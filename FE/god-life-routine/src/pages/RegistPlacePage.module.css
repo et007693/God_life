@@ -1,0 +1,11 @@
+.kakaoMapContainer {
+    display: flex;
+    flex-direction: column-reverse;
+    height: 100vh;
+    width: 100%;
+}
+
+.kakaoMap {
+    height: 100vh;
+    width: 100vw;
+}
