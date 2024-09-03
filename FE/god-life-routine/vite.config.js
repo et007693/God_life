@@ -12,13 +12,5 @@ export default ({mode}) => defineConfig({
         enabled: true,
       }
     }),
-    createHtmlPlugin({
-      minify: true,
-      inject:{
-        data:{
-          kakaoJavascriptKey:loadEnv(mode,process.cwd()).VITE_KAKAO_MAP_API_KEY,
-        }
-      }
-    })
   ],
 })
