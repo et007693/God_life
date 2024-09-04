@@ -16,6 +16,7 @@ const CustomMap = () => {
         })
       }
   return (
+    
     <Map
       id="map"
         center={center}

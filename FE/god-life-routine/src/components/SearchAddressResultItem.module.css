@@ -1,0 +1,16 @@
+.searchAddressResultItem{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    border: 0.5px solid #767676;
+    width: 90vw;
+    padding: 10px;
+}
+.placeName{
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.addressName{
+    font-size: 0.8rem;
+}

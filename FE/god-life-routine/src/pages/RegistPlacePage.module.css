@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column-reverse;
     height: 100vh;
-    width: 100%;
+    width: 100vw;
 }
 
 .kakaoMap {
@@ -34,7 +34,7 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
-    width: 100%;
+    width: 100vw;
 }
 
 .registerButton {
