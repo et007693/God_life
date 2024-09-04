@@ -1,13 +1,20 @@
 import { useState } from 'react'
 import './App.css'
 import RegistPlacePage from './pages/RegistPlacePage'
+import { BrowserRouter,Routes,Route } from 'react-router-dom'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-      <RegistPlacePage/>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<RegistPlacePage/>}/>
+
+        </Routes>
+
+      </BrowserRouter>
     </>
   )
 }

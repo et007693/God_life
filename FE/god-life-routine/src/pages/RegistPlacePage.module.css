@@ -9,3 +9,60 @@
     height: 100vh;
     width: 100vw;
 }
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    position: relative;
+}
+
+.title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.backButton {
+    position: absolute;
+    left: 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+}
+
+.registerButton {
+    position: fixed;
+    bottom: 1rem;
+    left: 0;
+    right: 0;
+    width: 100%;
+    padding: 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1000;
+}
+/* .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+.title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+.backButton {
+    font-size: 1rem;
+    font-weight: bold;
+} */
