@@ -39,7 +39,7 @@
 
 .registerButton {
     position: fixed;
-    bottom: 1rem;
+    bottom: 0;
     left: 0;
     right: 0;
     width: 100%;
