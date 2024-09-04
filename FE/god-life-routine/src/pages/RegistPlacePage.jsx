@@ -1,40 +1,71 @@
 import React, { useEffect, useRef, useState } from "react";
-import styles from "./RegistPlacePage.module.css";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 import { useKakaoMap } from "../hooks/useKakaoMap";
+import { useDaumCdn } from "../hooks/useDaumCdn";
+import CustomMap from "../components/CustomMap";
+import SearchAddress from "../components/SearchAddress";
+import useSearchStore from "../store/useSearchStore";
+import SearchBar from "../components/SearchBar";
 
-const center = { lat: 33.5563, lng: 126.79581 }
+const center = { lat: 33.5563, lng: 126.79581 };
 
 const RegistPlacePage = () => {
   // 카카오맵 API를 이용한 지도 구현
-  useKakaoMap();
-  const [position, setPosition] = useState();
-  const {kakao} = window;
-  useEffect(() =>{
-    if(kakao == null) return;
-      const ps = new kakao.maps.services.Places(); 
+  const { position } = useKakaoMap();
+  const [address, setAddress] = useState("");
+  const { isSearchMode,selectedAddress } = useSearchStore();
 
-  },[])
-
+  
+  const handleRegister = () => {
+    console.log("장소 등록 버튼이 클릭되었습니다.");
+    console.log("클릭된 위치의 위도:", position.lat);
+    console.log("클릭된 위치의 경도:", position.lng);
+    console.log("클릭된 위치의 주소:", address);
+  };
+  // 2024-09-04 작업시작
   return (
-      <Map
-      id="map"
-        center={center}
-        style={{width: "100vw", height: "100vh"  }}
-        level={3}
-        onClick={(_, mouseEvent) => {
-            const latlng = mouseEvent.latLng
-            setPosition({
-              lat: latlng.getLat(),
-              lng: latlng.getLng(),
-            })
-          }}
-      >
-        <MapMarker position={position ?? center }>
-          {position &&
-          `클릭한 위치의 위도는 ${position.lat} 이고, 경도는 ${position.lng} 입니다`}
-        </MapMarker>
-      </Map>
+    <>
+      <div className="w-full h-screen flex flex-col">
+        <div className="flex justify-center items-center p-4">
+          <button className="absolute left-4 top-4 text-black">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              />
+            </svg>
+          </button>
+          <h1 className="text-2xl font-bold">장소 등록</h1>
+        </div>
+        {/* 주소찾기 버튼을 누르면 주소찾기 모드로 변경 */}
+        {isSearchMode ? (
+          <div className="flex-grow overflow-hidden">
+            <SearchAddress />
+          </div>
+        ) : (
+          <div className="flex-grow flex flex-col">
+            <SearchBar value={selectedAddress}/>
+            <div className="flex-grow overflow-hidden">
+              <CustomMap />
+            </div>
+            <button
+              className="fixed z-10 bottom-0 left-0 right-0 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2"
+              onClick={handleRegister}
+            >
+              장소 등록
+            </button>
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 
