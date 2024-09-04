@@ -15,6 +15,25 @@ const useSearchStore = create((set) => ({
     setSelectedAddress: (selectedAddress) => set({selectedAddress}),
     setSelectedPlace: (selectedPlace) => set({selectedPlace}),
     setSelectedPosition: (selectedPosition) => set({selectedPosition}),
+    updatePositionWithGeolocation: () => {
+        if ("geolocation" in navigator) {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              set({
+                selectedPosition: {
+                  lat: position.coords.latitude,
+                  lng: position.coords.longitude,
+                },
+              });
+            },
+            (error) => {
+              console.error("Geolocation 오류:", error);
+            }
+          );
+        } else {
+          console.log("Geolocation을 지원하지 않는 브라우저입니다.");
+        }
+      },
 }))
 
 export default useSearchStore;

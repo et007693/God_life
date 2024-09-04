@@ -3,7 +3,6 @@ import { useKakaoMap } from '../hooks/useKakaoMap';
 import useSearchStore from '../store/useSearchStore';
 
 const SearchAddressResultItem = ({item}) => {
-    const {setPosition} = useKakaoMap();
     const {setIsSearchMode,setSelectedAddress,setSelectedPosition} = useSearchStore();
     const handleClick = () => {
         console.log(item);

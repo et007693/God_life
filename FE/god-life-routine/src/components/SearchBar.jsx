@@ -1,8 +1,8 @@
 import React from "react";
 import useSearchStore from "../store/useSearchStore";
 
-const SearchBar = ({ onChange,onKeyDown}) => {
-  const { setIsSearchMode } = useSearchStore();
+const SearchBar = ({value, onChange,onKeyDown}) => {
+  const { keyword, setIsSearchMode } = useSearchStore();
   const onAddressClick = () => {
     setIsSearchMode(true);
   };
@@ -13,6 +13,7 @@ const SearchBar = ({ onChange,onKeyDown}) => {
         onClick={onAddressClick}
         onChange={onChange}
         onKeyDown={onKeyDown}
+        value={value}
         placeholder="장소 이름을 입력하세요."
         className="p-3 border bg-gray-200 border-gray-300 rounded-md shadow-sm focus:ring-2 focus:border-blue-500 w-full"
       />

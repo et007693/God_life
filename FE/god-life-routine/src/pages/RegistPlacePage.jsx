@@ -13,14 +13,16 @@ const RegistPlacePage = () => {
   // 카카오맵 API를 이용한 지도 구현
   const { position } = useKakaoMap();
   const [address, setAddress] = useState("");
-  const { isSearchMode,selectedAddress } = useSearchStore();
+  const { isSearchMode,selectedAddress,updatePositionWithGeolocation } = useSearchStore();
 
-  
+  useEffect(()=>{
+    updatePositionWithGeolocation();
+  },[updatePositionWithGeolocation])
   const handleRegister = () => {
     console.log("장소 등록 버튼이 클릭되었습니다.");
     console.log("클릭된 위치의 위도:", position.lat);
     console.log("클릭된 위치의 경도:", position.lng);
-    console.log("클릭된 위치의 주소:", address);
+    console.log("클릭된 위치의 주소:", selectedAddress);
   };
   // 2024-09-04 작업시작
   return (
@@ -52,7 +54,7 @@ const RegistPlacePage = () => {
           </div>
         ) : (
           <div className="flex-grow flex flex-col">
-            <SearchBar value={selectedAddress}/>
+            <SearchBar value={selectedAddress} onChange={(e)=>{}}/>
             <div className="flex-grow overflow-hidden">
               <CustomMap />
             </div>

@@ -8,18 +8,10 @@ export const useKakaoMap = () => {
         appkey: import.meta.env.VITE_KAKAO_MAP_API_KEY,
         libraries: ['services']
     })
-    const [address,setAddress] = useState('');
     const [keyword,setKeyword] = useState('');
     const [position, setPosition] = useState();
     const [searchResult,setSearchResult] = useState(null)
     const {kakao} = window
-    const getAddressByLatLng = (lat,lng) =>{
-        const geocoder = new kakao.maps.Geocoder()
-        const coord = new kakao.maps.LatLng(lat, lng)
-        geocoder.coord2Address(coord.getLat(), coord.getLng(), function(result, status) {
-            
-        })
-    }
     // 키워드로 주소를 검색해서 정확한 도로명 주소를 얻는다.
     const searchByKeyword = () =>{
         const ps = new kakao.maps.services.Places()
