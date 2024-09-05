@@ -23,7 +23,8 @@ const CustomMap = () => {
     <Map
       id="map"
         center={center}
-        style={{width: "100vw", height: "100vh"  }}
+        // 
+        className='w-full h-full'
         level={3}
         onClick={onMapClick}
       >

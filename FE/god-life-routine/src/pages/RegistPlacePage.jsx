@@ -27,7 +27,7 @@ const RegistPlacePage = () => {
   // 2024-09-04 작업시작
   return (
     <>
-      <div className="w-full h-screen flex flex-col">
+      <div className="w-full h-real-screen flex flex-col">
         <div className="flex justify-center items-center p-4">
           <button className="absolute left-4 top-4 text-black">
             <svg
