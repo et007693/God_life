@@ -11,19 +11,12 @@ const center = { lat: 33.5563, lng: 126.79581 };
 
 const PlaceMissionRegistPage = () => {
   // 카카오맵 API를 이용한 지도 구현
-  const { position } = useKakaoMap();
   const [address, setAddress] = useState("");
   const { isSearchMode,selectedAddress,updatePositionWithGeolocation } = useSearchStore();
 
   useEffect(()=>{
     updatePositionWithGeolocation();
   },[updatePositionWithGeolocation])
-  const handleRegister = () => {
-    console.log("장소 등록 버튼이 클릭되었습니다.");
-    console.log("클릭된 위치의 위도:", position.lat);
-    console.log("클릭된 위치의 경도:", position.lng);
-    console.log("클릭된 위치의 주소:", selectedAddress);
-  };
   // 2024-09-04 작업시작
   return (
     <>
@@ -60,7 +53,7 @@ const PlaceMissionRegistPage = () => {
             </div>
             <button
               className="fixed z-10 bottom-0 left-0 right-0 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2"
-              onClick={handleRegister}
+              onClick={()=>{}}
             >
               장소 등록
             </button>
