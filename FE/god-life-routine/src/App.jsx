@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import RegistPlacePage from './pages/RegistPlacePage'
+import PlaceMissionRegistPage from './pages/PlaceMissionRegistPage'
 import { BrowserRouter,Routes,Route } from 'react-router-dom'
 import setScreenHeight from './util/setScreenHeight'
 
@@ -19,7 +19,21 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<RegistPlacePage/>}/>
+          <Route path="/" element={<PlaceMissionRegistPage/>}/>
+          <Route path="/personalMission/create" element={<PlaceMissionRegistPage/>}/>
+          <Route path="/personalMission" element={<PlaceMissionRegistPage/>} />
+          <Route path="/personalMission/accountHistory" element={<PlaceMissionRegistPage/>}/>
+          <Route path="/personalMission/calendar" element={<PlaceMissionRegistPage/>}/>
+          <Route path="/personalMission/gallery" element={<PlaceMissionRegistPage/>}/>
+          <Route path="/personalMission/wakeup" element={<PlaceMissionRegistPage/>}/>
+          <Route path="/personalMission/exercise" element={<PlaceMissionRegistPage/>}/>
+          <Route path="/teamMission/create" element={<PlaceMissionRegistPage/>}/>
+          <Route path="/teamMission" element={<PlaceMissionRegistPage/>}/>
+          <Route path="/teamMission/accountHistory" element={<PlaceMissionRegistPage/>}/>
+          <Route path="/teamMission/calendar" element={<PlaceMissionRegistPage/>}/>
+          <Route path="/teamMission/gallery" element={<PlaceMissionRegistPage/>}/>
+          <Route path="/teamMission/wakeup" element={<PlaceMissionRegistPage/>}/>
+          <Route path="/teamMission/exercise" element={<PlaceMissionRegistPage/>}/>
 
         </Routes>
 

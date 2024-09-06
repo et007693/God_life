@@ -9,7 +9,7 @@ import SearchBar from "../components/SearchBar";
 
 const center = { lat: 33.5563, lng: 126.79581 };
 
-const RegistPlacePage = () => {
+const PlaceMissionRegistPage = () => {
   // 카카오맵 API를 이용한 지도 구현
   const { position } = useKakaoMap();
   const [address, setAddress] = useState("");
@@ -71,4 +71,4 @@ const RegistPlacePage = () => {
   );
 };
 
-export default RegistPlacePage;
+export default PlaceMissionRegistPage;
