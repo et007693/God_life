@@ -38,14 +38,14 @@ function App() {
           {/* TODO: 메인페이지 라우팅 추가 */}
           <Route path="/" element={<MainPage/>}/>
           <Route path="/personalMission/create" element={<PersonalMissionCreatePage/>}/>
-          <Route path="/personalMission" element={<PersonalMissionDetailPage/>} />
+          <Route path="/personalMission/:roomId" element={<PersonalMissionDetailPage/>} />
           <Route path="/personalMission/accountHistory" element={<AccountHistoryPage/>}/>
           <Route path="/personalMission/calendar" element={<CalendarPage/>}/>
           <Route path="/personalMission/gallery" element={<GalleryPage/>}/>
           <Route path="/personalMission/setting" element={<PersonalMissionSettingPage/>}/>
           <Route path="/personalMission/perform" element={<PerformMissionPage/>}/>
           <Route path="/teamMission/create" element={<TeamMissionCreatePage/>}/>
-          <Route path="/teamMission" element={<TeamMissionDetailPage/>}/>
+          <Route path="/teamMission/:teamId" element={<TeamMissionDetailPage/>}/>
           <Route path="/teamMission/:teamId/accountHistory" element={<AccountHistoryPage/>}/>
           <Route path="/teamMission/:teamId/calendar" element={<CalendarPage/>}/>
           <Route path="/teamMission/:teamId/gallery" element={<GalleryPage/>}/>
