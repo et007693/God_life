@@ -18,6 +18,7 @@ import FineHistoryPage from './pages/FineHistoryPage'
 import LoginPage from './pages/LoginPage'
 import TransferPage from './pages/TransferPage'
 import TransferSuccessPage from './pages/TransferSuccessPage'
+import PhotoMissionPage from './pages/PhotoMissionPage'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -56,6 +57,7 @@ function App() {
           <Route path="/teamMission/:teamId/fine/pay" element={<TransferPage/>}/>
           <Route path="/teamMission/:teamId/fine/pay/success" element={<TransferSuccessPage/>}/>
           <Route path="/teamMission/:teamId/fine/pay/fail" element={<PlaceMissionRegistPage/>}/>
+          <Route path="/photoMission" element={<PhotoMissionPage/>}/>
         </Routes>
 
       </BrowserRouter>

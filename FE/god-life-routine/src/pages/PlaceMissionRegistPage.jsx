@@ -13,8 +13,6 @@ const center = { lat: 33.5563, lng: 126.79581 };
 
 const PlaceMissionRegistPage = () => {
   // 카카오맵 API를 이용한 지도 구현
-  const [address, setAddress] = useState("");
-  // SearchStore에서 자신의 현재 위치, 선택한 위치, 선택한 주소를 가져오는 함수
   // 전역변수를 사용해 다른 컴포넌트에서도 사용할 수 있도록함.
   const { isSearchMode,selectedAddress,updatePositionWithGeolocation } = useSearchStore();
   const navigate = useNavigate();
