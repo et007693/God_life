@@ -6,14 +6,29 @@ import CustomMap from "../components/CustomMap";
 import SearchAddress from "../components/SearchAddress";
 import useSearchStore from "../store/useSearchStore";
 import SearchBar from "../components/SearchBar";
+import Header from "../components/Header";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const center = { lat: 33.5563, lng: 126.79581 };
 
 const PlaceMissionRegistPage = () => {
   // 카카오맵 API를 이용한 지도 구현
   const [address, setAddress] = useState("");
+  // SearchStore에서 자신의 현재 위치, 선택한 위치, 선택한 주소를 가져오는 함수
+  // 전역변수를 사용해 다른 컴포넌트에서도 사용할 수 있도록함.
   const { isSearchMode,selectedAddress,updatePositionWithGeolocation } = useSearchStore();
-
+  const navigate = useNavigate();
+  const location = useLocation();
+  const onClickRegistButton = () => {
+    // TODO: 장소 등록 로직 추가 -api 연결
+    if(location.pathname.includes("/personalMission")){
+      console.log(selectedAddress);
+      navigate(`/personalMission/${1}`);
+    }else if(location.pathname.includes("/teamMission")){
+      console.log(selectedAddress);
+      navigate(`/teamMission/${1}`);
+    }
+  }
   useEffect(()=>{
     updatePositionWithGeolocation();
   },[updatePositionWithGeolocation])
@@ -21,31 +36,14 @@ const PlaceMissionRegistPage = () => {
   return (
     <>
       <div className="w-full h-real-screen flex flex-col">
-        <div className="flex justify-center items-center p-4">
-          <button className="absolute left-4 top-4 text-black">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M10 19l-7-7m0 0l7-7m-7 7h18"
-              />
-            </svg>
-          </button>
-          <h1 className="text-2xl font-bold">장소 등록</h1>
-        </div>
+        <Header title="장소 등록" />
         {/* 주소찾기 버튼을 누르면 주소찾기 모드로 변경 */}
         {isSearchMode ? (
           <div className="flex-grow overflow-hidden">
             <SearchAddress />
           </div>
         ) : (
+
           <div className="flex-grow flex flex-col">
             <SearchBar value={selectedAddress} onChange={(e)=>{}}/>
             <div className="flex-grow overflow-hidden">
@@ -53,7 +51,7 @@ const PlaceMissionRegistPage = () => {
             </div>
             <button
               className="fixed z-10 bottom-0 left-0 right-0 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2"
-              onClick={()=>{}}
+              onClick={onClickRegistButton}
             >
               장소 등록
             </button>

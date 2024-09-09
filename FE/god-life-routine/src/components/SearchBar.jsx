@@ -1,8 +1,8 @@
 import React from "react";
 import useSearchStore from "../store/useSearchStore";
 
-const SearchBar = ({value, onChange,onKeyDown}) => {
-  const { keyword, setIsSearchMode } = useSearchStore();
+const SearchBar = ({value, onChange,onKeyDown,onSearchButtonClick}) => {
+  const { keyword, setIsSearchMode, } = useSearchStore();
   const onAddressClick = () => {
     setIsSearchMode(true);
   };
@@ -17,7 +17,7 @@ const SearchBar = ({value, onChange,onKeyDown}) => {
         placeholder="장소 이름을 입력하세요."
         className="p-3 border bg-gray-200 border-gray-300 rounded-md shadow-sm focus:ring-2 focus:border-blue-500 w-full"
       />
-      <button>
+      <button onClick={onSearchButtonClick}>
       <svg
         className="absolute right-5 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400"
         xmlns="http://www.w3.org/2000/svg"
