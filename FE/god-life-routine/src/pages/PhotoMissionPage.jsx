@@ -2,18 +2,26 @@ import React, { useState, useEffect, useRef } from "react";
 import Header from "../components/Header";
 import { resizeImage } from "../util/resizeImg";
 import { uploadMissionImg } from "../api/uploadMissionImg";
+import { useMutation } from "@tanstack/react-query";
 
 const PhotoMissionPage = () => {
   const [capturedImage, setCapturedImage] = useState(null);
   const fileInputRef = useRef(null);
-
+  const { mutate, isPending, data, isError, error } = useMutation({
+    mutationFn: uploadMissionImg,
+    onSuccess: (data) => {
+      console.log(data);
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
   const handleImageCapture = async (e) => {
     const file = e.target.files[0];
     if (file) {
       const resizedImg = await resizeImage(file, 1024, 1024);
       setCapturedImage(URL.createObjectURL(resizedImg));
-      const response = await uploadMissionImg(resizedImg);
-      console.log(response);
+      const response = await mutate(resizedImg);
     }
   };
 
@@ -37,11 +45,20 @@ const PhotoMissionPage = () => {
         <h1 className="text-2xl font-bold mb-6">PhotoMissionPage</h1>
 
         {capturedImage ? (
-          <img
-            src={capturedImage}
-            alt="찍은 사진"
-            className="w-full max-w-md rounded-lg shadow-lg mt-4"
-          />
+          <>
+            <img
+              src={capturedImage}
+              alt="찍은 사진"
+              className={`w-full max-w-md rounded-lg shadow-lg mt-4 ${
+                isPending ? "filter blur-sm" : ""
+              }`}
+            />
+            {isPending && (
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500"></div>
+              </div>
+            )}
+          </>
         ) : (
           <div className="w-full aspect-square max-w-md bg-gray-200 flex justify-center items-center rounded-lg shadow-md mt-4">
             <span className="text-gray-500">사진을 촬영해주세요</span>

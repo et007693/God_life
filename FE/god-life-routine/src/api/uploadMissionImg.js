@@ -5,7 +5,8 @@ export const uploadMissionImg = async (file) => {
   formData.append("file", file);
   const response = await new Promise((resolve) => {
     setTimeout(() => {
-      resolve({ data: "test" });
+    alert("전송종료");
+      resolve({ isSuccess: true });
     }, 3000);
   });
   return response;
