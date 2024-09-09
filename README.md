@@ -49,7 +49,7 @@
   <img src="https://img.shields.io/badge/ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white">
   </div>
 
-<h1>팀원들</h1>
+<h1>👥팀원들</h1>
 
   |<img src="https://github.com/ktk3939.png" width="80">|<img src="https://github.com/SongJH97.png" width="80">|<img src="https://github.com/ParkRang.png" width="80">|<img src="https://github.com/et007693.png" width="80">|<img src="https://github.com/rlarbfla12.png" width="80">|<img src="https://github.com/cvcvcx9.png" width="80">|
   |:---:|:---:|:---:|:---:|:---:|:---:|
