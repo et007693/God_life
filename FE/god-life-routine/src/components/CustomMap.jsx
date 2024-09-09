@@ -9,18 +9,23 @@ import useSearchStore from '../store/useSearchStore';
 
 const CustomMap = () => {
 
-    const {mapRef,map,getUserLocation,getAddress} = useKakaoMap(
+    const {loading,mapRef,map,getUserLocation,getAddress} = useKakaoMap(
     {center: {
         lat: 37.566826,
         lng: 126.9786567,
       },
       level: 3,}
     );
-    useEffect(()=>{
-      if(map){
-        map.setCenter(getUserLocation());
-      }
-    },[map]);
+    // useEffect(()=>{
+    //   if(loading) return;
+    //   if(!map) return;
+    //   getUserLocation();
+    //     },[loading,map]);
+    // useEffect(()=>{
+    //   if(map){
+    //     map.setCenter(getUserLocation());
+    //   }
+    // },[map]);
   return (
     
     <div>

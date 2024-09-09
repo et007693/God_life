@@ -1,19 +1,21 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDaumCdn } from '../hooks/useDaumCdn';
 import { useKakaoMap } from '../hooks/useKakaoMap';
 import SearchAddressResultItem from './SearchAddressResultItem';
 import SearchBar from './SearchBar';
 const SearchAddress = ({setAddress,setIsSearchMode}) => {
-    const {keyword,setKeyword,searchByKeyword, searchResult,loading,error} = useKakaoMap();
+    const { searchResult,loading,error,searchByKeyword} = useKakaoMap();
+    const [keyword,setKeyword] = useState('');
     const handleOnChange = (e) => {
         setKeyword(e.target.value)
     }
     const handleSearch = () => {
-        searchByKeyword()
+        console.log(keyword);
+        searchByKeyword(keyword);
     }
     return (
         <>
-            <SearchBar value={keyword} onChange={handleOnChange} onKeyDown={(e) => e.key === 'Enter' && handleSearch()} />
+            <SearchBar value={keyword} onChange={handleOnChange} onSearchButtonClick={handleSearch} onKeyDown={(e) => e.key === 'Enter' && handleSearch()} />
             {
                 loading && <div>로딩중...</div>
             }

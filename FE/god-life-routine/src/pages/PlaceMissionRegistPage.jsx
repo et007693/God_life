@@ -46,6 +46,7 @@ const PlaceMissionRegistPage = () => {
             <SearchAddress />
           </div>
         ) : (
+          
           <div className="flex-grow flex flex-col">
             <SearchBar value={selectedAddress} onChange={(e)=>{}}/>
             <div className="flex-grow overflow-hidden">
