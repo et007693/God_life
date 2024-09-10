@@ -1,6 +1,10 @@
 import React from "react";
 
-const Header = ({title}) => {
+const Header = ({title, color}) => {
+const colorClass = {
+  orange: 'text-orange-500',
+}
+
   return (
     <div className="flex justify-center items-center p-4">
       <button className="absolute left-4 top-4 text-black">
@@ -19,7 +23,7 @@ const Header = ({title}) => {
           />
         </svg>
       </button>
-      <h1 className="text-2xl font-bold">{title}</h1>
+      <h1 className={`${colorClass[color]} text-2xl font-bold`}>{title}</h1>
     </div>
   );
 };
