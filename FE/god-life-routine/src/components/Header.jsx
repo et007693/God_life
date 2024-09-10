@@ -1,10 +1,16 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const Header = ({title, color}) => {
+
+const Header = ({title, color, backgroudcolor}) => {
   const navigate = useNavigate();
 const colorClass = {
   orange: 'text-orange-500',
+  white: 'text-white',
+}
+const backgroundColorClass = {
+  orange: 'bg-orange-500',
+  white: 'bg-white',
 }
 const onClickBack = () => {
   if (navigate.length > 2) {
@@ -33,6 +39,7 @@ const onClickBack = () => {
       </button>
       <h1 className={`${colorClass[color]} text-2xl font-bold`}>{title}</h1>
     </div>
+
   );
 };
 

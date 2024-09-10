@@ -24,6 +24,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import KakaoInvitePage from './pages/KakaoInvitePage'
 import InviteAcceptPage from './pages/inviteAcceptPage'
 import Layout from './components/Layout'
+import TimeSettingPage from './pages/TimeSettingPage'
 
 
 function App() {
@@ -75,7 +76,9 @@ function App() {
           <Route path="/teamMission/:teamId/fine/pay" element={<TransferPage/>}/>
           <Route path="/teamMission/:teamId/fine/pay/success" element={<TransferSuccessPage/>}/>
           <Route path="/teamMission/:teamId/fine/pay/fail" element={<PlaceMissionRegistPage/>}/>
+          <Route path="/teamMission/:teamId/time/setting" element={<TimeSettingPage/>}/>
           <Route path="/photoMission" element={<PhotoMissionPage/>}/>
+        
         </Routes>
 
       </BrowserRouter>
