@@ -1,3 +1,5 @@
+// URL: "/teamMission/:teamId/fine/pay"
+
 import React from 'react'
 
 const TransferPage = () => {
