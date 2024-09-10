@@ -8,7 +8,7 @@ const KakaoInvitePage = () => {
  }
   return (
     <div>
-        <Header title={'카카오톡 초대'}/>
+        <Header title={'카카오톡 초대'} color={'orange'}/>
         <button className='bg-blue-500 text-white p-2 rounded-md' onClick={handleShareKakaoBtn}>카카오톡 공유</button>
     </div>
   )
