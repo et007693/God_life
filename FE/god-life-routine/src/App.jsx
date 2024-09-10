@@ -21,12 +21,18 @@ import TransferSuccessPage from './pages/TransferSuccessPage'
 import PhotoMissionPage from './pages/PhotoMissionPage'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import KakaoInvitePage from './pages/KakaoInvitePage'
+import InviteAcceptPage from './pages/inviteAcceptPage'
 
 
 function App() {
   const queryClient = new QueryClient();
   const [count, setCount] = useState(0)
+  const {Kakao} = window;
   useEffect(()=>{
+    if(!Kakao.isInitialized()){
+    Kakao.init(import.meta.env.VITE_KAKAO_API_KEY);
+    }
     // 초기에 스크린 사이즈에 맞춰 높이 설정
     setScreenHeight();
     // 브라우저 창 크기가 변경될 때마다 스크린 높이 재설정
@@ -39,6 +45,9 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <Routes>
+          <Route path="/kakaoInvite" element={<KakaoInvitePage/>}/>
+          <Route path="/:teamId/invite/accept" element={<InviteAcceptPage/>}/>
+
           <Route path="/login" element={<LoginPage/>}/>
           {/* TODO: 메인페이지 라우팅 추가 */}
           <Route path="/" element={<MainPage/>}/>
