@@ -18,7 +18,7 @@ const TeamMissionDetailPage = () => {
   const goToTeamMissionTimeSettingPage = () => {
     navigate(`/teamMission/1/time/setting`);
   };
-  
+
 
   return (
     <div>

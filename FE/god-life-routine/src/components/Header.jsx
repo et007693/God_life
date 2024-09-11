@@ -13,7 +13,7 @@ const backgroundColorClass = {
   white: 'bg-white',
 }
 const onClickBack = () => {
-  if (navigate.length > 2) {
+  if (navigate.length > 1) {
     navigate(-1);
   } else {
     navigate('/');
