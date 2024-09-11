@@ -5,6 +5,7 @@ const NavTab = () => {
   const location = useLocation();
   const pathSegments = location.pathname.split("/");
   const currentPage = pathSegments[pathSegments.length - 1];
+  
   const navigate = useNavigate();
   useEffect(() => {
     console.log(currentPage);
@@ -15,7 +16,7 @@ const NavTab = () => {
         <button
           className="w-full flex items-center justify-center"
           onClick={() => {
-            navigate("/");
+            navigate("");
           }}
         >
           <svg
@@ -36,7 +37,7 @@ const NavTab = () => {
         <button
           className="w-full flex items-center justify-center"
           onClick={() => {
-            navigate("/gallery");
+            navigate("gallery");
           }}
         >
           <svg
@@ -54,7 +55,7 @@ const NavTab = () => {
         <button
           className="w-full flex items-center justify-center"
           onClick={() => {
-            navigate("/calendar");
+            navigate("calendar");
           }}
         >
             <svg
