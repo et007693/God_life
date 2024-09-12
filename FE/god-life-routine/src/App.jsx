@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import PlaceMissionRegistPage from './pages/PlaceMissionRegistPage'
+import LocationSettingPage from './pages/LocationSettingPage'
 import { BrowserRouter,Routes,Route } from 'react-router-dom'
 import setScreenHeight from './util/setScreenHeight'
 import MainPage from './pages/MainPage'
@@ -79,8 +79,9 @@ function App() {
           <Route path="/teamMission/:teamId/fine/history" element={<FineHistoryPage/>}/>
           <Route path="/teamMission/:teamId/fine/pay" element={<TransferPage/>}/>
           <Route path="/teamMission/:teamId/fine/pay/success" element={<TransferSuccessPage/>}/>
-          <Route path="/teamMission/:teamId/fine/pay/fail" element={<PlaceMissionRegistPage/>}/>
+          <Route path="/teamMission/:teamId/fine/pay/fail" element={<LocationSettingPage/>}/>
           <Route path="/teamMission/:teamId/time/setting" element={<TimeSettingPage/>}/>
+          <Route path="/teamMission/:teamId/location/setting" element={<LocationSettingPage/>}/>
           {/* 임시로 만들어놓은 사진촬영 미션 수행 페이지 */}
           <Route path="/photoMission" element={<PhotoMissionPage/>}/>
           {/* 임시로 만들어놓은 계좌선택 페이지 */}
