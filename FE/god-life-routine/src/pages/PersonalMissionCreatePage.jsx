@@ -14,6 +14,8 @@ const PersonalMissionCreatePage = () => {
     navigate(`/teamMission/1/time/setting`);
   };
 
+ 
+  
   const goToAccountSelectPage = () => {
     navigate(`/personalMission/account/select`);
   };
