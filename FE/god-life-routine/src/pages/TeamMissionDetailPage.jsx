@@ -19,7 +19,6 @@ const TeamMissionDetailPage = () => {
     navigate(`/teamMission/1/time/setting`);
   };
 
-
   return (
     <div>
       <Header title={"팀 미션"} color={"white"} backgroudcolor={"orange"} />
@@ -117,8 +116,9 @@ const TeamMissionDetailPage = () => {
         </div>
 
         <div
-        onClick={goToTeamMissionTimeSettingPage}
-        className="flex relative justify-around bg-gray-100 mt-4 px-8 py-32 rounded-2xl w-full">
+          onClick={goToTeamMissionTimeSettingPage}
+          className="flex relative justify-around bg-gray-100 mt-4 px-8 py-28 rounded-2xl w-full"
+        >
           <p>시간 설정이 완료되지 않았습니다. </p>
         </div>
       </div>
