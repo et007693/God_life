@@ -26,6 +26,7 @@ import InviteAcceptPage from './pages/inviteAcceptPage'
 import Layout from './components/Layout'
 import TimeSettingPage from './pages/TimeSettingPage'
 import AccountSelectPage from './pages/AccountSelectPage'
+import InstallBanner from './components/InstallBanner'
 
 
 function App() {
@@ -89,6 +90,7 @@ function App() {
 
       </BrowserRouter>
       <ReactQueryDevtools initialIsOpen={false} />
+      <InstallBanner/>
     </QueryClientProvider>
   )
 }

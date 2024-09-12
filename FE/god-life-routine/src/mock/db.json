@@ -1,0 +1,24 @@
+{
+    "main":{
+        "personalMission":
+            {
+                "id":1,
+                "title":"운동하기",
+                "isDone":false
+            },
+        "groupMissions":[
+            {
+                "id":1,
+                "title":"일찍 일어나기",
+                "isDone":true
+            },
+            {
+                "id":2,
+                "title":"운동하기",
+                "isDone":false
+            }
+        ],
+        "message":"미션 조회에 성공하였습니다."
+    }
+    
+}

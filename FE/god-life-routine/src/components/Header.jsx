@@ -1,9 +1,10 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 
 const Header = ({title, color,  backgroudcolor}) => {
   const navigate = useNavigate();
+  const location = useLocation();
 const colorClass = {
   orange: 'text-orange-500',
   white: 'text-white',
@@ -13,7 +14,7 @@ const backgroundColorClass = {
   white: 'bg-white',
 }
 const onClickBack = () => {
-  if (navigate.length > 1) {
+  if (location.key !== 'default') {
     navigate(-1);
   } else {
     navigate('/');
