@@ -1,0 +1,85 @@
+{
+  "main": {
+    "personalMission": {
+      "id": 1,
+      "title": "운동하기",
+      "isDone": false
+    },
+    "groupMissions": [
+      {
+        "id": 1,
+        "title": "일찍 일어나기",
+        "isDone": true
+      },
+      {
+        "id": 2,
+        "title": "운동하기",
+        "isDone": false
+      }
+    ],
+    "message": "미션 조회에 성공하였습니다."
+  },
+  "teamMission": [
+    {
+      "id": 1,
+      "memberList": [
+        {
+          "id": 1,
+          "name": "송창용",
+          "profileImage": "https://avatars.githubusercontent.com/u/103542723?v=4"
+        },
+        {
+          "id": 2,
+          "name": "김규림",
+          "profileImage": "https://avatars.githubusercontent.com/u/10101023?v=4"
+        },
+        {
+          "id": 3,
+          "name": "조창훈",
+          "profileImage": "https://avatars.githubusercontent.com/u/21821321?v=4"
+        }
+      ],
+      "teamName": "송창송창용",
+      "accountBank": "싸피",
+      "accountNumber": "1234567890",
+      "fineGathered": 10000,
+      "fineDelayed": 2500,
+      "rule": {
+        "ruleType": "wakeup",
+        "ruleDetail": "일찍 일어나기",
+        "ruleChecked": false,
+        "ruleSetted": false
+      }
+    },{
+      "id": 2,
+      "memberList": [
+        {
+          "id": 1,
+          "name": "송창용",
+          "profileImage": "https://avatars.githubusercontent.com/u/103542723?v=4"
+        },
+        {
+          "id": 2,
+          "name": "김규림",
+          "profileImage": "https://avatars.githubusercontent.com/u/10101023?v=4"
+        },
+        {
+          "id": 3,
+          "name": "조창훈",
+          "profileImage": "https://avatars.githubusercontent.com/u/21821321?v=4"
+        }
+      ],
+      "teamName": "송창송창용",
+      "accountBank": "싸피",
+      "accountNumber": "1234567890",
+      "fineGathered": 20000,
+      "fineDelayed": 3500,
+      "rule": {
+        "ruleType": "exercise",
+        "ruleDetail": "운동하기",
+        "ruleChecked": false,
+        "ruleSetted": false
+      }
+    }
+  ]
+}

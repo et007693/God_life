@@ -5,11 +5,7 @@ const NavTab = () => {
   const location = useLocation();
   const pathSegments = location.pathname.split("/");
   const currentPage = pathSegments[pathSegments.length - 1];
-  
   const navigate = useNavigate();
-  useEffect(() => {
-    console.log(currentPage);
-  }, [currentPage]);
   return (
     <div className="flex justify-between w-screen h-10 fixed bottom-0 border-t border-gray-300 bg-white items-center">
       <div className="flex justify-between items-center flex-1">

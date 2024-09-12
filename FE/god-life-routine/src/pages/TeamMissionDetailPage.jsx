@@ -1,61 +1,53 @@
 // URL: "/teamMission/1"
 
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../components/Header";
-import profile from "../assets/profile.png";
 import addProfile from "../assets/addProfile.png";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { getTeamMissionDetail } from "../api/teamMissionApi";
+import { useQuery } from "@tanstack/react-query";
+import AvatarList from "../components/AvatarList";
+import InviteMemberBtn from "../components/InviteMemberBtn";
+import AccountInfo from "../components/AccountInfo";
+import TeamMissionDetailBody from "../components/TeamMissionDetailBody";
+import shareKakao from "../util/shareKakao";
 
 const TeamMissionDetailPage = () => {
   const navigate = useNavigate();
-
+  const { teamId } = useParams();
+  const handleShareKakaoBtn = async ()=>{
+    await shareKakao(teamId);
+ }
+  const { data, isLoading } = useQuery({
+    queryKey: ["teamMissionDetail", teamId],
+    queryFn: () => getTeamMissionDetail(teamId),
+  });
   const goToTransferPage = () => {
-    navigate(`/teamMission/1/fine/pay`);
+    navigate(`fine/pay`);
   };
   const goToFineHistoryPage = () => {
-    navigate(`/teamMission/1/fine/history`);
+    navigate(`fine/history`);
   };
   const goToTeamMissionTimeSettingPage = () => {
-    navigate(`/teamMission/1/time/setting`);
+    navigate(`time/setting`);
   };
-
+  const goToTeamMissionLocationSettingPage = () => {
+    navigate(`location/setting`);
+  };
+  // 로딩 중일 때 로딩 표시
+  if (isLoading) return <div>Loading...</div>;
   return (
     <div>
       <Header title={"팀 미션"} color={"white"} backgroudcolor={"orange"} />
       <div className="flex flex-col items-center p-10">
         <div className="flex flex-col items-center">
-          <div className="w-full relative flex items-center">
-            <img
-              src={profile}
-              alt="Profile"
-              className="w-16 h-16 mb-4 rounded-full"
-            />
-            <img
-              src={addProfile}
-              alt="addProfile"
-              className="absolute w-16 h-16 p-1 rounded-full border-4 border-gray-300 bottom-4 left-12 bg-white"
-            />
+          <div className="w-full flex -space-x-4 rtl:space-x-reverse">
+            <AvatarList memberList={data.memberList} />
+            <InviteMemberBtn onClick={handleShareKakaoBtn} />
           </div>
-          <div className="text-center">
-            <div className="text-xl font-bold">송창송창용</div>
-            <div className="text-sm text-gray-500 mt-2 mb-4">계좌번호</div>
-          </div>
+          <AccountInfo data={data} />
         </div>
-
-        <div className="flex relative justify-around bg-white-100 pb-8 pt-4 rounded-t-2xl w-full border border-gray-300">
-          <div className="flex w-1/2 flex-col items-center justify-center">
-            <p className="text-sm font-bold text-gray-500">모인 벌금</p>
-            <p className="text-3xl font-bold pt-2 ">1000원</p>
-          </div>
-
-          <div className="border-l-2 border-gray-300 h-20 absolute left-1/2 -translate-x-1/2"></div>
-
-          <div className="flex w-1/2 flex-col items-center justify-center">
-            <p className="text-sm font-bold text-gray-500">밀린 벌금</p>
-            <p className="text-3xl font-bold pt-2">0원</p>
-          </div>
-        </div>
-
+        <TeamMissionDetailBody data={data} />
         {/* 하단 버튼 영역 */}
         <div className="flex justify-around w-full max-w-md mt-0 bg-gray-100 py-4 rounded-b-lg shadow-md">
           <button
@@ -110,17 +102,25 @@ const TeamMissionDetailPage = () => {
           </button>
         </div>
 
-        <div className="text-xl font-bold mt-8 text-left w-full">미션 이름</div>
+        <div className="text-xl font-bold mt-8 text-left w-full">{data.rule.ruleDetail}</div>
         <div className="text-xm text-gray-400 text-left w-full">
           평일에만 미션이 주어집니다.
         </div>
-
-        <div
+        {data.rule.ruletype == "wakeup" ?
+        (<div
           onClick={goToTeamMissionTimeSettingPage}
           className="flex relative justify-around bg-gray-100 mt-4 px-8 py-28 rounded-2xl w-full"
         >
           <p>시간 설정이 완료되지 않았습니다. </p>
-        </div>
+        </div>)
+        :
+        (<div
+          onClick={goToTeamMissionLocationSettingPage}
+          className="flex relative justify-around bg-gray-100 mt-4 px-8 py-28 rounded-2xl w-full"
+        >
+          <p>집 위치 설정이 완료되지 않았습니다. </p>
+        </div>)
+        }
       </div>
     </div>
   );

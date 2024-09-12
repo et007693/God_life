@@ -11,7 +11,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 const center = { lat: 33.5563, lng: 126.79581 };
 
-const PlaceMissionRegistPage = () => {
+const LocationSettingPage = () => {
   // 카카오맵 API를 이용한 지도 구현
   // 전역변수를 사용해 다른 컴포넌트에서도 사용할 수 있도록함.
   const { isSearchMode,selectedAddress,updatePositionWithGeolocation } = useSearchStore();
@@ -60,4 +60,4 @@ const PlaceMissionRegistPage = () => {
   );
 };
 
-export default PlaceMissionRegistPage;
+export default LocationSettingPage;
