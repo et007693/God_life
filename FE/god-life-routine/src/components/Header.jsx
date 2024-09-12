@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 
-const Header = ({title, color, backgroudcolor}) => {
+const Header = ({title, color,  backgroudcolor}) => {
   const navigate = useNavigate();
 const colorClass = {
   orange: 'text-orange-500',
@@ -20,7 +20,7 @@ const onClickBack = () => {
   }
 }
   return (
-    <div className="flex justify-center items-center p-4">
+    <div className= {`flex justify-center items-center p-4 ${backgroundColorClass[backgroudcolor]}`}>
       <button className="absolute left-4 top-4 text-black" onClick={onClickBack}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -37,7 +37,7 @@ const onClickBack = () => {
           />
         </svg>
       </button>
-      <h1 className={`${colorClass[color]} text-2xl font-bold`}>{title}</h1>
+      <h1 className={`${colorClass[color]} text-2xl font-bold `}>{title}</h1>
     </div>
 
   );
