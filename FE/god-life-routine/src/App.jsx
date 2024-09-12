@@ -25,6 +25,7 @@ import KakaoInvitePage from './pages/KakaoInvitePage'
 import InviteAcceptPage from './pages/inviteAcceptPage'
 import Layout from './components/Layout'
 import TimeSettingPage from './pages/TimeSettingPage'
+import AccountSelectPage from './pages/AccountSelectPage'
 
 
 function App() {
@@ -81,6 +82,8 @@ function App() {
           <Route path="/teamMission/:teamId/time/setting" element={<TimeSettingPage/>}/>
           {/* 임시로 만들어놓은 사진촬영 미션 수행 페이지 */}
           <Route path="/photoMission" element={<PhotoMissionPage/>}/>
+          {/* 임시로 만들어놓은 계좌선택 페이지 */}
+          <Route path="/personalMission/account/select" element={<AccountSelectPage/>}/>
         
         </Routes>
 
