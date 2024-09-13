@@ -59,7 +59,7 @@ function App() {
           <Route path="/personalMission/create" element={<PersonalMissionCreatePage/>}/>
           <Route path="/personalMission/accountHistory" element={<AccountHistoryPage/>}/>
           <Route path="/personalMission" element={<Layout/>}>
-            <Route path=":roomId" element={<PersonalMissionDetailPage/>} />
+            <Route path="" element={<PersonalMissionDetailPage/>} />
             <Route path="calendar" element={<CalendarPage/>}/>
             <Route path="gallery" element={<GalleryPage/>}/>
           </Route>

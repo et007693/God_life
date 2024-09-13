@@ -17,7 +17,7 @@
   },
   "teamMission": [
     {
-      "id": 1,
+      "id": "1",
       "memberList": [
         {
           "id": 1,
@@ -44,10 +44,13 @@
         "ruleType": "wakeup",
         "ruleDetail": "일찍 일어나기",
         "ruleChecked": false,
-        "ruleSetted": false
+        "ruleSetted": false,
+        "ruleTime": null,
+        "ruleLocation": null
       }
-    },{
-      "id": 2,
+    },
+    {
+      "id": "2",
       "memberList": [
         {
           "id": 1,
@@ -74,7 +77,12 @@
         "ruleType": "exercise",
         "ruleDetail": "운동하기",
         "ruleChecked": false,
-        "ruleSetted": false
+        "ruleSetted": false,
+        "ruleTime": null,
+        "ruleLocation": {
+          "latitude": 37.5666805,
+          "longitude": 126.9784147
+        }
       }
     }
   ]
