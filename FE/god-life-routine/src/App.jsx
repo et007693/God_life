@@ -29,6 +29,7 @@ import AccountSelectPage from './pages/AccountSelectPage'
 import InstallBanner from './components/InstallBanner'
 
 
+
 function App() {
   const queryClient = new QueryClient();
   const [count, setCount] = useState(0)
@@ -86,6 +87,8 @@ function App() {
           <Route path="/photoMission" element={<PhotoMissionPage/>}/>
           {/* 임시로 만들어놓은 계좌선택 페이지 */}
           <Route path="/personalMission/account/select" element={<AccountSelectPage/>}/>
+          {/* 임시로 만들어놓은 이체 성공 페이지 */}
+          <Route path="/transferSuccess" element={<TransferSuccessPage/>}/>
         
         </Routes>
 
