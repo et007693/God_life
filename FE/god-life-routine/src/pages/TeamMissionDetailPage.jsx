@@ -2,7 +2,6 @@
 
 import React, { useEffect } from "react";
 import Header from "../components/Header";
-import addProfile from "../assets/addProfile.png";
 import { useNavigate, useParams } from "react-router-dom";
 import { getTeamMissionDetail } from "../api/teamMissionApi";
 import { useQuery } from "@tanstack/react-query";
@@ -11,17 +10,31 @@ import InviteMemberBtn from "../components/InviteMemberBtn";
 import AccountInfo from "../components/AccountInfo";
 import TeamMissionDetailBody from "../components/TeamMissionDetailBody";
 import shareKakao from "../util/shareKakao";
+import useRoomInfo from "../store/useRoomInfo";
 
 const TeamMissionDetailPage = () => {
   const navigate = useNavigate();
   const { teamId } = useParams();
-  const handleShareKakaoBtn = async ()=>{
+  const { setRule } = useRoomInfo();
+  const handleShareKakaoBtn = async () => {
     await shareKakao(teamId);
- }
+  };
+  const { setRoomNumber, setRoomType } = useRoomInfo();
+  useEffect(() => {
+    setRoomNumber(teamId);
+    setRoomType("team");
+  }, [teamId, setRoomNumber, setRoomType]);
   const { data, isLoading } = useQuery({
     queryKey: ["teamMissionDetail", teamId],
+    cacheTime: 0,
     queryFn: () => getTeamMissionDetail(teamId),
+    onSuccess: (res) => {
+      console.log(res.rule);
+      setRule(...res.rule);
+    },
   });
+
+
   const goToTransferPage = () => {
     navigate(`fine/pay`);
   };
@@ -102,25 +115,37 @@ const TeamMissionDetailPage = () => {
           </button>
         </div>
 
-        <div className="text-xl font-bold mt-8 text-left w-full">{data.rule.ruleDetail}</div>
+        <div className="text-xl font-bold mt-8 text-left w-full">
+          {data.rule.ruleDetail}
+        </div>
         <div className="text-xm text-gray-400 text-left w-full">
           평일에만 미션이 주어집니다.
         </div>
-        {data.rule.ruletype == "wakeup" ?
-        (<div
-          onClick={goToTeamMissionTimeSettingPage}
-          className="flex relative justify-around bg-gray-100 mt-4 px-8 py-28 rounded-2xl w-full"
-        >
-          <p>시간 설정이 완료되지 않았습니다. </p>
-        </div>)
-        :
-        (<div
-          onClick={goToTeamMissionLocationSettingPage}
-          className="flex relative justify-around bg-gray-100 mt-4 px-8 py-28 rounded-2xl w-full"
-        >
-          <p>집 위치 설정이 완료되지 않았습니다. </p>
-        </div>)
-        }
+        {data.rule.ruleType == "wakeup" ? (
+          data.rule.ruleSetted == true ? (
+            <div className="flex relative justify-around bg-gray-100 mt-4 px-8 py-28 rounded-2xl w-full">
+              <p>{data.rule.ruleTime}</p>
+            </div>
+          ) : (
+            <div
+              onClick={goToTeamMissionTimeSettingPage}
+              className="flex relative justify-around bg-gray-100 mt-4 px-8 py-28 rounded-2xl w-full"
+            >
+              <p>시간 설정이 완료되지 않았습니다. </p>
+            </div>
+          )
+        ) : data.rule.ruleSetted == true ? (
+          <div className="flex relative justify-around bg-gray-100 mt-4 px-8 py-28 rounded-2xl w-full">
+            <p>{data.rule.ruleLocation}</p>
+          </div>
+        ) : (
+          <div
+            onClick={goToTeamMissionLocationSettingPage}
+            className="flex relative justify-around bg-gray-100 mt-4 px-8 py-28 rounded-2xl w-full"
+          >
+            <p>위치 설정이 완료되지 않았습니다. </p>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,9 +1,13 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import Picker from "react-mobile-picker";
 import Header from "../components/Header";
+import { useMutation } from "@tanstack/react-query";
+import useRoomInfo from "../store/useRoomInfo";
+import { useNavigate } from "react-router-dom";
+import { updateTeamMissionRule } from "../api/teamMissionApi";
 
 const selections = {
-  title: ["오전", "오후"],
+  meridiem: ["오전", "오후"],
   hour: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
   minute: [
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
@@ -13,13 +17,32 @@ const selections = {
 };
 
 export default function MyPicker() {
+  const navigate = useNavigate();
   const [pickerValue, setPickerValue] = useState({
-    title: "오전",
+    meridiem: "오전",
     hour: 1,
     minute: 1,
   });
 
-  const formattedTime = `${pickerValue.title} ${pickerValue.hour}시 ${pickerValue.minute}분`;
+  const { roomNumber, roomType, rule } = useRoomInfo();
+// mutate를 updateTeamMissionRule라는 이름으로 호출
+  const { mutate: updateTeamMission } = useMutation({
+    mutationFn: (ruleData) => updateTeamMissionRule(roomNumber, ruleData),
+    onSuccess: () => {
+      navigate(`/teamMission/${roomNumber}`);
+    },
+  });
+  const onClickConfirmBtn = useCallback(async () => {
+    if (roomType !== "team") {
+      alert("팀 미션만 설정할 수 있습니다.");
+      return;
+    }
+    await updateTeamMission({...rule,
+      ruleTime: pickerValue.meridiem + " " + pickerValue.hour + "시 " + pickerValue.minute + "분",
+      ruleSetted: true,
+    });
+  },[roomType, pickerValue, updateTeamMission]);
+  const formattedTime = `${pickerValue.meridiem} ${pickerValue.hour}시 ${pickerValue.minute}분`;
 
   return (
     <div>
@@ -57,7 +80,7 @@ export default function MyPicker() {
         </div>
 
         <div className="flex justify-center items-center pt-40">
-          <button className="bg-orange-400 text-white px-10 py-3 rounded-lg text-xl">
+          <button onClick={onClickConfirmBtn} className="bg-orange-400 text-white px-10 py-3 rounded-lg text-xl">
             확인
           </button>
         </div>
