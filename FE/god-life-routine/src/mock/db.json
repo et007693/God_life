@@ -1,10 +1,6 @@
 {
   "main": {
-    "personalMission": {
-      "id": 1,
-      "title": "운동하기",
-      "isDone": false
-    },
+
     "groupMissions": [
       {
         "id": 1,
