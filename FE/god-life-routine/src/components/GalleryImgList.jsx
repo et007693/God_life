@@ -2,7 +2,6 @@ import React from 'react'
 
 const GalleryImgList = ({data}) => {
     const allItems = data.flatMap(page => page);
-    console.log(allItems);
     const groupedByDate = allItems.reduce((groups, item) => {
 
         const date = item.date;

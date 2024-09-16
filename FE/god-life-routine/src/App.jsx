@@ -27,11 +27,21 @@ import Layout from './components/Layout'
 import TimeSettingPage from './pages/TimeSettingPage'
 import AccountSelectPage from './pages/AccountSelectPage'
 import InstallBanner from './components/InstallBanner'
+import MyPage from './pages/MyPage'
 
 
 
 function App() {
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient(
+    {
+      defaultOptions: {
+        queries: {
+          // 1분 동안 데이터가 유효하다.
+          staleTime: 1000 * 60 * 1,
+        },
+      },
+    }
+  );
   const [count, setCount] = useState(0)
   const {Kakao} = window;
   useEffect(()=>{
@@ -89,12 +99,12 @@ function App() {
           <Route path="/personalMission/account/select" element={<AccountSelectPage/>}/>
           {/* 임시로 만들어놓은 이체 성공 페이지 */}
           <Route path="/transferSuccess" element={<TransferSuccessPage/>}/>
-        
+          <Route path="/mypage" element={<MyPage/>}/>
         </Routes>
 
       </BrowserRouter>
       <ReactQueryDevtools initialIsOpen={false} />
-      <InstallBanner/>
+      {/* <InstallBanner/> */}
     </QueryClientProvider>
   )
 }

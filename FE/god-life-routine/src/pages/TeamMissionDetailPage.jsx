@@ -15,25 +15,20 @@ import useRoomInfo from "../store/useRoomInfo";
 const TeamMissionDetailPage = () => {
   const navigate = useNavigate();
   const { teamId } = useParams();
-  const { setRule } = useRoomInfo();
   const handleShareKakaoBtn = async () => {
     await shareKakao(teamId);
   };
-  const { setRoomNumber, setRoomType } = useRoomInfo();
+  const {setRoomNumber, setRoomType,setRule } = useRoomInfo();
+  const { data, isLoading } = useQuery({
+    queryKey: ["teamMissionDetail", teamId],
+    queryFn: () => getTeamMissionDetail(teamId),
+    staleTime: 0,
+  });
   useEffect(() => {
     setRoomNumber(teamId);
     setRoomType("team");
-  }, [teamId, setRoomNumber, setRoomType]);
-  const { data, isLoading } = useQuery({
-    queryKey: ["teamMissionDetail", teamId],
-    cacheTime: 0,
-    queryFn: () => getTeamMissionDetail(teamId),
-    onSuccess: (res) => {
-      console.log(res.rule);
-      setRule(...res.rule);
-    },
-  });
-
+    setRule(data?.rule);
+  }, [teamId,setRoomNumber,setRoomType,setRule,data]);
 
   const goToTransferPage = () => {
     navigate(`fine/pay`);
@@ -123,7 +118,9 @@ const TeamMissionDetailPage = () => {
         </div>
         {data.rule.ruleType == "wakeup" ? (
           data.rule.ruleSetted == true ? (
-            <div className="flex relative justify-around bg-gray-100 mt-4 px-8 py-28 rounded-2xl w-full">
+            <div 
+            onClick={goToTeamMissionTimeSettingPage}
+            className="flex relative justify-around bg-gray-100 mt-4 px-8 py-28 rounded-2xl w-full">
               <p>{data.rule.ruleTime}</p>
             </div>
           ) : (

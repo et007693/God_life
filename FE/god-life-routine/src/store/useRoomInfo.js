@@ -5,13 +5,15 @@ import { devtools } from "zustand/middleware";
 //   roomNumber : number; => 방 번호 (개인이면 존재하지 않음)
 //   roomType : string; => 개인, 팀
 // }
-const useRoomInfo = create(devtools((set) => ({
-  roomNumber : null,
-  roomType : null,
-  rule : null,
-  setRoomNumber: (roomNumber) => set({ roomNumber }),
-  setRoomType: (roomType) => set({ roomType }),
-  setRule: (rule) => set({ rule }),
-})));
+const useRoomInfo = create(
+  devtools((set) => ({
+    roomNumber: null,
+    roomType: null,
+    rule: null,
+    setRoomNumber: (roomNumber) => set({ roomNumber }),
+    setRoomType: (roomType) => set({ roomType }),
+    setRule: (rule) => set({ rule: { ...rule } }),
+  }))
+);
 
 export default useRoomInfo;
