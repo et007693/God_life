@@ -1,6 +1,5 @@
 {
   "main": {
-
     "groupMissions": [
       {
         "id": 1,
@@ -42,10 +41,10 @@
       "fineDelayed": 2500,
       "rule": {
         "ruleType": "wakeup",
-        "ruleDetail": "일찍 일어나기",
+        "ruleDetail": "일찍일어나기",
         "ruleChecked": false,
-        "ruleSetted": false,
-        "ruleTime": null,
+        "ruleSetted": true,
+        "ruleTime": "오전 2시 1분",
         "ruleLocation": null
       }
     },

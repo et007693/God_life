@@ -31,7 +31,16 @@ import InstallBanner from './components/InstallBanner'
 
 
 function App() {
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient(
+    {
+      defaultOptions: {
+        queries: {
+          // 1분 동안 데이터가 유효하다.
+          staleTime: 1000 * 60 * 1,
+        },
+      },
+    }
+  );
   const [count, setCount] = useState(0)
   const {Kakao} = window;
   useEffect(()=>{
@@ -94,7 +103,7 @@ function App() {
 
       </BrowserRouter>
       <ReactQueryDevtools initialIsOpen={false} />
-      <InstallBanner/>
+      {/* <InstallBanner/> */}
     </QueryClientProvider>
   )
 }
