@@ -1,12 +1,15 @@
 // URL: "/"
 
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getMainPageData } from "../api/mainPageApi";
 import TodoItem from "../components/TodoItem";
+import Avatar from "../components/Avatar";
+import useUserStore from "../store/useUserStore";
 
 const MainPage = () => {
+  const {user,setUser} = useUserStore();
   const navigate = useNavigate();
   const goToPersonalMissionCreate = () => {
     navigate("/personalMission/create");
@@ -18,22 +21,30 @@ const MainPage = () => {
   const today = new Date();
   const formatDate = `${today.getFullYear()}.${
     today.getMonth() + 1
-  }.${today.getDate()}`;
-  // console.log(formatDate);
+    }.${today.getDate()}`;
+    // console.log(formatDate);
 
   const { data, isFetching, isError } = useQuery({
     queryKey: ["mainPageData"],
     queryFn: getMainPageData,
   });
-
+  useEffect(()=>{
+    setUser({id:1,name:"송창용",profileImage:"https://avatars.githubusercontent.com/u/103542723?v=4"})
+  },[setUser])
   if (isFetching) return <div>Loading...</div>;
   if (isError) return <div>Error</div>;
 
   return (
     <div>
+      <div className="flex flex-row justify-between">
+
       <div className="text-left ml-10 mt-10 mb-10">
         <div className="text-gray-500 text-md">Today</div>
-        <div className="text-black-500 text-3xl font-bold">{formatDate}</div>
+          <div className="text-black-500 text-3xl font-bold">{formatDate}</div>
+        </div>
+    <div className="mr-10 mt-10 mb-10" onClick={()=>{navigate("/mypage")}}>
+        <Avatar member={user}/>
+    </div>
       </div>
       <div>
         <h1 className="text-xl font-bold text-left ml-10 mt-10 mb-10">

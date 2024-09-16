@@ -84,5 +84,14 @@
         }
       }
     }
-  ]
+  ],
+  "myPage": {
+    "user": {
+      "id": 1,
+      "name": "송창용",
+      "profileImage": "https://avatars.githubusercontent.com/u/103542723?v=4",
+      "mileage": 10000,
+      "ticket": 10
+    }
+  }
 }

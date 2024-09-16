@@ -27,6 +27,7 @@ import Layout from './components/Layout'
 import TimeSettingPage from './pages/TimeSettingPage'
 import AccountSelectPage from './pages/AccountSelectPage'
 import InstallBanner from './components/InstallBanner'
+import MyPage from './pages/MyPage'
 
 
 
@@ -98,7 +99,7 @@ function App() {
           <Route path="/personalMission/account/select" element={<AccountSelectPage/>}/>
           {/* 임시로 만들어놓은 이체 성공 페이지 */}
           <Route path="/transferSuccess" element={<TransferSuccessPage/>}/>
-        
+          <Route path="/mypage" element={<MyPage/>}/>
         </Routes>
 
       </BrowserRouter>
