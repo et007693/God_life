@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 
-import smile from "../assets/smile.png";
+// import smile from "../assets/smile.png";
 
 const CalendarPage = () => {
   const [date, setDate] = useState(new Date());
