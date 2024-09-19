@@ -47,7 +47,7 @@ const TeamMissionDetailPage = () => {
   return (
     <div>
       <Header title={"팀 미션"} color={"white"} backgroudcolor={"orange"} />
-      <div className="flex flex-col items-center p-10">
+      <div className="flex flex-col items-center p-10 mt-16">
         <div className="flex flex-col items-center">
           <div className="w-full flex -space-x-4 rtl:space-x-reverse">
             <AvatarList memberList={data.memberList} />

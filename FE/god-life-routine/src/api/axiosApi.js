@@ -3,6 +3,7 @@ import useUserStore from "../store/useUserStore";
 
 const axiosApi = axios.create({
     baseURL: "http://localhost:8080",
+    // baseURL: "http://j11a503.p.ssafy.io:8080/api/v1/",
 });
 axiosApi.interceptors.request.use((config) => {
     const {accessToken} = useUserStore.getState();
