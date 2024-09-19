@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import Header from "../components/Header";
 
 // import smile from "../assets/smile.png";
 
@@ -9,12 +10,13 @@ const CalendarPage = () => {
 
   return (
     <div>
-      <div className="flex flex-col items-end justify-center pt-7 pr-5">
-        <div className="mb-2">이달의 성공률</div>
-        <div className="bg-gray-300 px-4 py-2 rounded-xl text-xl font-bold">
-          95%
+      <Header title={"캘린더"} backgroundcolor={"orange"} color={"white"} />
+      {/* <div className="flex flex-col items-end justify-center pt-20 pr-5">
+        <div className="mb-2 text-sm">이달의 성공률</div>
+        <div className="bg-white shadow-md p-2 rounded-lg">
+          <div className="text-xl font-bold text-orange-500">85%</div>
         </div>
-      </div>
+      </div> */}
 
       <div className="flex justify-center">
         <div className="rounded-lg">
@@ -109,7 +111,7 @@ const CalendarPage = () => {
             view="month"
             locale="ko-KR"
             calendarType="gregory"
-            className="border-none pt-8"
+            className="border-none pt-28"
             formatDay={(locale, date) => date.getDate().toString()}
           />
           <p className="text-center text-lg">

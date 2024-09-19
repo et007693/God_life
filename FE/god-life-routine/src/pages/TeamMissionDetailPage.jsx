@@ -12,6 +12,7 @@ import TeamMissionDetailBody from "../components/TeamMissionDetailBody";
 import shareKakao from "../util/shareKakao";
 import useRoomInfo from "../store/useRoomInfo";
 
+
 const TeamMissionDetailPage = () => {
   const navigate = useNavigate();
   const { teamId } = useParams();
@@ -42,6 +43,11 @@ const TeamMissionDetailPage = () => {
   const goToTeamMissionLocationSettingPage = () => {
     navigate(`location/setting`);
   };
+
+  const goToAccountHistoryPage = () => {
+    navigate(`/personalMission/accountHistory`)
+  }
+
   // 로딩 중일 때 로딩 표시
   if (isLoading) return <div>Loading...</div>;
   return (
@@ -93,7 +99,7 @@ const TeamMissionDetailPage = () => {
           </button>
 
           <button
-            onClick={goToFineHistoryPage}
+            onClick={goToAccountHistoryPage}
             className="text-md font-medium flex items-center space-x-1"
           >
             <svg

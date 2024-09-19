@@ -34,83 +34,134 @@ import MileageHistoryPage from './pages/MileageHistoryPage'
 
 
 function App() {
-  const queryClient = new QueryClient(
-    {
-      defaultOptions: {
-        queries: {
-          // 1분 동안 데이터가 유효하다.
-          staleTime: 1000 * 60 * 1,
-        },
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        // 1분 동안 데이터가 유효하다.
+        staleTime: 1000 * 60 * 1,
       },
-    }
-  );
-  const [count, setCount] = useState(0)
-  const {Kakao} = window;
-  useEffect(()=>{
-    if(!Kakao.isInitialized()){
-    Kakao.init(import.meta.env.VITE_KAKAO_API_KEY);
+    },
+  });
+  const [count, setCount] = useState(0);
+  const { Kakao } = window;
+  useEffect(() => {
+    if (!Kakao.isInitialized()) {
+      Kakao.init(import.meta.env.VITE_KAKAO_API_KEY);
     }
     // 초기에 스크린 사이즈에 맞춰 높이 설정
     setScreenHeight();
     // 브라우저 창 크기가 변경될 때마다 스크린 높이 재설정
-    window.addEventListener('resize', setScreenHeight);
-    return ()=>{
-      window.removeEventListener('resize', setScreenHeight);
-    }
-  },[])
+    window.addEventListener("resize", setScreenHeight);
+    return () => {
+      window.removeEventListener("resize", setScreenHeight);
+    };
+  }, []);
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <Routes>
-          <Route path="/kakaoInvite" element={<KakaoInvitePage/>}/>
-          <Route path="/:teamId/invite/accept" element={<InviteAcceptPage/>}/>
+          <Route path="/kakaoInvite" element={<KakaoInvitePage />} />
+          <Route path="/:teamId/invite/accept" element={<InviteAcceptPage />} />
 
-          <Route path="/login" element={<LoginPage/>}/>
+          <Route path="/login" element={<LoginPage />} />
           {/* TODO: 메인페이지 라우팅 추가 */}
-          <Route path="/" element={<MainPage/>}/>
-          <Route path="/personalMission/create" element={<PersonalMissionCreatePage/>}/>
-          <Route path="/personalMission/accountHistory" element={<AccountHistoryPage/>}/>
-          <Route path="/personalMission" element={<Layout/>}>
-            <Route path="" element={<PersonalMissionDetailPage/>} />
-            <Route path="calendar" element={<CalendarPage/>}/>
-            <Route path="gallery" element={<GalleryPage/>}/>
+          <Route path="/" element={<MainPage />} />
+          <Route
+            path="/personalMission/create"
+            element={<PersonalMissionCreatePage />}
+          />
+          <Route
+            path="/personalMission/accountHistory"
+            element={<AccountHistoryPage />}
+          />
+          <Route path="/personalMission" element={<Layout />}>
+            <Route path="" element={<PersonalMissionDetailPage />} />
+            <Route path="calendar" element={<CalendarPage />} />
+            <Route path="gallery" element={<GalleryPage />} />
+            
+
           </Route>
-          <Route path="/personalMission/setting" element={<PersonalMissionSettingPage/>}/>
+          <Route
+            path="/personalMission/setting"
+            element={<PersonalMissionSettingPage />}
+          />
           {/* 미션 수행 페이지 */}
-          <Route path="/personalMission/perform" element={<PerformMissionPage/>}/>
-          <Route path="/teamMission/create" element={<TeamMissionCreatePage/>}/>
-          <Route path="/teamMission/:teamId" element={<Layout/>}>
-            <Route path="" element={<TeamMissionDetailPage/>}/>
-            <Route path="calendar" element={<CalendarPage/>}/>
-            <Route path="gallery" element={<GalleryPage/>}/>
+          <Route
+            path="/personalMission/perform"
+            element={<PerformMissionPage />}
+          />
+          <Route
+            path="/teamMission/create"
+            element={<TeamMissionCreatePage />}
+          />
+          <Route path="/teamMission/:teamId" element={<Layout />}>
+            <Route path="" element={<TeamMissionDetailPage />} />
+            <Route path="calendar" element={<CalendarPage />} />
+            <Route path="gallery" element={<GalleryPage />} />
           </Route>
-          <Route path="/teamMission/:teamId/accountHistory" element={<AccountHistoryPage/>}/>
+          <Route
+            path="/teamMission/:teamId/accountHistory"
+            element={<AccountHistoryPage />}
+          />
           {/* 팀에서 각 유저가 미션 설정하는 페이지 */}
-          <Route path="/teamMission/:teamId/setting" element={<TeamMissionSettingPage/>}/>
+          <Route
+            path="/teamMission/:teamId/setting"
+            element={<TeamMissionSettingPage />}
+          />
           {/* 미션 수행 페이지 */}
-          <Route path="/teamMission/:teamId/perform" element={<PerformMissionPage/>}/>
-          <Route path="/teamMission/:teamId/fine/history" element={<FineHistoryPage/>}/>
-          <Route path="/teamMission/:teamId/fine/pay" element={<TransferPage/>}/>
-          <Route path="/teamMission/:teamId/fine/pay/success" element={<TransferSuccessPage/>}/>
-          <Route path="/teamMission/:teamId/fine/pay/fail" element={<LocationSettingPage/>}/>
-          <Route path="/teamMission/:teamId/time/setting" element={<TimeSettingPage/>}/>
-          <Route path="/teamMission/:teamId/location/setting" element={<LocationSettingPage/>}/>
+          <Route
+            path="/teamMission/:teamId/perform"
+            element={<PerformMissionPage />}
+          />
+          <Route
+            path="/teamMission/:teamId/fine/history"
+            element={<FineHistoryPage />}
+          />
+          <Route
+            path="/teamMission/:teamId/fine/pay"
+            element={<TransferPage />}
+          />
+          <Route
+            path="/teamMission/:teamId/fine/pay/success"
+            element={<TransferSuccessPage />}
+          />
+          <Route
+            path="/teamMission/:teamId/fine/pay/fail"
+            element={<LocationSettingPage />}
+          />
+          <Route
+            path="/teamMission/:teamId/time/setting"
+            element={<TimeSettingPage />}
+          />
+          <Route
+            path="/teamMission/:teamId/location/setting"
+            element={<LocationSettingPage />}
+          />
           {/* 임시로 만들어놓은 사진촬영 미션 수행 페이지 */}
-          <Route path="/photoMission" element={<PhotoMissionPage/>}/>
+          <Route path="/photoMission" element={<PhotoMissionPage />} />
           {/* 임시로 만들어놓은 계좌선택 페이지 */}
-          <Route path="/personalMission/account/select" element={<AccountSelectPage/>}/>
+          <Route
+            path="/personalMission/account/select"
+            element={<AccountSelectPage />}
+          />
+          {/* 임시로 만들어놓은 개인 계좌 금리 디테일페이지 */}
+          <Route
+            path="/personalMission/account/detail"
+            element={<PersonalAccountDetailPage />}
+          />
           {/* 임시로 만들어놓은 이체 성공 페이지 */}
           <Route path="/transferSuccess" element={<TransferSuccessPage/>}/>
           <Route path="/mypage" element={<MyPage/>}/>
           <Route path="/mileageShop" element={<MileageShopPage/>}/>
           <Route path="/mileageHistory" element={<MileageHistoryPage />}/>
+          <Route path="/transferSuccess" element={<TransferSuccessPage />} />
+          <Route path="/mypage" element={<MyPage />} />
         </Routes>
-
       </BrowserRouter>
       <ReactQueryDevtools initialIsOpen={false} />
       {/* <InstallBanner/> */}
     </QueryClientProvider>
-  )
+  );
 }
 
-export default App
+export default App;
