@@ -28,6 +28,8 @@ import TimeSettingPage from './pages/TimeSettingPage'
 import AccountSelectPage from './pages/AccountSelectPage'
 import InstallBanner from './components/InstallBanner'
 import MyPage from './pages/MyPage'
+import MileageShopPage from './pages/MileageShopPage'
+import MileageHistoryPage from './pages/MileageHistoryPage'
 
 
 
@@ -100,6 +102,8 @@ function App() {
           {/* 임시로 만들어놓은 이체 성공 페이지 */}
           <Route path="/transferSuccess" element={<TransferSuccessPage/>}/>
           <Route path="/mypage" element={<MyPage/>}/>
+          <Route path="/mileageShop" element={<MileageShopPage/>}/>
+          <Route path="/mileageHistory" element={<MileageHistoryPage />}/>
         </Routes>
 
       </BrowserRouter>
