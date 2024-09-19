@@ -2,7 +2,7 @@ import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 
-const Header = ({title, color,  backgroudcolor}) => {
+const Header = ({title, color,  backgroundcolor}) => {
   const navigate = useNavigate();
   const location = useLocation();
 const colorClass = {
@@ -21,7 +21,7 @@ const onClickBack = () => {
   }
 }
   return (
-    <div className= {`fixed top-0 left-0 w-full justify-center items-center p-4 ${backgroundColorClass[backgroudcolor]}`}>
+    <div className= {`fixed top-0 left-0 w-full justify-center items-center p-4 ${backgroundColorClass[backgroundcolor]}`}>
       <button className="absolute left-4 top-4 text-black" onClick={onClickBack}>
         <svg
           xmlns="http://www.w3.org/2000/svg"

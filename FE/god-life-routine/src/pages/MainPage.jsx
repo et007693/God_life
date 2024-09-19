@@ -28,6 +28,7 @@ const MainPage = () => {
     queryKey: ["mainPageData"],
     queryFn: getMainPageData,
   });
+
   useEffect(()=>{
     setUser({id:1,name:"송창용",profileImage:"https://avatars.githubusercontent.com/u/103542723?v=4"})
   },[setUser])
@@ -73,7 +74,7 @@ const MainPage = () => {
         </ul>
       </div>
       <div>
-        <h1 className="text-xl font-bold text-left ml-10 mt-10 mb-10">
+        <h1 className="text-xl font-bold text-left ml-10 mt-20 mb-10">
           팀미션
         </h1>
         <ul className="flex flex-col gap-4 mx-10">
@@ -93,7 +94,7 @@ const MainPage = () => {
             <div>No missions</div>
           )}
         </ul>
-        <div className="m-3">
+        <div className="m-3 mt-8">
           <button
             onClick={goToTeamMissionCreate}
             className="bg-gray-200 hover:bg-gray-300 text-black font-bold py-1 px-2 rounded"

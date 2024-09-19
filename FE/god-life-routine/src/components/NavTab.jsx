@@ -7,7 +7,7 @@ const NavTab = () => {
   const currentPage = pathSegments[pathSegments.length - 1];
   const navigate = useNavigate();
   return (
-    <div className="flex justify-between w-screen h-10 fixed bottom-0 border-t border-gray-300 bg-white items-center">
+    <div className="flex justify-between w-screen h-12 fixed bottom-0 border-t border-gray-300 bg-white items-center">
       <div className="flex justify-between items-center flex-1">
         <button
           className="w-full flex items-center justify-center"
@@ -17,7 +17,7 @@ const NavTab = () => {
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className={`h-10 w-10 ${
+            className={`h-9 w-9 ${
               !currentPage.includes("gallery") &&
               !currentPage.includes("calendar")
                 ? "fill-black"
@@ -39,7 +39,7 @@ const NavTab = () => {
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24px"
-            className={`h-10 w-10 ${
+            className={`h-9 w-9 ${
               currentPage === "gallery" ? "fill-black" : "fill-gray-400"
             }`}
             viewBox="0 -960 960 960"
@@ -56,7 +56,7 @@ const NavTab = () => {
         >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className={`h-10 w-10 ${
+              className={`h-9 w-9 ${
                 currentPage === "calendar" ? "fill-black" : "fill-gray-400"
               }`}
               height="24px"

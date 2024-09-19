@@ -65,7 +65,7 @@ const TeamMissionCreatePage = () => {
   return (
     <div>
       <Header title={"벌금 통장"} color={"orange"} />
-      <div className="text-left p-10">
+      <div className="text-left p-10 mt-16">
         <div>
           <div className="text-xl font-bold mb-4">이름</div>
           <input
