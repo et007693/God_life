@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import MyPageMenuListItem from './MyPageMenuListItem';
 
-const MyPageMenuList = () => {
+const MyPageMenuList = ({setShowModal}) => {
   const navigate = useNavigate();
   // TODO: 네비게이트 및 모달 적용해야함
   const menuList = [
@@ -24,11 +24,11 @@ const MyPageMenuList = () => {
     {
       id:4,
       name:"회원 탈퇴",
-      onClick: ()=>navigate("")
+      onClick: setShowModal(true)
     }
   ]
   return (
-    <ul className="flex flex-col h-full px-8 divide-y pt-10 divide-gray-100">
+    <ul className="flex flex-col h-auto px-8 divide-y pt-10 divide-gray-100">
        {
         menuList.map((menu)=>{
           return <MyPageMenuListItem menu={menu} key={menu.id}/>
