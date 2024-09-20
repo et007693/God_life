@@ -15,7 +15,7 @@ export const updateTeamMissionRule = (teamId, rule) => {
     },
   };
   const response = axiosApi
-    .patch(`/teamMission/${teamId}`, data)
+    .patch(`/api/v1/teamMission/${teamId}`, data)
     .then((response) => response.data);
   return response;
 };

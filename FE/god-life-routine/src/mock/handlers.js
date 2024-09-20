@@ -153,6 +153,14 @@ export const handlers = [
           const teamMissionData = teamMissionList.find(data=>data.id===params.id)
           return HttpResponse.json(teamMissionData,{status:200})
         }),
+        http.patch('/api/v1/teamMission/:id', async ({params,request})=>{
+          const {rule} = await request.json();
+          console.log(rule);
+          
+          const teamMissionData = teamMissionList.find(data=>data.id===params.id)
+          teamMissionData.rule = rule
+          return HttpResponse.json(teamMissionData,{status:200})
+        }),
 
 
 ]
