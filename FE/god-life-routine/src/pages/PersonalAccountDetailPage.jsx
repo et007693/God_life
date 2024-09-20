@@ -29,6 +29,7 @@ const PersonalAccountDetailPage = () => {
         <div className="text-lg font-bold mt-8">우대 이자율 조건</div>
         <div className="border-b border-gray-400 mt-3 mr-5 mb-2"></div>
       </div>
+      
       <BenefitTable />
     </div>
     
