@@ -26,10 +26,12 @@ import InviteAcceptPage from './pages/inviteAcceptPage'
 import Layout from './components/Layout'
 import TimeSettingPage from './pages/TimeSettingPage'
 import AccountSelectPage from './pages/AccountSelectPage'
-import InstallBanner from './components/InstallBanner'
 import MyPage from './pages/MyPage'
 import MileageShopPage from './pages/MileageShopPage'
 import MileageHistoryPage from './pages/MileageHistoryPage'
+import PersonalAccountDetailPage from './pages/PersonalAccountDetailPage'
+import TempLoginPage from './pages/TempLoginPage'
+import KakaoLoginCallbackPage from './pages/KakaoLoginCallbackPage'
 
 
 
@@ -42,6 +44,7 @@ function App() {
       },
     },
   });
+  
   const [count, setCount] = useState(0);
   const { Kakao } = window;
   useEffect(() => {
@@ -60,12 +63,12 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <Routes>
+          <Route path="/" element={<MainPage />} />
           <Route path="/kakaoInvite" element={<KakaoInvitePage />} />
           <Route path="/:teamId/invite/accept" element={<InviteAcceptPage />} />
 
           <Route path="/login" element={<LoginPage />} />
           {/* TODO: 메인페이지 라우팅 추가 */}
-          <Route path="/" element={<MainPage />} />
           <Route
             path="/personalMission/create"
             element={<PersonalMissionCreatePage />}
@@ -156,6 +159,8 @@ function App() {
           <Route path="/mileageHistory" element={<MileageHistoryPage />}/>
           <Route path="/transferSuccess" element={<TransferSuccessPage />} />
           <Route path="/mypage" element={<MyPage />} />
+          {/* 카카오로그인 코드를 받을 url callback페이지 */}
+          <Route path="/auth/kakao/callback" element={<KakaoLoginCallbackPage />} />
         </Routes>
       </BrowserRouter>
       <ReactQueryDevtools initialIsOpen={false} />
