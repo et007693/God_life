@@ -6,6 +6,7 @@ import Avatar from "../components/Avatar";
 import useUserStore from "../store/useUserStore";
 import { useQuery } from "@tanstack/react-query";
 import { getMainPageData } from "../api/mainPageApi";
+import FineHistoryList from "../components/FineHistoryList"
 
 const FineHistoryPage = () => {
   const { setRoomNumber, setRoomType } = useRoomInfo();
@@ -37,25 +38,9 @@ const FineHistoryPage = () => {
       <div className="mt-24 flex justify-center">
         <Avatar member={user} />
       </div>
-      <div className="flex justify-between pl-5 pt-5">
-        <div className="text-lg">08.26</div>
-        <div className="text-sm text-gray-400 pr-4">벌금면제권</div>
-      </div>
 
-      <div className="flex justify-between items-center pt-4">
-
-        <div className="flex flex-col items-start pl-10">
-          <div className="text-lg font-semibold">일찍 일어나기</div>
-          <div className="text-sm text-gray-500">16:15</div>
-        </div>
-
-        <div className="flex flex-col items-end pl-14">
-          <div className="font-bold text-xl">- 500원</div>
-          <div className="text-gray-500 text-sm">2,500원</div>
-        </div>
-
-        <div className="pr-4">아이콘</div>
-      </div>
+      <FineHistoryList />
+      
     </div>
   );
 };
