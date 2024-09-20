@@ -1,7 +1,9 @@
 import axiosApi from "./axiosApi.js";
 
 export const getTeamMissionDetail = async (teamId) => {
-  const response = await axiosApi.get(`/teamMission/${teamId}`);
+  const response = await axiosApi.get(`/api/v1/teamMission/${teamId}`);
+  console.log(response);
+  
   return response.data;
 };
 

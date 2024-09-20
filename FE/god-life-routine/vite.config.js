@@ -8,7 +8,7 @@ export default ({mode}) => defineConfig({
     react(),
     VitePWA({registerType:'autoUpdate',
       devOptions:{
-        enabled: true,
+        enabled: false,
       },
       manifest: {
         "icons": [
