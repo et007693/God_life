@@ -2,12 +2,13 @@ import axios from "axios";
 import useUserStore from "../store/useUserStore";
 
 const axiosApi = axios.create({
-    baseURL: "",
+    // baseURL: "localhost:8080",
+    baseURL:''
     // baseURL: "http://j11a503.p.ssafy.io:8080/api/v1/",
 });
 axiosApi.interceptors.request.use((config) => {
-    // const {accessToken} = useUserStore.getState();
-    const accessToken = "tempAccessToken";
+    const {accessToken} = useUserStore.getState();
+    // const accessToken = "tempAccessToken";
     console.log(accessToken);
     
     if (accessToken) {

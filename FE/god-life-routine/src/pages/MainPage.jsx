@@ -7,9 +7,12 @@ import { getMainPageData } from "../api/mainPageApi";
 import TodoItem from "../components/TodoItem";
 import Avatar from "../components/Avatar";
 import useUserStore from "../store/useUserStore";
+import { useCookies } from "react-cookie";
 
 const MainPage = () => {
   const {user,setUser} = useUserStore();
+  const cookies = useCookies(['accessToken']);
+  const {setAccessToken} = useUserStore();
   const navigate = useNavigate();
   const goToPersonalMissionCreate = () => {
     navigate("/personalMission/create");
@@ -30,6 +33,11 @@ const MainPage = () => {
   });
 
   useEffect(()=>{
+    if(cookies!=null && cookies[0] && cookies[0].accessToken) {
+      setAccessToken(cookies[0].accessToken);
+    }else{
+      navigate("/login");
+    }
     setUser({id:1,name:"송창용",profileImage:"https://avatars.githubusercontent.com/u/103542723?v=4"})
   },[setUser])
   if (isFetching) return <div>Loading...</div>;
