@@ -4,24 +4,43 @@ import Header from "../components/Header";
 import Avatar from "../components/Avatar";
 import useUserStore from "../store/useUserStore";
 import { useQuery } from "@tanstack/react-query";
-import { getMainPageData } from "../api/mainPageApi";
 import { useNavigate } from "react-router-dom";
+import { getPersonalMissionData } from "../api/personalMissionApi";
+
+const RULE_CONFIG = {
+  wakeup:{
+    navigateUri: 'time',
+    title:'일찍 일어나기',
+    content:(ruleTime)=>ruleTime || "시간 설정이 완료되지 않았습니다."
+  },
+  exercise:{
+    navigateUri: 'exercise',
+    title:'운동하기',
+    content:(ruleLocation)=>ruleLocation || "집 위치 설정이 완료되지 않았습니다"
+  }
+}
 
 const PersonalMissionDetailPage = () => {
   const { setRoomNumber, setRoomType } = useRoomInfo();
   const { user, setUser } = useUserStore();
+  const {data, isFetching, isError } = useQuery({
+    queryKey: ["personalMissionDetail"],
+    queryFn: getPersonalMissionData,
+    staleTime:0
+  });
+
   const navigate = useNavigate();
 
   const goToPersonalAccountDetail = () => {
     navigate("/personalMission/account/detail");
   };
-
- 
-  const { isFetching, isError } = useQuery({
-    queryKey: ["mainPageData"],
-    queryFn: getMainPageData,
-  });
-
+  
+  
+  const goToPersonalMissionSettingPage = () => {
+    const navigateUri = data?.rule?.ruleType === "wakeup" ? "time" : "location"    
+    navigate(`/personalMission/setting/${navigateUri}`);
+  };
+  
   useEffect(() => {
     setRoomNumber(null);
     setRoomType("personal");
@@ -34,9 +53,10 @@ const PersonalMissionDetailPage = () => {
       profileImage: "https://avatars.githubusercontent.com/u/103542723?v=4",
     });
   }, [setUser]);
+
+
   if (user === null || isFetching) return <div>Loading...</div>;
   if (isError) return <div>Error</div>;
-
   return (
     <div>
       <Header title={"나의 미션"} color={"white"} backgroundcolor={"orange"} />
@@ -114,14 +134,18 @@ const PersonalMissionDetailPage = () => {
       </div>
 
       <div className="text-left pt-8 pl-10 font-bold text-xl">
-        일찍 일어나기
+        {data.rule.ruleType ==='wakeup' ? "일찍 일어나기" : "운동하기"}
       </div>
       <div className="pt-3">
         <div 
-         
-        className="bg-gray-200 mx-10 py-12 rounded-3xl">
-          시간 설정이 완료되지 않았습니다.
-        </div>
+        onClick={goToPersonalMissionSettingPage}
+       className="bg-gray-200 mx-10 py-12 rounded-3xl">
+        {data.rule.ruleType === 'wakeup' ? (
+          data.rule.ruleSetted ? data.rule.ruleTime: "아직 시간설정이 완료되지 않았습니다."
+        ):(
+           data.rule.ruleSetted ? data.rule.ruleLocation.latitude : "아직 집 위치 설정이 되지 않았습니다."
+        )}
+            </div>
       </div>
     </div>
   );

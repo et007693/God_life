@@ -84,6 +84,19 @@ let teamMissionList =  [
       }
     }
   ]
+let personalMission = {
+  "rule": {
+    "ruleType": "wakeup",
+    "ruleDetail": "일찍 일어나기",
+    "ruleChecked": false,
+    "ruleSetted": false,
+    "ruleTime": null,
+    "ruleLocation": {
+      "latitude": 37.5666805,
+      "longitude": 126.9784147
+    }
+  }
+}
 
 const isAuthenticated = async (req)=>{
   const request = await req;
@@ -107,6 +120,7 @@ export const handlers = [
           headers: {'Content-Type': 'application/json',
             "Authorization":accessToken
           }})}),
+          // 메인페이지 영역
     http.get('/api/v1', async ({request})=>{
         // 엑세스토큰을 헤더에서 가져온다. 요청마다 헤더에 들어갈 예정
         
@@ -137,6 +151,7 @@ export const handlers = [
                 "message": "미션 조회에 성공하였습니다."
               },)
             }),
+        // 마이페이지 영역
         http.get('/api/v1/mypage',()=>{
           return HttpResponse.json(myPageDataList[0],{status:200})
         }),
@@ -149,6 +164,7 @@ export const handlers = [
           userMyPageData.mileage -= count*2000
           return  HttpResponse.json(userMyPageData,{status:200})
         }),
+        // 팀미션 영역
         http.get('/api/v1/teamMission/:id',({params})=>{
           const teamMissionData = teamMissionList.find(data=>data.id===params.id)
           return HttpResponse.json(teamMissionData,{status:200})
@@ -160,6 +176,18 @@ export const handlers = [
           const teamMissionData = teamMissionList.find(data=>data.id===params.id)
           teamMissionData.rule = rule
           return HttpResponse.json(teamMissionData,{status:200})
+        }),
+        // 개인미션영역
+        http.get('/api/v1/personalMission',async ({request})=>{
+          await isAuthenticated(request);
+          return HttpResponse.json(personalMission,{status:200})
+        }),
+
+        http.patch('/api/v1/personalMission', async ({request})=>{
+          const {rule} = await request.json();
+          console.log(rule);
+          personalMission.rule = {...personalMission.rule, ...rule}
+          return HttpResponse.json(personalMission,{status:200})
         }),
 
 

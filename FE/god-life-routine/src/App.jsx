@@ -84,8 +84,12 @@ function App() {
 
           </Route>
           <Route
-            path="/personalMission/setting"
-            element={<PersonalMissionSettingPage />}
+            path="/personalMission/setting/location"
+            element={<LocationSettingPage />}
+          />
+          <Route
+            path="/personalMission/setting/time"
+            element={<TimeSettingPage />}
           />
           {/* 미션 수행 페이지 */}
           <Route
