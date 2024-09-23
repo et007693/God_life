@@ -13,7 +13,7 @@ const groupByDate = (arr) => {
   }, {});
 };
 
-const AccountHistoryList = () => {
+const AccountHistoryList = ( {selectedUser} ) => {
   const arr = [
     {
       id: 1,
@@ -44,7 +44,8 @@ const AccountHistoryList = () => {
     },
   ];
 
-  const groupedData = groupByDate(arr);
+  const filteredArr = selectedUser === "전체" ? arr : arr.filter(item => item.name === selectedUser);
+  const groupedData = groupByDate(filteredArr);
 
   return (
     <div>
