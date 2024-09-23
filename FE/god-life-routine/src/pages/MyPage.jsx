@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../components/Header'
 import Avatar from '../components/Avatar'
 import { useQuery } from '@tanstack/react-query'
@@ -6,6 +6,7 @@ import { getMyPageData } from '../api/myPageApi'
 import MyPageUserInfo from '../components/MyPageUserInfo'
 import MyPageMenuList from '../components/MyPageMenuList'
 import useUserStore from '../store/useUserStore'
+import Modal from '../components/Modal'
 
 const MyPage = () => {
   const {setUserMyPageData} = useUserStore();
@@ -16,6 +17,7 @@ const MyPage = () => {
       staleTime:0,
     }
   )
+  const [showModal,setShowModal] = useState(false);
   useEffect(()=>{
     if(data != null){
       setUserMyPageData(data)
@@ -23,11 +25,16 @@ const MyPage = () => {
   },[data,setUserMyPageData])
   if (isFetching) return <div>로딩중...</div>
   return (
+    <>
     <div className="h-real-screen">
       <Header title={"마이페이지"}  backgroudcolor={"white"} />
       <MyPageUserInfo member={data}/>
-      <MyPageMenuList/>
+      <MyPageMenuList onClickSignOutBtn={()=>setShowModal(true)}/>
+      <Modal showModal={showModal} onClickCloseBtn={()=>setShowModal(false)} >
+        ㅎㅇㅎㅇ
+      </Modal>
     </div>
+    </>
   )
 }
 
