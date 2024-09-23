@@ -29,8 +29,8 @@ const MyPage = () => {
     <div className="h-real-screen">
       <Header title={"마이페이지"}  backgroudcolor={"white"} />
       <MyPageUserInfo member={data}/>
-      <MyPageMenuList setShowModal={setShowModal}/>
-      <Modal showModal={showModal} onClose={()=>setShowModal(false)} >
+      <MyPageMenuList onClickSignOutBtn={()=>setShowModal(true)}/>
+      <Modal showModal={showModal} onClickCloseBtn={()=>setShowModal(false)} >
         ㅎㅇㅎㅇ
       </Modal>
     </div>

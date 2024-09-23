@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import MyPageMenuListItem from './MyPageMenuListItem';
 
-const MyPageMenuList = ({setShowModal}) => {
+const MyPageMenuList = ({onClickSignOutBtn}) => {
   const navigate = useNavigate();
   // TODO: 네비게이트 및 모달 적용해야함
   const menuList = [
@@ -24,7 +24,7 @@ const MyPageMenuList = ({setShowModal}) => {
     {
       id:4,
       name:"회원 탈퇴",
-      onClick: setShowModal(true)
+      onClick: ()=>onClickSignOutBtn()
     }
   ]
   return (

@@ -1,18 +1,19 @@
 import React, { useEffect } from 'react'
 
-const Modal = ({children,onClose,showModal}) => {
+const Modal = ({children,onClickCloseBtn,showModal}) => {
     useEffect(()=>{
+        console.log(showModal);
         
     },[showModal])
-if(!showModal) return null;
 const onClickClose = ()=>{
     console.log("클릭되고있음");
-    onClose(false);
+    onClickCloseBtn();
 }
+
   return (
-<div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+<div className={`${showModal ? "": "hidden"} fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center`}>
       <div className="bg-white p-6 rounded-lg">
-        {children}
+        <div>{children}</div>
         <button
           onClick={onClickClose}
           className="mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
