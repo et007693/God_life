@@ -8,15 +8,15 @@ import Header from "../components/Header";
 const CalendarPage = () => {
   const [date, setDate] = useState(new Date());
 
+  const isWeekend = (date) => {
+    const day = date.getDay();
+    return day === 0 || day === 6; // 0: Sunday, 6: Saturday
+  };
+
   return (
     <div>
       <Header title={"캘린더"} backgroundcolor={"orange"} color={"white"} />
-      {/* <div className="flex flex-col items-end justify-center pt-20 pr-5">
-        <div className="mb-2 text-sm">이달의 성공률</div>
-        <div className="bg-white shadow-md p-2 rounded-lg">
-          <div className="text-xl font-bold text-orange-500">85%</div>
-        </div>
-      </div> */}
+      
 
       <div className="flex justify-center">
         <div className="rounded-lg">
@@ -31,6 +31,10 @@ const CalendarPage = () => {
               justify-content: center;
               align-items: center;
               height: 100px;
+            }
+
+            .react-calendar__tile:hover {
+              background-color: transparent !important;
             }
 
             /* 오늘 날짜 (하늘색 원) */
@@ -70,6 +74,16 @@ const CalendarPage = () => {
               background-color: transparent !important;
               position: relative;
               color: black;
+            }
+
+            /* 주말인 경우는 빨간색으로 유지 */
+            .react-calendar__tile--active abbr[data-weekend="true"] {
+              color: brown !important; /* 주말일 때 선택해도 빨간색 유지 */
+            }
+
+            /* 평일 선택 시 검정색 */
+            .react-calendar__tile--active abbr[data-weekend="false"] {
+              color: black !important;
             }
 
             /* 선택된 날짜 숫자 */
@@ -112,8 +126,14 @@ const CalendarPage = () => {
             locale="ko-KR"
             calendarType="gregory"
             className="border-none pt-28"
-            formatDay={(locale, date) => date.getDate().toString()}
-          />
+            formatDay={(locale, date) => (<abbr
+              data-weekend={isWeekend(date) ? "true" : "false"} // 주말인지 아닌지 확인
+            >
+              {date.getDate()}
+            </abbr>
+          )}
+        />
+          
           <p className="text-center text-lg">
             선택한 날짜: {date.toDateString()}
           </p>
