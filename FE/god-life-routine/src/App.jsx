@@ -30,7 +30,6 @@ import MyPage from './pages/MyPage'
 import MileageShopPage from './pages/MileageShopPage'
 import MileageHistoryPage from './pages/MileageHistoryPage'
 import PersonalAccountDetailPage from './pages/PersonalAccountDetailPage'
-import TempLoginPage from './pages/TempLoginPage'
 import KakaoLoginCallbackPage from './pages/KakaoLoginCallbackPage'
 
 
