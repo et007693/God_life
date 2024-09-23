@@ -2,11 +2,30 @@ import React, { useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import Header from "../components/Header";
+import { AiOutlineSmile } from "react-icons/ai";
 
 // import smile from "../assets/smile.png";
 
 const CalendarPage = () => {
   const [date, setDate] = useState(new Date());
+
+  const arr = [
+    {
+      id : 1, 
+      date : "2024-09-02",
+      issuccess : "true"
+    },
+    {
+      id : 2, 
+      date : "2024-09-03",
+      issuccess : "false"
+    },
+    {
+      id : 3, 
+      date : "2024-09-04",
+      issuccess : "true"
+    },
+  ];
 
   const isWeekend = (date) => {
     const day = date.getDay();
@@ -130,7 +149,9 @@ const CalendarPage = () => {
               data-weekend={isWeekend(date) ? "true" : "false"} // 주말인지 아닌지 확인
             >
               {date.getDate()}
+              <AiOutlineSmile />
             </abbr>
+            
           )}
         />
           
