@@ -22,7 +22,7 @@ import PhotoMissionPage from './pages/PhotoMissionPage'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import KakaoInvitePage from './pages/KakaoInvitePage'
-import InviteAcceptPage from './pages/inviteAcceptPage'
+// import InviteAcceptPage from './pages/inviteAcceptPage'
 import Layout from './components/Layout'
 import TimeSettingPage from './pages/TimeSettingPage'
 import AccountSelectPage from './pages/AccountSelectPage'
@@ -64,7 +64,7 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/kakaoInvite" element={<KakaoInvitePage />} />
-          <Route path="/:teamId/invite/accept" element={<InviteAcceptPage />} />
+          {/* <Route path="/:teamId/invite/accept" element={<InviteAcceptPage />} /> */}
 
           <Route path="/login" element={<LoginPage />} />
           {/* TODO: 메인페이지 라우팅 추가 */}
