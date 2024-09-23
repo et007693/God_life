@@ -9,11 +9,13 @@ const REDIRECT_URI = 'http://localhost:5173/auth/kakao/callback'
 const {accessToken,setAccessToken} = useUserStore();
 const navigate = useNavigate();
   const onClickKakaoLogin = async () =>{
+    
     await setAccessToken("hehehe");
-    navigate("/")
+    
+    // navigate("/")
     // TODO: 추후 로그인 리다이렉트 수정 필요
     
-    // window.location.href = 'http://j11a503.p.ssafy.io:8080/api/v1/oauth2/authorization/kakao'
+    window.location.href = 'http://j11a503.p.ssafy.io:8080/api/v1/oauth2/authorization/kakao'
     // window.location.href = 
     // `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`
 

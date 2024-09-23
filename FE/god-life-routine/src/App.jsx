@@ -64,7 +64,7 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/kakaoInvite" element={<KakaoInvitePage />} />
-          {/* <Route path="/:teamId/invite/accept" element={<InviteAcceptPage />} /> */}
+          <Route path="/:teamId/invite/accept" element={<InviteAcceptPage />} />
 
           <Route path="/login" element={<LoginPage />} />
           {/* TODO: 메인페이지 라우팅 추가 */}
