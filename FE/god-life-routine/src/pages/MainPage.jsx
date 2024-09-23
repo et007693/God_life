@@ -33,11 +33,12 @@ const MainPage = () => {
   });
 
   useEffect(()=>{
-    if(cookies!=null && cookies[0] && cookies[0].accessToken) {
-      setAccessToken(cookies[0].accessToken);
-    }else{
-      navigate("/login");
-    }
+    // if(cookies!=null && cookies[0] && cookies[0].accessToken) {
+    //   setAccessToken(cookies[0].accessToken);
+    // }else{
+      // navigate("/login");
+  // }
+    
     setUser({id:1,name:"송창용",profileImage:"https://avatars.githubusercontent.com/u/103542723?v=4"})
   },[setUser])
   if (isFetching) return <div>Loading...</div>;
