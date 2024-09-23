@@ -5,6 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 import useRoomInfo from "../store/useRoomInfo";
 import { useNavigate } from "react-router-dom";
 import { updateTeamMissionRule } from "../api/teamMissionApi";
+import { updatePersonalMission } from "../api/personalMissionApi";
 
 const selections = {
   meridiem: ["오전", "오후"],
@@ -18,30 +19,29 @@ const selections = {
 
 export default function MyPicker() {
   const navigate = useNavigate();
+  const now = new Date();
   const [pickerValue, setPickerValue] = useState({
-    meridiem: "오전",
-    hour: 1,
-    minute: 1,
+    meridiem: now.getHours() < 12 ? "오전": "오후",
+    hour: now.getHours() % 12,
+    minute: now.getMinutes(),
   });
 
   const { roomNumber, roomType, rule } = useRoomInfo();
+  const onNavigateNextPage = ()=>{
+    const uri = roomType === "team" ? `/teamMission/${roomNumber}` : `/personalMission`
+    navigate(uri);
+  }
 // mutate를 updateTeamMissionRule라는 이름으로 호출
-  const { mutate: updateTeamMission } = useMutation({
-    mutationFn: (ruleData) => updateTeamMissionRule(roomNumber, ruleData),
-    onSuccess: () => {
-      navigate(`/teamMission/${roomNumber}`);
-    },
+  const { mutate: updateMissionSetting } = useMutation({
+    mutationFn: (ruleData) => roomType ==='team' ? updateTeamMissionRule(roomNumber, ruleData) : updatePersonalMission(ruleData),
+    onSuccess: onNavigateNextPage
   });
   const onClickConfirmBtn = useCallback(async () => {
-    if (roomType !== "team") {
-      alert("팀 미션만 설정할 수 있습니다.");
-      return;
-    }
-    await updateTeamMission({...rule,
-      ruleTime: pickerValue.meridiem + " " + pickerValue.hour + "시 " + pickerValue.minute + "분",
-      ruleSetted: true,
-    });
-  },[roomType, pickerValue, updateTeamMission]);
+      await updateMissionSetting({...rule,
+        ruleTime: pickerValue.meridiem + " " + pickerValue.hour + "시 " + pickerValue.minute + "분",
+        ruleSetted: true,
+      });
+  },[roomType, pickerValue,rule]);
   const formattedTime = `${pickerValue.meridiem} ${pickerValue.hour}시 ${pickerValue.minute}분`;
 
   return (
