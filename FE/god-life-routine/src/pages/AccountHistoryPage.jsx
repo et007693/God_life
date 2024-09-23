@@ -1,20 +1,113 @@
-import React from 'react'
-import Header from '../components/Header'
-import AccountHistoryList from '../components/AccountHistoryList'
-
-
+import React, { useState } from "react";
+import Header from "../components/Header";
+import AccountHistoryList from "../components/AccountHistoryList";
 
 const AccountHistoryPage = () => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [selectedUser, setSelectedUser] = useState("전체");
+
+  const arr = [
+    {
+      id: 1,
+      name : "전체"
+    },
+    {
+      id: 2,
+      name: "송창용",
+      // profileImg:
+    },
+    {
+      id: 3,
+      name: "조창훈",
+    },
+    {
+      id: 4,
+      name: "김규림",
+    },
+    {
+      id: 5,
+      name: "박진우",
+    },
+    {
+      id: 6,
+      name: "강태경",
+    },
+    {
+      id: 7,
+      name: "송주한",
+    },
+  ];
+
+  const sortedArr = [
+    ...arr.filter(user => user.name === "전체"), // "전체" 항목을 먼저 배열에 추가
+    ...arr.filter(user => user.name !== "전체").sort((a, b) => a.name.localeCompare(b.name, 'ko-KR')), // 나머지 이름을 가나다 순으로 정렬
+  ];
   
   return (
     <div>
-      <Header title={"거래 내역"} color={"orange"}/>
-      <div className='mt-24 text-left pl-4'>드롭다운</div>
+      <Header title={"거래 내역"} color={"orange"} />
 
-      <AccountHistoryList />
+      <div className="relative flex justify-start pl-5">
+        <button
+          onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+          className="text-black bg-gray-200 hover:bg-gray-300 font-medium rounded-lg text-sm px-5 py-1.5 inline-flex items-center mt-24 pl-4"
+          type="button"
+        >
+          {selectedUser}
+          <svg
+            className="w-2.5 h-2.5 ml-3"
+            // 접근 x, 시각적인 요소
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 10 6"
+          >
+            <path
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="m1 1 4 4 4-4"
+            />
+          </svg>
+        </button>
 
+        {isDropdownOpen && (
+          <div
+            className="absolute top-full left-4 bg-white rounded-lg shadow-lg w-40 mt-2"
+          >
+            <ul
+              className="h-48 py-2 overflow-y-auto text-gray-700 dark:text-gray-200"
+              aria-labelledby="dropdownUsersButton"
+            >
+              {sortedArr.map((user) => (
+                <li key={user.id}>
+                  <div
+                    className="flex items-center px-4 py-2 hover:bg-gray-100"
+                    onClick={() => {
+                      setSelectedUser(user.name);
+                      setIsDropdownOpen(false);
+                    }}
+                  >
+                    {user.name !== "전체" && (
+                      <img
+                        src={user.profileImg}
+                        alt={`${user.name} 프로필 이미지`}
+                        className="w-6 h-6 rounded-full mr-2"
+                      />
+                    )}
+                    {user.name}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+
+      <AccountHistoryList selectedUser={selectedUser} />
     </div>
-  )
-}
+  );
+};
 
-export default AccountHistoryPage
+export default AccountHistoryPage;

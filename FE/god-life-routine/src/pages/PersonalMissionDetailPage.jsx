@@ -16,6 +16,7 @@ const PersonalMissionDetailPage = () => {
     navigate("/personalMission/account/detail");
   };
 
+ 
   const { isFetching, isError } = useQuery({
     queryKey: ["mainPageData"],
     queryFn: getMainPageData,
@@ -116,7 +117,9 @@ const PersonalMissionDetailPage = () => {
         일찍 일어나기
       </div>
       <div className="pt-3">
-        <div className="bg-gray-200 mx-10 py-12 rounded-3xl">
+        <div 
+         
+        className="bg-gray-200 mx-10 py-12 rounded-3xl">
           시간 설정이 완료되지 않았습니다.
         </div>
       </div>

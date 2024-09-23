@@ -14,7 +14,7 @@ const TransferPage = () => {
   };
 
   return (
-    <div>
+    <div className="mt-16">
       <Header title={"이체하기"} color={"orange"} />
 
       <div className="text-left pl-10 pt-10">
