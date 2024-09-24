@@ -48,8 +48,9 @@ const CalendarPage = () => {
   // 주말 확인 함수
   const isWeekend = (date) => {
     const day = date.getDay();
-    return day === 6 || day === 7; // 1: Mon, ... 6: Sat, 7: Sun, 
+    return day === 0 || day === 6; // 6: Sat, 0: Sun, 
   };
+  console.log(isWeekend(date));
 
   // 성공 여부 확인
   const isSuccessDate = (date) => {
@@ -199,12 +200,15 @@ const CalendarPage = () => {
                   height: "120px", // 부모 요소의 높이 고정
                 }}
               >
-                <div
+                
+                {/* div 태그는 스타일 적용 안됨 */}
+                <abbr
                   data-weekend={isWeekend(date) ? "true" : "false"} // 주말인지 아닌지 확인
                   style={{ textAlign: "center" }}
                 >
                   {date.getDate()}
-                </div>
+                </abbr>
+                
 
                 {isSuccessDate(date)}
               </div>
