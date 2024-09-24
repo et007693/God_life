@@ -2,21 +2,84 @@ import React, { useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import Header from "../components/Header";
-
-// import smile from "../assets/smile.png";
+import { AiFillSmile, AiFillFrown } from "react-icons/ai";
 
 const CalendarPage = () => {
   const [date, setDate] = useState(new Date());
+  
 
+  const arr = [
+    {
+      id: 1,
+      date: "2024-09-02",
+      issuccess: "true",
+    },
+    {
+      id: 2,
+      date: "2024-09-03",
+      issuccess: "false",
+    },
+    {
+      id: 3,
+      date: "2024-09-04",
+      issuccess: "true",
+    },
+    {
+      id: 4,
+      date: "2024-09-05",
+      issuccess: "true",
+    },{
+      id: 5,
+      date: "2024-09-06",
+      issuccess: "true",
+    },
+    {
+      id: 6,
+      date: "2024-09-09",
+      issuccess: "false",
+    },
+    {
+      id: 7,
+      date: "2024-09-10",
+      issuccess: "true",
+    },
+  ];
+
+  // 주말 확인 함수
   const isWeekend = (date) => {
     const day = date.getDay();
-    return day === 0 || day === 6; // 0: Sunday, 6: Saturday
+    return day === 0 || day === 6; // 6: Sat, 0: Sun, 
   };
+  console.log(isWeekend(date));
+
+  // 성공 여부 확인
+  const isSuccessDate = (date) => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0"); // 월 추출 (0부터 시작하므로 +1 필요)
+    const day = String(date.getDate()).padStart(2, "0");        // 일 추출
+    const formattedDate = `${year}-${month}-${day}`;            // YYYY-MM-DD 형식으로 결합
+    
+
+    const found = arr.find((d) => d.date === formattedDate);
+    
+    if (found) {
+      return found.issuccess === "true" 
+      ? <AiFillSmile style={{ fontSize: "30px",
+        color: "orange",
+        position: "absolute",
+        bottom: "5px", }} />
+      : <AiFillFrown style={{ fontSize: "30px",
+        color: "red",
+        position: "absolute",
+        bottom: "5px", }} />;
+    }
+    return null;
+  };
+  
 
   return (
     <div>
       <Header title={"캘린더"} backgroundcolor={"orange"} color={"white"} />
-      
 
       <div className="flex justify-center">
         <div className="rounded-lg">
@@ -124,16 +187,34 @@ const CalendarPage = () => {
             value={date}
             view="month"
             locale="ko-KR"
-            calendarType="gregory"
+            calendarType="gregory" // 일요일부터 시작
             className="border-none pt-28"
-            formatDay={(locale, date) => (<abbr
-              data-weekend={isWeekend(date) ? "true" : "false"} // 주말인지 아닌지 확인
-            >
-              {date.getDate()}
-            </abbr>
-          )}
-        />
-          
+            formatDay={(locale, date) => (
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  position: "relative",
+                  height: "120px", // 부모 요소의 높이 고정
+                }}
+              >
+                
+                {/* div 태그는 스타일 적용 안됨 */}
+                <abbr
+                  data-weekend={isWeekend(date) ? "true" : "false"} // 주말인지 아닌지 확인
+                  style={{ textAlign: "center" }}
+                >
+                  {date.getDate()}
+                </abbr>
+                
+
+                {isSuccessDate(date)}
+              </div>
+            )}
+          />
+
           <p className="text-center text-lg">
             선택한 날짜: {date.toDateString()}
           </p>
