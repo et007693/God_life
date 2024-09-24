@@ -7,6 +7,7 @@ const Modal = ({
   width,
   height,
   buttonText,
+  buttonColor,
   onClickButton,
 }) => {
   useEffect(() => {
@@ -22,7 +23,7 @@ const Modal = ({
     <div
       className={`${
         showModal ? "" : "hidden"
-      } fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center -z-1`}
+      } fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center -z-1`}
       onClick={onClickClose}
     >
       <div
@@ -40,10 +41,13 @@ const Modal = ({
           &times; {/* X 표시 */}
         </button>
 
-        <div className="pt-12">{children}</div>
+        <div className="pt-1">{children}</div>
         <button
           onClick={onClickButton || onClickClose}
-          className="mt-20 px-5 py-2 bg-orange-500 text-white rounded hover:bg-orange-600"
+          className="mt-10 px-5 py-2 text-white rounded"
+          style={{
+            backgroundColor: buttonColor, 
+          }}
         >
           {buttonText}
         </button>

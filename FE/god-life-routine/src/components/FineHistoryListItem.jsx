@@ -14,12 +14,8 @@ const FineHistoryListItem = ({ item }) => {
     setShowModal(true);
   };
 
-  const closeModal = () => {
-    setShowModal(false);
-  };
-
   const handleButtonClick = () => {
-    closeModal(); 
+    setShowModal(false);
   };
 
   return (
@@ -53,9 +49,10 @@ const FineHistoryListItem = ({ item }) => {
         width="250px"
         height="300px"
         buttonText="확인"  
+        buttonColor ="orange"
         onClickButton={handleButtonClick}
       >
-        <div className="text-lg font-semibold">
+        <div className="text-lg font-semibold pt-10">
           <div>벌금 면제권을</div>
           <div>사용하시겠습니까?</div>
         </div>
