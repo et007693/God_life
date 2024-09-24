@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getPersonalMissionData } from "../api/personalMissionApi";
 import { useNavigate } from "react-router-dom";
 
-const usePersonalMissionDetail = ()=>{
+export const usePersonalMissionDetail = ()=>{
 
     const { setRoomNumber, setRoomType } = useRoomInfo();
     const { user, setUser } = useUserStore();
