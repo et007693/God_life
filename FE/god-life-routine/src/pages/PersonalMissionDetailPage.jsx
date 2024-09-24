@@ -8,39 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { getPersonalMissionData } from "../api/personalMissionApi";
 
 const PersonalMissionDetailPage = () => {
-  const { setRoomNumber, setRoomType } = useRoomInfo();
-  const { user, setUser } = useUserStore();
-  const {data, isFetching, isError } = useQuery({
-    queryKey: ["personalMissionDetail"],
-    queryFn: getPersonalMissionData,
-    staleTime:0
-  });
-
-  const navigate = useNavigate();
-
-  const goToPersonalAccountDetail = () => {
-    navigate("/personalMission/account/detail");
-  };
-  
-  
-  const goToPersonalMissionSettingPage = () => {
-    const navigateUri = data?.rule?.ruleType === "wakeup" ? "time" : "location"    
-    navigate(`/personalMission/setting/${navigateUri}`);
-  };
-  
-  useEffect(() => {
-    setRoomNumber(null);
-    setRoomType("personal");
-  }, [setRoomNumber, setRoomType]);
-
-  useEffect(() => {
-    setUser({
-      id: 1,
-      name: "송창용",
-      profileImage: "https://avatars.githubusercontent.com/u/103542723?v=4",
-    });
-  }, [setUser]);
-
+  const { data, isFetching, isError, user, goToPersonalAccountDetail, goToPersonalMissionSettingPage } = usePersonalMissionDetail();
 
   if (user === null || isFetching) return <div>Loading...</div>;
   if (isError) return <div>Error</div>;
