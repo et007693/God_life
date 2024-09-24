@@ -7,19 +7,6 @@ import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { getPersonalMissionData } from "../api/personalMissionApi";
 
-const RULE_CONFIG = {
-  wakeup:{
-    navigateUri: 'time',
-    title:'일찍 일어나기',
-    content:(ruleTime)=>ruleTime || "시간 설정이 완료되지 않았습니다."
-  },
-  exercise:{
-    navigateUri: 'exercise',
-    title:'운동하기',
-    content:(ruleLocation)=>ruleLocation || "집 위치 설정이 완료되지 않았습니다"
-  }
-}
-
 const PersonalMissionDetailPage = () => {
   const { setRoomNumber, setRoomType } = useRoomInfo();
   const { user, setUser } = useUserStore();

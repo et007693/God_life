@@ -11,8 +11,11 @@ const onClickClose = ()=>{
 }
 
   return (
-<div className={`${showModal ? "": "hidden"} fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center`}>
-      <div className="bg-white p-6 rounded-lg">
+    
+<div className={`${showModal ? "": "hidden"} fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center -z-1`}
+  onClick={onClickClose}
+>
+      <div className="bg-white p-6 rounded-lg" onClick={(e)=>e.stopPropagation()}>
         <div>{children}</div>
         <button
           onClick={onClickClose}
