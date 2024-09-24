@@ -85,6 +85,14 @@ let teamMissionList =  [
     }
   ]
 let personalMission = {
+  "profileImage": "https://avatars.githubusercontent.com/u/103542723?v=4",
+  "nickname": "송창용",
+  "mainAccountNo": "1234567890",
+  "runningDate": 159,
+  "remainingDate": 189,
+  "successRate": 80,
+  "interestRate": 4,
+  "primeRate": 8.6,
   "rule": {
     "ruleType": "wakeup",
     "ruleDetail": "일찍 일어나기",
