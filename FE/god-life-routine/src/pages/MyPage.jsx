@@ -27,7 +27,7 @@ const MyPage = () => {
   return (
     <>
     <div className="h-real-screen">
-      <Header title={"마이페이지"}  backgroudcolor={"white"} />
+      <Header title={"마이페이지"}  backgroudcolor={"white"} goBack={"/"}/>
       <MyPageUserInfo member={data}/>
       <MyPageMenuList onClickSignOutBtn={()=>setShowModal(true)}/>
       <Modal showModal={showModal} onClickCloseBtn={()=>setShowModal(false)} >

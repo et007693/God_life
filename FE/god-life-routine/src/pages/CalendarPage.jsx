@@ -79,7 +79,7 @@ const CalendarPage = () => {
 
   return (
     <div>
-      <Header title={"캘린더"} backgroundcolor={"orange"} color={"white"} />
+      <Header title={"캘린더"} backgroundcolor={"orange"} color={"white"} goBack={"/"}/>
 
       <div className="flex justify-center">
         <div className="rounded-lg">

@@ -2,7 +2,7 @@ import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 
-const Header = ({title, color,  backgroundcolor}) => {
+const Header = ({title, color,  backgroundcolor, goBack}) => {
   const navigate = useNavigate();
   const location = useLocation();
 const colorClass = {
@@ -14,10 +14,10 @@ const backgroundColorClass = {
   white: 'bg-white',
 }
 const onClickBack = () => {
-  if (location.key !== 'default') {
+  if (!goBack) {
     navigate(-1);
   } else {
-    navigate('/');
+    navigate(goBack);
   }
 }
   return (

@@ -64,7 +64,7 @@ const TeamMissionCreatePage = () => {
 
   return (
     <div>
-      <Header title={"벌금 통장"} color={"orange"} />
+      <Header title={"벌금 통장"} color={"orange"} goBack={"/"}/>
       <div className="text-left p-10 mt-16">
         <div>
           <div className="text-xl font-bold mb-4">이름</div>

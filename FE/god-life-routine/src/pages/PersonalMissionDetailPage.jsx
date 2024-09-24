@@ -15,7 +15,7 @@ const PersonalMissionDetailPage = () => {
   if (isError) return <div>Error</div>;
   return (
     <div>
-      <Header title={"나의 미션"} color={"white"} backgroundcolor={"orange"} />
+      <Header title={"나의 미션"} color={"white"} backgroundcolor={"orange"} goBack={"/"}/>
       <PersonalMissionRoomInfo missionProps={missionProps}/>
     </div>
   );
