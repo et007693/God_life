@@ -84,6 +84,8 @@ let teamMissionList =  [
       }
     }
   ]
+
+
 let personalMission = {
   "profileImage": "https://avatars.githubusercontent.com/u/103542723?v=4",
   "nickname": "송창용",
@@ -95,8 +97,10 @@ let personalMission = {
   "primeRate": 8.6,
   // 수정이 필요한 부분
   "rule": {
-    "ruleType": "wakeup",
-    "ruleDetail": "일찍 일어나기",
+    // "ruleType": "wakeup",
+    "ruleType": "exercise",
+    // "ruleDetail": "일찍 일어나기",
+    "ruleDetail": "운동하기",
     "ruleChecked": false,
     "ruleSetted": false,
     "ruleTime": null,
@@ -167,7 +171,6 @@ export const handlers = [
         http.patch('/api/v1/mypage', async ({request})=>{
           const {id, count} = await request.json();
           const userMyPageData = myPageDataList.find(data=>data.id===id)
-          console.log(userMyPageData);
           
           userMyPageData.fineImmunityCount += count
           userMyPageData.mileage -= count*2000
@@ -180,7 +183,6 @@ export const handlers = [
         }),
         http.patch('/api/v1/teamMission/:id', async ({params,request})=>{
           const {rule} = await request.json();
-          console.log(rule);
           
           const teamMissionData = teamMissionList.find(data=>data.id===params.id)
           teamMissionData.rule = rule
@@ -194,7 +196,6 @@ export const handlers = [
 
         http.patch('/api/v1/personalMission', async ({request})=>{
           const {rule} = await request.json();
-          console.log(rule);
           personalMission.rule = {...personalMission.rule, ...rule}
           return HttpResponse.json(personalMission,{status:200})
         }),

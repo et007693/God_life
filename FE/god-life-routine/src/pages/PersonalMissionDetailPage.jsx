@@ -14,7 +14,7 @@ const PersonalMissionDetailPage = () => {
   if (user === null || isFetching) return <div>Loading...</div>;
   if (isError) return <div>Error</div>;
   return (
-    <div>
+    <div className="w-full h-full">
       <Header title={"나의 미션"} color={"white"} backgroundcolor={"orange"} goBack={"/"}/>
       <PersonalMissionRoomInfo missionProps={missionProps}/>
     </div>

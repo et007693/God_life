@@ -1,8 +1,14 @@
 import React from "react";
 import Avatar from "./Avatar";
+import { Map, MapMarker } from "react-kakao-maps-sdk";
 
-const PersonalMissionRoomInfo = ({missionProps}) => {
-  const {data, user, goToPersonalAccountDetail, goToPersonalMissionSettingPage} = missionProps;
+const PersonalMissionRoomInfo = ({ missionProps }) => {
+  const {
+    data,
+    user,
+    goToPersonalAccountDetail,
+    goToPersonalMissionSettingPage,
+  } = missionProps;
   return (
     <div>
       <div className="flex flex-col items-center pt-24">
@@ -24,7 +30,9 @@ const PersonalMissionRoomInfo = ({missionProps}) => {
             <div className=" bg-gray-200 rounded-full">
               <div
                 className="bg-yellow-300 h-5 rounded-full text-center text-sm flex items-center justify-center"
-                style={{ width: `${data.runningDate/data.remainingDate*100}%` }}
+                style={{
+                  width: `${(data.runningDate / data.remainingDate) * 100}%`,
+                }}
               >
                 {data.runningDate}일
               </div>
@@ -55,7 +63,9 @@ const PersonalMissionRoomInfo = ({missionProps}) => {
             <div>
               <div className="flex flex-row">
                 <div className="text-gray-400 pl-5">현재 적용이율</div>
-                <div className="font-bold text-md pl-5 text-red-500">{data.interestRate}%</div>
+                <div className="font-bold text-md pl-5 text-red-500">
+                  {data.interestRate}%
+                </div>
               </div>
 
               <div className="flex flex-row">
@@ -84,15 +94,32 @@ const PersonalMissionRoomInfo = ({missionProps}) => {
       <div className="pt-3">
         <div
           onClick={goToPersonalMissionSettingPage}
-          className="bg-gray-200 mx-10 py-12 rounded-3xl"
+          className="bg-gray-200 mx-10 py-4 rounded-3xl mb-16"
         >
-          {data.rule.ruleType === "wakeup"
-            ? data.rule.ruleSetted
-              ? data.rule.ruleTime
-              : "아직 시간설정이 완료되지 않았습니다."
-            : data.rule.ruleSetted
-            ? data.rule.ruleLocation.latitude
-            : "아직 집 위치 설정이 되지 않았습니다."}
+          {data.rule.ruleType === "wakeup" ? (
+            data.rule.ruleSetted ? (
+              data.rule.ruleTime
+            ) : (
+              "아직 시간설정이 완료되지 않았습니다."
+            )
+          ) : data.rule.ruleSetted ? (
+            <div className="flex flex-col items-center pb-5">
+              <h3 className="text-xl font-bold mb-4">설정된 집 위치</h3>
+              <Map
+              level={3}
+              className="w-60 h-60 "
+              center={{
+                lat: (data.rule.ruleLocation.lat),
+                lng: (data.rule.ruleLocation.lng),
+              }}
+
+              >
+                <MapMarker position={data.rule.ruleLocation}/>
+              </Map>
+              </div>
+          ) : (
+            "아직 집 위치 설정이 되지 않았습니다."
+          )}
         </div>
       </div>
     </div>

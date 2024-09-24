@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import { useKakaoMap } from '../hooks/useKakaoMap';
 import useSearchStore from '../store/useSearchStore';
@@ -9,8 +8,7 @@ import useSearchStore from '../store/useSearchStore';
 
 const CustomMap = () => {
     const {position, setPosition} = useKakaoMap();
-    const {selectedPosition} = useSearchStore();
-    const center = selectedPosition;
+    const {center} = useSearchStore();
     const onMapClick = (_,mouseEvent) => {
         const latlng = mouseEvent.latLng
         setPosition({

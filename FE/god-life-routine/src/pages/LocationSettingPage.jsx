@@ -8,23 +8,27 @@ import useSearchStore from "../store/useSearchStore";
 import SearchBar from "../components/SearchBar";
 import Header from "../components/Header";
 import { useLocation, useNavigate } from "react-router-dom";
+import { updatePersonalMission } from "../api/personalMissionApi";
+import useRoomInfo from "../store/useRoomInfo";
+import { updateTeamMissionRule } from "../api/teamMissionApi";
 
-const center = { lat: 33.5563, lng: 126.79581 };
 
 const LocationSettingPage = () => {
   // 카카오맵 API를 이용한 지도 구현
   // 전역변수를 사용해 다른 컴포넌트에서도 사용할 수 있도록함.
-  const { isSearchMode,selectedAddress,updatePositionWithGeolocation } = useSearchStore();
+  const { isSearchMode,selectedAddress,updatePositionWithGeolocation,selectedPosition} = useSearchStore();
+  const { roomNumber, roomType, rule } = useRoomInfo();
   const navigate = useNavigate();
   const location = useLocation();
-  const onClickRegistButton = () => {
+  const onClickRegistButton = async () => {
     // TODO: 장소 등록 로직 추가 -api 연결
-    if(location.pathname.includes("/personalMission")){
-      console.log(selectedAddress);
-      navigate(`/personalMission/${1}`);
+    if(rule){
+      await updatePersonalMission({...rule,ruleLocation:selectedPosition})
+      navigate(`/personalMission`);
     }else if(location.pathname.includes("/teamMission")){
+      await updateTeamMissionRule({...rule,ruleLocation:selectedPosition})
       console.log(selectedAddress);
-      navigate(`/teamMission/${1}`);
+      navigate(`/teamMission/${roomNumber}`);
     }
   }
   useEffect(()=>{
@@ -43,7 +47,7 @@ const LocationSettingPage = () => {
         ) : (
 
           <div className="flex-grow flex flex-col">
-            <SearchBar value={selectedAddress} onChange={(e)=>{}}/>
+            <SearchBar value={selectedAddress} readonly />
             <div className="flex-grow overflow-hidden">
               <CustomMap />
             </div>

@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 export const usePersonalMissionDetail = ()=>{
 
-    const { setRoomNumber, setRoomType } = useRoomInfo();
+    const { setRoomNumber, setRoomType, setRule } = useRoomInfo();
     const { user, setUser } = useUserStore();
     const {data, isFetching, isError } = useQuery({
       queryKey: ["personalMissionDetail"],
@@ -30,8 +30,9 @@ export const usePersonalMissionDetail = ()=>{
     useEffect(() => {
       setRoomNumber(null);
       setRoomType("personal");
-    }, [setRoomNumber, setRoomType]);
-  
+      setRule(data?.rule);
+    }, [setRoomNumber, setRoomType, setRule,data?.rule]);
+  // TODO: 임시설정유저 추후 변경
     useEffect(() => {
       setUser({
         id: 1,

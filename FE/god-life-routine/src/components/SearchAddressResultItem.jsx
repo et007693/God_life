@@ -3,9 +3,14 @@ import { useKakaoMap } from '../hooks/useKakaoMap';
 import useSearchStore from '../store/useSearchStore';
 
 const SearchAddressResultItem = ({item}) => {
-    const {setIsSearchMode,setSelectedAddress,setSelectedPosition} = useSearchStore();
+
+    const {setIsSearchMode,setSelectedAddress,setSelectedPosition,setCenter} = useSearchStore();
     const handleClick = () => {
         setSelectedPosition({
+            lat: item.y,
+            lng: item.x
+        })
+        setCenter({
             lat: item.y,
             lng: item.x
         })
