@@ -30,8 +30,7 @@ import MileageHistoryPage from './pages/MileageHistoryPage'
 import PersonalAccountDetailPage from './pages/PersonalAccountDetailPage'
 import KakaoLoginCallbackPage from './pages/KakaoLoginCallbackPage'
 import GalleryPage from './pages/GalleryPage'
-
-
+import CalculateTeam from './pages/calculateTeam'
 
 function App() {
   const queryClient = new QueryClient({
@@ -141,6 +140,15 @@ function App() {
             path="/teamMission/:teamId/location/setting"
             element={<LocationSettingPage />}
           />
+          {/* 팀원 정산 목록 - API 추가, 1/N로 나누기 */}
+          <Route 
+            path="/calculateteam/:teamId" 
+            element={<CalculateTeam />}
+          />
+
+
+
+
           {/* 임시로 만들어놓은 사진촬영 미션 수행 페이지 */}
           <Route path="/photoMission" element={<PhotoMissionPage />} />
           {/* 임시로 만들어놓은 계좌선택 페이지 */}
@@ -162,6 +170,7 @@ function App() {
           <Route path="/mypage" element={<MyPage />} />
           {/* 카카오로그인 코드를 받을 url callback페이지 */}
           <Route path="/auth/kakao/callback" element={<KakaoLoginCallbackPage />} />
+
         </Routes>
       </BrowserRouter>
       <ReactQueryDevtools initialIsOpen={false} />

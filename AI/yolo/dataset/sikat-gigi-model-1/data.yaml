@@ -1,0 +1,6 @@
+names:
+- toothbrush
+nc: 1
+test: "C:/Users/SSAFY/Desktop/\uD2B9\uD654/yolo//sikat-gigi-model-1/test/images"
+train: "C:/Users/SSAFY/Desktop/\uD2B9\uD654/yolo//sikat-gigi-model-1/train/images"
+val: "C:/Users/SSAFY/Desktop/\uD2B9\uD654/yolo//sikat-gigi-model-1/valid/images"
