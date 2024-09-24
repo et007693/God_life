@@ -1,6 +1,6 @@
 // URL: "/teamMission/1"
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import { useNavigate, useParams } from "react-router-dom";
 import { getTeamMissionDetail } from "../api/teamMissionApi";
@@ -11,7 +11,9 @@ import AccountInfo from "../components/AccountInfo";
 import TeamMissionDetailBody from "../components/TeamMissionDetailBody";
 import shareKakao from "../util/shareKakao";
 import useRoomInfo from "../store/useRoomInfo";
-
+import firecracker from "../assets/firecracker.png";
+import Modal from "../components/Modal";
+import BettingButton from "../components/BettingButton";
 
 const TeamMissionDetailPage = () => {
   const navigate = useNavigate();
@@ -19,7 +21,9 @@ const TeamMissionDetailPage = () => {
   const handleShareKakaoBtn = async () => {
     await shareKakao(teamId);
   };
-  const {setRoomNumber, setRoomType,setRule } = useRoomInfo();
+  const { setRoomNumber, setRoomType, setRule } = useRoomInfo();
+  const [showModal, setShowModal] = useState(false);
+  const [selectedButton, setSelectedButton] = useState("");
   const { data, isLoading } = useQuery({
     queryKey: ["teamMissionDetail", teamId],
     queryFn: () => getTeamMissionDetail(teamId),
@@ -29,7 +33,15 @@ const TeamMissionDetailPage = () => {
     setRoomNumber(teamId);
     setRoomType("team");
     setRule(data?.rule);
-  }, [teamId,setRoomNumber,setRoomType,setRule,data]);
+  }, [teamId, setRoomNumber, setRoomType, setRule, data]);
+
+  const handleOpenModal = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
 
   const goToTransferPage = () => {
     navigate(`fine/pay`);
@@ -45,15 +57,73 @@ const TeamMissionDetailPage = () => {
   };
 
   const goToAccountHistoryPage = () => {
-    navigate(`/personalMission/accountHistory`)
-  }
+    navigate(`/personalMission/accountHistory`);
+  };
+
+  const handleButtonClick = (button) => {
+    setSelectedButton(button); 
+  };
 
   // 로딩 중일 때 로딩 표시
   if (isLoading) return <div>Loading...</div>;
   return (
     <div>
       <Header title={"팀 미션"} color={"white"} backgroundcolor={"orange"} goBack={"/"}/>
-      <div className="flex flex-col items-center p-10 mt-16">
+
+      {/* 이벤트 */}
+      <div
+        className="mt-20 bg-yellow-100 mx-4 py-1 rounded-lg flex justify-center"
+        onClick={handleOpenModal}
+      >
+        <img src={firecracker} alt="폭죽 아이콘" className="inline w-6 h-6" />
+        <div className="pl-2">이벤트에 참여하고 상금을 획득하세요!</div>
+      </div>
+
+      {showModal && (
+        <Modal
+          showModal={showModal}
+          onClickCloseBtn={handleCloseModal}
+          width="300px"
+          height="500px"
+          buttonText="확인"
+          buttonColor="orange"
+          onClickButton={handleCloseModal}
+        >
+          <div className="text-xl font-bold">오늘의 베팅</div>
+          <div className="text-gray-400 text-sm pt-1">
+            투표를 통해 상금을 획득하세요!
+          </div>
+
+          <div className=" pt-10 flex justify-center items-center space-x-4">
+            <div> 프로필 사진</div>
+            <div>
+              <div className="font-bold text-orange-500 text-2xl">송창용</div>
+              <div className="pt-4 text-lg">일찍 일어나기</div>
+            </div>
+          </div>
+
+          <div className="pt-12 text-2xl font-bold">예측성공시 : 1,000원</div>
+
+          <div className="flex flex-row justify-center gap-14 mt-8">
+            <BettingButton
+              label="성공"
+              isSelected={selectedButton === "성공"}
+              onClick={() => {
+                handleButtonClick("성공");
+              }}
+            />
+            <BettingButton
+              label="실패"
+              isSelected={selectedButton === "실패"}
+              onClick={() => {
+                handleButtonClick("실패");
+              }}
+            />
+          </div>
+        </Modal>
+      )}
+
+      <div className="flex flex-col items-center px-10 py-5">
         <div className="flex flex-col items-center">
           <div className="w-full flex -space-x-4 rtl:space-x-reverse">
             <AvatarList memberList={data.memberList} />
@@ -124,9 +194,10 @@ const TeamMissionDetailPage = () => {
         </div>
         {data.rule.ruleType == "wakeup" ? (
           data.rule.ruleSetted == true ? (
-            <div 
-            onClick={goToTeamMissionTimeSettingPage}
-            className="flex relative justify-around bg-gray-100 mt-4 px-8 py-28 rounded-2xl w-full">
+            <div
+              onClick={goToTeamMissionTimeSettingPage}
+              className="flex relative justify-around bg-gray-100 mt-4 px-8 py-28 rounded-2xl w-full"
+            >
               <p>{data.rule.ruleTime}</p>
             </div>
           ) : (

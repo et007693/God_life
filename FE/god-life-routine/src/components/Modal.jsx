@@ -1,30 +1,59 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from "react";
 
-const Modal = ({children,onClickCloseBtn,showModal}) => {
-    useEffect(()=>{
-        console.log(showModal);
-        
-    },[showModal])
-const onClickClose = ()=>{
+const Modal = ({
+  children,
+  onClickCloseBtn,
+  showModal,
+  width,
+  height,
+  buttonText,
+  buttonColor,
+  onClickButton,
+}) => {
+  useEffect(() => {
+    console.log(showModal);
+  }, [showModal]);
+
+  const onClickClose = () => {
     console.log("클릭되고있음");
     onClickCloseBtn();
-}
+  };
 
   return (
-    
-<div className={`${showModal ? "": "hidden"} fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center -z-1`}
-  onClick={onClickClose}
->
-      <div className="bg-white p-6 rounded-lg" onClick={(e)=>e.stopPropagation()}>
-        <div>{children}</div>
+    <div
+      className={`${
+        showModal ? "" : "hidden"
+      } fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center -z-1`}
+      onClick={onClickClose}
+    >
+      <div
+        className="bg-white p-6 rounded-lg relative"
+        onClick={(e) => e.stopPropagation()}
+        style={{
+          width,
+          height,
+        }}
+      >
         <button
-          onClick={onClickClose}
-          className="mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+          onClick={onClickClose} 
+          className="absolute top-2 right-3 text-lg text-gray-500 hover:text-black"
         >
-          Close
+          &times; {/* X 표시 */}
+        </button>
+
+        <div className="pt-1">{children}</div>
+        <button
+          onClick={onClickButton || onClickClose}
+          className="mt-10 px-5 py-2 text-white rounded"
+          style={{
+            backgroundColor: buttonColor, 
+          }}
+        >
+          {buttonText}
         </button>
       </div>
-    </div>  )
-}
+    </div>
+  );
+};
 
-export default Modal
+export default Modal;
