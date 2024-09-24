@@ -1,13 +1,26 @@
-import React from 'react'
-import coupon from '../assets/image/coupon.png'
+import React, { useState } from "react";
+import coupon from "../assets/image/coupon.png";
+import Modal from "../components/Modal";
 
-
-
-const FineHistoryListItem = ({item}) => {
+const FineHistoryListItem = ({ item }) => {
   const formattedDate = new Date(item.date).toLocaleDateString("ko-KR", {
-      month: "long",
-      day: "numeric"
-    })
+    month: "long",
+    day: "numeric",
+  });
+
+  const [showModal, setShowModal] = useState(false);
+
+  const openModal = () => {
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
+  const handleButtonClick = () => {
+    closeModal(); 
+  };
 
   return (
     <div>
@@ -23,15 +36,32 @@ const FineHistoryListItem = ({item}) => {
         </div>
 
         <div className="pr-8">
-          <img src={coupon} alt="Coupon Icon" className="w-8 h-8" />
+          <img
+            src={coupon}
+            alt="Coupon Icon"
+            className="w-8 h-8"
+            onClick={openModal}
+          />
         </div>
-        
       </div>
 
       <div className="border-b border-gray-200 mt-4 mx-4 mb-2"></div>
 
+      <Modal
+        showModal={showModal}
+        onClickCloseBtn={() => setShowModal(false)}
+        width="250px"
+        height="300px"
+        buttonText="확인"  
+        onClickButton={handleButtonClick}
+      >
+        <div className="text-lg font-semibold">
+          <div>벌금 면제권을</div>
+          <div>사용하시겠습니까?</div>
+        </div>
+      </Modal>
     </div>
-  )
-}
+  );
+};
 
-export default FineHistoryListItem
+export default FineHistoryListItem;
