@@ -68,7 +68,7 @@ const TeamMissionDetailPage = () => {
   if (isLoading) return <div>Loading...</div>;
   return (
     <div>
-      <Header title={"팀 미션"} color={"white"} backgroundcolor={"orange"} />
+      <Header title={"팀 미션"} color={"white"} backgroundcolor={"orange"} goBack={"/"}/>
 
       {/* 이벤트 */}
       <div
