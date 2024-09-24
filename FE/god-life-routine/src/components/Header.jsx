@@ -4,7 +4,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 const Header = ({title, color,  backgroundcolor, goBack}) => {
   const navigate = useNavigate();
-  const location = useLocation();
 const colorClass = {
   orange: 'text-orange-500',
   white: 'text-white',

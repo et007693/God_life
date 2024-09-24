@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import Header from '../components/Header'
-import Avatar from '../components/Avatar'
 import { useQuery } from '@tanstack/react-query'
 import { getMyPageData } from '../api/myPageApi'
 import MyPageUserInfo from '../components/MyPageUserInfo'

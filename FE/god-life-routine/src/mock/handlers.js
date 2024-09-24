@@ -7,10 +7,10 @@ const generateAccessToken = () => {
   let myPageDataList = [
     {
         "id": 1,
-        "name": "송창용",
+        "nickname": "송창용",
         "profileImage": "https://avatars.githubusercontent.com/u/103542723?v=4",
         "mileage": 10000,
-        "ticket": 8
+        "fineImmunityCount": 8
       }
 ]
 let teamMissionList =  [
@@ -169,7 +169,7 @@ export const handlers = [
           const userMyPageData = myPageDataList.find(data=>data.id===id)
           console.log(userMyPageData);
           
-          userMyPageData.ticket += count
+          userMyPageData.fineImmunityCount += count
           userMyPageData.mileage -= count*2000
           return  HttpResponse.json(userMyPageData,{status:200})
         }),
