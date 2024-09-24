@@ -10,7 +10,7 @@ const MyPageUserInfo = ({member}) => {
         <Avatar size={"lg"} member={member}/>
         <div className='flex flex-col text-left w-full pl-8 gap-2'>
           <p className='text-xl font-bold'>
-            {member.name}
+            {member.nickname}
           </p>
           <div className='flex justify-between items-center'>
             <p>
@@ -26,7 +26,7 @@ const MyPageUserInfo = ({member}) => {
             벌금 면제권
             </p>
             <p className='flex gap-2 items-center'>
-              {member.ticket}
+              {member.fineImmunityCount}
               <img src={coupon} alt="" />
             </p>
           </div>

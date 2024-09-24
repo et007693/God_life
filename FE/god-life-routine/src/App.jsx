@@ -8,8 +8,6 @@ import PersonalMissionCreatePage from './pages/PersonalMissionCreatePage'
 import PersonalMissionDetailPage from './pages/PersonalMissionDetailPage'
 import AccountHistoryPage from './pages/AccountHistoryPage'
 import CalendarPage from './pages/CalendarPage'
-import GalleryPage from './pages/GalleryPage'
-import PersonalMissionSettingPage from './pages/PersonalMissionSettingPage'
 import PerformMissionPage from './pages/PerformMissionPage'
 import TeamMissionCreatePage from './pages/TeamMissionCreatePage'
 import TeamMissionDetailPage from './pages/TeamMissionDetailPage'
@@ -31,6 +29,7 @@ import MileageShopPage from './pages/MileageShopPage'
 import MileageHistoryPage from './pages/MileageHistoryPage'
 import PersonalAccountDetailPage from './pages/PersonalAccountDetailPage'
 import KakaoLoginCallbackPage from './pages/KakaoLoginCallbackPage'
+import GalleryPage from './pages/GalleryPage'
 
 
 
@@ -44,7 +43,6 @@ function App() {
     },
   });
   
-  const [count, setCount] = useState(0);
   const { Kakao } = window;
   useEffect(() => {
     if (!Kakao.isInitialized()) {

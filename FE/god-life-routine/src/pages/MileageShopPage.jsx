@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Header from "../components/Header";
 import coin from "../assets/image/coin.png";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -13,7 +13,7 @@ const MileageShopPage = () => {
     queryKey: ["myPageData"],
     queryFn: getMyPageData,
   });
-  const {mutate:mutateBuyTicket,data} = useMutation({
+  const {mutate:mutateBuyTicket} = useMutation({
     mutationKey:["buyTickets"],
     mutationFn:()=>buyTickets(count),
     onSuccess:()=>{
@@ -76,7 +76,7 @@ const MileageShopPage = () => {
                 <div className="flex flex-row justify-between">
                   <p>구매 후 면제권 개수</p>
                   <p className="flex flex-row">
-                    {myPageData.ticket + count}
+                    {myPageData.fineImmunityCount + count}
                     <img className="ml-1" src={coupon} alt="" />
                   </p>
                 </div>
