@@ -93,6 +93,7 @@ let personalMission = {
   "successRate": 80,
   "interestRate": 4,
   "primeRate": 8.6,
+  // 수정이 필요한 부분
   "rule": {
     "ruleType": "wakeup",
     "ruleDetail": "일찍 일어나기",
@@ -100,8 +101,8 @@ let personalMission = {
     "ruleSetted": false,
     "ruleTime": null,
     "ruleLocation": {
-      "latitude": 37.5666805,
-      "longitude": 126.9784147
+      "latitude": null,
+      "longitude": null
     }
   }
 }

@@ -36,7 +36,7 @@ const MileageShopPage = () => {
   if (isFetching) return <div>로딩중...</div>;
   return (
     <div className="h-real-screen w-full flex items-center justify-center">
-      <Header title={"마일리지Shop"} color={"orange"} />
+      <Header title={"마일리지Shop"} color={"orange"} goBack={"/"}/>
       <div className="h-full w-auto mt-16 py-10">
         <div className="rounded-xl w-full h-full px-10 py-4 m-auto flex flex-col gap-8 justify-around">
           <div className="w-full h-auto relative mt-12">

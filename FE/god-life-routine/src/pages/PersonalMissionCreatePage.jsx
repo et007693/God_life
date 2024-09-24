@@ -50,7 +50,7 @@ const PersonalMissionCreatePage = () => {
 
   return (
     <div>
-      <Header title={"예금 통장"} color={"orange"} />
+      <Header title={"예금 통장"} color={"orange"} goBack={"/"}/>
       <p className="text-center font-bold text-red-300 pt-20">
         매일매일 미션 달성하고 우대금리를 적용받아요
       </p>

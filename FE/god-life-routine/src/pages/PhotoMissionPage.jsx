@@ -49,7 +49,7 @@ const PhotoMissionPage = () => {
 
   return (
     <div className="w-full h-real-screen flex flex-col">
-      <Header title={"사진 촬영"} color={"orange"} />
+      <Header title={"사진 촬영"} color={"orange"} goBack={"/"}/>
       <div className="h-full justify-around flex-1 flex flex-col items-center p-5">
         {capturedImage ? (
           <>

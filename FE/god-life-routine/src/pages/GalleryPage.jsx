@@ -43,7 +43,7 @@ const GalleryPage = () => {
   return (
     <div>
       <div className="flex bg-white bg-opacity-50 fixed w-full justify-end items-center px-4 py-2">
-        <Header></Header>
+        <Header goBack={"/"}></Header>
         <div className="text-center">
           <p className="text-sm font-semibold mb-2">이달의 성공률</p>
           <div className="bg-white shadow-md rounded-lg p-2">
