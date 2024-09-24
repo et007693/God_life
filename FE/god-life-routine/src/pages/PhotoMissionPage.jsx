@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Header from "../components/Header";
 import { resizeImage } from "../util/resizeImg";
-import { uploadMissionImg } from "../api/uploadMissionImg";
+import { uploadMissionImg } from "../api/wakeupMissionApi";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
