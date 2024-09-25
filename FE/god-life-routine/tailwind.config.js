@@ -11,10 +11,7 @@ export default {
       },
       minHeight: {
         'real-screen': 'calc(var(--vh,1vh) * 100)',
-      },
-      fontFamily: {
-        'noto-sans-kr': ['Noto Sans KR', 'sans-serif'],
-      },
+      }
     },
   },
   plugins: [],
