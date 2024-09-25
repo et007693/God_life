@@ -10,9 +10,9 @@ import useUserStore from "../store/useUserStore";
 import { useCookies } from "react-cookie";
 
 const MainPage = () => {
-  const {user,setUser} = useUserStore();
-  const cookies = useCookies(['accessToken']);
-  const {setAccessToken} = useUserStore();
+  const { user, setUser } = useUserStore();
+  const [cookies] = useCookies(["accessToken"]);
+  const { accessToken, setAccessToken } = useUserStore();
   const navigate = useNavigate();
   const goToPersonalMissionCreate = () => {
     navigate("/personalMission/create");
@@ -24,37 +24,44 @@ const MainPage = () => {
   const today = new Date();
   const formatDate = `${today.getFullYear()}.${
     today.getMonth() + 1
-    }.${today.getDate()}`;
-    // console.log(formatDate);
+  }.${today.getDate()}`;
+  // console.log(formatDate);
 
   const { data, isFetching, isError } = useQuery({
     queryKey: ["mainPageData"],
     queryFn: getMainPageData,
   });
-
-  useEffect(()=>{
-    // if(cookies!=null && cookies[0] && cookies[0].accessToken) {
-    //   setAccessToken(cookies[0].accessToken);
-    // }else{
-      // navigate("/login");
-  // }
-    
-    setUser({id:1,name:"송창용",profileImage:"https://avatars.githubusercontent.com/u/103542723?v=4"})
-  },[setUser])
+// 이곳 한정으로 login 페이지로 이동하는 로직 추가 나머지는 PrivateRoute에서 처리
+  useEffect(() => {
+    if (cookies != null && cookies.accessToken) {
+      setAccessToken(cookies.accessToken);
+    } else {
+      navigate("/login");
+    }
+    setUser({
+      id: 1,
+      name: "송창용",
+      profileImage: "https://avatars.githubusercontent.com/u/103542723?v=4",
+    });
+  }, []);
   if (isFetching) return <div>Loading...</div>;
   if (isError) return <div>Error</div>;
 
   return (
     <div>
       <div className="flex flex-row justify-between">
-
-      <div className="text-left ml-10 mt-10 mb-10">
-        <div className="text-gray-500 text-md">Today</div>
+        <div className="text-left ml-10 mt-10 mb-10">
+          <div className="text-gray-500 text-md">Today</div>
           <div className="text-black-500 text-3xl font-bold">{formatDate}</div>
         </div>
-    <div className="mr-10 mt-10 mb-10" onClick={()=>{navigate("/mypage")}}>
-        <Avatar member={user}/>
-    </div>
+        <div
+          className="mr-10 mt-10 mb-10"
+          onClick={() => {
+            navigate("/mypage");
+          }}
+        >
+          <Avatar member={user} />
+        </div>
       </div>
       <div>
         <h1 className="text-xl font-bold text-left ml-10 mt-10 mb-10">

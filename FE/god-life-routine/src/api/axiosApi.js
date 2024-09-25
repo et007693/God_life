@@ -7,8 +7,8 @@ const axiosApi = axios.create({
     // baseURL: "http://j11a503.p.ssafy.io:8080/api/v1/",
 });
 axiosApi.interceptors.request.use((config) => {
-  // const {accessToken} = useUserStore.getState();
-  const accessToken = "tempAccessToken";
+  const {accessToken} = useUserStore.getState();
+  // const accessToken = "tempAccessToken";
   console.log(accessToken);
 
   if (accessToken) {
