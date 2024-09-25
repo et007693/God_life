@@ -1,8 +1,6 @@
 import { create } from "zustand";
-import { devtools } from "zustand/middleware";
 
-const useSearchStore = create(
-  devtools((set) => ({
+const useSearchStore = create((set) => ({
     isSearchMode: false,
     // 선택한 주소지의 주소
     selectedAddress: "",
@@ -36,6 +34,6 @@ const useSearchStore = create(
           console.log("Geolocation을 지원하지 않는 브라우저입니다.");
         }
       },
-})))
+}))
 
 export default useSearchStore;

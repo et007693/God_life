@@ -1,9 +1,9 @@
 import React from 'react'
-import LocationSettingPage from './LocationSettingPage'
+import PlaceMissionRegistPage from './PlaceMissionRegistPage'
 
 const PersonalMissionSettingPage = () => {
   return (
-    <LocationSettingPage/>
+    <PlaceMissionRegistPage/>
   )
 }
 

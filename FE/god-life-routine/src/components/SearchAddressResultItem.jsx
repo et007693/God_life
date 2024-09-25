@@ -5,6 +5,7 @@ import useSearchStore from '../store/useSearchStore';
 const SearchAddressResultItem = ({item}) => {
     const {setIsSearchMode,setSelectedAddress,setSelectedPosition} = useSearchStore();
     const handleClick = () => {
+        console.log(item);
         setSelectedPosition({
             lat: item.y,
             lng: item.x

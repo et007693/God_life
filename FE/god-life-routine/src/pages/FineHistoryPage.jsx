@@ -1,48 +1,9 @@
-import React from "react";
-import Header from "../components/Header";
-import { useEffect, useCallback } from "react";
-import useRoomInfo from "../store/useRoomInfo";
-import Avatar from "../components/Avatar";
-import useUserStore from "../store/useUserStore";
-import { useQuery } from "@tanstack/react-query";
-import { getMainPageData } from "../api/mainPageApi";
-import FineHistoryList from "../components/FineHistoryList"
+import React from 'react'
 
 const FineHistoryPage = () => {
-  const { setRoomNumber, setRoomType } = useRoomInfo();
-  const { user, setUser } = useUserStore();
-
-  const { isFetching, isError } = useQuery({
-    queryKey: ["mainPageData"],
-    queryFn: getMainPageData,
-  });
-
-  useEffect(() => {
-    setRoomNumber(null);
-    setRoomType("personal");
-  }, [setRoomNumber, setRoomType]);
-
-  useEffect(() => {
-    setUser({
-      id: 1,
-      name: "송창용",
-      profileImage: "https://avatars.githubusercontent.com/u/103542723?v=4",
-    });
-  }, [setUser]);
-  if (user === null || isFetching) return <div>Loading...</div>;
-  if (isError) return <div>Error</div>;
-
   return (
-    <div>
-      <Header title={"벌금 내역"} color={"orange"} />
-      <div className="mt-24 flex justify-center">
-        <Avatar member={user} />
-      </div>
+    <div>FineHistoryPage</div>
+  )
+}
 
-      <FineHistoryList />
-      
-    </div>
-  );
-};
-
-export default FineHistoryPage;
+export default FineHistoryPage

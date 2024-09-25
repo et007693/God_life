@@ -3,21 +3,8 @@ import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 
-const enableMocking = async () =>{
-
-  if (!import.meta.env.DEV){
-    return;
-  }
-
-    const {worker} = await import('./mock/browser.js');
-    // worker가 시작되는것을 기다림
-    return worker.start();
-}
-enableMocking().then(()=>{
-  createRoot(document.getElementById('root')).render(
-    <StrictMode>
-      <App />
-    </StrictMode>,
-  )
-})
-
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+)
