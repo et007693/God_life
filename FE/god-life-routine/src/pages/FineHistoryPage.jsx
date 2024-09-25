@@ -7,39 +7,37 @@ import useUserStore from "../store/useUserStore";
 import { useQuery } from "@tanstack/react-query";
 import { getMainPageData } from "../api/mainPageApi";
 import FineHistoryList from "../components/FineHistoryList"
+import { useParams } from "react-router-dom";
+import { getFineHistory } from "../api/fineHistoryApi";
 
 const FineHistoryPage = () => {
   const { setRoomNumber, setRoomType } = useRoomInfo();
   const { user, setUser } = useUserStore();
+  const { teamId } = useParams();
+  const { data, isFetching, isError } = useQuery({
+    queryKey:["fineHistory"],
+    queryFn: () => getFineHistory(teamId),
+    staleTime:0,
+  })
 
-  const { isFetching, isError } = useQuery({
-    queryKey: ["mainPageData"],
-    queryFn: getMainPageData,
-  });
 
   useEffect(() => {
     setRoomNumber(null);
     setRoomType("personal");
   }, [setRoomNumber, setRoomType]);
 
-  useEffect(() => {
-    setUser({
-      id: 1,
-      name: "송창용",
-      profileImage: "https://avatars.githubusercontent.com/u/103542723?v=4",
-    });
-  }, [setUser]);
-  if (user === null || isFetching) return <div>Loading...</div>;
+
+  if (!data === null || isFetching) return <div>Loading...</div>;
   if (isError) return <div>Error</div>;
 
   return (
     <div>
       <Header title={"벌금 내역"} color={"orange"} />
       <div className="mt-24 flex justify-center">
-        <Avatar member={user} />
+        <Avatar member={data.user} />
       </div>
 
-      <FineHistoryList />
+      <FineHistoryList data={data.fineinfo} />
       
     </div>
   );

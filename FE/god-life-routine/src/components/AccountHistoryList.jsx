@@ -4,7 +4,7 @@ import AccountHistoryItem from "./AccountHistoryItem";
 // 날짜로 그룹화
 const groupByDate = (arr) => {
   return arr.reduce((acc, item) => {
-    const dateKey = item.date; 
+    const dateKey = item.date;
     if (!acc[dateKey]) {
       acc[dateKey] = []; // 해당 날짜에 대한 배열 초기화
     }
@@ -13,38 +13,11 @@ const groupByDate = (arr) => {
   }, {});
 };
 
-const AccountHistoryList = ( {selectedUser} ) => {
-  const arr = [
-    {
-      id: 1,
-      date: "2024-09-01",
-      name: "송창용",
-      context: "벌금",
-      mission: "일찍 일어나기",
-      fine: "500원",
-      balance: "3,000원",
-    },
-    {
-      id: 2,
-      date: "2024-09-01",
-      name: "조창훈",
-      context: "벌금",
-      mission: "일찍 일어나기",
-      fine: "500원",
-      balance: "3,500원",
-    },
-    {
-      id: 3,
-      date: "2024-09-04",
-      name: "박진우",
-      context: "베팅 성공",
-      mission: "일찍 일어나기",
-      fine: "500원",
-      balance: "4,000원",
-    },
-  ];
-
-  const filteredArr = selectedUser === "전체" ? arr : arr.filter(item => item.name === selectedUser);
+const AccountHistoryList = ({ selectedUser, data }) => {
+  const filteredArr =
+    selectedUser === "전체"
+      ? data
+      : data.filter((item) => item.name === selectedUser);
   const groupedData = groupByDate(filteredArr);
 
   return (
@@ -53,7 +26,6 @@ const AccountHistoryList = ( {selectedUser} ) => {
         // .sort((a, b) => new Date(b) - new Date(a)) 역순
         .map((dateKey) => (
           <div key={dateKey}>
-      
             <div className="text-left pl-4 pt-4">
               {new Date(dateKey).toLocaleDateString("ko-KR", {
                 month: "long",

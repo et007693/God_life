@@ -1,47 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import AccountHistoryList from "../components/AccountHistoryList";
+import { getAccountHistory } from "../api/accountHistoryApi";
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
 
 const AccountHistoryPage = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState("전체");
+  
+  const { teamId } = useParams();
+  const { data, isFetching } = useQuery({
+    queryKey: ["accountHistory"],
+    queryFn: () => getAccountHistory(teamId),
+    staleTime: 0,
+  });
 
-  const arr = [
-    {
-      id: 1,
-      name : "전체"
-    },
-    {
-      id: 2,
-      name: "송창용",
-      // profileImg:
-    },
-    {
-      id: 3,
-      name: "조창훈",
-    },
-    {
-      id: 4,
-      name: "김규림",
-    },
-    {
-      id: 5,
-      name: "박진우",
-    },
-    {
-      id: 6,
-      name: "강태경",
-    },
-    {
-      id: 7,
-      name: "송주한",
-    },
-  ];
+  
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
 
-  const sortedArr = [
-    ...arr.filter(user => user.name === "전체"), // "전체" 항목을 먼저 배열에 추가
-    ...arr.filter(user => user.name !== "전체").sort((a, b) => a.name.localeCompare(b.name, 'ko-KR')), // 나머지 이름을 가나다 순으로 정렬
-  ];
+  // const sortedArr = [
+  //   ...arr.filter((user) => user.name === "전체"), // "전체" 항목을 먼저 배열에 추가
+  //   ...arr
+  //     .filter((user) => user.name !== "전체")
+  //     .sort((a, b) => a.name.localeCompare(b.name, "ko-KR")), // 나머지 이름을 가나다 순으로 정렬
+  // ];
+  if (isFetching) return <div>Loading...</div>;
   
   return (
     <div>
@@ -73,14 +59,12 @@ const AccountHistoryPage = () => {
         </button>
 
         {isDropdownOpen && (
-          <div
-            className="absolute top-full left-4 bg-white rounded-lg shadow-lg w-40 mt-2"
-          >
+          <div className="absolute top-full left-4 bg-white rounded-lg shadow-lg w-40 mt-2">
             <ul
               className="h-48 py-2 overflow-y-auto text-gray-700 dark:text-gray-200"
               aria-labelledby="dropdownUsersButton"
             >
-              {sortedArr.map((user) => (
+              {data.filterUsers.map((user) => (
                 <li key={user.id}>
                   <div
                     className="flex items-center px-4 py-2 hover:bg-gray-100"
@@ -105,7 +89,10 @@ const AccountHistoryPage = () => {
         )}
       </div>
 
-      <AccountHistoryList selectedUser={selectedUser} />
+      <AccountHistoryList
+        selectedUser={selectedUser}
+        data={data.accountHistoryData}
+      />
     </div>
   );
 };

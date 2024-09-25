@@ -1,4 +1,4 @@
-// URL : "/caculateteam/1"
+// URL : "/caculateteam/1" calculateteam/1
 
 import React, { useEffect } from "react";
 import AvatarList from "../components/AvatarList"
