@@ -1,6 +1,0 @@
-names:
-- monitor
-nc: 1
-test: "C:/Users/SSAFY/Desktop/\uD2B9\uD654/yolo/dataset_monitor-1/test/images"
-train: "C:/Users/SSAFY/Desktop/\uD2B9\uD654/yolo/dataset_monitor-1/train/images"
-val: "C:/Users/SSAFY/Desktop/\uD2B9\uD654/yolo/dataset_monitor-1/valid/images"

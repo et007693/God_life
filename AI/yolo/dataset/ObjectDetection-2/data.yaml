@@ -1,6 +1,0 @@
-names:
-- spoon
-nc: 1
-test: "C:/Users/SSAFY/Desktop/\uD2B9\uD654/yolo//ObjectDetection-2/test/images"
-train: "C:/Users/SSAFY/Desktop/\uD2B9\uD654/yolo//ObjectDetection-2/train/images"
-val: "C:/Users/SSAFY/Desktop/\uD2B9\uD654/yolo//ObjectDetection-2/valid/images"
