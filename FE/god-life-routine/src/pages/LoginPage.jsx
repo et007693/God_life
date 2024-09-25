@@ -16,11 +16,11 @@ const [cookies,setCookies,removeCookies] = useCookies(["accessToken"]);
     // window.location.href = 'http://j11a503.p.ssafy.io:8080/api/v1/oauth2/authorization/kakao'
     // navigate("/");
     
-    window.location.href = 'http://localhost:8080/api/v1/oauth2/authorization/kakao'
+    // window.location.href = 'http://localhost:8080/api/v1/oauth2/authorization/kakao'
     // navigate("/")
     // TODO: 추후 로그인 리다이렉트 수정 및 쿠키 설정 필요
-    // setCookies("accessToken","hehehe");
-    // navigate("/");
+    setCookies("accessToken","hehehe");
+    navigate("/");
     // window.location.href = 
     // `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`
 
