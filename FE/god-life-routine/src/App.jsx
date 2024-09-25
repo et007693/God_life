@@ -30,7 +30,7 @@ import MileageHistoryPage from "./pages/MileageHistoryPage";
 import PersonalAccountDetailPage from "./pages/PersonalAccountDetailPage";
 import KakaoLoginCallbackPage from "./pages/KakaoLoginCallbackPage";
 import GalleryPage from "./pages/GalleryPage";
-import CalculateTeam from "./pages/calculateTeam";
+import CalculateTeam from "./pages/CalculateTeam";
 import PrivateRoute from "./components/PrivateRoute";
 import { CookiesProvider } from "react-cookie";
 
