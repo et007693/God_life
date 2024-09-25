@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useDaumCdn } from '../hooks/useDaumCdn';
 import { useKakaoMap } from '../hooks/useKakaoMap';
 import SearchAddressResultItem from './SearchAddressResultItem';
 import SearchBar from './SearchBar';

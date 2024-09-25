@@ -4,7 +4,7 @@ import App from './App.jsx'
 import './index.css'
 
 const enableMocking = async () =>{
-
+// 개발환경이 아니면 모킹 끄기
   if (!import.meta.env.DEV){
     return;
   }
