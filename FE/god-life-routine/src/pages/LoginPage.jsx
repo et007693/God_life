@@ -2,20 +2,25 @@ import React from 'react'
 import kakaoLogo from '../assets/kakao-logo.png'
 import useUserStore from '../store/useUserStore'
 import { useNavigate } from 'react-router-dom'
+import axiosApi from '../api/axiosApi'
+import { useCookies } from 'react-cookie'
 
 const LoginPage = () => {
-const CLIENT_ID = import.meta.env.VITE_KAKAO_REST_API_KEY
-const REDIRECT_URI = 'http://localhost:5173/auth/kakao/callback'
-const {accessToken,setAccessToken} = useUserStore();
+// const CLIENT_ID = import.meta.env.VITE_KAKAO_REST_API_KEY
+// const REDIRECT_URI = 'http://localhost:5173/auth/kakao/callback'
 const navigate = useNavigate();
+const [cookies,setCookies,removeCookies] = useCookies(["accessToken"]);
   const onClickKakaoLogin = async () =>{
     
-    await setAccessToken("hehehe");
+    // await setAccessToken("hehehe");
+    // window.location.href = 'http://j11a503.p.ssafy.io:8080/api/v1/oauth2/authorization/kakao'
+    // navigate("/");
     
+    // window.location.href = 'http://localhost:5173/api/v1/login?code=1234'
     // navigate("/")
     // TODO: 추후 로그인 리다이렉트 수정 필요
-    
-    window.location.href = 'http://j11a503.p.ssafy.io:8080/api/v1/oauth2/authorization/kakao'
+    setCookies("accessToken","hehehe");
+    navigate("/");
     // window.location.href = 
     // `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`
 

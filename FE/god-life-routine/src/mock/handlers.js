@@ -128,10 +128,10 @@ export const handlers = [
         const accessToken = generateAccessToken()
         // const code = request.url.searchParams.get('code')
         return new HttpResponse(null, {
-          status: 200,
-          body: JSON.stringify({access_token: accessToken}),
-          headers: {'Content-Type': 'application/json',
-            "Authorization":accessToken
+          status: 302,
+          headers: {
+            "Set-Cookie":`accessToken=${accessToken}`,
+            "Location":"/"
           }})}),
           // 메인페이지 영역
     http.get('/api/v1', async ({request})=>{
