@@ -16,8 +16,8 @@ import { updateTeamMissionRule } from "../api/teamMissionApi";
 const LocationSettingPage = () => {
   // 카카오맵 API를 이용한 지도 구현
   // 전역변수를 사용해 다른 컴포넌트에서도 사용할 수 있도록함.
-  const { isSearchMode,selectedAddress,updatePositionWithGeolocation,selectedPosition} = useSearchStore();
-  const { roomNumber, roomType, rule } = useRoomInfo();
+  const { isSearchMode,selectedAddress,center, updatePositionWithGeolocation,selectedPosition,setSelectedPosition} = useSearchStore();
+  const { roomNumber, rule } = useRoomInfo();
   const navigate = useNavigate();
   const location = useLocation();
   const onClickRegistButton = async () => {
@@ -33,6 +33,7 @@ const LocationSettingPage = () => {
   }
   useEffect(()=>{
     updatePositionWithGeolocation();
+    setSelectedPosition(center);
   },[updatePositionWithGeolocation])
   // 2024-09-04 작업시작
   return (
@@ -47,7 +48,7 @@ const LocationSettingPage = () => {
         ) : (
 
           <div className="flex-grow flex flex-col">
-            <SearchBar value={selectedAddress} readonly />
+            <SearchBar value={selectedAddress} onChange={()=>{}} />
             <div className="flex-grow overflow-hidden">
               <CustomMap />
             </div>
