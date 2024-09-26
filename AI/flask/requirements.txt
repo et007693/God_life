@@ -68,3 +68,4 @@ ultralytics==8.2.97
 ultralytics-thop==2.0.6
 urllib3==2.2.3
 wcwidth==0.2.13
+Flask==3.0.3
