@@ -61,14 +61,19 @@ const TeamMissionDetailPage = () => {
   };
 
   const handleButtonClick = (button) => {
-    setSelectedButton(button); 
+    setSelectedButton(button);
   };
 
   // 로딩 중일 때 로딩 표시
   if (isLoading) return <div>Loading...</div>;
   return (
     <div>
-      <Header title={"팀 미션"} color={"white"} backgroundcolor={"orange"} goBack={"/"}/>
+      <Header
+        title={"팀 미션"}
+        color={"white"}
+        backgroundcolor={"orange"}
+        goBack={"/"}
+      />
 
       {/* 이벤트 */}
       <div
@@ -185,8 +190,23 @@ const TeamMissionDetailPage = () => {
             <span>거래내역</span>
           </button>
         </div>
+        
 
-        <div className="text-xl font-bold mt-8 text-left w-full">
+        <button className="mt-2 ml-auto pr-2 block text-left"
+        onClick={goToCalculateTeamPage}>
+          {/* <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="20px"
+          viewBox="0 0 24 24"
+          width="20px"
+          fill="#000000"
+        >
+          <path d="M14.648,5.493c.873-.701,1.772-1.643,2.228-2.789,.238-.598,.161-1.277-.205-1.816-.377-.556-1.002-.888-1.671-.888h-6c-.669,0-1.294,.332-1.671,.888-.366,.539-.442,1.218-.205,1.816,.456,1.145,1.355,2.088,2.228,2.789C4.696,7.221,1,13.159,1,18c0,3.309,2.691,6,6,6h10c3.309,0,6-2.691,6-6,0-4.841-3.696-10.779-8.352-12.507Zm.369-3.528c-.516,1.297-2.094,2.393-3.019,2.91-.923-.513-2.495-1.6-2.999-2.875l6.018-.035Zm1.982,20.035H7c-2.206,0-4-1.794-4-4,0-5.243,4.71-11,9-11s9,5.757,9,11c0,2.206-1.794,4-4,4Zm-5,0c-.552,0-1-.448-1-1v-1h-.268c-1.068,0-2.063-.574-2.598-1.499-.276-.478-.113-1.089,.365-1.366,.476-.277,1.089-.114,1.366,.365,.178,.308,.511,.5,.867,.5h2.268c.551,0,1-.449,1-1,0-.378-.271-.698-.644-.76l-3.042-.507c-1.341-.223-2.315-1.373-2.315-2.733,0-1.654,1.346-3,3-3v-1c0-.552,.448-1,1-1s1,.448,1,1v1h.268c1.067,0,2.063,.575,2.598,1.5,.276,.478,.113,1.089-.365,1.366-.477,.277-1.089,.114-1.366-.365-.179-.309-.511-.5-.867-.5h-2.268c-.551,0-1,.449-1,1,0,.378,.271,.698,.644,.76l3.042,.507c1.341,.223,2.315,1.373,2.315,2.733,0,1.654-1.346,3-3,3v1c0,.552-.448,1-1,1Z" />
+        </svg> */}
+          <div className="font-bold text-gray-600">정산하기 →</div>
+        </button>
+
+        <div className="text-xl font-bold mt-4 text-left w-full">
           {data.rule.ruleDetail}
         </div>
         <div className="text-xm text-gray-400 text-left w-full">
