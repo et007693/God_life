@@ -17,6 +17,11 @@ export const getGalleryImgData = async (page) => {
   //   return response.data;
 };
 
+export const createPersonalMission = async (data) => {
+  const response = await axiosApi.post("/api/v1/personalMission", data);
+  return response.data;
+};
+
 export const getPersonalMissionData = async () => {
   const response = await axiosApi.get(`/api/v1/personalMission`);
   return response.data;
