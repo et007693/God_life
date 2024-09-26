@@ -1,11 +1,17 @@
 import React, { useState } from "react";
 import Header from "../components/Header";
 import kakaoBank from "../assets/kakaoBank.png";
+import { useQuery } from "@tanstack/react-query";
+import { getBankList } from "../api/accountSelectApi";
 
 const AccountSelectPage = () => {
   const [isDone, setIsDone] = useState(false);
+  const {data:bankList} = useQuery({
+    queryKey: ["account"],
+    queryFn: getBankList,
+  })
   return (
-    <div>
+    <div className="mt-16"  >
       <Header title={"계좌 선택"} color={"orange"} />
       <div className="text-center text-gray-500 pt-7">
         우대금리를 적용받을 계좌의 은행을 선택해주세요
