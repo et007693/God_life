@@ -13,11 +13,11 @@ const enableMocking = async () =>{
     // worker가 시작되는것을 기다림
     return worker.start();
 }
-enableMocking().then(()=>{
+// enableMocking().then(()=>{
   createRoot(document.getElementById('root')).render(
     <StrictMode>
       <App />
     </StrictMode>,
   )
-})
+// })
 
