@@ -32,7 +32,7 @@ const AccountHistoryPage = () => {
   return (
     <div>
       <Header title={"거래 내역"} color={"orange"} />
-
+      
       <div className="relative flex justify-start pl-5">
         <button
           onClick={() => setIsDropdownOpen(!isDropdownOpen)}

@@ -20,7 +20,7 @@ const onClickBack = () => {
   }
 }
   return (
-    <div className= {`fixed top-0 left-0 w-full justify-center items-center p-4 ${backgroundColorClass[backgroundcolor]}`}>
+    <div className= {`fixed top-0 left-0 w-full justify-center items-center p-4 z-50 ${backgroundColorClass[backgroundcolor]}`}>
       <button className="absolute left-4 top-4 text-black" onClick={onClickBack}>
         <svg
           xmlns="http://www.w3.org/2000/svg"

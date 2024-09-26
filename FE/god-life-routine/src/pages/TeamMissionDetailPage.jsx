@@ -57,7 +57,7 @@ const TeamMissionDetailPage = () => {
   };
 
   const goToAccountHistoryPage = () => {
-    navigate(`/personalMission/accountHistory`);
+    navigate(`/teamMission/${teamId}/accountHistory`);
   };
 
   const handleButtonClick = (button) => {
