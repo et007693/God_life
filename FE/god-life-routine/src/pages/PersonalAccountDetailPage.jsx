@@ -5,7 +5,7 @@ import BenefitTable from "../components/BenefitTable";
 const PersonalAccountDetailPage = () => {
   return (
     <div>
-      <Header title={"나의 미션"} color={"orange"} goBack={"/"}/>
+      <Header title={"나의 미션"} color={"orange"} />
       <div className="text-left ml-5 mt-20">
         <div className="text-lg font-bold">계좌 기본 정보</div>
         <div className="border-b border-gray-400 mt-3 mr-5"></div>
