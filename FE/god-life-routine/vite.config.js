@@ -50,4 +50,5 @@ export default ({mode}) => defineConfig({
     //   ],}
     // }),
   ],
+  base: '/',
 })
