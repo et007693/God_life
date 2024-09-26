@@ -7,9 +7,6 @@ export default ({mode}) => defineConfig({
   plugins: [
     react(),
     VitePWA({registerType:'autoUpdate',
-      devOptions:{
-        enabled: false,
-      },
       manifest: {
         "icons": [
           {
