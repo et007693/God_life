@@ -15,6 +15,7 @@ import firecracker from "../assets/firecracker.png";
 import Modal from "../components/Modal";
 import BettingButton from "../components/BettingButton";
 import LoadingSpinner from "../components/common/LoadingSpinner";
+import SettedHomeMap from "../components/SettedHomeMap";
 
 const TeamMissionDetailPage = () => {
   const navigate = useNavigate();
@@ -66,6 +67,10 @@ const TeamMissionDetailPage = () => {
 
   const handleButtonClick = (button) => {
     setSelectedButton(button);
+  };
+
+  const goToExerciseMissionPage = () => {
+    navigate(`exercise`);
   };
 
   // 로딩 중일 때 로딩 표시
@@ -239,9 +244,11 @@ const TeamMissionDetailPage = () => {
               <p>시간 설정이 완료되지 않았습니다. </p>
             </div>
           )
-          ) : data.data.ruleLocation ? (
-          <div className="flex relative justify-around bg-gray-100 mt-4 px-8 py-28 rounded-2xl w-full">
-            <p>{data.data.ruleLocation}</p>
+        ) : data.rule.ruleSetted == true ? (
+          <div
+            className="flex relative justify-around bg-gray-100 px-8 py-5 rounded-2xl w-full"
+          >
+          <SettedHomeMap data={data} onclickSettingBtn={goToTeamMissionLocationSettingPage} onclickMap={goToExerciseMissionPage}/>
           </div>
         ) : (
           <div

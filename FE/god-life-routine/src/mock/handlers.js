@@ -97,8 +97,8 @@ let personalMission = {
   primeRate: 8.6,
   // 수정이 필요한 부분
   rule: {
-    ruleType: "wakeup",
-    ruleDetail: "일찍 일어나기",
+    ruleType: "exercise",
+    ruleDetail: "운동하기",
     ruleChecked: false,
     ruleSetted: false,
     ruleTime: null,
