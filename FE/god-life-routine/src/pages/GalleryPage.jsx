@@ -1,7 +1,7 @@
 // 개인 미션 url : /personalMission/gallery
 // 팀 미션 url : /teamMission/:teamId/gallery
 import React, { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import Header from "../components/Header";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { getGalleryImgData } from "../api/personalMissionApi";
@@ -9,6 +9,8 @@ import GalleryImgList from "../components/GalleryImgList";
 const GalleryPage = () => {
   const { teamId } = useParams();
   const [successRate, setSuccessRate] = useState(85);
+  const [searchParams] = useSearchParams();
+  const type = searchParams.get('type');
   const { data, isFetching, isFetchingNextPage, isLoading, fetchNextPage } =
     useInfiniteQuery({
       queryKey: ["galleryImgData"],
@@ -43,7 +45,7 @@ const GalleryPage = () => {
   return (
     <div>
       <div className="flex bg-white bg-opacity-50 fixed w-full justify-end items-center px-4 py-2">
-        <Header goBack={"/"}></Header>
+        <Header goBack={type === 'team' ? `/teamMission/${teamId}/` : `/personalMission/`}></Header>
         <div className="text-center">
           <p className="text-sm font-semibold mb-2">이달의 성공률</p>
           <div className="bg-white shadow-md rounded-lg p-2">

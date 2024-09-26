@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-const NavTab = () => {
+const NavTab = ({ userType }) => {
   const location = useLocation();
   const pathSegments = location.pathname.split("/");
   const currentPage = pathSegments[pathSegments.length - 1];
@@ -33,7 +33,7 @@ const NavTab = () => {
         <button
           className="w-full flex items-center justify-center"
           onClick={() => {
-            navigate("gallery");
+            navigate(`gallery?type=${userType}`);
           }}
         >
           <svg
@@ -51,7 +51,7 @@ const NavTab = () => {
         <button
           className="w-full flex items-center justify-center"
           onClick={() => {
-            navigate("calendar");
+            navigate(`calendar?type=${userType}`);
           }}
         >
             <svg

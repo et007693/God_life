@@ -3,10 +3,13 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import Header from "../components/Header";
 import { AiFillSmile, AiFillFrown } from "react-icons/ai";
+import { useParams, useSearchParams } from "react-router-dom";
 
 const CalendarPage = () => {
+  const { teamId } = useParams();
   const [date, setDate] = useState(new Date());
-  
+  const [searchParams] = useSearchParams();
+  const type = searchParams.get('type');
 
   const arr = [
     {
@@ -79,7 +82,7 @@ const CalendarPage = () => {
 
   return (
     <div>
-      <Header title={"캘린더"} backgroundcolor={"orange"} color={"white"} goBack={"/"}/>
+      <Header title={"캘린더"} backgroundcolor={"orange"} color={"white"} goBack={type === 'team' ? `/teamMission/${teamId}/` : `/personalMission/`}/>
 
       <div className="flex justify-center">
         <div className="rounded-lg">
