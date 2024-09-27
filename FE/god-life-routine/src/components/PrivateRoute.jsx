@@ -7,8 +7,8 @@ const PrivateRoute = () => {
   const {accessToken,setAccessToken} = useUserStore();
   const [cookies,setCookies,removeCookies] = useCookies(["accessToken"]);
   useEffect(()=>{
-    if(cookies.accessToken != null || localStorage.getItem("accessToken") != null){
-      setAccessToken(cookies.accessToken || localStorage.getItem("accessToken"));
+    if(localStorage.getItem("accessToken") != null){
+      setAccessToken(localStorage.getItem("accessToken"));
     }
   },[])
     if(localStorage.getItem("accessToken") == null){
