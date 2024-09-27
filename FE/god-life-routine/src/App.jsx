@@ -55,7 +55,7 @@ function App() {
     setScreenHeight();
     if(cookies.accessToken != null){
       localStorage.setItem("accessToken",cookies.accessToken);
-      
+
       setAccessToken(cookies.accessToken);
     }
     // 브라우저 창 크기가 변경될 때마다 스크린 높이 재설정
@@ -155,7 +155,7 @@ function App() {
               />
               {/* 팀원 정산 목록 - API 추가, 1/N로 나누기 */}
               <Route
-                path="/calculateteam/:teamId"
+                path="/teamMission/:teamId/calculate"
                 element={<CalculateTeam />}
               />
 
