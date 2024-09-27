@@ -20,14 +20,14 @@ const MyPage = () => {
   return (
     <>
       <div className="h-real-screen text-lg font-semibold">
-        <Header title={"마이페이지"} backgroudcolor={"white"} goBack={"/"} />
+        <Header title={"마이페이지"} backgroudcolor={"white"} color={"orange"} goBack={"/"} />
         <MyPageUserInfo member={data} />
         <MyPageMenuList onClickSignOutBtn={() => setShowModal(true)} />
         <Modal
           showModal={showModal}
           onClickCloseBtn={() => setShowModal(false)}
           width="250px"
-          height="260px"
+          height="240px"
           buttonText="탈퇴하기"
           buttonColor="red"
           onClickButton={handleButtonClick}
@@ -35,17 +35,7 @@ const MyPage = () => {
           <div className="pt-10">정말 탈퇴하시겠습니까?</div>
         </Modal>
       </div>
-      <div className="h-real-screen">
-        <Header title={"마이페이지"} backgroudcolor={"white"} goBack={"/"} />
-        <MyPageUserInfo member={data} />
-        <MyPageMenuList onClickSignOutBtn={() => setShowModal(true)} />
-        <Modal
-          showModal={showModal}
-          onClickCloseBtn={() => setShowModal(false)}
-        >
-          ㅎㅇㅎㅇ
-        </Modal>
-      </div>
+      
     </>
   );
 };
