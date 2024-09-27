@@ -2,8 +2,10 @@ import axios from "axios";
 import useUserStore from "../store/useUserStore";
 
 const axiosApi = axios.create({
-    // baseURL:''
-    baseURL: import.meta.env.DEV ? "http://localhost:8080" : "http://j11a503.p.ssafy.io"
+  // baseURL:''
+  baseURL: import.meta.env.DEV
+    ? "http://localhost:8080"
+    : "https://j11a503.p.ssafy.io",
 });
 axiosApi.interceptors.request.use((config) => {
   // const accessToken = "tempAccessToken";
@@ -13,7 +15,7 @@ axiosApi.interceptors.request.use((config) => {
   if (accessToken) {
     config.headers["Authorization"] = `Bearer ${accessToken}`;
   }
-  config.withCredentials=true;
+  config.withCredentials = true;
   config.headers["Content-Type"] = "application/json";
   return config;
 });
