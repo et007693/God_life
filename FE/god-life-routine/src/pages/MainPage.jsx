@@ -1,18 +1,14 @@
 // URL: "/"
 
 import { useQuery } from "@tanstack/react-query";
-import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getMainPageData } from "../api/mainPageApi";
 import TodoItem from "../components/TodoItem";
 import Avatar from "../components/Avatar";
-import useUserStore from "../store/useUserStore";
 import { useCookies } from "react-cookie";
 
 const MainPage = () => {
-  const { user, setUser } = useUserStore();
-  const [cookies] = useCookies(["accessToken"]);
-  const { accessToken, setAccessToken } = useUserStore();
+  const [cookies,setCookies,removeCookies] = useCookies(["accessToken"]);
   const navigate = useNavigate();
   const goToPersonalMissionCreate = () => {
     navigate("/personalMission/create");
@@ -32,18 +28,6 @@ const MainPage = () => {
     queryFn: getMainPageData,
   });
 // 이곳 한정으로 login 페이지로 이동하는 로직 추가 나머지는 PrivateRoute에서 처리
-  useEffect(() => {
-    if (cookies != null && cookies.accessToken) {
-      setAccessToken(cookies.accessToken);
-    } else {
-      navigate("/login");
-    }
-    setUser({
-      id: 1,
-      name: "송창용",
-      profileImage: "https://avatars.githubusercontent.com/u/103542723?v=4",
-    });
-  }, []);
   if (isFetching) return <div>Loading...</div>;
   if (isError) return <div>Error</div>;
 
@@ -60,8 +44,9 @@ const MainPage = () => {
             navigate("/mypage");
           }}
         >
-          <Avatar member={user} />
+          <Avatar member={{profileImage:data.profileImage}} />
         </div>
+       
       </div>
       <div>
         <h1 className="text-xl font-bold text-left ml-10 mt-10 mb-10">
@@ -94,15 +79,15 @@ const MainPage = () => {
           팀미션
         </h1>
         <ul className="flex flex-col gap-4 mx-10">
-          {data.groupMissions ? (
-            data.groupMissions.map((mission) => (
+          {data.teamRoomList ? (
+            data.teamRoomList.map((mission) => (
               <TodoItem
-                key={mission.id}
-                id={mission.id}
-                isDone={mission.isDone}
-                title={mission.title}
+                key={mission.roomId}
+                id={mission.roomId}
+                isDone={mission.completed}
+                title={mission.rule}
                 onclick={() => {
-                  navigate(`/teamMission/${mission.id}`);
+                  navigate(`/teamMission/${mission.roomId}`);
                 }}
               />
             ))
@@ -119,6 +104,15 @@ const MainPage = () => {
           </button>
         </div>
       </div>
+      <div className="flex justify-center items-center bg-slate-500 h-20">
+          <button onClick={()=>{
+            localStorage.removeItem("accessToken");
+            removeCookies("accessToken");
+            navigate("/login");
+          }}>
+            로그아웃
+          </button>
+        </div>
     </div>
   );
 };

@@ -134,7 +134,7 @@ const TeamMissionDetailPage = () => {
       <div className="flex flex-col items-center px-10 py-5">
         <div className="flex flex-col items-center">
           <div className="w-full flex -space-x-4 rtl:space-x-reverse">
-            <AvatarList memberList={data.memberList} />
+            <AvatarList memberList={data.data.memberList} />
             <InviteMemberBtn onClick={handleShareKakaoBtn} />
           </div>
           <AccountInfo data={data} />
@@ -210,19 +210,19 @@ const TeamMissionDetailPage = () => {
         </button>
 
         <div className="text-xl font-bold mt-6 text-left w-full">
-          {data.rule.ruleDetail}
+          {data.rule}
         </div>
         <div className="text-xm text-gray-400 text-left w-full">
           평일에만 미션이 주어집니다.
         </div>
-        {data.rule.ruleType == "wakeup" ? (
-          data.rule.ruleSetted == true ? (
+        {data.rule == "일찍 일어나기" ? (
+          data.rule == true ? (
             <div
               onClick={goToTeamMissionTimeSettingPage}
               className="flex relative justify-around bg-gray-100 mt-4 px-8 py-20 rounded-2xl w-full"
             >
               <div className="text-3xl font-bold text-center">
-                {data.rule.ruleTime}
+                {data.rule}
               </div>
             </div>
           ) : (
@@ -233,7 +233,7 @@ const TeamMissionDetailPage = () => {
               <p>시간 설정이 완료되지 않았습니다. </p>
             </div>
           )
-        ) : data.rule.ruleSetted == true ? (
+        ) : data.rule == true ? (
           <div className="flex relative justify-around bg-gray-100 mt-4 px-8 py-28 rounded-2xl w-full">
             <p>{data.rule.ruleLocation}</p>
           </div>
