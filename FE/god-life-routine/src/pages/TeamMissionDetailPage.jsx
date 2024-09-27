@@ -206,7 +206,7 @@ const TeamMissionDetailPage = () => {
           <div className="font-bold text-gray-600">정산하기 →</div>
         </button>
 
-        <div className="text-xl font-bold mt-4 text-left w-full">
+        <div className="text-xl font-bold mt-6 text-left w-full">
           {data.rule.ruleDetail}
         </div>
         <div className="text-xm text-gray-400 text-left w-full">
@@ -216,9 +216,11 @@ const TeamMissionDetailPage = () => {
           data.rule.ruleSetted == true ? (
             <div
               onClick={goToTeamMissionTimeSettingPage}
-              className="flex relative justify-around bg-gray-100 mt-4 px-8 py-28 rounded-2xl w-full"
+              className="flex relative justify-around bg-gray-100 mt-4 px-8 py-20 rounded-2xl w-full"
             >
-              <p>{data.rule.ruleTime}</p>
+              <div className="text-3xl font-bold text-center">
+                {data.rule.ruleTime}
+              </div>
             </div>
           ) : (
             <div

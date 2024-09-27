@@ -99,7 +99,7 @@ const PersonalMissionRoomInfo = ({ missionProps }) => {
         >
           {data.rule.ruleType === "wakeup" ? (
             data.rule.ruleSetted ? (
-              <div className="text-3xl font-bold text-center">
+              <div className="text-2xl font-bold text-center">
                 {data.rule.ruleTime}
               </div>
             ) : (
