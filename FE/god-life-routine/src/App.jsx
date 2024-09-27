@@ -70,9 +70,9 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/login" element={<LoginPage />} />
-            <Route path="/" element={<MainPage />} />
             {/* 로그인 되지 않은 사용자는 로그인 페이지로 이동 */}
             <Route element={<PrivateRoute />}>
+            <Route path="/" element={<MainPage />} />
               <Route path="/kakaoInvite" element={<KakaoInvitePage />} />
               <Route
                 path="/:teamId/invite/accept"
