@@ -95,11 +95,13 @@ const PersonalMissionRoomInfo = ({ missionProps }) => {
       <div className="pt-3">
         <div
           onClick={goToPersonalMissionSettingPage}
-          className="bg-gray-200 mx-10 py-4 rounded-3xl mb-16"
+          className="bg-gray-200 mx-10 py-10  rounded-3xl mb-16"
         >
           {data.rule.ruleType === "wakeup" ? (
             data.rule.ruleSetted ? (
-              data.rule.ruleTime
+              <div className="text-2xl font-bold text-center">
+                {data.rule.ruleTime}
+              </div>
             ) : (
               "아직 시간설정이 완료되지 않았습니다."
             )
@@ -113,7 +115,8 @@ const PersonalMissionRoomInfo = ({ missionProps }) => {
               <div className="flex justify-around items-center pb-5 w-full">
                 {" "}
                 <h3 className="text-xl font-bold">설정된 집 위치</h3>
-                <button className="flex items-center justify-center text-2xl"
+                <button
+                  className="flex items-center justify-center text-2xl"
                   onClick={goToPersonalMissionSettingPage}
                 >
                   <IoMdSettings />

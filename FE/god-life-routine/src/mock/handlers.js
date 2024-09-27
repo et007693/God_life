@@ -177,15 +177,14 @@ let accountHistory = [
 
 let fineHistory = [
   {
-    id:"1",
-    user : 
-      {
-        id: 1,
-        name: "송창용",
-        profileImage: "https://avatars.githubusercontent.com/u/103542723?v=4",
-      },
-    
-    fineinfo : [
+    id: "1",
+    user: {
+      id: 1,
+      name: "송창용",
+      profileImage: "https://avatars.githubusercontent.com/u/103542723?v=4",
+    },
+
+    fineinfo: [
       {
         id: 1,
         date: "2024-08-20",
@@ -213,16 +212,60 @@ let fineHistory = [
         time: "12:08",
         fine: "-500원",
         balance: "4,000원",
-      },{
+      },
+      {
         id: 5,
         date: "2024-09-18",
         time: "23:54",
         fine: "-500원",
         balance: "4,500원",
       },
-    ]
-  }
-]
+    ],
+  },
+];
+
+let calendar = [
+  {
+    id: "1",
+    userInfo: [
+      {
+        id: 1,
+        date: "2024-09-02",
+        issuccess: "true",
+      },
+      {
+        id: 2,
+        date: "2024-09-03",
+        issuccess: "false",
+      },
+      {
+        id: 3,
+        date: "2024-09-04",
+        issuccess: "true",
+      },
+      {
+        id: 4,
+        date: "2024-09-05",
+        issuccess: "true",
+      },
+      {
+        id: 5,
+        date: "2024-09-06",
+        issuccess: "true",
+      },
+      {
+        id: 6,
+        date: "2024-09-09",
+        issuccess: "false",
+      },
+      {
+        id: 7,
+        date: "2024-09-10",
+        issuccess: "true",
+      },
+    ],
+  },
+];
 
 const isAuthenticated = async (req) => {
   const request = await req;
@@ -234,78 +277,84 @@ const isAuthenticated = async (req) => {
 };
 
 export const handlers = [
-    // 임시 로그인 - 카카오로그인이 현재 액세스토큰을 전달해오지 않기 때문에 임시로 로그인 api생성
-    http.post('/api/v1/login',(request)=>{
-      console.log(request);
-      
-        const accessToken = generateAccessToken()
-        // const code = request.url.searchParams.get('code')
-        return new HttpResponse(null, {
-          status: 302,
-          headers: {
-            "Set-Cookie":`accessToken=${accessToken}`,
-            "Location":"/"
-          }})}),
-          // 메인페이지 영역
-    http.get('/api/v1', async ({request})=>{
-        // 엑세스토큰을 헤더에서 가져온다. 요청마다 헤더에 들어갈 예정
-        
-        // if(!accessToken){
-        //   // 엑세스토큰이 없는 경우 401
-        //     return new HttpResponse(null,{status: 401})
-        // }
-        // 액세스토큰이 있으면 
-        await isAuthenticated(request);
-        return HttpResponse.json({
-                "personalMission": {
-                  "id": 1,
-                  "title": "운동하기",
-                  "isDone": false
-                },
-                "groupMissions": [
-                  {
-                    "id": 1,
-                    "title": "일찍 일어나기",
-                    "isDone": true
-                  },
-                  {
-                    "id": 2,
-                    "title": "운동하기",
-                    "isDone": false
-                  }
-                ],
-                "message": "미션 조회에 성공하였습니다."
-              },)
-            }),
-        // 마이페이지 영역
-        http.get('/api/v1/mypage',()=>{
-          return HttpResponse.json(myPageDataList[0],{status:200})
-        }),
-        http.patch('/api/v1/mypage', async ({request})=>{
-          const {id, count} = await request.json();
-          const userMyPageData = myPageDataList.find(data=>data.id===id)
-          
-          userMyPageData.fineImmunityCount += count
-          userMyPageData.mileage -= count*2000
-          return  HttpResponse.json(userMyPageData,{status:200})
-        }),
-        // 팀미션 영역
-        http.get('/api/v1/teamMission/:id',({params})=>{
-          const teamMissionData = teamMissionList.find(data=>data.id===params.id)
-          return HttpResponse.json(teamMissionData,{status:200})
-        }),
-        http.patch('/api/v1/teamMission/:id', async ({params,request})=>{
-          const {rule} = await request.json();
-          
-          const teamMissionData = teamMissionList.find(data=>data.id===params.id)
-          teamMissionData.rule = rule
-          return HttpResponse.json(teamMissionData,{status:200})
-        }),
-        // 개인미션영역
-        http.get('/api/v1/personalMission',async ({request})=>{
-          await isAuthenticated(request);
-          return HttpResponse.json(personalMission,{status:200})
-        }),
+  // 임시 로그인 - 카카오로그인이 현재 액세스토큰을 전달해오지 않기 때문에 임시로 로그인 api생성
+  http.post("/api/v1/login", (request) => {
+    console.log(request);
+
+    const accessToken = generateAccessToken();
+    // const code = request.url.searchParams.get('code')
+    return new HttpResponse(null, {
+      status: 302,
+      headers: {
+        "Set-Cookie": `accessToken=${accessToken}`,
+        Location: "/",
+      },
+    });
+  }),
+  // 메인페이지 영역
+  http.get("/api/v1", async ({ request }) => {
+    // 엑세스토큰을 헤더에서 가져온다. 요청마다 헤더에 들어갈 예정
+
+    // if(!accessToken){
+    //   // 엑세스토큰이 없는 경우 401
+    //     return new HttpResponse(null,{status: 401})
+    // }
+    // 액세스토큰이 있으면
+    await isAuthenticated(request);
+    return HttpResponse.json({
+      personalMission: {
+        id: 1,
+        title: "운동하기",
+        isDone: false,
+      },
+      groupMissions: [
+        {
+          id: 1,
+          title: "일찍 일어나기",
+          isDone: true,
+        },
+        {
+          id: 2,
+          title: "운동하기",
+          isDone: false,
+        },
+      ],
+      message: "미션 조회에 성공하였습니다.",
+    });
+  }),
+  // 마이페이지 영역
+  http.get("/api/v1/mypage", () => {
+    return HttpResponse.json(myPageDataList[0], { status: 200 });
+  }),
+  http.patch("/api/v1/mypage", async ({ request }) => {
+    const { id, count } = await request.json();
+    const userMyPageData = myPageDataList.find((data) => data.id === id);
+
+    userMyPageData.fineImmunityCount += count;
+    userMyPageData.mileage -= count * 2000;
+    return HttpResponse.json(userMyPageData, { status: 200 });
+  }),
+  // 팀미션 영역
+  http.get("/api/v1/teamMission/:id", ({ params }) => {
+    const teamMissionData = teamMissionList.find(
+      (data) => data.id === params.id
+    );
+    return HttpResponse.json(teamMissionData, { status: 200 });
+  }),
+  http.patch("/api/v1/teamMission/:id", async ({ params, request }) => {
+    const { rule } = await request.json();
+
+    const teamMissionData = teamMissionList.find(
+      (data) => data.id === params.id
+    );
+    teamMissionData.rule = rule;
+    return HttpResponse.json(teamMissionData, { status: 200 });
+  }),
+  // 개인미션영역
+  http.get("/api/v1/personalMission", async ({ request }) => {
+    await isAuthenticated(request);
+    return HttpResponse.json(personalMission, { status: 200 });
+  }),
 
   http.patch("/api/v1/personalMission", async ({ request }) => {
     const { rule } = await request.json();
@@ -314,19 +363,19 @@ export const handlers = [
     return HttpResponse.json(personalMission, { status: 200 });
   }),
 
-
   http.get("/api/v1/group/:id", ({ params }) => {
     const accountHistoryEachData = accountHistory.find(
       (item) => item.id === params.id
     );
-    return HttpResponse.json(accountHistoryEachData, {status:200})
+    return HttpResponse.json(accountHistoryEachData, { status: 200 });
   }),
 
   http.get("/api/v1/group/fine/:id", ({ params }) => {
-    const fineHistoryData = fineHistory.find(
-      (item) => item.id === params.id
-    );
-    return HttpResponse.json(fineHistoryData, {status:200})
+    const fineHistoryData = fineHistory.find((item) => item.id === params.id);
+    return HttpResponse.json(fineHistoryData, { status: 200 });
   }),
 
+  // http.get("/api/v1/mission/calendar", () => {
+  //   const calendarData = calendar.find((item) => )
+  // }),
 ];
