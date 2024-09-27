@@ -6,6 +6,7 @@ import { getMainPageData } from "../api/mainPageApi";
 import TodoItem from "../components/TodoItem";
 import Avatar from "../components/Avatar";
 import { useCookies } from "react-cookie";
+import { useEffect } from "react";
 
 const MainPage = () => {
   const [cookies,setCookies,removeCookies] = useCookies(["accessToken"]);
@@ -16,13 +17,20 @@ const MainPage = () => {
   const goToTeamMissionCreate = () => {
     navigate("/teamMission/create");
   };
-
+  
   const today = new Date();
   const formatDate = `${today.getFullYear()}.${
     today.getMonth() + 1
   }.${today.getDate()}`;
   // console.log(formatDate);
-
+  useEffect(()=>{
+    if(cookies.accessToken != null){
+      localStorage.setItem("accessToken",cookies.accessToken);
+    }
+    else{
+      navigate("/login");
+    }
+  },[])
   const { data, isFetching, isError } = useQuery({
     queryKey: ["mainPageData"],
     queryFn: getMainPageData,
