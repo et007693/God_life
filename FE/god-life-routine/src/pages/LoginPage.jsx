@@ -12,12 +12,12 @@ const navigate = useNavigate();
 const {setAccessToken} = useUserStore();
 
   const onClickKakaoLogin = async () =>{
-    
+    const baseUrl = import.meta.env.DEV ? "http://localhost:8080" : "http://j11a503.p.ssafy.io"
     // await setAccessToken("hehehe");
     // window.location.href = 'http://j11a503.p.ssafy.io:8080/api/v1/oauth2/authorization/kakao'
     // navigate("/");
     
-    window.location.href = 'http://localhost:8080/api/v1/oauth2/authorization/kakao'
+    window.location.href = `${baseUrl}/api/v1/oauth2/authorization/kakao`
     // navigate("/")
     // TODO: 추후 로그인 리다이렉트 수정 및 쿠키 설정 필요
     // setCookies("accessToken","hehehe");
