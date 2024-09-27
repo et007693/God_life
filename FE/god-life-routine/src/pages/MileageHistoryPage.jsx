@@ -15,7 +15,7 @@ const MileageHistoryPage = () => {
         <div className="font-bold">1200</div>
         <img src={coin} alt="" />
       </div>
-      < MileageHistoryList />
+      <MileageHistoryList />
     </div>
   );
 };
