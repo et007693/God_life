@@ -23,14 +23,6 @@ const MainPage = () => {
     today.getMonth() + 1
   }.${today.getDate()}`;
   // console.log(formatDate);
-  useEffect(()=>{
-    if(cookies.accessToken != null){
-      localStorage.setItem("accessToken",cookies.accessToken);
-    }
-    else{
-      navigate("/login");
-    }
-  },[])
   const { data, isFetching, isError } = useQuery({
     queryKey: ["mainPageData"],
     queryFn: getMainPageData,
