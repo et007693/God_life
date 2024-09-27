@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../components/Header";
 import coin from "../assets/image/coin.png";
-import MileageHistoryList from "../components/mileageHistoryList";
+import MileageHistoryList from "../components/MileageHistoryList";
 
 const MileageHistoryPage = () => {
   return (
