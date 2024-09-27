@@ -1,7 +1,13 @@
 import axiosApi from "./axiosApi.js";
 
+export const createTeamRoom = async (roomSetting) => {
+  console.log(roomSetting);
+  const response = await axiosApi.post("/api/v1/group", roomSetting);
+  return response.data;
+};
+
 export const getTeamMissionDetail = async (teamId) => {
-  const response = await axiosApi.get(`/api/v1/teamMission/${teamId}`);
+  const response = await axiosApi.get(`/api/v1/group/${teamId}`,);
   console.log(response);
   
   return response.data;

@@ -55,6 +55,9 @@ const TeamMissionDetailPage = () => {
   const goToTeamMissionLocationSettingPage = () => {
     navigate(`location/setting`);
   };
+  const goToCalculateTeamPage = () => {
+    navigate(`/teamMission/${teamId}/calculate`);
+  };
 
   const goToAccountHistoryPage = () => {
     navigate(`/teamMission/${teamId}/accountHistory`);

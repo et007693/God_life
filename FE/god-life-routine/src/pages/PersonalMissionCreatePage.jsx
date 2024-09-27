@@ -3,14 +3,24 @@ import Header from "../components/Header";
 import Select from "react-select";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { createPersonalMission } from "../api/personalMissionApi";
+import { useMutation } from "@tanstack/react-query";
 
 const PersonalMissionCreatePage = () => {
   const [selectedTopic, setSelectedTopic] = useState(null);
   const [deposit, setDeposit] = useState("");
   const navigate = useNavigate();
-
+  const {data,mutate} = useMutation({
+    mutationFn: (data) => 
+      createPersonalMission(data),
+    onSuccess: (data) => {}
+    
+  });
   const goToMissionTimeSettingPage = () => {
-    navigate(`/teamMission/1/time/setting`);
+    navigate(`/personalMission/time/setting`);
+  };
+  const goToMissionLocationsSettingPage = () => {
+    navigate(`/personalMission/locations/setting`);
   };
 
   const goToAccountSelectPage = () => {

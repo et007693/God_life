@@ -32,7 +32,8 @@ import KakaoLoginCallbackPage from "./pages/KakaoLoginCallbackPage";
 import GalleryPage from "./pages/GalleryPage";
 import CalculateTeam from "./pages/CalculateTeam";
 import PrivateRoute from "./components/PrivateRoute";
-import { CookiesProvider } from "react-cookie";
+import { CookiesProvider, useCookies } from "react-cookie";
+import useUserStore from "./store/useUserStore";
 
 function App() {
   const queryClient = new QueryClient({
@@ -43,7 +44,8 @@ function App() {
       },
     },
   });
-
+  const [cookies,setCookies,removeCookies] = useCookies(["accessToken"]);
+  const {setAccessToken} = useUserStore();
   const { Kakao } = window;
   useEffect(() => {
     if (!Kakao.isInitialized()) {
@@ -51,6 +53,11 @@ function App() {
     }
     // 초기에 스크린 사이즈에 맞춰 높이 설정
     setScreenHeight();
+    if(cookies.accessToken != null){
+      localStorage.setItem("accessToken",cookies.accessToken);
+
+      setAccessToken(cookies.accessToken);
+    }
     // 브라우저 창 크기가 변경될 때마다 스크린 높이 재설정
     window.addEventListener("resize", setScreenHeight);
     return () => {
@@ -87,11 +94,11 @@ function App() {
                 <Route path="gallery" element={<GalleryPage />} />
               </Route>
               <Route
-                path="/personalMission/setting/location"
+                path="/personalMission/location/setting"
                 element={<LocationSettingPage />}
               />
               <Route
-                path="/personalMission/setting/time"
+                path="/personalMission/time/setting"
                 element={<TimeSettingPage />}
               />
               {/* 미션 수행 페이지 */}
@@ -148,7 +155,7 @@ function App() {
               />
               {/* 팀원 정산 목록 - API 추가, 1/N로 나누기 */}
               <Route
-                path="/calculateteam/:teamId"
+                path="/teamMission/:teamId/calculate"
                 element={<CalculateTeam />}
               />
 

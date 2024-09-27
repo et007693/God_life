@@ -5,6 +5,8 @@ import Header from "../components/Header";
 import Select from "react-select";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { createTeamRoom } from "../api/teamMissionApi";
 
 const TeamMissionCreatePage = () => {
   const [name, setName] = useState("");
@@ -13,13 +15,18 @@ const TeamMissionCreatePage = () => {
   const [selectedMonth, setSelectedMonth] = useState(null);
 
   const navigate = useNavigate();
-  const goToTeamMissionDetail = () => {
-    navigate("/teamMission/1");
+  const goToTeamMissionDetail = (id) => {
+    navigate(`/teamMission/${id}`);
   };
-
+  const {mutate} = useMutation({
+    mutationFn: ()=>createTeamRoom({"title":name,"fine":penalty,"rule":selectedTopic.value,"period":selectedMonth.value}),
+    onSuccess: (data) => {
+      goToTeamMissionDetail(data.data.id);
+    }
+  })
   const topics = [
-    { value: "wakeup", label: "일찍 일어나기" },
-    { value: "exercise", label: "운동하기" },
+    { value: "일찍 일어나기", label: "일찍 일어나기" },
+    { value: "운동하기", label: "운동하기" },
   ];
 
   const months = [
@@ -115,8 +122,7 @@ const TeamMissionCreatePage = () => {
       </div>
       <button
         onClick={() => {
-          goToTeamMissionDetail();
-          console.log({ name, penalty, selectedTopic, selectedMonth });
+          mutate({ name, penalty, selectedTopic, selectedMonth });
         }}
         className="bg-orange-400 text-white px-10 py-3 rounded-lg text-xl"
       >

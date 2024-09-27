@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import kakaoLogo from '../assets/kakao-logo.png'
 import useUserStore from '../store/useUserStore'
 import { useNavigate } from 'react-router-dom'
@@ -9,7 +9,8 @@ const LoginPage = () => {
 // const CLIENT_ID = import.meta.env.VITE_KAKAO_REST_API_KEY
 // const REDIRECT_URI = 'http://localhost:5173/auth/kakao/callback'
 const navigate = useNavigate();
-const [cookies,setCookies,removeCookies] = useCookies(["accessToken"]);
+const {setAccessToken} = useUserStore();
+
   const onClickKakaoLogin = async () =>{
     
     // await setAccessToken("hehehe");
