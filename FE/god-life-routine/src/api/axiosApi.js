@@ -6,8 +6,8 @@ const axiosApi = axios.create({
     baseURL: import.meta.env.DEV ? "http://localhost:8080" : "http://j11a503.p.ssafy.io"
 });
 axiosApi.interceptors.request.use((config) => {
-  const {accessToken} = useUserStore.getState();
   // const accessToken = "tempAccessToken";
+  const accessToken = localStorage.getItem("accessToken");
   console.log(accessToken);
 
   if (accessToken) {
