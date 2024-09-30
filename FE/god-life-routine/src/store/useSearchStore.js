@@ -3,7 +3,7 @@ import { devtools } from "zustand/middleware";
 
 const useSearchStore = create(
   devtools((set) => ({
-    isSearchMode: false,
+    isSearchMode: true,
     // 선택한 주소지의 주소
     selectedAddress: "",
     // 선택한 장소의 이름

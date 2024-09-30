@@ -4,7 +4,7 @@ import Avatar from './Avatar'
 const AvatarList = ({memberList}) => {
   return (
     memberList.map((member) => (
-        <Avatar key={member.id} member={member}/>
+        <Avatar key={member.profileImage} member={member}/>
         ))
   )
 }

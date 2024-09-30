@@ -210,19 +210,19 @@ const TeamMissionDetailPage = () => {
         </button>
 
         <div className="text-xl font-bold mt-6 text-left w-full">
-          {data.rule}
+          {data.data.rule}
         </div>
         <div className="text-xm text-gray-400 text-left w-full">
           평일에만 미션이 주어집니다.
         </div>
-        {data.rule == "일찍 일어나기" ? (
-          data.rule == true ? (
+        {data.data.rule == "일찍 일어나기" ? (
+          data.data.rule == true ? (
             <div
               onClick={goToTeamMissionTimeSettingPage}
               className="flex relative justify-around bg-gray-100 mt-4 px-8 py-20 rounded-2xl w-full"
             >
               <div className="text-3xl font-bold text-center">
-                {data.rule}
+                {data.data.rule}
               </div>
             </div>
           ) : (
@@ -233,9 +233,9 @@ const TeamMissionDetailPage = () => {
               <p>시간 설정이 완료되지 않았습니다. </p>
             </div>
           )
-        ) : data.rule == true ? (
+          ) : data.data.ruleLocation ? (
           <div className="flex relative justify-around bg-gray-100 mt-4 px-8 py-28 rounded-2xl w-full">
-            <p>{data.rule.ruleLocation}</p>
+            <p>{data.data.ruleLocation}</p>
           </div>
         ) : (
           <div
