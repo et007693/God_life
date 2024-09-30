@@ -18,15 +18,15 @@ const PhotoMissionPage = () => {
       queryFn:getPhotoMission
     }
   );
-const missionObj = {
-  "refrigerator": "냉장고",
-  "monitor": "모니터",
-  "pen": "볼펜",
-  "toothbrush": "칫솔",
-  "toothpaste": "치약",
-  "chopstick":"젓가락",
-  "book": "책"
-}
+  const missionObj = {
+    "refrigerator": "냉장고",
+    "monitor": "모니터",
+    "pen": "볼펜",
+    "toothbrush": "칫솔",
+    "toothpaste": "치약",
+    "chopstick":"젓가락",
+    "book": "책"
+  }
 
   const { mutate, isPending, data, isError, error } = useMutation({
     mutationKey: ["uploadMissionImg"],
@@ -44,7 +44,7 @@ const missionObj = {
     if (file) {
       const resizedImg = await resizeImage(file, 1024, 1024);
       setCapturedImage(URL.createObjectURL(resizedImg));
-      const response = await mutate(resizedImg);
+      mutate(resizedImg);
     }
   };
 
@@ -52,6 +52,11 @@ const missionObj = {
   const handleCameraClick = () => {
     fileInputRef.current.click();
   };
+
+  const goBack = () => {
+    window.location.reload();
+  }
+
   const handleConfirmClick = () => {
     if (capturedImage) {
       const file = fileInputRef.current.files[0];
@@ -86,7 +91,7 @@ const missionObj = {
   return (
     <div className="w-full h-real-screen flex flex-col">
       <Header title={"사진 촬영"} color={"orange"} goBack={"/"}/>
-      <div className="h-full justify-around flex-1 flex flex-col items-center p-5">
+      <div className="h-full flex-1 flex flex-col items-center p-5 mt-24 gap-14">
         {capturedImage ? (
           <>
             <img
@@ -101,32 +106,58 @@ const missionObj = {
                 <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500"></div>
               </div>
             ) : (
-              
               <div className="flex w-full justify-around">
-
                 {uploadResponse ? (
-                  <div className="flex flex-row">
-                    <button
-                      onClick={goToGallery}
-                      className="mt-6 font-noto-sans-kr w-32 justify-center font-bold px-6 py-3 bg-orange-500 text-white rounded-md shadow-md hover:bg-orange-600 transition duration-300 ease-in-out flex items-center"
-                    >
-                      갤러리 이동
-                    </button>
+                  <div className="flex w-full flex-col gap-5">
+                    {data.data.detect.success ? (
+                      <>
+                      <div>
+                        <h1>미션 성공!</h1>
+                      </div>
+                        <div className="flex w-full justify-around">
+                          {/* TODO: back에 사진 post 요청 보내기 */}
+                          <button
+                            onClick={goToGallery}
+                            className="mt-6 font-noto-sans-kr w-32 justify-center font-bold px-6 py-3 bg-orange-500 text-white rounded-md shadow-md hover:bg-orange-600 transition duration-300 ease-in-out flex items-center"
+                          >
+                          갤러리 이동
+                          </button>
 
-                    <button
-                    onClick={handleHomeClick}
-                    className="mt-6 font-noto-sans-kr w-32 justify-center font-bold px-6 py-3 bg-orange-500 text-white rounded-md shadow-md hover:bg-orange-600 transition duration-300 ease-in-out flex items-center"
-                    >
-                    확인
-                    </button>
+                          <button
+                          onClick={handleHomeClick}
+                          className="mt-6 font-noto-sans-kr w-32 justify-center font-bold px-6 py-3 bg-orange-500 text-white rounded-md shadow-md hover:bg-orange-600 transition duration-300 ease-in-out flex items-center"
+                          >
+                          확인
+                      </button>
+                      </div>
+                      </>
+                    ) : (
+                      <>
+                      <div>
+                        <h1>사진이 부정확합니다.
+                          <br></br>
+                          다시 촬영해주세요.
+                        </h1>
+                      </div>
+                        <div className="flex w-full justify-around">
+                          <button
+                          onClick={goBack}
+                          className="mt-6 font-noto-sans-kr w-32 justify-center font-bold px-6 py-3 bg-orange-500 text-white rounded-md shadow-md hover:bg-orange-600 transition duration-300 ease-in-out flex items-center"
+                          >
+                            다시 찍기
+                          </button>
+                        </div>
+                      </>
+                    )}
                   </div>
+
                 ) : (
-                  <div className="flex flex-row">
+                  <div className="flex w-full justify-around">
                     <button
                     onClick={handleCameraClick}
                     className="mt-6 font-noto-sans-kr w-32 justify-center font-bold px-6 py-3 bg-orange-500 text-white rounded-md shadow-md hover:bg-orange-600 transition duration-300 ease-in-out flex items-center"
                     >
-                    다시 찍기
+                      다시 찍기
                     </button>
                     <button
                       onClick={handleConfirmClick}
