@@ -7,11 +7,21 @@ import MyPageUserInfo from "../components/MyPageUserInfo";
 import MyPageMenuList from "../components/MyPageMenuList";
 import useUserStore from "../store/useUserStore";
 import Modal from "../components/Modal";
-import { useMyPage } from "../hooks/useMyPage";
+// import { useMyPage } from "../hooks/useMyPage";
 
 const MyPage = () => {
-  const { isFetching, data, showModal, setShowModal } = useMyPage();
-  if (isFetching) return <div>로딩중...</div>;
+  // const { isFetching, data, showModal, setShowModal } = useMyPage();
+  // if (isFetching) return <div>로딩중...</div>;
+  const { data, isFetching, isError, showModal, setShowModal } = useQuery({
+    queryKey: ["myPageData"],
+    queryFn: getMyPageData,
+    staleTime:0,
+    
+  });
+
+  if (isFetching) return <div>Loading...</div>;
+  if (isError) return <div>Error</div>;
+
 
   const handleButtonClick = () => {
     setShowModal(false);

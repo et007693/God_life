@@ -6,6 +6,8 @@ import { buyTickets, getMyPageData } from "../api/myPageApi";
 import bigSizeCoupon from "../assets/image/big_size_coupon.png";
 import coupon from "../assets/image/coupon.png";
 import { useNavigate } from "react-router-dom";
+
+
 const MileageShopPage = () => {
   const navigate = useNavigate();
   const [count, setCount] = useState(1);

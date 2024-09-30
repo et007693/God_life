@@ -12,11 +12,11 @@ export const buyTickets = async (count) => {
   console.log(userMyPageData.myPageData);
   const data = {
     // TODO: 아이디 추후 삭제해야함
-    id: 1,
+    // id: 1,
     // 구매하는 티켓의 개수
-    count: count,
+    amount: count,
   };
 
-  const response = await axiosApi.patch("/api/v1/mypage", data);
-  return response.data;
+  const response = await axiosApi.post("/api/v1/coupon", data);
+  return response.data.data;
 };
