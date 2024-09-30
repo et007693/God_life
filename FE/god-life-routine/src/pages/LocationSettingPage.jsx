@@ -11,6 +11,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { updatePersonalMission } from "../api/personalMissionApi";
 import useRoomInfo from "../store/useRoomInfo";
 import { updateTeamMissionRule } from "../api/teamMissionApi";
+import { settingMyHomeLocation } from "../api/locationApi";
 
 
 const LocationSettingPage = () => {
@@ -22,12 +23,16 @@ const LocationSettingPage = () => {
   const location = useLocation();
   const onClickRegistButton = async () => {
     // TODO: 장소 등록 로직 추가 -api 연결
-    if(rule){
+    const requestLocation = {
+      "location_name": selectedAddress,
+      lat: selectedPosition.lat,
+      lng: selectedPosition.lng,
+    }
+    if(location.pathname.includes("/personalMission")){
       await updatePersonalMission({...rule,ruleLocation:selectedPosition})
       navigate(`/personalMission`);
     }else if(location.pathname.includes("/teamMission")){
-      await updateTeamMissionRule({...rule,ruleLocation:selectedPosition})
-      console.log(selectedAddress);
+      await settingMyHomeLocation(requestLocation);
       navigate(`/teamMission/${roomNumber}`);
     }
   }
