@@ -244,7 +244,7 @@ const TeamMissionDetailPage = () => {
               <p>시간 설정이 완료되지 않았습니다. </p>
             </div>
           )
-        ) : data.rule.ruleSetted == true ? (
+        ) : data.data.rule == true ? (
           <div
             className="flex relative justify-around bg-gray-100 px-8 py-5 rounded-2xl w-full"
           >

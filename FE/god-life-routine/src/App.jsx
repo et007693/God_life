@@ -20,7 +20,6 @@ import PhotoMissionPage from "./pages/PhotoMissionPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import KakaoInvitePage from "./pages/KakaoInvitePage";
-import InviteAcceptPage from "./pages/InviteAcceptPage";
 import Layout from "./components/Layout";
 import TimeSettingPage from "./pages/TimeSettingPage";
 import AccountSelectPage from "./pages/AccountSelectPage";
@@ -35,6 +34,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import ExerciseMissionPage from "./pages/ExerciseMissionPage";
 import { CookiesProvider, useCookies } from "react-cookie";
 import useUserStore from "./store/useUserStore";
+import InviteAcceptPage from "./pages/inviteAcceptPage";
 
 function App() {
   const queryClient = new QueryClient({

@@ -1,8 +1,7 @@
 import React from "react";
 import Avatar from "./Avatar";
-import { Map, MapMarker } from "react-kakao-maps-sdk";
-import { IoMdSettings } from "react-icons/io";
 import SettedHomeMap from "./SettedHomeMap";
+import { useNavigate } from "react-router-dom";
 
 const PersonalMissionRoomInfo = ({ missionProps }) => {
   const {
@@ -11,6 +10,10 @@ const PersonalMissionRoomInfo = ({ missionProps }) => {
     goToPersonalAccountDetail,
     goToPersonalMissionSettingPage,
   } = missionProps;
+  const navigate = useNavigate();
+  const goToExerciseMissionPage = () => {
+    navigate("/exerciseMission");
+  };
   return (
     <div>
       <div className="flex flex-col items-center pt-24">
