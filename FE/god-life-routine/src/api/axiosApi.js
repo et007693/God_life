@@ -1,6 +1,6 @@
 import axios from "axios";
 import useUserStore from "../store/useUserStore";
-
+import Cookies from "js-cookie";
 const axiosApi = axios.create({
   // baseURL:''
   baseURL: import.meta.env.DEV
@@ -26,6 +26,12 @@ axiosApi.interceptors.response.use(
   },
   (error) => {
     if (error.response && error.response.status === 401) {
+      axiosApi.post("/api/v1/refresh").then((res) => {
+        const newAccessToken = Cookies.get("accessToken");
+        localStorage.setItem("accessToken", newAccessToken);
+        const newRes = axiosApi.request(error.config);
+        return newRes.data;
+      });
       // console.log("에러발생했습니다");
       // useUserStore.getState().setAccessToken(null);
       // window.location.href = "/login";
