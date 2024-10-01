@@ -35,6 +35,10 @@ const MileageShopPage = () => {
     mutateBuyTicket(count);
   }
 
+  const gotoMypage = () => {
+    navigate('/myPage')
+  }
+
   if (isFetching) return <div>로딩중...</div>;
   return (
     <div className="h-real-screen w-full flex items-center justify-center">
@@ -97,7 +101,7 @@ const MileageShopPage = () => {
               구매
             </button>
             <button
-              onClick={() => {}}
+              onClick={gotoMypage}
               className="bg-gray-400 text-white px-5 py-3 rounded-lg text-xl"
             >
               취소

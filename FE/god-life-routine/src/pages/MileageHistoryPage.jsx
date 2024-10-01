@@ -12,8 +12,8 @@ const MileageHistoryPage = () => {
     queryFn: getMileageHistoryPageData,
   });
 
-  // if (isFetching) return <div>Loading...</div>;
-  // if (isError) return <div>Error</div>;
+  if (isFetching) return <div>Loading...</div>;
+  if (isError) return <div>Error</div>;
 
   return (
     <div>
@@ -24,12 +24,13 @@ const MileageHistoryPage = () => {
       />
       <div className="mt-20 flex gap-2 justify-end pr-5 ">
         <div className="text-lg flex items-center border-2 border-gray-300 rounded-lg px-4 py-2">
-          <div>1200</div>
+          <div>{data.mileage}</div>
           <img className="ml-2" src={coin} alt="Coin" />
         </div>
       </div>
-      {/* < MileageHistoryList data={data} /> */}
-      < MileageHistoryList />
+
+      < MileageHistoryList data={data} />
+      
 
     </div>
   );

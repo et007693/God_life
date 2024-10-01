@@ -1,7 +1,7 @@
 import React from "react";
 import MileageHistoryItem from "../components/MileageHistoryItem"
 
-const MileageHistoryList = () => {
+const MileageHistoryList = ({ data }) => {
   return (
     <div>
       {/* <div>
@@ -14,7 +14,7 @@ const MileageHistoryList = () => {
         </div>
       </div> */}
       
-    <MileageHistoryItem />
+    <MileageHistoryItem data={data} />
 
     
     </div>
