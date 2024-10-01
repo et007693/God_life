@@ -44,8 +44,8 @@ function App() {
       },
     },
   });
-  const [cookies,setCookies,removeCookies] = useCookies(["accessToken"]);
-  const {setAccessToken} = useUserStore();
+  const [cookies, setCookies, removeCookies] = useCookies(["accessToken"]);
+  const { setAccessToken } = useUserStore();
   const { Kakao } = window;
   useEffect(() => {
     if (!Kakao.isInitialized()) {
@@ -53,20 +53,18 @@ function App() {
     }
     // 초기에 스크린 사이즈에 맞춰 높이 설정
     setScreenHeight();
-    
+
     // 브라우저 창 크기가 변경될 때마다 스크린 높이 재설정
     window.addEventListener("resize", setScreenHeight);
     return () => {
       window.removeEventListener("resize", setScreenHeight);
     };
   }, []);
-  useEffect(()=>{
-    if(cookies.accessToken != null){
-      localStorage.setItem("accessToken",cookies.accessToken);
-      removeCookies("accessToken");
-
+  useEffect(() => {
+    if (cookies.accessToken != null) {
+      localStorage.setItem("accessToken", cookies.accessToken);
     }
-  },[cookies.accessToken])
+  }, [cookies.accessToken]);
   return (
     <CookiesProvider>
       <QueryClientProvider client={queryClient}>
@@ -75,7 +73,7 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             {/* 로그인 되지 않은 사용자는 로그인 페이지로 이동 */}
             <Route element={<PrivateRoute />}>
-            <Route path="/" element={<MainPage />} />
+              <Route path="/" element={<MainPage />} />
               <Route path="/kakaoInvite" element={<KakaoInvitePage />} />
               <Route
                 path="/:teamId/invite/accept"
