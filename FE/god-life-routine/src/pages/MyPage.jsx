@@ -19,10 +19,8 @@ const MyPage = () => {
 
   const [showModal, setShowModal] = useState(false);
 
-
   if (isFetching) return <div>Loading...</div>;
   if (isError) return <div>Error</div>;
-
 
   const handleButtonClick = () => {
     setShowModal(false);
