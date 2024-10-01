@@ -12,6 +12,7 @@ import { updatePersonalMission } from "../api/personalMissionApi";
 import useRoomInfo from "../store/useRoomInfo";
 import { updateTeamMissionRule } from "../api/teamMissionApi";
 import { settingMyHomeLocation } from "../api/locationApi";
+import { useQueryClient } from "@tanstack/react-query";
 
 
 const LocationSettingPage = () => {
@@ -20,21 +21,17 @@ const LocationSettingPage = () => {
   const { isSearchMode,selectedAddress,center, updatePositionWithGeolocation,selectedPosition,setSelectedPosition} = useSearchStore();
   const { roomNumber, rule } = useRoomInfo();
   const navigate = useNavigate();
-  const location = useLocation();
+  const queryClient = useQueryClient();
   const onClickRegistButton = async () => {
     // TODO: 장소 등록 로직 추가 -api 연결
     const requestLocation = {
-      "location_name": selectedAddress,
+      "locationName": selectedAddress,
       lat: selectedPosition.lat,
       lng: selectedPosition.lng,
     }
-    if(location.pathname.includes("/personalMission")){
-      await updatePersonalMission({...rule,ruleLocation:selectedPosition})
-      navigate(`/personalMission`);
-    }else if(location.pathname.includes("/teamMission")){
-      await settingMyHomeLocation(requestLocation);
-      navigate(`/teamMission/${roomNumber}`);
-    }
+    await settingMyHomeLocation(requestLocation);
+    await queryClient.invalidateQueries({queryKey:["mainPageData"]});
+    navigate(`/`);
   }
   useEffect(()=>{
     updatePositionWithGeolocation();

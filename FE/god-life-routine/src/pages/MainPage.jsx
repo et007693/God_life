@@ -29,7 +29,13 @@ const MainPage = () => {
   const { data, isFetching, isError } = useQuery({
     queryKey: ["mainPageData"],
     queryFn: getMainPageData,
+    staleTime: 0,
   });
+  useEffect(() => {
+    if(data && !data.locationSet){
+      navigate("/location/setting");
+    }
+  }, [data]);
   // 이곳 한정으로 login 페이지로 이동하는 로직 추가 나머지는 PrivateRoute에서 처리
   if (isFetching) return <div>Loading...</div>;
   if (isError) return <Navigate to={'/login'}/>;

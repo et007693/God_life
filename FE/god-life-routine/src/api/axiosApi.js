@@ -26,10 +26,10 @@ axiosApi.interceptors.response.use(
   },
   (error) => {
     if (error.response && error.response.status === 401) {
-      axiosApi.post("/api/v1/refresh").then((res) => {
+      axiosApi.post("/api/v1/refresh").then(async (res) => {
         const newAccessToken = Cookies.get("accessToken");
         localStorage.setItem("accessToken", newAccessToken);
-        const newRes = axiosApi.request(error.config);
+        const newRes = await axiosApi.request(error.config);
         return newRes.data;
       });
       // console.log("에러발생했습니다");

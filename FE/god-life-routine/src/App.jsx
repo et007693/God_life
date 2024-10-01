@@ -95,10 +95,6 @@ function App() {
                 <Route path="gallery" element={<GalleryPage />} />
               </Route>
               <Route
-                path="/personalMission/location/setting"
-                element={<LocationSettingPage />}
-              />
-              <Route
                 path="/personalMission/time/setting"
                 element={<TimeSettingPage />}
               />
@@ -151,7 +147,7 @@ function App() {
                 element={<TimeSettingPage />}
               />
               <Route
-                path="/teamMission/:teamId/location/setting"
+                path="/location/setting"
                 element={<LocationSettingPage />}
               />
               {/* 팀원 정산 목록 - API 추가, 1/N로 나누기 */}
