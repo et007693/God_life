@@ -6,12 +6,25 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const TransferPage = () => {
+
+  const { data, isFetching, isError} = useQuery({
+    queryKey: ["transferData"],
+    queryFn: getTransferData,
+    staleTime:0,
+  });
+
+  if (isFetching) return <div>Loading...</div>;
+  if (isError) return <div>Error</div>;
+
+
   const [sendMoney, setSendMoney] = useState("");
   const navigate = useNavigate();
 
   const goToTransferSuccess = () => {
     navigate("/transferSuccess");
   };
+
+
 
   return (
     <div className="mt-16">

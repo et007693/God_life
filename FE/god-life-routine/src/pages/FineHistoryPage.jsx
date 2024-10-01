@@ -13,6 +13,7 @@ import { getFineHistory } from "../api/fineHistoryApi";
 const FineHistoryPage = () => {
   const { setRoomNumber, setRoomType } = useRoomInfo();
   const { user, setUser } = useUserStore();
+  
   const { teamId } = useParams();
   const { data, isFetching, isError } = useQuery({
     queryKey:["fineHistory"],

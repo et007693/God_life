@@ -46,12 +46,6 @@ const TeamMissionDetailPage = () => {
     setShowModal(false);
   };
 
-  // const goToTransferPage = () => {
-  //   navigate(`fine/pay`);
-  // };
-  // const goToFineHistoryPage = () => {
-  //   navigate(`fine/history`);
-  // };
   const goToTeamMissionTimeSettingPage = () => {
     navigate(`time/setting`);
   };
@@ -62,13 +56,17 @@ const TeamMissionDetailPage = () => {
     navigate(`/teamMission/${teamId}/calculate`);
   };
 
+  const handleButtonClick = (button) => {
+    setSelectedButton(button);
+  };
+
   // const goToAccountHistoryPage = () => {
   //   navigate(`/teamMission/${teamId}/accountHistory`);
   // };
 
-  const handleButtonClick = (button) => {
-    setSelectedButton(button);
-  };
+  // const handleButtonClick = (button) => {
+  //   setSelectedButton(button);
+  // };
 
   const goToExerciseMissionPage = () => {
     navigate(`exercise`,{state:{lat:data.data.lat,lng:data.data.lng}});
@@ -157,7 +155,7 @@ const TeamMissionDetailPage = () => {
           <AccountInfo data={data} />
         </div>
         <TeamMissionDetailBody data={data} />
-        <TeamMissionDetailThreeButton />
+        <TeamMissionDetailThreeButton navigate={navigate} teamId={teamId}/>
 
         <button
           className="mt-2 ml-auto pr-2 block text-left"

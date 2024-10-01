@@ -1,17 +1,17 @@
 import React from "react";
 
-const goToAccountHistoryPage = () => {
-  navigate(`/teamMission/${teamId}/accountHistory`);
-};
+const TeamMissionDetailThreeButton = ({ navigate, teamId }) => {
 
-const goToTransferPage = () => {
-  navigate(`fine/pay`);
-};
-const goToFineHistoryPage = () => {
-  navigate(`fine/history`);
-};
-
-const TeamMissionDetailThreeButton = () => {
+  const goToAccountHistoryPage = () => {
+    navigate(`/teamMission/${teamId}/accountHistory`);
+  };
+  
+  const goToTransferPage = () => {
+    navigate(`fine/pay`);
+  };
+  const goToFineHistoryPage = () => {
+    navigate(`/teamMission/${teamId}/fine/history`);
+  };
   return (
     <div className="w-full">
       <div className="flex justify-around bg-gray-100 py-4 rounded-b-lg shadow-md">
