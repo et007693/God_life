@@ -70,7 +70,7 @@ const TeamMissionDetailPage = () => {
   };
 
   const goToExerciseMissionPage = () => {
-    navigate(`exercise`);
+    navigate(`exercise`,{state:{lat:data.data.lat,lng:data.data.lng}});
   };
 
   // 로딩 중일 때 로딩 표시
@@ -218,13 +218,13 @@ const TeamMissionDetailPage = () => {
           평일에만 미션이 주어집니다.
         </div>
         {data.data.rule == "일찍 일어나기" ? (
-          data.data.rule == true ? (
+          data.data.timeSet == true ? (
             <div
               onClick={goToTeamMissionTimeSettingPage}
               className="flex relative justify-around bg-gray-100 mt-4 px-8 py-20 rounded-2xl w-full"
             >
               <div className="text-3xl font-bold text-center">
-                {data.data.rule}
+                {data.data.meridiem} {data.data.time}
               </div>
             </div>
           ) : (
