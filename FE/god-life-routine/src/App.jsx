@@ -34,7 +34,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import ExerciseMissionPage from "./pages/ExerciseMissionPage";
 import { CookiesProvider, useCookies } from "react-cookie";
 import useUserStore from "./store/useUserStore";
-import InviteAcceptPage from "./pages/inviteAcceptPage";
+import InviteAcceptPage from "./pages/InviteAcceptPage";
 
 function App() {
   const queryClient = new QueryClient({

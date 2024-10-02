@@ -24,12 +24,12 @@ const SettedHomeMap = ({ data, onclickSettingBtn, onclickMap }) => {
         level={3}
         className="w-60 h-60 -z-1"
         center={{
-          lat: data.rule.ruleLocation.lat,
-          lng: data.rule.ruleLocation.lng,
+          lat: data.data.lat,
+          lng: data.data.lng,
         }}
         onClick={onclickMap}
       >
-        <MapMarker position={data.rule.ruleLocation} />
+        <MapMarker position={{lat: data.data.lat, lng: data.data.lng}} />
       </Map>
     </div>
   );
