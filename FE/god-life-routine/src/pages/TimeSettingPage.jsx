@@ -3,23 +3,25 @@ import Picker from "react-mobile-picker";
 import Header from "../components/Header";
 import { useMutation } from "@tanstack/react-query";
 import useRoomInfo from "../store/useRoomInfo";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { updateTeamMissionRule } from "../api/teamMissionApi";
 import { updatePersonalMission } from "../api/personalMissionApi";
 
 const selections = {
   meridiem: ["오전", "오후"],
-  hour: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+  hour: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"],
   minute: [
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
-    22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
-    41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59,
+    "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
+    "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40",
+    "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59",
   ],
 };
 
 export default function MyPicker() {
   const navigate = useNavigate();
   const now = new Date();
+  const location = useLocation();
+  const {teamId} = useParams();
   const [pickerValue, setPickerValue] = useState({
     meridiem: now.getHours() < 12 ? "오전": "오후",
     hour: now.getHours() % 12,
@@ -33,13 +35,13 @@ export default function MyPicker() {
   }
 // mutate를 updateTeamMissionRule라는 이름으로 호출
   const { mutate: updateMissionSetting } = useMutation({
-    mutationFn: (ruleData) => roomType ==='team' ? updateTeamMissionRule(roomNumber, ruleData) : updatePersonalMission(ruleData),
+    mutationFn: (ruleData) => location.pathname.includes('team') ? updateTeamMissionRule(teamId, ruleData) : updatePersonalMission(ruleData),
     onSuccess: onNavigateNextPage
   });
   const onClickConfirmBtn = useCallback(async () => {
-      await updateMissionSetting({...rule,
-        ruleTime: pickerValue.meridiem + " " + pickerValue.hour + "시 " + pickerValue.minute + "분",
-        ruleSetted: true,
+      await updateMissionSetting({
+        meridiem: pickerValue.meridiem,
+        time:  pickerValue.hour + ":" + pickerValue.minute,
       });
   },[roomType, pickerValue,rule]);
   const formattedTime = `${pickerValue.meridiem} ${pickerValue.hour}시 ${pickerValue.minute}분`;

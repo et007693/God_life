@@ -13,15 +13,14 @@ export const getTeamMissionDetail = async (teamId) => {
   return response.data;
 };
 
-export const updateTeamMissionRule = (teamId, rule) => {
+export const updateTeamMissionRule = (teamId, time) => {
+  console.log(teamId, time);
   const data = {
-    rule: {
-      ...rule,
-      ruleSetted: true,
-    },
+    meridiem: time.meridiem,
+    time: time.time,
   };
   const response = axiosApi
-    .patch(`/api/v1/teamMission/${teamId}`, data)
+    .post(`/api/v1/group/${teamId}/time`, data)
     .then((response) => response.data);
   return response;
 };
