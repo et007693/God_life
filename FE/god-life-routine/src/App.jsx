@@ -20,7 +20,6 @@ import PhotoMissionPage from "./pages/PhotoMissionPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import KakaoInvitePage from "./pages/KakaoInvitePage";
-import InviteAcceptPage from "./pages/InviteAcceptPage";
 import Layout from "./components/Layout";
 import TimeSettingPage from "./pages/TimeSettingPage";
 import AccountSelectPage from "./pages/AccountSelectPage";
@@ -32,8 +31,10 @@ import KakaoLoginCallbackPage from "./pages/KakaoLoginCallbackPage";
 import GalleryPage from "./pages/GalleryPage";
 import CalculateTeam from "./pages/CalculateTeam";
 import PrivateRoute from "./components/PrivateRoute";
+import ExerciseMissionPage from "./pages/ExerciseMissionPage";
 import { CookiesProvider, useCookies } from "react-cookie";
 import useUserStore from "./store/useUserStore";
+import InviteAcceptPage from "./pages/inviteAcceptPage";
 
 function App() {
   const queryClient = new QueryClient({
@@ -123,8 +124,13 @@ function App() {
               />
               {/* 미션 수행 페이지 */}
               <Route
-                path="/teamMission/:teamId/perform"
-                element={<PerformMissionPage />}
+                path="/teamMission/:teamId/exercise"
+                element={<ExerciseMissionPage />}
+              />
+              {/* TODO:일어나기미션페이지 추가해야함 */}
+              <Route
+                path="/teamMission/:teamId/wakeup"
+                element={<ExerciseMissionPage />}
               />
               <Route
                 path="/teamMission/:teamId/fine/history"
