@@ -14,6 +14,7 @@ import useRoomInfo from "../store/useRoomInfo";
 import firecracker from "../assets/firecracker.png";
 import Modal from "../components/Modal";
 import BettingButton from "../components/BettingButton";
+import LoadingSpinner from "../components/common/LoadingSpinner";
 
 const TeamMissionDetailPage = () => {
   const navigate = useNavigate();
@@ -68,7 +69,12 @@ const TeamMissionDetailPage = () => {
   };
 
   // 로딩 중일 때 로딩 표시
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return (
+      <div className="flex justify-center items-center w-full h-screen">
+        <LoadingSpinner />
+      </div>
+    );
   return (
     <div>
       <Header
