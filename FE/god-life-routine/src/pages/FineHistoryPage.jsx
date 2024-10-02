@@ -38,7 +38,7 @@ const FineHistoryPage = () => {
         <Avatar member={data.user} />
       </div>
 
-      <FineHistoryList data={data.fineinfo} />
+      <FineHistoryList data={data.fines} />
       
     </div>
   );

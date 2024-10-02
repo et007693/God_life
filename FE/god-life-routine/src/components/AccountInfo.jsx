@@ -5,11 +5,11 @@ const AccountInfo = ({ data }) => {
   return (
     <div className="text-center">
       <div className="text-xl font-bold">
-        <p>{teamName}</p>
+        <p>{data.data.teamName}</p>
       </div>
       <div className="text-sm text-gray-500 mt-2 mb-4">
         <p>
-          {accountBank} {accountNumber}
+          {data.data.accountBank} {data.data.accountNumber}
         </p>
       </div>
     </div>

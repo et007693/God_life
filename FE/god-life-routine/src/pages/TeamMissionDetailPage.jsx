@@ -148,7 +148,7 @@ const TeamMissionDetailPage = () => {
 
       <div className="flex flex-col items-center px-10 py-5">
         <div className="flex flex-col items-center">
-          <div className="w-full flex -space-x-4 rtl:space-x-reverse">
+          <div className="w-full flex justify-center -space-x-4 rtl:space-x-reverse">
             <AvatarList memberList={data.data.memberList} />
             <InviteMemberBtn onClick={handleShareKakaoBtn} />
           </div>
