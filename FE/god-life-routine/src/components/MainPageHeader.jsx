@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Avatar from "./Avatar";
 const MainPageHeader = ({ formatDate, profileImageSrc }) => {
   const navigate = useNavigate();
-  const imgSrc = profileImageSrc ? "null" : "/images/default_profile.png";
+  const imgSrc = profileImageSrc ? profileImageSrc.profileImage : "/images/default_profile.png";
   return (
     <div className="flex flex-row justify-between">
       <div className="text-left ml-10 mt-10 mb-10">
