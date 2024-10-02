@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import LocationSettingPage from "./pages/LocationSettingPage";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import setScreenHeight from "./util/setScreenHeight";
 import MainPage from "./pages/MainPage";
 import PersonalMissionCreatePage from "./pages/PersonalMissionCreatePage";
@@ -35,6 +35,7 @@ import ExerciseMissionPage from "./pages/ExerciseMissionPage";
 import { CookiesProvider, useCookies } from "react-cookie";
 import useUserStore from "./store/useUserStore";
 import InviteAcceptPage from "./pages/InviteAcceptPage";
+import useRedirectStore from "./store/useRedirectStore";
 
 function App() {
   const queryClient = new QueryClient({
@@ -48,38 +49,40 @@ function App() {
   const [cookies, setCookies, removeCookies] = useCookies(["accessToken"]);
   const { setAccessToken } = useUserStore();
   const { Kakao } = window;
+  const {redirectUrl} = useRedirectStore();
   useEffect(() => {
     if (!Kakao.isInitialized()) {
       Kakao.init(import.meta.env.VITE_KAKAO_API_KEY);
     }
     // 초기에 스크린 사이즈에 맞춰 높이 설정
     setScreenHeight();
-
     // 브라우저 창 크기가 변경될 때마다 스크린 높이 재설정
     window.addEventListener("resize", setScreenHeight);
     return () => {
       window.removeEventListener("resize", setScreenHeight);
     };
   }, []);
+
   useEffect(() => {
     if (cookies.accessToken != null) {
       localStorage.setItem("accessToken", cookies.accessToken);
     }
   }, [cookies.accessToken]);
+  
   return (
     <CookiesProvider>
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <Routes>
             <Route path="/login" element={<LoginPage />} />
+            <Route
+              path="/:teamId/invite/accept"
+              element={<InviteAcceptPage />}
+            />
             {/* 로그인 되지 않은 사용자는 로그인 페이지로 이동 */}
             <Route element={<PrivateRoute />}>
               <Route path="/" element={<MainPage />} />
               <Route path="/kakaoInvite" element={<KakaoInvitePage />} />
-              <Route
-                path="/:teamId/invite/accept"
-                element={<InviteAcceptPage />}
-              />
 
               {/* TODO: 메인페이지 라우팅 추가 */}
               <Route

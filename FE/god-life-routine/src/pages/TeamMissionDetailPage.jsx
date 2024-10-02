@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
-import { useNavigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { getTeamMissionDetail } from "../api/teamMissionApi";
 import { useQuery } from "@tanstack/react-query";
 import AvatarList from "../components/AvatarList";
@@ -26,7 +26,7 @@ const TeamMissionDetailPage = () => {
   const { setRoomNumber, setRoomType, setRule } = useRoomInfo();
   const [showModal, setShowModal] = useState(false);
   const [selectedButton, setSelectedButton] = useState("");
-  const { data, isLoading } = useQuery({
+  const { data, isLoading,isError } = useQuery({
     queryKey: ["teamMissionDetail", teamId],
     queryFn: () => getTeamMissionDetail(teamId),
     staleTime: 0,
@@ -80,6 +80,11 @@ const TeamMissionDetailPage = () => {
         <LoadingSpinner />
       </div>
     );
+  if(isError){
+    return (
+      <Navigate to="/login" />
+    );
+  }
   return (
     <div>
       <Header
