@@ -3,18 +3,18 @@
 import { useQuery } from "@tanstack/react-query";
 import { Navigate, useNavigate } from "react-router-dom";
 import { getMainPageData } from "../api/mainPageApi";
-import TodoItem from "../components/TodoItem";
-import Avatar from "../components/Avatar";
 import { useCookies } from "react-cookie";
 import { useEffect } from "react";
 import MainPageHeader from "../components/MainPageHeader";
 import MainPagePersonalMission from "../components/MainPagePersonalMission";
 import MainPageTeamMission from "../components/MainPageTeamMission";
 import LoadingSpinner from "../components/common/LoadingSpinner";
+import useRedirectStore from "../store/useRedirectStore";
 
 const MainPage = () => {
   const [cookies, setCookies, removeCookies] = useCookies(["accessToken"]);
   const navigate = useNavigate();
+  const {redirectUrl} = useRedirectStore();
   const goToPersonalMissionCreate = () => {
     navigate("/personalMission/create");
   };
@@ -35,6 +35,9 @@ const MainPage = () => {
   useEffect(() => {
     if(data && !data.locationSet){
       navigate("/location/setting");
+    }
+    if(redirectUrl){
+      navigate(redirectUrl);
     }
   }, [data]);
   // 이곳 한정으로 login 페이지로 이동하는 로직 추가 나머지는 PrivateRoute에서 처리
