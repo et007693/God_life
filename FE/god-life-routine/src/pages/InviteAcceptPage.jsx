@@ -1,24 +1,33 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Header from '../components/Header'
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { acceptInvite } from '../api/inviteApi';
 import { useMutation } from '@tanstack/react-query';
+import useRedirectStore from '../store/useRedirectStore';
 
 const InviteAcceptPage = () => {
   const {teamId} = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const {mutate} = useMutation({
     mutationFn: (teamId)=>acceptInvite(teamId),
     onSuccess: () => {
       navigate(`/teamMission/${teamId}`);
     },
   });
+  const {setRedirectUrl} = useRedirectStore();
   const onClickAcceptBtn = () => {
     mutate(teamId);
   }
   const onClickRejectBtn = () => {
     navigate("/");
   }
+  useEffect(()=>{
+    if(localStorage.getItem("accessToken") == null){
+      localStorage.setItem("redirectUrl",location.pathname);
+      navigate("/login");
+    }
+  },[location.pathname])
   return (
     <div className='h-screen flex flex-col justify-items-center items-center'>
       <Header title={'초대 수락'} color={'orange'} goBack={"/"}/>

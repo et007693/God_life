@@ -32,8 +32,14 @@ axiosApi.interceptors.response.use(
         const newRes = await axiosApi.request(error.config);
         return newRes.data;
       });
+    if(error.response && error.response.status === 400){
+      console.log(error.response);
+      useUserStore.getState().setAccessToken(null);
+      Cookies.remove("accessToken");
+      Cookies.remove("refreshToken");
+      window.location.href = "/login";
+      }
       // console.log("에러발생했습니다");
-      // useUserStore.getState().setAccessToken(null);
       // window.location.href = "/login";
     }
     return Promise.reject(error);

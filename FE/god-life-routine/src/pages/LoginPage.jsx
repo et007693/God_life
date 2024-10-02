@@ -7,15 +7,9 @@ import { useCookies } from 'react-cookie'
 import useRedirectStore from '../store/useRedirectStore'
 
 const LoginPage = () => {
-// const CLIENT_ID = import.meta.env.VITE_KAKAO_REST_API_KEY
-// const REDIRECT_URI = 'http://localhost:5173/auth/kakao/callback'
-const navigate = useNavigate();
-const location = useLocation();
-const from = location.state?.from?.pathname || "/";
-const {setRedirectUrl} = useRedirectStore();
-
+  const location = useLocation();
+  const {setRedirectUrl} = useRedirectStore();
   const onClickKakaoLogin = async () =>{
-    setRedirectUrl(from);
     const baseUrl = import.meta.env.DEV ? "http://localhost:8080" : "http://j11a503.p.ssafy.io"
     
     window.location.href = `${baseUrl}/api/v1/oauth2/authorization/kakao`

@@ -14,7 +14,6 @@ import useRedirectStore from "../store/useRedirectStore";
 const MainPage = () => {
   const [cookies, setCookies, removeCookies] = useCookies(["accessToken"]);
   const navigate = useNavigate();
-  const {redirectUrl} = useRedirectStore();
   const goToPersonalMissionCreate = () => {
     navigate("/personalMission/create");
   };
@@ -36,10 +35,14 @@ const MainPage = () => {
     if(data && !data.locationSet){
       navigate("/location/setting");
     }
+  }, [data]);
+  useEffect(()=>{
+    const redirectUrl = localStorage.getItem("redirectUrl");
     if(redirectUrl){
       navigate(redirectUrl);
+      localStorage.removeItem("redirectUrl");
     }
-  }, [data]);
+  },[])
   // 이곳 한정으로 login 페이지로 이동하는 로직 추가 나머지는 PrivateRoute에서 처리
   if (isFetching)
     return (
