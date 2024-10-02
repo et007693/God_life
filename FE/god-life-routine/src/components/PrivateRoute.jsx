@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react'
-import { Navigate, Outlet } from 'react-router-dom';
+import { Navigate, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import useUserStore from '../store/useUserStore';
 import { useCookies } from 'react-cookie';
 
 const PrivateRoute = () => {
   const {accessToken,setAccessToken} = useUserStore();
-  const [cookies,setCookies,removeCookies] = useCookies(["accessToken"]);
   useEffect(()=>{
     if(localStorage.getItem("accessToken") != null){
       setAccessToken(localStorage.getItem("accessToken"));
