@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import MainPageHeader from "../components/MainPageHeader";
 import MainPagePersonalMission from "../components/MainPagePersonalMission";
 import MainPageTeamMission from "../components/MainPageTeamMission";
+import LoadingSpinner from "../components/common/LoadingSpinner";
 
 const MainPage = () => {
   const [cookies, setCookies, removeCookies] = useCookies(["accessToken"]);
@@ -37,8 +38,13 @@ const MainPage = () => {
     }
   }, [data]);
   // 이곳 한정으로 login 페이지로 이동하는 로직 추가 나머지는 PrivateRoute에서 처리
-  if (isFetching) return <div>Loading...</div>;
-  if (isError) return <Navigate to={'/login'}/>;
+  if (isFetching)
+    return (
+      <div className="flex justify-center items-center w-full h-screen">
+        <LoadingSpinner />
+      </div>
+    );
+  if (isError) return <Navigate to={"/login"} />;
 
   return (
     <div>
