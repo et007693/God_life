@@ -1,6 +1,10 @@
-import axiosApi from "./axiosApi"
+import axiosApi from "./axiosApi";
 
-export const getTransferData = async(groupId) => {
-  const response =  await axiosApi.get(`/api/v1/group/${groupId}`);
-  return response.data.data
-}
+export const sendFineMoney = async ({ teamId, money }) => {
+  console.log(teamId, money);
+  const response = await axiosApi.post(`/api/v1/group/transfer`, {
+    teamId: teamId,
+    money: money,
+  });
+  return response.data.data;
+};

@@ -33,7 +33,7 @@ const AccountHistoryList = ({ selectedUser, data }) => {
               })}
             </div>
             {groupedData[dateKey].map((item) => (
-              <AccountHistoryItem key={item.id} item={item} />
+              <AccountHistoryItem key={item.id} item={item}/>
             ))}
           </div>
         ))}

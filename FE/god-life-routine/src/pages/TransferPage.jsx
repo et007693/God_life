@@ -3,28 +3,38 @@
 import React from "react";
 import Header from "../components/Header";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import { sendFineMoney } from "../api/transferApi";
 
 const TransferPage = () => {
+  const { teamId } = useParams();
+  const [sendMoney, setSendMoney] = useState("");
+  const navigate = useNavigate();
 
-  const { data, isFetching, isError} = useQuery({
-    queryKey: ["transferData"],
-    queryFn: getTransferData,
-    staleTime:0,
+  const goToTransferSuccess = (data) => {
+    console.log(data.REC[0].accountNo); // 내 계좌
+    console.log(data.REC[0].transactionAccountNo);  // 팀 계좌
+
+    navigate("/transferSuccess", {
+      state: { 
+        sendMoney: `${sendMoney}`, 
+        teamId: `${teamId}`,
+        myAccount: `${data.REC[0].accountNo}`,
+        teamAccount: `${data.REC[0].transactionAccountNo}`
+      },
+    });
+  };
+
+  const { mutate, isFetching, isError } = useMutation({
+    mutationKey: ["transferData"],
+    mutationFn: ({ teamId, money }) => sendFineMoney({ teamId, money }),
+    staleTime: 0,
+    onSuccess: (data) => goToTransferSuccess(data),
   });
 
   if (isFetching) return <div>Loading...</div>;
   if (isError) return <div>Error</div>;
-
-
-  const [sendMoney, setSendMoney] = useState("");
-  const navigate = useNavigate();
-
-  const goToTransferSuccess = () => {
-    navigate("/transferSuccess");
-  };
-
-
 
   return (
     <div className="mt-16">
@@ -46,7 +56,7 @@ const TransferPage = () => {
       </div>
 
       <div className="text-left pl-10 pt-1 text-gray-400 text-base">
-        싸피 9999-88-22222
+        계좌번호 넣어야함        
       </div>
 
       <div>
@@ -71,7 +81,7 @@ const TransferPage = () => {
       <div className="pt-60">
         <button
           onClick={() => {
-            goToTransferSuccess();
+            mutate({ teamId, money: sendMoney });
           }}
           className="bg-orange-400 text-white px-10 py-3 rounded-lg text-xl"
         >
