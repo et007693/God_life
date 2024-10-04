@@ -1,10 +1,12 @@
 from flask import Flask, request,  jsonify
+from flask_cors import CORS
 from ultralytics import YOLO
 
 import random
 import os
 
 app = Flask(__name__)
+CORS(app)
 
 object = ''
 object_id = ''
@@ -15,9 +17,9 @@ def home():
 
 @app.route('/api/v1/mission/object/', methods=['GET', 'POST'])
 def object_detect():
-  global object
+  global object, object_id
   if request.method == 'GET':
-    object_list = ['monitor', 'refrigerator', 'pen', 'toothbrush', 'chopstick', 'towel', 'book','toothpaste']
+    object_list = ['monitor', 'refrigerator', 'pen', 'toothbrush', 'chopstick', 'book','toothpaste']
     object_id = random.randint(0, len(object_list) - 1)
     object = object_list[object_id]
 
@@ -31,6 +33,7 @@ def object_detect():
     return jsonify(response)
   
   if request.method == 'POST':
+    print(object)
     model = YOLO(f'./model/{object}.pt')
     file = request.files['file']
     file.save('./temp/' + file.filename)
