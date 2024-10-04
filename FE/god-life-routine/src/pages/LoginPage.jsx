@@ -1,16 +1,8 @@
-import React, { useEffect } from 'react'
 import kakaoLogo from '../assets/kakao-logo.png'
-import useUserStore from '../store/useUserStore'
-import { useLocation, useNavigate } from 'react-router-dom'
-import axiosApi from '../api/axiosApi'
-import { useCookies } from 'react-cookie'
-import useRedirectStore from '../store/useRedirectStore'
 
 const LoginPage = () => {
-  const location = useLocation();
-  const {setRedirectUrl} = useRedirectStore();
   const onClickKakaoLogin = async () =>{
-    const baseUrl = import.meta.env.DEV ? "http://localhost:8080" : "http://j11a503.p.ssafy.io"
+    const baseUrl = import.meta.env.DEV ? "http://localhost:8080" : "https://j11a503.p.ssafy.io"
     
     window.location.href = `${baseUrl}/api/v1/oauth2/authorization/kakao`
 
