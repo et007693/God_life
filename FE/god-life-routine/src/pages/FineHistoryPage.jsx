@@ -28,7 +28,7 @@ const FineHistoryPage = () => {
   }, [setRoomNumber, setRoomType]);
 
 
-  if (!data === null || isFetching) return <div>Loading...</div>;
+  if (!data || isFetching) return <div>Loading...</div>;
   if (isError) return <div>Error</div>;
 
   return (
