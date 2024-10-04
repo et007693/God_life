@@ -1,39 +1,74 @@
 // URL: "/teamMission/:teamId/fine/pay"
 
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../components/Header";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { sendFineMoney } from "../api/transferApi";
+import { getTransferPageData } from "../api/transferApi";
 
 const TransferPage = () => {
+  const { teamId } = useParams();
   const [sendMoney, setSendMoney] = useState("");
   const navigate = useNavigate();
 
-  const goToTransferSuccess = () => {
-    navigate("/transferSuccess");
+  const goToTransferSuccess = (data) => {
+    navigate("/transferSuccess", {
+      state: {
+        sendMoney: `${sendMoney}`,
+        teamId: `${teamId}`,
+        myAccount: `${data.REC[0].accountNo}`,
+        teamAccount: `${data.REC[0].transactionAccountNo}`,
+      },
+    });
   };
+
+  const { mutate, isFetching, isError } = useMutation({
+    mutationKey: ["transferData"],
+    mutationFn: ({ teamId, money }) => sendFineMoney({ teamId, money }),
+    staleTime: 0,
+    onSuccess: (data) => goToTransferSuccess(data),
+  });
+
+  const {
+    data: transferData,
+    isError: isGetError,
+    isFetching: isGetFetching,
+  } = useQuery({
+    queryKey: ["getTransferPageData"],
+    queryFn: () => getTransferPageData(teamId),
+    staleTime: 0,
+  });
+
+  useEffect(() => {
+    console.log(transferData);
+  }, [transferData]);
+
+  if (isFetching || isGetFetching) return <div>Loading...</div>;
+  if (isError || isGetError) return <div>Error</div>;
 
   return (
     <div className="mt-16">
       <Header title={"이체하기"} color={"orange"} />
 
       <div className="text-left pl-10 pt-10">
-        <span className="text-2xl font-bold">내 계좌</span>
+        <span className="text-2xl font-bold">{transferData.accountName}</span>
         <span className="text-lg pl-2 text-gray-500">에서</span>
       </div>
 
       <div className="text-left pl-10 text-gray-400 text-base">
         <span>잔액</span>
-        <span className="pl-1 pt-1">100,500원</span>
+        <span className="pl-1 pt-1">{transferData.accountBalance}</span>
       </div>
 
-      <div className="text-left pl-10 pt-10">
-        <span className="text-2xl font-bold">송창송창용</span>
-        <span className="text-lg pl-2 text-gray-500">팀에게</span>
+      <div className="text-left pl-10 pt-10 flex flex-wrap">
+        <span className="text-2xl font-bold">{transferData.withdrawalAccountBankName}</span>
+        <span className="text-lg pl-0 text-gray-500">팀에게</span>
       </div>
 
       <div className="text-left pl-10 pt-1 text-gray-400 text-base">
-        싸피 9999-88-22222
+        {transferData.withdrawalAccountNo}
       </div>
 
       <div>
@@ -58,7 +93,7 @@ const TransferPage = () => {
       <div className="pt-60">
         <button
           onClick={() => {
-            goToTransferSuccess();
+            mutate({ teamId, money: sendMoney });
           }}
           className="bg-orange-400 text-white px-10 py-3 rounded-lg text-xl"
         >

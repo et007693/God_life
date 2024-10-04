@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import addProfile from "../assets/addProfile.png";
-const InviteMemberBtn = ({ onClick }) => {
+const InviteMemberBtn = ({ onClick, className }) => {
     const {teamId} = useParams();
    
   return (
@@ -9,7 +9,7 @@ const InviteMemberBtn = ({ onClick }) => {
       <img
         src={addProfile}
         alt="addProfile"
-        className="w-14 h-14 p-1 rounded-full border-4 border-gray-300 bg-white"
+        className="w-16 h-16 p-1 rounded-full border-4 border-gray-300 bg-white"
       />
     </button>
   );

@@ -13,17 +13,13 @@ const groupByDate = (arr) => {
   }, {});
 };
 
-const AccountHistoryList = ({ selectedUser, data }) => {
-  const filteredArr =
-    selectedUser === "전체"
-      ? data
-      : data.filter((item) => item.name === selectedUser);
-  const groupedData = groupByDate(filteredArr);
+const AccountHistoryList = ({ data }) => {
+  
+  const groupedData = groupByDate(data);
 
   return (
     <div>
       {Object.keys(groupedData)
-        // .sort((a, b) => new Date(b) - new Date(a)) 역순
         .map((dateKey) => (
           <div key={dateKey}>
             <div className="text-left pl-4 pt-4">
@@ -33,7 +29,7 @@ const AccountHistoryList = ({ selectedUser, data }) => {
               })}
             </div>
             {groupedData[dateKey].map((item) => (
-              <AccountHistoryItem key={item.id} item={item} />
+              <AccountHistoryItem key={item.id} item={item}/>
             ))}
           </div>
         ))}

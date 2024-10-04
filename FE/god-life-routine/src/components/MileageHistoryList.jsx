@@ -15,8 +15,6 @@ const MileageHistoryList = ({ data }) => {
       </div> */}
       
     <MileageHistoryItem data={data} />
-
-    
     </div>
   );
 };

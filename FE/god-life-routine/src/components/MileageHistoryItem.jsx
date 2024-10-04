@@ -4,21 +4,6 @@ const MileageHistoryItem = ({ data }) => {
   let previousDate = null; // 이전 항목의 날짜를 추적할 변수
 
   return (
-    // <div>
-    //   {data.history.map((item, index) => (
-    //     <div key={index}>
-    //       <div className="pt-10 text-left pl-8">{item.month}월 {item.day}일</div>
-    //       <div className="flex justify-around pt-4">
-    //         <div className="pl-4">{item.hour}:{item.minute < 10 ? `0${item.minute}`: item.minute}</div>
-    //         <div className="text-lg">{`${item.itemName.replace('구매','')} ${item.amount}개 구매`}</div>
-    //         <div className="flex flex-col items-end">
-    //           <div className="font-bold text-lg">-{item.usedMileage} P</div>
-    //           <div className="text-gray-500 text-sm">잔액 {item.leftMileage} P</div>
-    //         </div>
-    //       </div>
-    //     </div>
-    //   ))}
-    // </div>
 
     <div>
       {data.history.map((item, index) => {

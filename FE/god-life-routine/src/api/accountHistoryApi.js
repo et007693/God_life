@@ -2,6 +2,7 @@ import axiosApi from "./axiosApi"
 
 
 export const getAccountHistory = async(groupId) => {
-  const response =  await axiosApi.get(`/api/v1/group/${groupId}`);
-  return response.data
+  console.log(groupId);
+  const response =  await axiosApi.get(`/api/v1/group/transaction/${groupId}`);
+  return response.data.data
 }
