@@ -3,13 +3,22 @@ import Header from "../components/Header";
 import kakaoBank from "../assets/kakaoBank.png";
 import { useQuery } from "@tanstack/react-query";
 import { getBankList } from "../api/accountSelectApi";
+import useCreatePersonelStore from "../store/useCreatePersonelStore";
 
 const AccountSelectPage = () => {
-  const [isDone, setIsDone] = useState(false);
+  const { account, setAccount } = useCreatePersonelStore();
   const {data:bankList} = useQuery({
     queryKey: ["account"],
     queryFn: getBankList,
   })
+
+  const handleCheckboxChange = (event, bankValue) => {
+    if (event.target.checked) {
+      setAccount(bankValue);
+    } else {
+      setAccount('');
+    }
+  }
   return (
     <div className="mt-16"  >
       <Header title={"계좌 선택"} color={"orange"} />
@@ -26,8 +35,8 @@ const AccountSelectPage = () => {
         <input
           type="checkbox"
           className="w-5 h-5 accent-orange-600 rounded-lg ml-32"
-          checked={isDone}
-          onChange={() => setIsDone(!isDone)}
+          checked={account === 'kakao'}
+          onChange={(e) => handleCheckboxChange(e, 'kakao')}
         />
       </div>
     </div>

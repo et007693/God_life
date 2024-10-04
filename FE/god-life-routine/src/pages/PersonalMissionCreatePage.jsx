@@ -5,22 +5,24 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createPersonalMission } from "../api/personalMissionApi";
 import { useMutation } from "@tanstack/react-query";
+import useCreatePersonelStore from "../store/useCreatePersonelStore";
+
 
 const PersonalMissionCreatePage = () => {
-  const [selectedTopic, setSelectedTopic] = useState(null);
-  const [deposit, setDeposit] = useState("");
+  // TODO: api연결 확인
+  const { topic, amount, account, setTopic, setAmount } = useCreatePersonelStore();
   const navigate = useNavigate();
-  const {data,mutate} = useMutation({
-    mutationFn: (data) => 
-      createPersonalMission(data),
-    onSuccess: (data) => {}
-    
+
+  const {mutate} = useMutation({
+    mutationFn: () => 
+      createPersonalMission({"rule": topic, "money": amount, "account": account}),
+    onSuccess: () => {
+      goToPersonalMissionDetail();
+    }
   });
-  const goToMissionTimeSettingPage = () => {
-    navigate(`/personalMission/time/setting`);
-  };
-  const goToMissionLocationsSettingPage = () => {
-    navigate(`/personalMission/locations/setting`);
+
+  const goToPersonalMissionDetail = () => {
+    navigate(`/personal`);
   };
 
   const goToAccountSelectPage = () => {
@@ -83,9 +85,9 @@ const PersonalMissionCreatePage = () => {
         <div className="text-xl font-bold mb-4 mt-[-30px]">주제</div>
         <Select
           options={topics}
-          value={selectedTopic}
+          value={topic}
           styles={customStyles}
-          onChange={(selectedOption) => setSelectedTopic(selectedOption)}
+          onChange={(selectedOption) => setTopic(selectedOption)}
           placeholder="주제를 선택해주세요"
           className="w-full"
         />
@@ -97,8 +99,8 @@ const PersonalMissionCreatePage = () => {
           <div className="relative">
             <input
               type="number"
-              value={deposit}
-              onChange={(e) => setDeposit(e.target.value)}
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
               placeholder="벌금을 입력해주세요"
               className="w-full p-2 pr-12 border-b border-gray-300 focus:border-orange-400 focus:outline-none transition-colors"
             />
@@ -119,9 +121,7 @@ const PersonalMissionCreatePage = () => {
 
       <div className="pt-7">
         <button
-          onClick={() => {
-            goToMissionTimeSettingPage();
-          }}
+          onClick={() => {mutate();}}
           className="bg-orange-400 text-white px-10 py-3 rounded-lg text-xl"
         >
           확인

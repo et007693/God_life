@@ -13,12 +13,10 @@ export const getGalleryImgData = async (page) => {
   });
 
   return response;
-  //   const response = await axios.get('/api/galleryImgData');
-  //   return response.data;
 };
 
 export const createPersonalMission = async (data) => {
-  const response = await axiosApi.post("/api/v1/personalMission", data);
+  const response = await axiosApi.post("/api/v1/personal/create", data);
   return response.data;
 };
 
@@ -28,16 +26,16 @@ export const getPersonalMissionData = async () => {
 }
 
 export const updatePersonalMission = async (rule) => {
-
-    const data = {
-      rule: {
-        ...rule,
-        ruleSetted: true,
-      }
+  console.log()
+  const data = {
+    rule: {
+      ...rule,
+      ruleSetted: true,
     }
-    const response = axiosApi
-      .patch(`/api/v1/personalMission`, data)
-      .then((response) => response.data);
-    return response;
+  }
+  const response = axiosApi
+    .patch(`/api/v1/personalMission`, data)
+    .then((response) => response.data);
+  return response;
   };
   

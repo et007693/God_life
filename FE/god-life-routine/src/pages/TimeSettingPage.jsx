@@ -38,11 +38,12 @@ export default function MyPicker() {
     mutationFn: (ruleData) => location.pathname.includes('team') ? updateTeamMissionRule(teamId, ruleData) : updatePersonalMission(ruleData),
     onSuccess: onNavigateNextPage
   });
+
   const onClickConfirmBtn = useCallback(async () => {
-      await updateMissionSetting({
-        meridiem: pickerValue.meridiem,
-        time:  pickerValue.hour + ":" + pickerValue.minute,
-      });
+    await updateMissionSetting({
+      meridiem: pickerValue.meridiem,
+      time:  pickerValue.hour + ":" + pickerValue.minute,
+    });
   },[roomType, pickerValue,rule]);
   const formattedTime = `${pickerValue.meridiem} ${pickerValue.hour}시 ${pickerValue.minute}분`;
 
