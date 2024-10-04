@@ -1,78 +1,29 @@
 // URL: "/teamMission/1"
-
-import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
-import { getTeamMissionDetail } from "../api/teamMissionApi";
-import { useQuery } from "@tanstack/react-query";
 import AvatarList from "../components/AvatarList";
 import InviteMemberBtn from "../components/InviteMemberBtn";
 import AccountInfo from "../components/AccountInfo";
 import TeamMissionDetailBody from "../components/TeamMissionDetailBody";
-import shareKakao from "../util/shareKakao";
-import useRoomInfo from "../store/useRoomInfo";
 import firecracker from "../assets/firecracker.png";
 import Modal from "../components/Modal";
 import BettingButton from "../components/BettingButton";
 import TeamMissionDetailThreeButton from "../components/TeamMissionDetailThreeButton";
 import LoadingSpinner from "../components/common/LoadingSpinner";
 import SettedHomeMap from "../components/SettedHomeMap";
+import { useTeamMissionDetailPage } from "../hooks/useTeamMissionDetailPage";
 
 const TeamMissionDetailPage = () => {
-  const navigate = useNavigate();
-  const { teamId } = useParams();
-  const handleShareKakaoBtn = async () => {
-    await shareKakao(teamId);
-  };
-  const { setRoomNumber, setRoomType, setRule } = useRoomInfo();
-  const [showModal, setShowModal] = useState(false);
-  const [selectedButton, setSelectedButton] = useState("");
-  const { data, isLoading,isError } = useQuery({
-    queryKey: ["teamMissionDetail", teamId],
-    queryFn: () => getTeamMissionDetail(teamId),
-    staleTime: 0,
-  });
-  useEffect(() => {
-    setRoomNumber(teamId);
-    setRoomType("team");
-    setRule(data?.rule);
-  }, [teamId, setRoomNumber, setRoomType, setRule, data]);
-
-  const handleOpenModal = () => {
-    setShowModal(true);
-  };
-
-  const handleCloseModal = () => {
-    setShowModal(false);
-  };
-
-  const goToTeamMissionTimeSettingPage = () => {
-    navigate(`time/setting`);
-  };
-  const goToTeamMissionLocationSettingPage = () => {
-    navigate(`/location/setting`);
-  };
-  const goToCalculateTeamPage = () => {
-    navigate(`/teamMission/${teamId}/calculate`);
-  };
-
-  const handleButtonClick = (button) => {
-    setSelectedButton(button);
-  };
-
-  // const goToAccountHistoryPage = () => {
-  //   navigate(`/teamMission/${teamId}/accountHistory`);
-  // };
-
-  // const handleButtonClick = (button) => {
-  //   setSelectedButton(button);
-  // };
-
-  const goToExerciseMissionPage = () => {
-    navigate(`exercise`,{state:{lat:data.data.lat,lng:data.data.lng}});
-  };
-
+  const {data,isLoading,isError,showModal,selectedButton,handleShareKakaoBtn,handleOpenModal,handleCloseModal,
+    goToTeamMissionTimeSettingPage,
+    goToTeamMissionLocationSettingPage,
+    goToPhotoMissionPage,
+    goToExerciseMissionPage,
+    goToCalculateTeamPage,
+    handleButtonClick} = useTeamMissionDetailPage();
   // 로딩 중일 때 로딩 표시
+  const navigate = useNavigate();
+  const {teamId} = useParams();
   if (isLoading)
     return (
       <div className="flex justify-center items-center w-full h-screen">
@@ -173,7 +124,7 @@ const TeamMissionDetailPage = () => {
         {data.data.rule == "일찍 일어나기" ? (
           data.data.timeSet == true ? (
             <div
-              onClick={goToTeamMissionTimeSettingPage}
+              onClick={goToPhotoMissionPage}
               className="flex relative justify-around bg-gray-100 mt-4 px-8 py-20 rounded-2xl w-full"
             >
               <div className="text-3xl font-bold text-center">
