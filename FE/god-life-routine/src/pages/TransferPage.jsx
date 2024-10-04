@@ -66,6 +66,7 @@ const TransferPage = () => {
         <span className="text-2xl font-bold">
           {transferData.withdrawalAccountBankName}
         </span>
+      
         <span className="text-lg pl-0 text-gray-500">팀에게</span>
       </div>
 

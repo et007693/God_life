@@ -1,30 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
-import Avatar from "../components/Avatar";
-import { useQuery } from "@tanstack/react-query";
-import { getMyPageData } from "../api/myPageApi";
 import MyPageUserInfo from "../components/MyPageUserInfo";
 import MyPageMenuList from "../components/MyPageMenuList";
-import useUserStore from "../store/useUserStore";
 import Modal from "../components/Modal";
-// import { useMyPage } from "../hooks/useMyPage";
+import { useMyPage } from "../hooks/useMyPage";
 
 const MyPage = () => {
- 
-  const { data, isFetching, isError} = useQuery({
-    queryKey: ["myPageData"],
-    queryFn: getMyPageData,
-    staleTime:0,
-  });
-
-  const [showModal, setShowModal] = useState(false);
+  const { data, isFetching, isError, showModal, setShowModal, handleButtonClick } = useMyPage();
 
   if (isFetching) return <div>Loading...</div>;
   if (isError) return <div>Error</div>;
-
-  const handleButtonClick = () => {
-    setShowModal(false);
-  };
 
   return (
     <>

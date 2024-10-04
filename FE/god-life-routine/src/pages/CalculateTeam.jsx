@@ -13,7 +13,6 @@ import { getCalculateTeam } from "../api/calculateTeamApi";
 import CalculateAvatarList from "../components/CalculateAvatarList";
 
 const CalculateTeam = () => {
-  const navigate = useNavigate();
   const { teamId } = useParams();
 
   const { data, isLoading, isError } = useQuery({
