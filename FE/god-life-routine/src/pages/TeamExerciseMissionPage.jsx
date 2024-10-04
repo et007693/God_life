@@ -1,44 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
 import {
   CustomOverlayMap,
   Map,
   MapMarker,
   Polyline,
 } from "react-kakao-maps-sdk";
-import useSearchStore from "../store/useSearchStore";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import calculateDistance from "../util/calculateDistance";
 import Header from "../components/Header";
-import { useMutation } from "@tanstack/react-query";
-import { doExerciseMission } from "../api/teamMissionApi";
-import { createScreenShotToFormData } from "../util/screenShot";
+import { useTeamExerciseMissionPage } from "../hooks/useTeamExerciseMissionPage";
 
-const ExerciseMissionPage = () => {
-  const { center, updatePositionWithGeolocation } = useSearchStore();
-  const { lat, lng } = useLocation().state;
-  const [distance, setDistance] = useState(0);
-  const [moveLine, setMoveLine] = useState([]);
-  const limitDistance = 150;
-  const navigate = useNavigate();
-  useEffect(() => {
-    const updatePosition = setInterval(() => {
-      updatePositionWithGeolocation();
-      const nowDistance = calculateDistance(center.lat, center.lng, lat, lng);
-      setDistance(nowDistance);
-    }, 1000);
-    return () => clearInterval(updatePosition);
-  }, [lat, lng, center.lat, center.lng]);
-  const {teamId} = useParams();
-  const {mutate} = useMutation({
-    mutationFn: (data)=>(doExerciseMission(teamId,data)),
-    onSuccess: (data)=>{
-      navigate(`/teamMission/${teamId}`);
-    }
-  })
-  const handleSubmit = async () => {
-      const blob = await createScreenShotToFormData("screen-shot-div");
-      mutate(blob);
-  }
+const TeamExerciseMissionPage = () => {
+  const { center,lat,lng,distance,setMoveLine,limitDistance,handleSubmit } = useTeamExerciseMissionPage();
   return (
     <div className="w-screen h-real-screen" id="screen-shot-div">
       <Header backgroundcolor={"white"} title={"운동 미션"} color={"orange"} goBack={"/"}/>
@@ -73,4 +43,4 @@ const ExerciseMissionPage = () => {
   );
 };
 
-export default ExerciseMissionPage;
+export default TeamExerciseMissionPage;

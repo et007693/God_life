@@ -31,7 +31,7 @@ import KakaoLoginCallbackPage from "./pages/KakaoLoginCallbackPage";
 import GalleryPage from "./pages/GalleryPage";
 import CalculateTeam from "./pages/CalculateTeam";
 import PrivateRoute from "./components/PrivateRoute";
-import ExerciseMissionPage from "./pages/TeamExerciseMissionPage";
+import TeamExerciseMissionPage from "./pages/TeamExerciseMissionPage";
 import { CookiesProvider, useCookies } from "react-cookie";
 import useUserStore from "./store/useUserStore";
 import InviteAcceptPage from "./pages/InviteAcceptPage";
@@ -128,12 +128,12 @@ function App() {
               {/* 미션 수행 페이지 */}
               <Route
                 path="/teamMission/:teamId/exercise"
-                element={<ExerciseMissionPage />}
+                element={<TeamExerciseMissionPage />}
               />
               {/* TODO:일어나기미션페이지 추가해야함 */}
               <Route
                 path="/teamMission/:teamId/wakeup"
-                element={<ExerciseMissionPage />}
+                element={<PhotoMissionPage />}
               />
               <Route
                 path="/teamMission/:teamId/fine/history"
