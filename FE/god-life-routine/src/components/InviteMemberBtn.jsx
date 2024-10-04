@@ -1,8 +1,6 @@
 import React from "react";
-import { useParams } from "react-router-dom";
 import addProfile from "../assets/addProfile.png";
 const InviteMemberBtn = ({ onClick, className }) => {
-    const {teamId} = useParams();
    
   return (
     <button className="flex justify-center" onClick={onClick}>
