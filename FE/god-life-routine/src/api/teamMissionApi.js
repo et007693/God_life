@@ -1,3 +1,4 @@
+import axios from "axios";
 import axiosApi from "./axiosApi.js";
 
 export const createTeamRoom = async (roomSetting) => {
@@ -23,3 +24,20 @@ export const updateTeamMissionRule = (teamId, time) => {
     .then((response) => response.data);
   return response;
 };
+
+// 
+export const doExerciseMission = async (teamId, blob) => {
+  const token = localStorage.getItem("accessToken");
+  console.log(blob);
+  const formData = new FormData();
+  formData.append("picture", blob, "image.jpg");
+  formData.append("isCompleted", true);
+  const response = await axios.post(`http://localhost:8080/api/v1/group/${teamId}/mission`,formData,{
+    
+    headers: {
+      "Content-Type": "multipart/form-data",
+      "Authorization": `Bearer ${token}`
+    },
+  })
+  return response.data;
+}
