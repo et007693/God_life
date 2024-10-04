@@ -6,7 +6,7 @@ import random
 import os
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, supports_credentials=True)
 
 object = ''
 object_id = ''
@@ -15,7 +15,7 @@ object_id = ''
 def home():
   return '갓생루팅'
 
-@app.route('/api/v1/mission/object/', methods=['GET', 'POST'])
+@app.route('/ai/v1/mission/object/', methods=['GET', 'POST'])
 def object_detect():
   global object, object_id
   if request.method == 'GET':
