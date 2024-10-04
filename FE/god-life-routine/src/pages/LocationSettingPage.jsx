@@ -38,10 +38,14 @@ const LocationSettingPage = () => {
     setSelectedPosition(center);
   },[updatePositionWithGeolocation])
   // 2024-09-04 작업시작
+  useEffect(()=>{
+    alert("미션 수행을 위해 집 주소를 등록해주세요");
+  },[])
   return (
     <>
       <div className="w-full h-real-screen flex flex-col">
-        <Header title="장소 등록" />
+        <Header title="주소 등록" />
+        <p className="text-center text-gray-500 mt-12">미션 수행을 위해 장소를 등록해주세요</p>
         {/* 주소찾기 버튼을 누르면 주소찾기 모드로 변경 */}
         {isSearchMode ? (
           <div className="flex-grow overflow-hidden">

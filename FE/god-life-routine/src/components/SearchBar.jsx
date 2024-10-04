@@ -7,7 +7,7 @@ const SearchBar = ({value, onChange,onKeyDown,onSearchButtonClick}) => {
     setIsSearchMode(true);
   };
   return (
-    <div className="relative mb-2 p-3 mt-16 ">
+    <div className="relative mb-2 p-3 ">
       <input
         type="text"
         onClick={onAddressClick}
