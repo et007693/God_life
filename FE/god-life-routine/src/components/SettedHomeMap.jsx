@@ -12,9 +12,9 @@ const SettedHomeMap = ({ data, onclickSettingBtn, onclickMap }) => {
     >
       <div className="flex justify-around items-center pb-5 w-full">
         {" "}
-        <h3 className="text-xl font-bold">설정된 집 위치</h3>
+        <h3 className="text-md text-gray-600 font-semibold">설정된 집 위치</h3>
         <button
-          className="flex items-center justify-center text-2xl"
+          className="flex items-center justify-center text-xl"
           onClick={onclickSettingBtn}
         >
           <IoMdSettings />

@@ -14,36 +14,36 @@ const CalendarPage = () => {
   const arr = [
     {
       id: 1,
-      date: "2024-09-02",
+      date: "2024-10-02",
       issuccess: "true",
     },
     {
       id: 2,
-      date: "2024-09-03",
+      date: "2024-10-03",
       issuccess: "false",
     },
     {
       id: 3,
-      date: "2024-09-04",
+      date: "2024-10-04",
       issuccess: "true",
     },
     {
       id: 4,
-      date: "2024-09-05",
+      date: "2024-10-07",
       issuccess: "true",
     },{
       id: 5,
-      date: "2024-09-06",
+      date: "2024-10-08",
       issuccess: "true",
     },
     {
       id: 6,
-      date: "2024-09-09",
+      date: "2024-10-09",
       issuccess: "false",
     },
     {
       id: 7,
-      date: "2024-09-10",
+      date: "2024-10-10",
       issuccess: "true",
     },
   ];
@@ -51,7 +51,7 @@ const CalendarPage = () => {
   // 주말 확인 함수
   const isWeekend = (date) => {
     const day = date.getDay();
-    return day === 0 || day === 6; // 6: Sat, 0: Sun, 
+    return day === 0 || day === 6; // 6: Sat, 0: Sun,
   };
   console.log(isWeekend(date));
 
@@ -61,12 +61,11 @@ const CalendarPage = () => {
     const month = String(date.getMonth() + 1).padStart(2, "0"); // 월 추출 (0부터 시작하므로 +1 필요)
     const day = String(date.getDate()).padStart(2, "0");        // 일 추출
     const formattedDate = `${year}-${month}-${day}`;            // YYYY-MM-DD 형식으로 결합
-    
 
     const found = arr.find((d) => d.date === formattedDate);
-    
+
     if (found) {
-      return found.issuccess === "true" 
+      return found.issuccess === "true"
       ? <AiFillSmile style={{ fontSize: "30px",
         color: "orange",
         position: "absolute",
@@ -78,11 +77,19 @@ const CalendarPage = () => {
     }
     return null;
   };
+
   
 
   return (
     <div>
-      <Header title={"캘린더"} backgroundcolor={"orange"} color={"white"} goBack={type === 'team' ? `/teamMission/${teamId}/` : `/personalMission/`}/>
+      <Header
+        title={"캘린더"}
+        backgroundcolor={"orange"}
+        color={"white"}
+        goBack={
+          type === "team" ? `/teamMission/${teamId}/` : `/personalMission/`
+        }
+      />
 
       <div className="flex justify-center">
         <div className="rounded-lg">
@@ -203,7 +210,6 @@ const CalendarPage = () => {
                   height: "120px", // 부모 요소의 높이 고정
                 }}
               >
-                
                 {/* div 태그는 스타일 적용 안됨 */}
                 <abbr
                   data-weekend={isWeekend(date) ? "true" : "false"} // 주말인지 아닌지 확인
@@ -211,7 +217,6 @@ const CalendarPage = () => {
                 >
                   {date.getDate()}
                 </abbr>
-                
 
                 {isSuccessDate(date)}
               </div>

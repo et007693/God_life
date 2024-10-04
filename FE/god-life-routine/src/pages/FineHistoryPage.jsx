@@ -35,10 +35,10 @@ const FineHistoryPage = () => {
     <div>
       <Header title={"벌금 내역"} color={"orange"} />
       <div className="mt-24 flex justify-center">
-        <Avatar member={data.user} />
+        {/* <Avatar member={data.user} /> */}
       </div>
 
-      <FineHistoryList data={data.fines} />
+      <FineHistoryList data={data} />
       
     </div>
   );

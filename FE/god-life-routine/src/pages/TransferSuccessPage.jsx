@@ -8,11 +8,11 @@ import { useLocation, useNavigate } from "react-router-dom";
 const TransferSuccessPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
- 
-  const {sendMoney, teamId, myAccount, teamAccount } = location.state;
+
+  const { sendMoney, teamId, myAccount, teamAccount } = location.state;
 
   const goToTeamMissionDetail = () => {
-    navigate(`/teamMission/${teamId}`); 
+    navigate(`/teamMission/${teamId}`);
   };
 
   const formatAccountNumber = (account) => {
@@ -20,7 +20,7 @@ const TransferSuccessPage = () => {
     for (let i = 0; i < account.length; i += 4) {
       accountArray.push(account.slice(i, i + 4));
     }
-    return accountArray.join('-');
+    return accountArray.join("-");
   };
 
   return (
@@ -41,12 +41,20 @@ const TransferSuccessPage = () => {
 
         <div className="pt-14">
           <span className="pt-2 text-gray-400 text-base">출금 계좌</span>
-          <span className="pl-8 text-gray-500">{formatAccountNumber(myAccount)}</span>
+          <span className="pl-8 text-gray-500">
+            {myAccount.startsWith("999")
+              ? `싸피 ${formatAccountNumber(myAccount)}`
+              : formatAccountNumber(myAccount)}
+          </span>
         </div>
 
         <div>
           <span className="pt-2 text-gray-400 text-base">입금 계좌</span>
-          <span className="pl-8 text-gray-500">{formatAccountNumber(teamAccount)}</span>
+          <span className="pl-8 text-gray-500">
+            {teamAccount.startsWith("999")
+              ? `싸피 ${formatAccountNumber(teamAccount)}`
+              : formatAccountNumber(teamAccount)}
+          </span>
         </div>
 
         <div className="flex justify-center items-center pt-28">

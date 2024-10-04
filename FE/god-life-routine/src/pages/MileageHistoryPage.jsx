@@ -2,12 +2,11 @@ import React from "react";
 import Header from "../components/Header";
 import { useQuery } from "@tanstack/react-query";
 import { getMileageHistoryPageData } from "../api/mileageHistoryApi";
-import coin from "../assets/image/coin.png";
 import MileageHistoryList from "../components/MileageHistoryList";
+import coin from "../assets/image/coin.png";
 
 const MileageHistoryPage = () => {
-
-  const { data, isFetching, isError} = useQuery({
+  const { data, isFetching, isError } = useQuery({
     queryKey: ["MileageHistoryPageData"],
     queryFn: getMileageHistoryPageData,
   });
@@ -29,9 +28,7 @@ const MileageHistoryPage = () => {
         </div>
       </div>
 
-      < MileageHistoryList data={data} />
-      
-
+      <MileageHistoryList data={data} />
     </div>
   );
 };
