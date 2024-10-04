@@ -31,7 +31,7 @@ import KakaoLoginCallbackPage from "./pages/KakaoLoginCallbackPage";
 import GalleryPage from "./pages/GalleryPage";
 import CalculateTeam from "./pages/CalculateTeam";
 import PrivateRoute from "./components/PrivateRoute";
-import ExerciseMissionPage from "./pages/ExerciseMissionPage";
+import ExerciseMissionPage from "./pages/TeamExerciseMissionPage";
 import { CookiesProvider, useCookies } from "react-cookie";
 import useUserStore from "./store/useUserStore";
 import InviteAcceptPage from "./pages/InviteAcceptPage";
