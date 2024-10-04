@@ -28,11 +28,13 @@ export const updateTeamMissionRule = (teamId, time) => {
 // 
 export const doExerciseMission = async (teamId, blob) => {
   const token = localStorage.getItem("accessToken");
-  console.log(blob);
+  const baseUrl =  import.meta.env.DEV
+  ? "http://localhost:8080"
+  : "https://j11a503.p.ssafy.io";
   const formData = new FormData();
   formData.append("picture", blob, "image.jpg");
   formData.append("isCompleted", true);
-  const response = await axios.post(`http://localhost:8080/api/v1/group/${teamId}/mission`,formData,{
+  const response = await axios.post(`${baseUrl}/api/v1/group/${teamId}/mission`,formData,{
     
     headers: {
       "Content-Type": "multipart/form-data",
