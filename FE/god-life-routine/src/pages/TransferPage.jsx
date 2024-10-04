@@ -59,16 +59,20 @@ const TransferPage = () => {
 
       <div className="text-left pl-10 text-gray-400 text-base">
         <span>잔액</span>
-        <span className="pl-1 pt-1">{transferData.accountBalance}</span>
+        <span className="pl-1 pt-1">{transferData.accountBalance}원</span>
       </div>
 
       <div className="text-left pl-10 pt-10 flex flex-wrap">
-        <span className="text-2xl font-bold">{transferData.withdrawalAccountBankName}</span>
+        <span className="text-2xl font-bold">
+          {transferData.withdrawalAccountBankName}
+        </span>
         <span className="text-lg pl-0 text-gray-500">팀에게</span>
       </div>
 
       <div className="text-left pl-10 pt-1 text-gray-400 text-base">
-        {transferData.withdrawalAccountNo}
+        {transferData.withdrawalAccountNo.startsWith("999")
+          ? `싸피 ${transferData.withdrawalAccountNo}`
+          : transferData.withdrawalAccountNo}
       </div>
 
       <div>
