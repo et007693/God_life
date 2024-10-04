@@ -10,6 +10,7 @@ import useUserStore from "../store/useUserStore";
 import useRoomInfo from "../store/useRoomInfo";
 import { useLocation } from "react-router-dom";
 import calculateDistance from "../util/calculateDistance";
+import Header from "../components/Header";
 
 const ExerciseMissionPage = () => {
   const { center, updatePositionWithGeolocation } = useSearchStore();
@@ -27,6 +28,7 @@ const ExerciseMissionPage = () => {
   }, [lat, lng, center.lat, center.lng]);
   return (
     <div className="w-screen h-real-screen">
+      <Header z title={"운동 미션"} color={"orange"} goBack={"/"}/>
       {/* 현재 위치에서 ruleLocation까지의 거리를 표시하는 폴리라인 */}
       <Map center={center} level={3} className="w-full h-full">
         <Polyline
