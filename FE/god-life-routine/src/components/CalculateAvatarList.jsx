@@ -1,6 +1,7 @@
 import React from 'react'
 import CalculateAvatar from './CalculateAvatar'
 
+
 const CalculateAvatarList = ({memberList}) => {
   return (
     memberList.map((member) => (
