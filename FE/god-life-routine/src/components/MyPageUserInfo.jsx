@@ -5,8 +5,10 @@ import coupon from "../assets/image/coupon.png";
 
 const MyPageUserInfo = ({ member }) => {
   return (
-    <div className="flex flex-row w-full mt-20 px-8 justify-items-center items-center justify-around">
+    <div className="flex flex-row w-full mt-20 px-8 items-center justify-around">
+      <div>
       <Avatar size={"lg"} member={{profileImage:member.profileImage}} />
+      </div>
       <div className="flex flex-col text-left w-full pl-8 gap-1">
         <p className="text-xl font-bold">{member.nickname}</p>
         <div >
