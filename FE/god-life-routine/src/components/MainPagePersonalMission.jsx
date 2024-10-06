@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import TodoItem from './TodoItem';
 
 const MainPagePersonalMission = ({data, navigate, goToPersonalMissionCreate}) => {
@@ -8,7 +8,7 @@ const MainPagePersonalMission = ({data, navigate, goToPersonalMissionCreate}) =>
           개인미션
         </h1>
         <ul className="flex flex-col gap-4 mx-10">
-          {data.personalRoomList ? (
+          {data.personalRoomList.length > 0 ? (
             data.personalRoomList.map((mission) => (
               <TodoItem
                 key={mission.roomId}
