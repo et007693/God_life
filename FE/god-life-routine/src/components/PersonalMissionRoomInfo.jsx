@@ -10,18 +10,22 @@ const PersonalMissionRoomInfo = ({ missionProps }) => {
     goToPersonalAccountDetail,
     goToPersonalMissionSettingPage,
   } = missionProps;
+  console.log(data)
+  // console.log(missionProps)
   const navigate = useNavigate();
   const goToExerciseMissionPage = () => {
-    navigate("/exerciseMission");
+    navigate("/location/setting");
   };
+
   return (
     <div>
+      
       <div className="flex flex-col items-center pt-24">
         <div>
           <Avatar member={user} />
         </div>
-        <div className="text-xl font-bold">{data.nickname}</div>
-        <div className="text-sm text-gray-400 mt-1">{data.mainAccountNo}</div>
+        <div className="text-xl font-bold">{data.data.nickname}</div>
+        <div className="text-sm text-gray-400 mt-1">{data.data.mainAccountNo}</div>
 
         <div className="border rounded-xl mt-6 shadow-md text-center text-sm">
           <div className="px-10 py-4">
@@ -29,17 +33,17 @@ const PersonalMissionRoomInfo = ({ missionProps }) => {
           </div>
           <div className="flex flex-row justify-between pt-4">
             <div className="text-gray-400 pl-5">남은 기간</div>
-            <div className="font-bold text-lg pr-5">{data.remainingDate}일</div>
+            <div className="font-bold text-lg pr-5">{data.data.remainingDate}일</div>
           </div>
           <div className="px-4 py-3">
             <div className=" bg-gray-200 rounded-full">
               <div
                 className="bg-yellow-300 h-5 rounded-full text-center text-sm flex items-center justify-center"
                 style={{
-                  width: `${(data.runningDate / data.remainingDate) * 100}%`,
+                  width: `${(data.data.runningDate / data.data.remainingDate) * 100}%`,
                 }}
               >
-                {data.runningDate}일
+                {data.data.runningDate}일
               </div>
             </div>
           </div>
@@ -48,16 +52,16 @@ const PersonalMissionRoomInfo = ({ missionProps }) => {
 
           <div className="flex flex-row justify-between pt-4">
             <div className="text-gray-400 pl-5">성공률</div>
-            <div className="font-bold text-lg pr-5">{data.successRate}%</div>
+            <div className="font-bold text-lg pr-5">{data.data.successRate}%</div>
           </div>
 
           <div className="px-4 py-3">
             <div className=" bg-gray-200 rounded-full">
               <div
                 className="bg-yellow-300 h-5 rounded-full"
-                style={{ width: `${data.successRate}%` }}
+                style={{ width: `${data.data.successRate}%` }}
               >
-                {data.successRate}%
+                {data.data.successRate}%
               </div>
             </div>
           </div>
@@ -69,14 +73,14 @@ const PersonalMissionRoomInfo = ({ missionProps }) => {
               <div className="flex flex-row">
                 <div className="text-gray-400 pl-5">현재 적용이율</div>
                 <div className="font-bold text-md pl-5 text-red-500">
-                  {data.interestRate}%
+                  {data.data.interestRate}%
                 </div>
               </div>
 
               <div className="flex flex-row">
                 <div className="text-gray-400 pl-5">최대 적용이율</div>
                 <div className="font-bold text-md pl-5 text-red-500 mb-4">
-                  {data.primeRate}%
+                  {data.data.primeRate}%
                 </div>
               </div>
             </div>
@@ -94,23 +98,27 @@ const PersonalMissionRoomInfo = ({ missionProps }) => {
       </div>
 
       <div className="text-left pt-8 pl-10 font-bold text-xl">
-        {data.rule === "wakeup" ? "일찍 일어나기" : "운동하기"}
+        {data.data.rule === "일찍 일어나기" ? "일찍 일어나기" : "운동하기"}
       </div>
       <div className="pt-3">
         <div
           onClick={goToPersonalMissionSettingPage}
           className="bg-gray-200 mx-10 py-10  rounded-3xl mb-16"
         >
-          {data.rule === "wakeup" ? (
-            data.rule.timeSet ? (
+          {data.data.rule === "일찍 일어나기" ? (
+            data.data.rule.timeSet ? (
               <div className="text-2xl font-bold text-center">
-                {data.rule.ruleTime}
+                {data.data.rule.ruleTime}
               </div>
             ) : (
-              "아직 시간설정이 완료되지 않았습니다."
+              <div onClick={(e) => { e.stopPropagation(); goToSetTimePage(); }}>
+                <p>시간설정이 완료되지 않았습니다</p>
+              </div>
             )
           ) : data.locationName ? (
-            <SettedHomeMap data={data} onclickSettingBtn={goToPersonalMissionSettingPage} onclickMap={goToExerciseMissionPage}/>
+            <div>
+              <SettedHomeMap data={data} onclickSettingBtn={goToPersonalMissionSettingPage} onclickMap={goToExerciseMissionPage}/>
+            </div>
           ) : (
             "아직 집 위치 설정이 되지 않았습니다."
           )}
