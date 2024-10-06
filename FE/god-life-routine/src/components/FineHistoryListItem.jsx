@@ -27,7 +27,7 @@ const FineHistoryListItem = ({ item, data }) => {
           <div className="text-sm text-gray-500">{hour}:{minute}</div>
         </div>
 
-        <div className="flex flex-col items-center pl-14">
+        <div className="flex flex-col items-end pl-14">
           <div className="font-bold text-xl">{item.fine}원</div>
           <div className="text-gray-500 text-sm">{item.prefixFine}원</div>
         </div>
