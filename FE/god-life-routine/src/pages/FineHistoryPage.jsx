@@ -34,8 +34,8 @@ const FineHistoryPage = () => {
   return (
     <div>
       <Header title={"벌금 내역"} color={"orange"} />
-      <div className="mt-24 flex justify-center">
-        {/* <Avatar member={data.user} /> */}
+      <div className="mt-24 flex justify-center mb-2">
+        <Avatar member={data} />
       </div>
 
       <FineHistoryList data={data} />
