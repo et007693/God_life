@@ -8,15 +8,19 @@ const MainPagePersonalMission = ({data, navigate, goToPersonalMissionCreate}) =>
           개인미션
         </h1>
         <ul className="flex flex-col gap-4 mx-10">
-          {data.personalMission ? (
-            <TodoItem
-              id={data.personalMission.id}
-              isDone={data.personalMission.isDone}
-              title={data.personalMission.title}
-              onclick={() => {
-                navigate("/personalMission");
-              }}
-            />
+          {data.personalRoomList ? (
+            data.personalRoomList.map((mission) => (
+              <TodoItem
+                key={mission.roomId}
+                id={mission.roomId}
+                isDOne={mission.completed}
+                title={mission.rule}
+                onclick={() => {
+                  navigate("/personalMission");
+                }}
+              />
+            ))
+            
           ) : (
             <div className="m-3">
               <button
