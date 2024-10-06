@@ -13,6 +13,7 @@ const FineList = ({memberList}) => {
         <div key={member.id} className="flex flex-row items-center mb-2 w-full">
           <div className="flex flex-col items-center text-center relative mt-3">
             {index === 0 && <img src={crown} alt="왕관" className="absolute -top-12 -left-9"/>}
+            {/* member의 총금액이 가장 높은 사람부터 crownList 들어가도록 수정 */}
             <CrownList member={member}/>
             <div className="w-20">{member.name}</div>
           </div>

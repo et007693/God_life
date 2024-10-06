@@ -65,11 +65,14 @@ const groupByDate = (arr) => {
 };
 
 const FineHistoryList = ({ data }) => {
-  const groupedData = groupByDate(data);
+  const groupedData = groupByDate(data.list);
+
+  // 날짜 역순으로 뜨도록(최신순)
+  const sortedDate = Object.keys(groupedData).sort((a, b) => b.localeCompare(a));
 
   return (
     <div>
-      {Object.keys(groupedData).map((dateKey) => {
+      {sortedDate.map((dateKey) => {
         const year = dateKey.substring(0, 4);
         const month = dateKey.substring(4, 6);
         const day = dateKey.substring(6, 8);
@@ -92,6 +95,7 @@ const FineHistoryList = ({ data }) => {
                 key={item.id}
                 item={item}
                 dateKey={dateKey}
+                data ={data}
               />
             ))}
           </div>
