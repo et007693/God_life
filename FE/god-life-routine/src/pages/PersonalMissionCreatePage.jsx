@@ -15,14 +15,18 @@ const PersonalMissionCreatePage = () => {
 
   const {mutate} = useMutation({
     mutationFn: () => 
-      createPersonalMission({"rule": topic, "money": amount, "account": account}),
+      createPersonalMission({"rule": topic.label, "money": parseInt(amount, 10), "account": account}),
+
     onSuccess: () => {
       goToPersonalMissionDetail();
-    }
+    },
+    onError: (error) => {
+      console.log("Error creating personal mission:", error);
+    },
   });
 
   const goToPersonalMissionDetail = () => {
-    navigate(`/personal`);
+    navigate(`/personalMission`);
   };
 
   const goToAccountSelectPage = () => {
@@ -87,7 +91,7 @@ const PersonalMissionCreatePage = () => {
           options={topics}
           value={topic}
           styles={customStyles}
-          onChange={(selectedOption) => setTopic(selectedOption)}
+          onChange={(topic) => setTopic(topic)}
           placeholder="주제를 선택해주세요"
           className="w-full"
         />

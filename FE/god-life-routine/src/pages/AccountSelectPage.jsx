@@ -35,8 +35,8 @@ const AccountSelectPage = () => {
         <input
           type="checkbox"
           className="w-5 h-5 accent-orange-600 rounded-lg ml-32"
-          checked={account === 'kakao'}
-          onChange={(e) => handleCheckboxChange(e, 'kakao')}
+          checked={account === '090'}
+          onChange={(e) => handleCheckboxChange(e, '090')}
         />
       </div>
     </div>

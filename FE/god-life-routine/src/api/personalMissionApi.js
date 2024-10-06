@@ -17,11 +17,12 @@ export const getGalleryImgData = async (page) => {
 
 export const createPersonalMission = async (data) => {
   const response = await axiosApi.post("/api/v1/personal/create", data);
+  console.log(response.data)
   return response.data;
 };
 
 export const getPersonalMissionData = async () => {
-  const response = await axiosApi.get(`/api/v1/personalMission`);
+  const response = await axiosApi.get(`/api/v1/personal`);
   return response.data;
 }
 
@@ -34,7 +35,7 @@ export const updatePersonalMission = async (rule) => {
     }
   }
   const response = axiosApi
-    .patch(`/api/v1/personalMission`, data)
+    .patch(`/api/v1/personal`, data)
     .then((response) => response.data);
   return response;
   };

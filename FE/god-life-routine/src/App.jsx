@@ -37,6 +37,7 @@ import useUserStore from "./store/useUserStore";
 import InviteAcceptPage from "./pages/InviteAcceptPage";
 import useRedirectStore from "./store/useRedirectStore";
 
+
 function App() {
   const queryClient = new QueryClient({
     defaultOptions: {

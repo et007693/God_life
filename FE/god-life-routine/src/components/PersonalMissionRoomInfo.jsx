@@ -94,22 +94,22 @@ const PersonalMissionRoomInfo = ({ missionProps }) => {
       </div>
 
       <div className="text-left pt-8 pl-10 font-bold text-xl">
-        {data.rule.ruleType === "wakeup" ? "일찍 일어나기" : "운동하기"}
+        {data.rule === "wakeup" ? "일찍 일어나기" : "운동하기"}
       </div>
       <div className="pt-3">
         <div
           onClick={goToPersonalMissionSettingPage}
           className="bg-gray-200 mx-10 py-10  rounded-3xl mb-16"
         >
-          {data.rule.ruleType === "wakeup" ? (
-            data.rule.ruleSetted ? (
+          {data.rule === "wakeup" ? (
+            data.rule.timeSet ? (
               <div className="text-2xl font-bold text-center">
                 {data.rule.ruleTime}
               </div>
             ) : (
               "아직 시간설정이 완료되지 않았습니다."
             )
-          ) : data.rule.ruleSetted ? (
+          ) : data.locationName ? (
             <SettedHomeMap data={data} onclickSettingBtn={goToPersonalMissionSettingPage} onclickMap={goToExerciseMissionPage}/>
           ) : (
             "아직 집 위치 설정이 되지 않았습니다."
