@@ -23,8 +23,7 @@ export const usePersonalMissionDetail = ()=>{
     
     
     const goToPersonalMissionSettingPage = () => {
-      const navigateUri = data?.rule?.ruleType === "wakeup" ? "time" : "location"    
-      navigate(`/personalMission/setting/${navigateUri}`);
+      navigate(`/location/setting/`);
     };
     
     useEffect(() => {
