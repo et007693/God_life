@@ -6,16 +6,23 @@ import { useNavigate } from "react-router-dom";
 import { createPersonalMission } from "../api/personalMissionApi";
 import { useMutation } from "@tanstack/react-query";
 import useCreatePersonelStore from "../store/useCreatePersonelStore";
-
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { createPersonalRoomSchema } from "../util/formCheckSchema";
 
 const PersonalMissionCreatePage = () => {
   // TODO: api연결 확인
-  const { topic, amount, account, setTopic, setAmount } = useCreatePersonelStore();
+  const { topic, amount, account, setTopic, setAmount } =
+    useCreatePersonelStore();
   const navigate = useNavigate();
 
-  const {mutate} = useMutation({
-    mutationFn: () => 
-      createPersonalMission({"rule": topic.label, "money": parseInt(amount, 10), "account": account}),
+  const { mutate } = useMutation({
+    mutationFn: (data) =>
+      createPersonalMission({
+        rule: data.selectedTopic,
+        money: data.money,
+        account: data.account,
+      }),
 
     onSuccess: () => {
       goToPersonalMissionDetail();
@@ -34,9 +41,27 @@ const PersonalMissionCreatePage = () => {
   };
 
   const topics = [
-    { value: "wakeup", label: "일찍 일어나기" },
-    { value: "exercise", label: "운동하기" },
+    { value: "일찍 일어나기", label: "일찍 일어나기" },
+    { value: "운동하기", label: "운동하기" },
   ];
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(createPersonalRoomSchema),
+    mode: "onChange",
+  });
+
+  const onSubmit = (data) => {
+    console.log(data);
+    mutate({
+      rule: data.selectedTopic,
+      money: parseInt(data.amount, 10),
+      account: account,
+    });
+  };
 
   const customStyles = {
     control: (provided, state) => ({
@@ -65,7 +90,8 @@ const PersonalMissionCreatePage = () => {
 
   return (
     <div>
-      <Header title={"예금 통장"} color={"orange"} goBack={"/"}/>
+      <Header title={"예금 통장"} color={"orange"} goBack={"/"} />
+      <form onSubmit={handleSubmit(onSubmit)}>
       <p className="text-center font-bold text-red-300 pt-20">
         매일매일 미션 달성하고 우대금리를 적용받아요
       </p>
@@ -85,52 +111,55 @@ const PersonalMissionCreatePage = () => {
         </div>
       </div>
 
-      <div className="text-left p-10">
-        <div className="text-xl font-bold mb-4 mt-[-30px]">주제</div>
-        <Select
-          options={topics}
-          value={topic}
-          styles={customStyles}
-          onChange={(topic) => setTopic(topic)}
-          placeholder="주제를 선택해주세요"
-          className="w-full"
-        />
-      </div>
+        <div className="text-left p-10">
+          <div className="text-xl font-bold mb-4 mt-[-30px]">주제</div>
+          <Select
+            options={topics}
+            {...register("selectedTopic")}
+            onChange={(selectedOption) =>
+              setValue("selectedTopic", selectedOption.label)
+            }
+            styles={customStyles}
+            placeholder="주제를 선택해주세요"
+            className="w-full"
+          />
+          {errors.selectedTopic && <p className="text-red-500 text-sm">{errors.selectedTopic.message}</p>}
+        </div>
 
-      <div className="text-left p-10">
-        <div>
-          <div className="text-xl font-bold mb-4 mt-[-35px]">납입 금액</div>
-          <div className="relative">
-            <input
-              type="number"
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-              placeholder="벌금을 입력해주세요"
-              className="w-full p-2 pr-12 border-b border-gray-300 focus:border-orange-400 focus:outline-none transition-colors"
-            />
-            <span className="absolute right-0 top-2 text-gray-500">(원)</span>
+        <div className="text-left p-10">
+          <div>
+            <div className="text-xl font-bold mb-4 mt-[-35px]">납입 금액</div>
+            <div className="relative">
+              <input
+                type="number"
+                {...register("amount")}
+                onChange={(e) => setValue("amount", e.target.value)}
+                placeholder="벌금을 입력해주세요"
+                className="w-full p-2 pr-12 border-b border-gray-300 focus:border-orange-400 focus:outline-none transition-colors"
+              />
+              {errors.amount && <p className="text-red-500 text-sm">{errors.amount.message}</p>}
+              <span className="absolute right-0 top-2 text-gray-500">(원)</span>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className="text-left p-10">
-        <div
-          className="flex justify-between items-center text-xl font-bold mb-4 mt-[-30px] cursor-pointer"
-          onClick={goToAccountSelectPage}
-        >
-          <span>계좌 선택</span>
-          <span className="text-gray-400">{">"}</span>{" "}
+        <div className="text-left p-10">
+          <div
+            className="flex justify-between items-center text-xl font-bold mb-4 mt-[-30px] cursor-pointer"
+            onClick={goToAccountSelectPage}
+          >
+            <span>계좌 선택</span>
+            <span className="text-gray-400">{">"}</span>{" "}
+          </div>
         </div>
-      </div>
 
-      <div className="pt-7">
         <button
-          onClick={() => {mutate();}}
+          type="submit"
           className="bg-orange-400 text-white px-10 py-3 rounded-lg text-xl"
         >
           확인
         </button>
-      </div>
+      </form>
     </div>
   );
 };
