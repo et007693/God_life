@@ -2,19 +2,6 @@ import galleryImgData from "../assets/galleryImgdata.json";
 import axios from "axios";
 import axiosApi from "./axiosApi";
 
-// export const getGalleryImgData = async (page) => {
-//   const response = await new Promise((resolve) => {
-//     setTimeout(() => {
-//       const startIndex = (page.pageParam - 1) * 5;
-//       const endIndex = startIndex + 5;
-//       const paginatedData = galleryImgData.slice(startIndex, endIndex);
-//       resolve(paginatedData);
-//     }, 1000);
-//   });
-
-//   return response;
-// };
-
 export const getGalleryImgData = async (teamId, year, month) => {
   const response = await axiosApi.get(
     `/api/v1/group/${teamId}/board?year=${year}&month=${month}`
