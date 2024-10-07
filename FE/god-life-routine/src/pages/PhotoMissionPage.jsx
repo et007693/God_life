@@ -18,6 +18,7 @@ const PhotoMissionPage = () => {
       queryFn:getPhotoMission
     }
   );
+  console.log(missionData)
   const missionObj = {
     "refrigerator": "냉장고",
     "monitor": "모니터",
