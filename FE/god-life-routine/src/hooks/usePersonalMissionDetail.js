@@ -22,7 +22,7 @@ export const usePersonalMissionDetail = ()=>{
     };
     
     
-    const goToPersonalMissionSettingPage = () => {
+    const goToPersonalLocationSettingPage = () => {
       navigate(`/location/setting/`);
     };
     
@@ -46,7 +46,7 @@ export const usePersonalMissionDetail = ()=>{
         isError,
         user,
         goToPersonalAccountDetail,
-        goToPersonalMissionSettingPage
+        goToPersonalLocationSettingPage
     }
   
 }

@@ -128,7 +128,7 @@ const PhotoMissionPage = () => {
                           onClick={handleHomeClick}
                           className="mt-6 font-noto-sans-kr w-32 justify-center font-bold px-6 py-3 bg-orange-500 text-white rounded-md shadow-md hover:bg-orange-600 transition duration-300 ease-in-out flex items-center"
                           >
-                          확인
+                          홈
                       </button>
                       </div>
                       </>
