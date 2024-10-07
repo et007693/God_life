@@ -5,3 +5,7 @@ export const createTeamRoomSchema = yup.object().shape({
     selectedTopic: yup.string("주제를 선택해주세요").required("주제를 선택해주세요"),
     selectedMonth: yup.string("월을 선택해주세요").required("월을 선택해주세요"),
 });
+export const createPersonalRoomSchema = yup.object().shape({
+    amount: yup.number().typeError("입금액은 정수로 입력해주세요").positive("입금액은 양수로 입력해주세요").integer("입금액은 정수로 입력해주세요").min(1000000,"입금액은 최소 100만원부터입니다").required("입금액을 입력해주세요"),
+    selectedTopic: yup.string("주제를 선택해주세요").required("주제를 선택해주세요"),
+});
