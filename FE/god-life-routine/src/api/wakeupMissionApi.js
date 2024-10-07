@@ -15,7 +15,6 @@ export const uploadMissionImg = async (file) => {
   const formData = new FormData();
   formData.append("file", file);
   
-  //  TODO: 나중에 URL변경 필요
   const response = await axios.post(`${baseUrl}/ai/v1/mission/object/`, formData, {
     headers: {
       "Content-Type": "multipart/form-data",
