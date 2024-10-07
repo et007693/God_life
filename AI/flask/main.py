@@ -6,7 +6,7 @@ import random
 import os
 
 app = Flask(__name__)
-CORS(app, supports_credentials=True)
+CORS(app, supports_credentials=True, resources={r"/ai/v1/mission/object/*": {"origins": "http://localhost:5173"}})
 
 object = ''
 object_id = ''
