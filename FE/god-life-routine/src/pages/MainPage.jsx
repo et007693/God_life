@@ -38,17 +38,6 @@ const MainPage = () => {
         navigate={navigate}
         goToTeamMissionCreate={goToTeamMissionCreate}
       />
-      <div className="flex justify-center items-center bg-slate-500 h-20">
-        <button
-          onClick={() => {
-            localStorage.removeItem("accessToken");
-            removeCookies("accessToken");
-            navigate("/login");
-          }}
-        >
-          로그아웃
-        </button>
-      </div>
     </div>
   );
 };

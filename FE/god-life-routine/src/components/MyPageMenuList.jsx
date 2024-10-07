@@ -1,8 +1,10 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import MyPageMenuListItem from './MyPageMenuListItem';
+import { useCookies } from 'react-cookie';
 
 const MyPageMenuList = ({onClickSignOutBtn}) => {
+  const [cookies, removeCookies] = useCookies();
   const navigate = useNavigate();
   // TODO: 네비게이트 및 모달 적용해야함
   const menuList = [
@@ -18,8 +20,12 @@ const MyPageMenuList = ({onClickSignOutBtn}) => {
     },
     {
       id:3,
-      name:"마일리지 계좌변경",
-      onClick: ()=>navigate("")
+      name:"로그아웃",
+      onClick: ()=>{
+            localStorage.removeItem("accessToken");
+            removeCookies("accessToken");
+            return navigate("/login");
+          }
     },
     {
       id:4,
