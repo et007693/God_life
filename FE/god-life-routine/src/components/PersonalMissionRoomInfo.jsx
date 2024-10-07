@@ -14,7 +14,7 @@ const PersonalMissionRoomInfo = ({ missionProps }) => {
   // console.log(missionProps)
   const navigate = useNavigate();
   const goToExerciseMissionPage = () => {
-    navigate("/location/setting");
+    navigate("/personalMission/exercise",{state:{lat:data.data.lat,lng:data.data.lng}});
   };
 
   return (
@@ -104,7 +104,7 @@ const PersonalMissionRoomInfo = ({ missionProps }) => {
       <div className="pt-3">
         <div
           onClick={goToPersonalMissionSettingPage}
-          className="bg-gray-200 mx-10 py-10  rounded-3xl mb-16"
+          className="bg-gray-200 mx-10 py-5  rounded-3xl mb-16"
         >
           {data.data.rule === "일찍 일어나기" ? (
             data.data.rule.timeSet ? (
@@ -116,8 +116,8 @@ const PersonalMissionRoomInfo = ({ missionProps }) => {
                 <p>시간설정이 완료되지 않았습니다</p>
               </div>
             )
-          ) : data.locationName ? (
-            <div>
+          ) : data.data.locationName ? (
+            <div className="flex justify-center px-5">
               <SettedHomeMap data={data} onclickSettingBtn={goToPersonalMissionSettingPage} onclickMap={goToExerciseMissionPage}/>
             </div>
           ) : (

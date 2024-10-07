@@ -8,7 +8,6 @@ import PersonalMissionCreatePage from "./pages/PersonalMissionCreatePage";
 import PersonalMissionDetailPage from "./pages/PersonalMissionDetailPage";
 import AccountHistoryPage from "./pages/AccountHistoryPage";
 import CalendarPage from "./pages/CalendarPage";
-import PerformMissionPage from "./pages/PerformMissionPage";
 import TeamMissionCreatePage from "./pages/TeamMissionCreatePage";
 import TeamMissionDetailPage from "./pages/TeamMissionDetailPage";
 import TeamMissionSettingPage from "./pages/TeamMissionSettingPage";
@@ -36,6 +35,7 @@ import { CookiesProvider, useCookies } from "react-cookie";
 import useUserStore from "./store/useUserStore";
 import InviteAcceptPage from "./pages/InviteAcceptPage";
 import useRedirectStore from "./store/useRedirectStore";
+import PersonalExerciseMissionPage from "./pages/PersonalExerciseMissionPage";
 
 
 function App() {
@@ -105,9 +105,9 @@ function App() {
               />
               {/* 미션 수행 페이지 */}
               <Route
-                path="/personalMission/perform"
-                element={<PerformMissionPage />}
-              />
+                path="/personalMission/exercise"
+                element={<PersonalExerciseMissionPage />}
+              />  
               <Route
                 path="/teamMission/create"
                 element={<TeamMissionCreatePage />}
