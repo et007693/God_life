@@ -1,14 +1,17 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../components/Header'
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { acceptInvite } from '../api/inviteApi';
 import { useMutation } from '@tanstack/react-query';
 import useRedirectStore from '../store/useRedirectStore';
+import axiosApi from '../api/axiosApi';
+import axios from 'axios';
 
 const InviteAcceptPage = () => {
   const {teamId} = useParams();
   const navigate = useNavigate();
   const location = useLocation();
+  const [isLoading, setIsLoading] = useState(false);
   const {mutate} = useMutation({
     mutationFn: (teamId)=>acceptInvite(teamId),
     onSuccess: () => {
@@ -16,6 +19,7 @@ const InviteAcceptPage = () => {
     },
   });
   const {setRedirectUrl} = useRedirectStore();
+
   const onClickAcceptBtn = () => {
     mutate(teamId);
   }
@@ -23,13 +27,19 @@ const InviteAcceptPage = () => {
     navigate("/");
   }
   useEffect(()=>{
-    if(localStorage.getItem("accessToken") == null){
+    axiosApi.post("/api/v1/refresh").then((res)=>{
+      console.log(res);
+    })
+    .catch((err)=>{
+      console.log(err);
       localStorage.setItem("redirectUrl",location.pathname);
       navigate("/login");
-    }
+    })
   },[location.pathname])
   return (
     <div className='h-screen flex flex-col justify-items-center items-center'>
+      {isLoading ? <div>Loading...</div> : (
+      <>
       <Header title={'초대 수락'} color={'orange'} goBack={"/"}/>
       <div className='flex flex-col items-center justify-center h-full'>
         <h1 className='text-2xl font-bold'>초대 수락</h1>
@@ -39,6 +49,8 @@ const InviteAcceptPage = () => {
         <button className='bg-orange-500 text-white px-4 py-2 rounded-md' onClick={onClickAcceptBtn}>초대 수락</button>
         <button className='bg-gray-500 text-white px-4 py-2 rounded-md' onClick={onClickRejectBtn}>초대 거절</button>
       </div>
+      </>
+      )}
     </div>
   )
 }

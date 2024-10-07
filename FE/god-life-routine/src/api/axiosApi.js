@@ -14,6 +14,9 @@ axiosApi.interceptors.request.use((config) => {
 
   if (accessToken) {
     config.headers["Authorization"] = `Bearer ${accessToken}`;
+  }else{
+    localStorage.setItem("redirectUrl",window.location.pathname);
+    window.location.href = "/login";
   }
   config.withCredentials = true;
   config.headers["Content-Type"] = "application/json";
@@ -40,13 +43,15 @@ axiosApi.interceptors.response.use(
           useUserStore.getState().setAccessToken(null);
           Cookies.remove("accessToken");
           Cookies.remove("refreshToken");
-          window.location.href = "/login";
+          if (!window.location.pathname.includes("invite")) {
+            localStorage.setItem("redirectUrl", window.location.pathname);
           }
+          window.location.href = "/login";
           // console.log("에러발생했습니다");
       // window.location.href = "/login";
     }
     return Promise.reject(error);
   }
-);
+});
 
 export default axiosApi;
