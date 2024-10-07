@@ -59,7 +59,8 @@ const PersonalMissionRoomInfo = ({ missionProps }) => {
             <div className=" bg-gray-200 rounded-full">
               <div
                 className="bg-yellow-300 h-5 rounded-full"
-                style={{ width: `${data.data.successRate}%` }}
+                // 기본값 : 8% 만큼 찬 상태에서 시작
+                style={{ width: `${data.data.successRate > 8 ? data.data.successRate : 8}%` }}
               >
                 {data.data.successRate}%
               </div>
