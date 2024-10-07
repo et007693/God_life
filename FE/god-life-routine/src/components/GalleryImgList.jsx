@@ -1,13 +1,11 @@
 import React from "react";
 
 const GalleryImgList = ({ data, month }) => {
-  console.log(data);
-
   // 배열로 만들어줌
-  const dataArray = Array.isArray(data) ? data : [data];
+  // const dataArray = Array.isArray(data) ? data : [data];
 
   // 날짜별 그룹화
-  const groupedByDate = dataArray.reduce((groups, item) => {
+  const groupedByDate = data.reduce((groups, item) => {
     const date = item.day;
     if (!groups[date]) {
       groups[date] = [];
@@ -15,24 +13,30 @@ const GalleryImgList = ({ data, month }) => {
     groups[date].push(item);
     return groups;
   }, {});
+  console.log(groupedByDate);
 
   // 최신순 정렬
   const sortedDates = Object.keys(groupedByDate).sort((a, b) => b - a);
 
   return sortedDates.map((date) => (
     <div key={date}>
-      <div className="col-span-3 text-left mt-4 mb-2">
-        {month}월 {date}일
-      </div>
+      {/* 날짜 표시 */}
+      {groupedByDate[date].length > 0 && (
+        <div className="col-span-3 text-left mt-4 mb-2 font-semibold">
+          {month}월 {date}일
+        </div>
+      )}
+
+      {/* 이미지를 3개씩 그리드로 배치 */}
       <div className="grid grid-cols-3 gap-1">
         {groupedByDate[date].map((item, index) => (
-          <div key={index} className="w-32 h-32">
+          <div key={index} className="w-28 h-28 mb-6">
             <img
               src={`data:image/jpeg;base64,${item.picture}`}
               alt={`Day ${item.day}`}
-              className="w-full h-full object-cover" 
+              className="w-full h-full object-cover"
             />
-            <div className="text-sm">{item.memberName}</div>
+            <div className="text-sm text-center">{item.memberName}</div>
           </div>
         ))}
       </div>

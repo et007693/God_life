@@ -12,8 +12,8 @@ const FineList = ({ memberList }) => {
   return (
     <div className="flex flex-col w-full">
       {sortedMemberList.map((member, index) => {
-        // 0~10%면, 다 10% 크기만큼으로 노란색의 넓이 조정
-        const widthPercent = member.totalFinePercent < 10 ? 10 : member.totalFinePercent;
+        // 0~20%면, 다 20% 크기만큼으로 노란색의 넓이 조정
+        const widthPercent = member.totalFinePercent < 20 ? 20 : member.totalFinePercent;
 
         return (
           <div

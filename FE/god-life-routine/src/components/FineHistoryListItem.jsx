@@ -14,8 +14,8 @@ const FineHistoryListItem = ({ item, data }) => {
     setShowModal(false);
   };
 
-  const hour = item.transactionTime.substring(0, 2);
-  const minute = item.transactionTime.substring(2, 4);
+  // const hour = item.transactionTime.substring(0, 2);
+  // const minute = item.transactionTime.substring(2, 4);
 
 
 
@@ -23,8 +23,8 @@ const FineHistoryListItem = ({ item, data }) => {
     <div>
       <div className="flex justify-between items-center pt-3">
         <div className="flex flex-col items-start pl-10">
-          <div className="text-lg font-semibold">{data.teamMissionName}</div>
-          <div className="text-sm text-gray-500">{hour}:{minute}</div>
+          <div className="text-xl font-semibold">{item.rule}</div>
+          {/* <div className="text-sm text-gray-500">{hour}:{minute}</div> */}
         </div>
 
         <div className="flex flex-col items-end pl-14">

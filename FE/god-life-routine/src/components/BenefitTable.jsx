@@ -1,58 +1,47 @@
 import React from "react";
 import BenefitTableItem from "./BenefitTableItem";
 
-const BenefitTable = () => {
+const BenefitTable = ({ data }) => {
+  console.log(data);
   const arr = [
     {
-      term: "30일",
+      term: 30,
       rate: "0.3%",
-      isApplied: "O",
     },
     {
-      term: "60일",
+      term: 60,
       rate: "0.3%",
-      isApplied: "O",
     },
     {
-      term: "90일",
+      term: 90,
       rate: "0.3%",
-      isApplied: "O",
     },{
-      term: "120일",
+      term: 120,
       rate: "0.3%",
-      isApplied: "O",
     },{
-      term: "180일",
+      term: 180,
       rate: "0.3%",
-      isApplied: "O",
     },{
-      term: "210일",
+      term: 210,
       rate: "0.3%",
-      isApplied: "O",
     },{
-      term: "240일",
+      term: 240,
       rate: "0.3%",
-      isApplied: "X",
     },{
-      term: "270일",
+      term: 270,
       rate: "0.3%",
-      isApplied: "X",
     },{
-      term: "300일",
+      term: 300,
       rate: "0.3%",
-      isApplied: "X",
     },{
-      term: "330일",
+      term: 330,
       rate: "0.3%",
-      isApplied: "X",
     },{
-      term: "360일",
+      term: 360,
       rate: "0.3%",
-      isApplied: "X",
     },{
-      term: "365일",
+      term: 365,
       rate: "1%",
-      isApplied: "X",
     },
   ];
   return (
@@ -68,7 +57,7 @@ const BenefitTable = () => {
           </thead>
           <tbody>
             {arr.map((item) => (
-              <BenefitTableItem key={item.term} item={item} />
+              <BenefitTableItem key={item.term} item={item} data={data} />
             ))}
           </tbody>
         </table>
