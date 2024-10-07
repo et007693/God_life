@@ -72,14 +72,11 @@ const GalleryPage = () => {
         </div>
       </div>
       <div className="p-4 pt-20">
-        {data && data.dayList.length > 0 && (
-          <div className="grid grid-cols-3 gap-4">
-            {data.dayList.map((dayItem) => (
+        {/* {data.dayList.map((dayItem) => (
               <GalleryImgList key={dayItem.day} data={dayItem} month={month}/>
-            ))}
-            <div className="w-full" ref={containerRef}></div>
-          </div>
-        )}
+            ))} */}
+        <GalleryImgList data={data.dayList} month={month} />
+        <div className="w-full" ref={containerRef}></div>
       </div>
       {/* {isFetchingNextPage && <div className="text-center">로딩중...</div>} */}
     </div>
