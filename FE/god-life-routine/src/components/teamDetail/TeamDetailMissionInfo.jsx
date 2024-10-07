@@ -30,7 +30,7 @@ const TeamDetailMissionInfo = ({data,goToPhotoMissionPage,goToTeamMissionTimeSet
           )
         ) : (
           <div
-            className="flex relative justify-around bg-gray-100 px-8 py-5 rounded-2xl w-full"
+            className="flex relative justify-around bg-gray-100 py-5 rounded-2xl w-full"
           >
           <SettedHomeMap data={data} onclickSettingBtn={goToTeamMissionLocationSettingPage} onclickMap={goToExerciseMissionPage}/>
           </div>
