@@ -25,7 +25,8 @@ axiosApi.interceptors.response.use(
     return response;
   },
   (error) => {
-    if (error.response && error.response.status === 401 && error.response.data.code === "JWT001") {
+    if (error.response && error.response.status === 401) {
+      console.log(error.response.data);
       if(error.response.data.responseCode === "JWT001"){
       axiosApi.post("/api/v1/refresh").then(async (res) => {
         const newAccessToken = Cookies.get("accessToken");

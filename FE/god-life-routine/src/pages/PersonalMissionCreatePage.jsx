@@ -12,14 +12,13 @@ import { createPersonalRoomSchema } from "../util/formCheckSchema";
 
 const PersonalMissionCreatePage = () => {
   // TODO: api연결 확인
-  const { topic, amount, account, setTopic, setAmount } =
-    useCreatePersonelStore();
+  const {account} = useCreatePersonelStore();
   const navigate = useNavigate();
 
   const { mutate } = useMutation({
     mutationFn: (data) =>
       createPersonalMission({
-        rule: data.selectedTopic,
+        rule: data.rule,
         money: data.money,
         account: data.account,
       }),
@@ -117,7 +116,7 @@ const PersonalMissionCreatePage = () => {
             options={topics}
             {...register("selectedTopic")}
             onChange={(selectedOption) =>
-              setValue("selectedTopic", selectedOption.label)
+              setValue("selectedTopic", selectedOption.value)
             }
             styles={customStyles}
             placeholder="주제를 선택해주세요"
