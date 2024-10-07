@@ -1,8 +1,20 @@
 import React from "react";
 import Header from "../components/Header";
 import BenefitTable from "../components/BenefitTable";
+import { useQuery } from "@tanstack/react-query";
+import { getPersonalAccountDeatailData } from "../api/personalAccountDetailApi";
 
 const PersonalAccountDetailPage = () => {
+
+  const { data, isFetching, isError } = useQuery({
+    queryKey: ["getPersonalAccountDeatailData"],
+    queryFn: getPersonalAccountDeatailData,
+    staleTime: 0,
+  })
+
+  if (isFetching) return <div>Loading...</div>;
+  if (isError) return <div>Error</div>;
+
   return (
     <div>
       <Header title={"나의 미션"} color={"orange"} />
@@ -16,12 +28,12 @@ const PersonalAccountDetailPage = () => {
 
         <div className="flex flex-row justify-between">
           <span className="text-gray-500 ml-4 mt-3">가입일</span>
-          <span className="text-black-500 mr-8 mt-3">2024.01.01</span>
+          <span className="text-black-500 mr-8 mt-3">{data.createdDate}</span>
         </div>
 
         <div className="flex flex-row justify-between">
           <span className="text-gray-500 ml-4 mt-3">만기일</span>
-          <span className="text-black-500 mr-8 mt-3">2025.01.01</span>
+          <span className="text-black-500 mr-8 mt-3">{data.expiredDate}</span>
         </div>
       </div>
 

@@ -4,49 +4,27 @@ import "react-calendar/dist/Calendar.css";
 import Header from "../components/Header";
 import { AiFillSmile, AiFillFrown } from "react-icons/ai";
 import { useParams, useSearchParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { getCalendarData } from "../api/calendarApi";
 
 const CalendarPage = () => {
   const { teamId } = useParams();
   const [date, setDate] = useState(new Date());
-  const [searchParams] = useSearchParams();
-  const type = searchParams.get('type');
 
-  const arr = [
-    {
-      id: 1,
-      date: "2024-10-02",
-      issuccess: "true",
-    },
-    {
-      id: 2,
-      date: "2024-10-03",
-      issuccess: "false",
-    },
-    {
-      id: 3,
-      date: "2024-10-04",
-      issuccess: "true",
-    },
-    {
-      id: 4,
-      date: "2024-10-07",
-      issuccess: "true",
-    },{
-      id: 5,
-      date: "2024-10-08",
-      issuccess: "true",
-    },
-    {
-      id: 6,
-      date: "2024-10-09",
-      issuccess: "false",
-    },
-    {
-      id: 7,
-      date: "2024-10-10",
-      issuccess: "true",
-    },
-  ];
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+
+  const [searchParams] = useSearchParams();
+  const type = searchParams.get("type");
+
+  const { data, isFetching, isError } = useQuery({
+    queryKey: ["getCalendarData"],
+    queryFn: () => getCalendarData(teamId, year, month),
+    staleTime: 0,
+  });
+
+  if (isFetching) return <div>Loading...</div>;
+  if (isError) return <div>Error</div>;
 
   // 주말 확인 함수
   const isWeekend = (date) => {
@@ -57,28 +35,34 @@ const CalendarPage = () => {
 
   // 성공 여부 확인
   const isSuccessDate = (date) => {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0"); // 월 추출 (0부터 시작하므로 +1 필요)
-    const day = String(date.getDate()).padStart(2, "0");        // 일 추출
-    const formattedDate = `${year}-${month}-${day}`;            // YYYY-MM-DD 형식으로 결합
+    const day = date.getDate();
+    if (year === date.getFullYear() && month === date.getMonth() + 1) {
+      const found = data.dayList.find((d) => d.day === day); 
 
-    const found = arr.find((d) => d.date === formattedDate);
-
-    if (found) {
-      return found.issuccess === "true"
-      ? <AiFillSmile style={{ fontSize: "30px",
-        color: "orange",
-        position: "absolute",
-        bottom: "5px", }} />
-      : <AiFillFrown style={{ fontSize: "30px",
-        color: "red",
-        position: "absolute",
-        bottom: "5px", }} />;
+      if (found) {
+        return found.completed ? (
+          <AiFillSmile
+            style={{
+              fontSize: "30px",
+              color: "orange",
+              position: "absolute",
+              bottom: "5px",
+            }}
+          />
+        ) : (
+          <AiFillFrown
+            style={{
+              fontSize: "30px",
+              color: "red",
+              position: "absolute",
+              bottom: "5px",
+            }}
+          />
+        );
+      }
     }
     return null;
   };
-
-  
 
   return (
     <div>

@@ -20,12 +20,12 @@ const FineList = ({ memberList }) => {
             key={member.id}
             className="flex flex-row items-center mb-2 w-full"
           >
-            <div className="flex flex-col items-center text-center relative mt-3">
+            <div className="flex flex-col items-center text-center relative mt-4">
               {index === 0 && (
                 <img
                   src={crown}
                   alt="왕관"
-                  className="absolute -top-12 -left-9"
+                  className="absolute -top-11 -left-7"
                 />
               )}
               <CrownList member={member} />
@@ -42,11 +42,11 @@ const FineList = ({ memberList }) => {
               className="w-full bg-yellow-200 rounded-full flex items-center justify-center"
               style={{ width: `${widthPercent}%` }}
             >
-              {member.totalFine}
+              {member.totalFine}원
             </div>
 
             {/* 납부한 벌금 비율 */}
-            <div className="ml-2">{member.totalFinePercent}</div>
+            <div className="ml-2 text-sm whitespace-nowrap">{member.totalFinePercent}%</div>
           </div>
         );
       })}
