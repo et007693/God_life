@@ -65,7 +65,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (cookies.accessToken != null) {
+    if (cookies.accessToken != null && cookies.accessToken != "undefined") {
       localStorage.setItem("accessToken", cookies.accessToken);
     }
   }, [cookies.accessToken]);
