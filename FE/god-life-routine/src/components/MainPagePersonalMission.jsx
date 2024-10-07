@@ -13,7 +13,7 @@ const MainPagePersonalMission = ({data, navigate, goToPersonalMissionCreate}) =>
               <TodoItem
                 key={mission.roomId}
                 id={mission.roomId}
-                isDOne={mission.completed}
+                isDone={mission.completed}
                 title={mission.rule}
                 onclick={() => {
                   navigate("/personalMission");

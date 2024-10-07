@@ -16,6 +16,9 @@ const PersonalMissionRoomInfo = ({ missionProps }) => {
   const goToExerciseMissionPage = () => {
     navigate("/personalMission/exercise",{state:{lat:data.data.lat,lng:data.data.lng}});
   };
+  const goToSetTimePage = () => {
+    navigate("/personalMission/time/setting");
+  }
 
   return (
     <div>
