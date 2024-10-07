@@ -2,6 +2,7 @@ import React from "react";
 import Avatar from "./Avatar";
 import SettedHomeMap from "./SettedHomeMap";
 import { useNavigate } from "react-router-dom";
+import SettedTime from "./SettedTime";
 
 const PersonalMissionRoomInfo = ({ missionProps }) => {
   const {
@@ -10,21 +11,26 @@ const PersonalMissionRoomInfo = ({ missionProps }) => {
     goToPersonalAccountDetail,
     goToPersonalMissionSettingPage,
   } = missionProps;
-  console.log(data)
-  // console.log(missionProps)
+
   const navigate = useNavigate();
   const goToExerciseMissionPage = () => {
     navigate("/personalMission/exercise",{state:{lat:data.data.lat,lng:data.data.lng}});
   };
+
   const goToSetTimePage = () => {
     navigate("/personalMission/time/setting");
+  }
+
+  // TODO: 기상 미션 페이지 만들고 연결
+  const goToPhotoMissionPage = () => {
+    navigate(`/personalMission`);
   }
 
   return (
     <div>
       <div className="flex flex-col items-center pt-24">
         <div>
-          <Avatar member={data.data} />
+          <Avatar member={data} />
         </div>
         <div className="text-xl font-bold pt-2">{data.data.nickname}</div>
         <div className="text-sm text-gray-400 ">{data.data.accountBank} {data.data.accountNumber}</div>
@@ -61,8 +67,7 @@ const PersonalMissionRoomInfo = ({ missionProps }) => {
             <div className=" bg-gray-200 rounded-full">
               <div
                 className="bg-yellow-300 h-5 rounded-full"
-                // 기본값 : 8% 만큼 찬 상태에서 시작
-                style={{ width: `${data.data.successRate > 8 ? data.data.successRate : 8}%` }}
+                style={{ width: `${data.data.successRate}%` }}
               >
                 {data.data.successRate}%
               </div>
@@ -88,6 +93,7 @@ const PersonalMissionRoomInfo = ({ missionProps }) => {
               </div>
             </div>
 
+            {/* TODO: 계좌상세 API 연결 */}
             <div className="pr-5">
               <button
                 onClick={goToPersonalAccountDetail}
@@ -101,32 +107,30 @@ const PersonalMissionRoomInfo = ({ missionProps }) => {
       </div>
 
       <div className="text-left pt-8 pl-10 font-bold text-xl">
-        {data.data.rule === "일찍 일어나기" ? "일찍 일어나기" : "운동하기"}
+        {data.data.rule}
       </div>
-      <div className="pt-3">
+      <div className="text-xm text-gray-400 text-left w-full pl-10">
+        평일에만 미션이 주어집니다.
+      </div>
         <div
-          onClick={goToPersonalMissionSettingPage}
-          className="bg-gray-200 mx-10 py-5  rounded-3xl mb-16"
+          className="bg-gray-100 mt-3 mx-10 py-3 pt-1 rounded-3xl mb-16"
         >
           {data.data.rule === "일찍 일어나기" ? (
-            data.data.rule.timeSet ? (
-              <div className="text-2xl font-bold text-center">
-                {data.data.rule.ruleTime}
-              </div>
-            ) : (
-              <div onClick={(e) => { e.stopPropagation(); goToSetTimePage(); }}>
-                <p>시간설정이 완료되지 않았습니다</p>
-              </div>
-            )
-          ) : data.data.locationName ? (
-            <div className="flex justify-center px-5">
+            <div
+              className="px-4 py-5"
+            >
+              <SettedTime data={data} onclickSettingBtn={goToSetTimePage} onclickTime={goToPhotoMissionPage}/>
+            </div>
+          ):(
+            <div
+              className="flex relative justify-around bg-gray-100 py-5 rounded-2xl w-full"
+            >
               <SettedHomeMap data={data} onclickSettingBtn={goToPersonalMissionSettingPage} onclickMap={goToExerciseMissionPage}/>
             </div>
-          ) : (
-            "아직 집 위치 설정이 되지 않았습니다."
-          )}
+
+          )
+         }
         </div>
-      </div>
     </div>
   );
 };

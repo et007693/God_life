@@ -33,19 +33,22 @@ export default function MyPicker() {
     const uri = roomType === "team" ? `/teamMission/${roomNumber}` : `/personalMission`
     navigate(uri);
   }
-// mutate를 updateTeamMissionRule라는 이름으로 호출
+
   const { mutate: updateMissionSetting } = useMutation({
     mutationFn: (ruleData) => location.pathname.includes('team') ? updateTeamMissionRule(teamId, ruleData) : updatePersonalMission(ruleData),
     onSuccess: onNavigateNextPage
+
   });
 
   const onClickConfirmBtn = useCallback(async () => {
     await updateMissionSetting({
       meridiem: pickerValue.meridiem,
-      time:  pickerValue.hour + ":" + pickerValue.minute,
+      time: `${pickerValue.hour.toString().padStart(2, '0')}:${pickerValue.minute.toString().padStart(2, '0')}`,
     });
   },[roomType, pickerValue,rule]);
   const formattedTime = `${pickerValue.meridiem} ${pickerValue.hour}시 ${pickerValue.minute}분`;
+  
+  
 
   return (
     <div>

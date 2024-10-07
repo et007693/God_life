@@ -4,12 +4,12 @@ import { usePersonalMissionDetail } from "../hooks/usePersonalMissionDetail";
 import PersonalMissionRoomInfo from "../components/PersonalMissionRoomInfo";
 
 const PersonalMissionDetailPage = () => {
-  const { data, isFetching, isError, user, goToPersonalAccountDetail, goToPersonalMissionSettingPage } = usePersonalMissionDetail();
+  const { data, isFetching, isError, user, goToPersonalAccountDetail, goToPersonalLocationSettingPage } = usePersonalMissionDetail();
   const missionProps = {
     data,
     user,
     goToPersonalAccountDetail,
-    goToPersonalMissionSettingPage,
+    goToPersonalLocationSettingPage,
   }
   if (user === null || isFetching) return <div>Loading...</div>;
   if (isError) return <div>Error</div>;

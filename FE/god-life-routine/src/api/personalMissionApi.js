@@ -25,13 +25,11 @@ export const getPersonalMissionData = async () => {
 export const updatePersonalMission = async (rule) => {
   console.log();
   const data = {
-    rule: {
       ...rule,
-      ruleSetted: true,
-    },
-  };
+    };
+  console.log(data)
   const response = axiosApi
-    .patch(`/api/v1/personal`, data)
+    .post(`/api/v1/personal/time`, data)
     .then((response) => response.data);
   return response;
 };
