@@ -63,7 +63,7 @@ const TransferPage = () => {
       </div>
 
       <div className="text-left pl-10 pt-10 flex flex-wrap">
-        <span className="text-2xl font-bold">
+        <span className="text-2xl font-bold mr-1">
           {transferData.withdrawalAccountBankName}
         </span>
       
