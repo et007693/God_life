@@ -10,8 +10,7 @@ const SettedHomeMap = ({ data, onclickSettingBtn, onclickMap }) => {
         e.stopPropagation();
       }}
     >
-      <div className="flex justify-around items-center pb-5 w-full">
-        {" "}
+      <div className="flex justify-between items-center mb-4 w-full">
         <h3 className="text-md text-gray-600 font-semibold">설정된 집 위치</h3>
         <button
           className="flex items-center justify-center text-xl"

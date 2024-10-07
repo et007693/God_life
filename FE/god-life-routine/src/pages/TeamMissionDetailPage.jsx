@@ -60,7 +60,7 @@ const TeamMissionDetailPage = () => {
         />
       )}
 
-      <div className="flex flex-col items-center px-10 py-5">
+      <div className="flex flex-col items-center px-10 py-5 mb-16">
         <TeamDetailRoomInfo data={data} navigate={navigate} teamId={teamId} goToCalculateTeamPage={goToCalculateTeamPage} handleShareKakaoBtn={handleShareKakaoBtn}/>
         <TeamDetailMissionInfo data={data} goToPhotoMissionPage={goToPhotoMissionPage} goToTeamMissionTimeSettingPage={goToTeamMissionTimeSettingPage} goToTeamMissionLocationSettingPage={goToTeamMissionLocationSettingPage} goToExerciseMissionPage={goToExerciseMissionPage}/>
       </div>

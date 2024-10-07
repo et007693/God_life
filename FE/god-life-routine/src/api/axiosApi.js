@@ -26,20 +26,22 @@ axiosApi.interceptors.response.use(
   },
   (error) => {
     if (error.response && error.response.status === 401 && error.response.data.code === "JWT001") {
+      if(error.response.data.responseCode === "JWT001"){
       axiosApi.post("/api/v1/refresh").then(async (res) => {
         const newAccessToken = Cookies.get("accessToken");
         localStorage.setItem("accessToken", newAccessToken);
         const newRes = await axiosApi.request(error.config);
         return newRes.data;
-      });
-    if(error.response && error.response.status === 400){
-      console.log(error.response);
-      useUserStore.getState().setAccessToken(null);
-      Cookies.remove("accessToken");
-      Cookies.remove("refreshToken");
-      window.location.href = "/login";
+      })
       }
-      // console.log("에러발생했습니다");
+      else if(error.response.data.responseCode === "JWT002"){
+          console.log(error.response);
+          useUserStore.getState().setAccessToken(null);
+          Cookies.remove("accessToken");
+          Cookies.remove("refreshToken");
+          window.location.href = "/login";
+          }
+          // console.log("에러발생했습니다");
       // window.location.href = "/login";
     }
     return Promise.reject(error);
