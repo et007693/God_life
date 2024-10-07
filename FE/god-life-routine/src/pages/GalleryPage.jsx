@@ -60,23 +60,26 @@ const GalleryPage = () => {
 
   return (
     <div>
-      <div className="flex bg-white bg-opacity-50 fixed w-full justify-end items-center px-4 py-2">
-        {/* <Header goBack={type === 'team' ? `/teamMission/${teamId}/` : `/personalMission/`}></Header> */}
-        <div className="text-center">
-          <p className="text-sm font-semibold mb-2">이달의 성공률</p>
-          <div className="bg-white shadow-md rounded-lg p-2">
-            <span className="text-xl font-bold text-orange-500">
-              {data.successRate}%
-            </span>
+      <Header title={"갤러리"} backgroundcolor={"orange"} color={"white"} />
+      <div className="mt-16">
+        <div className="flex bg-white bg-opacity-50 fixed w-full justify-end items-center px-4 py-2">
+          {/* <Header goBack={type === 'team' ? `/teamMission/${teamId}/` : `/personalMission/`}></Header> */}
+          <div className="text-center">
+            <p className="text-sm font-semibold mb-2">이달의 성공률</p>
+            <div className="bg-white shadow-md rounded-lg p-2">
+              <span className="text-xl font-bold text-orange-500">
+                {data.successRate}%
+              </span>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="p-4 pt-20">
-        {/* {data.dayList.map((dayItem) => (
+        <div className="p-4 pt-20">
+          {/* {data.dayList.map((dayItem) => (
               <GalleryImgList key={dayItem.day} data={dayItem} month={month}/>
             ))} */}
-        <GalleryImgList data={data.dayList} month={month} />
-        <div className="w-full" ref={containerRef}></div>
+          <GalleryImgList data={data.dayList} month={month} />
+          <div className="w-full" ref={containerRef}></div>
+        </div>
       </div>
       {/* {isFetchingNextPage && <div className="text-center">로딩중...</div>} */}
     </div>

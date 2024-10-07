@@ -33,7 +33,7 @@ const AccountHistoryPage = () => {
   return (
     <div>
       <Header title={"거래내역"} color={"orange"} />
-      <div className="mt-16 text-lg text-orange-300 font-semibold">{data.roomName}</div>
+      <div className="mt-16 text-xl text-orange-400 font-semibold">{data.roomName}</div>
       
       {/* <div className="relative flex justify-start pl-5"> */}
         {/* <button

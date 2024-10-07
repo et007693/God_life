@@ -126,12 +126,12 @@ const CalendarPage = () => {
               z-index: -1;
             }
 
-            /* 선택된 날짜 (회색 원) */
-            .react-calendar__tile--active {
-              background-color: transparent !important;
-              position: relative;
-              color: black;
-            }
+            // /* 선택된 날짜 (회색 원) */
+            // .react-calendar__tile--active {
+            //   background-color: transparent !important;
+            //   position: relative;
+            //   color: black;
+            // }
 
             /* 주말인 경우는 빨간색으로 유지 */
             .react-calendar__tile--active abbr[data-weekend="true"] {
@@ -143,37 +143,37 @@ const CalendarPage = () => {
               color: black !important;
             }
 
-            /* 선택된 날짜 숫자 */
-            .react-calendar__tile--active abbr {
-              position: relative;
-              z-index: 1;
-              line-height: 30px;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              height: 30px; /* 원 안의 숫자 중앙 배치 */
-              width: 30px; /* 원 안의 숫자 크기 */
-            }
+            // /* 선택된 날짜 숫자 */
+            // .react-calendar__tile--active abbr {
+            //   position: relative;
+            //   z-index: 1;
+            //   line-height: 30px;
+            //   display: flex;
+            //   justify-content: center;
+            //   align-items: center;
+            //   height: 30px; /* 원 안의 숫자 중앙 배치 */
+            //   width: 30px; /* 원 안의 숫자 크기 */
+            // }
 
-            /* 선택된 날짜 배경 */
-            .react-calendar__tile--active abbr::before {
-              content: "";
-              position: absolute;
-              top: 50%;
-              left: 50%;
-              transform: translate(-50%, -50%);
-              width: 30px;
-              height: 30px;
-              background-color: lightgray; /* 선택된 날짜 회색 원 */
-              border-radius: 50%;
-              z-index: -1;
-            }
+            // /* 선택된 날짜 배경 */
+            // .react-calendar__tile--active abbr::before {
+            //   content: "";
+            //   position: absolute;
+            //   top: 50%;
+            //   left: 50%;
+            //   transform: translate(-50%, -50%);
+            //   width: 30px;
+            //   height: 30px;
+            //   background-color: lightgray; /* 선택된 날짜 회색 원 */
+            //   border-radius: 50%;
+            //   z-index: -1;
+            // }
 
-            /* 오늘 날짜가 선택된 경우 회색 대신 하늘색으로 표시 */
-            .react-calendar__tile--active.react-calendar__tile--now
-              abbr::before {
-              background-color: lightblue !important; /* 오늘 날짜가 선택된 경우에도 하늘색 원 유지 */
-            }
+            // /* 오늘 날짜가 선택된 경우 회색 대신 하늘색으로 표시 */
+            // .react-calendar__tile--active.react-calendar__tile--now
+            //   abbr::before {
+            //   background-color: lightblue !important; /* 오늘 날짜가 선택된 경우에도 하늘색 원 유지 */
+            // }
           `}</style>
 
           <Calendar
@@ -207,9 +207,9 @@ const CalendarPage = () => {
             )}
           />
 
-          <p className="text-center text-lg">
+          {/* <p className="text-center text-lg">
             선택한 날짜: {date.toDateString()}
-          </p>
+          </p> */}
         </div>
       </div>
     </div>

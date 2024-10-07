@@ -30,7 +30,7 @@ const GalleryImgList = ({ data, month }) => {
       {/* 이미지를 3개씩 그리드로 배치 */}
       <div className="grid grid-cols-3 gap-1">
         {groupedByDate[date].map((item, index) => (
-          <div key={index} className="w-28 h-28 object-cover">
+          <div key={index} className="w-28 h-28 mb-6">
             <img
               src={`data:image/jpeg;base64,${item.picture}`}
               alt={`Day ${item.day}`}

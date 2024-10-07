@@ -22,15 +22,14 @@ const PersonalMissionRoomInfo = ({ missionProps }) => {
 
   return (
     <div>
-      
       <div className="flex flex-col items-center pt-24">
         <div>
-          <Avatar member={user} />
+          <Avatar member={data.data} />
         </div>
-        <div className="text-xl font-bold">{data.data.nickname}</div>
-        <div className="text-sm text-gray-400 mt-1">{data.data.mainAccountNo}</div>
+        <div className="text-xl font-bold pt-2">{data.data.nickname}</div>
+        <div className="text-sm text-gray-400 ">{data.data.accountBank} {data.data.accountNumber}</div>
 
-        <div className="border rounded-xl mt-6 shadow-md text-center text-sm">
+        <div className="border rounded-xl mt-4 shadow-md text-center text-sm">
           <div className="px-10 py-4">
             매일 미션을 성공하면 우대금리를 드려요!
           </div>
