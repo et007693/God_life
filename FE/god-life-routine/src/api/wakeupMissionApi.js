@@ -1,8 +1,12 @@
 import axios from "axios";
 import axiosApi from "./axiosApi";
 
-export const getPhotoMission = async () => {
-  const response = await axios.get(`http://localhost:8000/api/v1/mission/object/`);
+const baseUrl =  import.meta.env.DEV
+? "http://localhost:8000"
+: "https://j11a503.p.ssafy.io";
+
+export const getPhotoMission = async () => {  
+  const response = await axios.get(`${baseUrl}/ai/v1/mission/object/`);
   console.log(response.data);
   return response.data;
 }
@@ -12,7 +16,7 @@ export const uploadMissionImg = async (file) => {
   formData.append("file", file);
   
   //  TODO: 나중에 URL변경 필요
-  const response = await axios.post("http://localhost:8000/api/v1/mission/object/", formData, {
+  const response = await axios.post(`${baseUrl}/api/v1/mission/object/`, formData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
