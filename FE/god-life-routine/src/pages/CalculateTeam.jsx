@@ -37,14 +37,13 @@ const CalculateTeam = () => {
             <h1 className="text-xl mt-4 font-bold mb-2">{data.teamName}</h1>
             <span className="text-4xl text-orange-500 mt-4"><b>{data.fineGathered}</b></span>원
           </div>
-          <div className="bg-gray-100 m-4 mt-6 p-5">
+          <div className="bg-gray-100 m-2 mt-4 p-5">
             <p><b>{data.memberName}</b>님이 받을 수 있는 금액은</p>
             <p><b className="text-3xl">{Math.round(data.fineGathered / data.memberList.length)}</b> 원 입니다.</p>
           </div>
         </div>
         {/* 벌금 집계 */}
-        <div className="flex flex-col items-center gap-5 w-full mt-5">
-          
+        <div className="flex w-full mt-5">
           <FineList memberList={data.memberList}/>
         </div>
     </div>
