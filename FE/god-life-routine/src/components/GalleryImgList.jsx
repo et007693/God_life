@@ -22,7 +22,7 @@ const GalleryImgList = ({ data, month }) => {
     <div key={date}>
       {/* 날짜 표시 */}
       {groupedByDate[date].length > 0 && (
-        <div className="col-span-3 text-left mt-4 mb-2">
+        <div className="col-span-3 text-left mt-4 mb-2 font-semibold">
           {month}월 {date}일
         </div>
       )}

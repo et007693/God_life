@@ -42,7 +42,7 @@ const PersonalAccountDetailPage = () => {
         <div className="border-b border-gray-400 mt-3 mr-5 mb-2"></div>
       </div>
       
-      <BenefitTable />
+      <BenefitTable data={data} />
     </div>
     
   );
