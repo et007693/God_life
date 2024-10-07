@@ -23,7 +23,7 @@ const MainPage = () => {
   if (isError) return <Navigate to={"/login"} />;
 
   return (
-    <div>
+    <div className="mb-16">
       <MainPageHeader
         formatDate={formatDate}
         profileImageSrc={{ profileImage: data.profileImage }}

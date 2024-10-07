@@ -1,9 +1,7 @@
 import axios from "axios";
 import axiosApi from "./axiosApi";
 
-const baseUrl =  import.meta.env.DEV
-? "http://localhost:8000"
-: "https://j11a503.p.ssafy.io";
+const baseUrl = "https://j11a503.p.ssafy.io";
 
 export const getPhotoMission = async () => {  
   const response = await axios.get(`${baseUrl}/ai/v1/mission/object/`);

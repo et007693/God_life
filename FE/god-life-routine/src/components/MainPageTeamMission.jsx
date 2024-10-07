@@ -22,14 +22,16 @@ const MainPageTeamMission = ({ data, navigate, goToTeamMissionCreate }) => {
           <></>
         )}
       </ul>
-      <div className="m-3 mt-8">
-        <button
+      {data.teamRoomList.length < 4 && (
+        <div className="m-3 mt-8">
+          <button
           onClick={goToTeamMissionCreate}
           className="bg-gray-200 hover:bg-gray-300 text-black font-bold py-1 px-2 rounded"
         >
           +
         </button>
       </div>
+      )}
     </div>
   );
 };
