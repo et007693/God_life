@@ -9,7 +9,6 @@ export const createTeamRoom = async (roomSetting) => {
 
 export const getTeamMissionDetail = async (teamId) => {
   const response = await axiosApi.get(`/api/v1/group/${teamId}`,);
-  
   return response.data;
 };
 

@@ -11,10 +11,13 @@ const PersonalMissionRoomInfo = ({ missionProps }) => {
     goToPersonalAccountDetail,
     goToPersonalMissionSettingPage,
   } = missionProps;
-
+  console.log(data);
+  // console.log(missionProps)
   const navigate = useNavigate();
   const goToExerciseMissionPage = () => {
-    navigate("/personalMission/exercise",{state:{lat:data.data.lat,lng:data.data.lng}});
+    navigate("/personalMission/exercise", {
+      state: { lat: data.data.lat, lng: data.data.lng },
+    });
   };
 
   const goToSetTimePage = () => {
@@ -33,7 +36,9 @@ const PersonalMissionRoomInfo = ({ missionProps }) => {
           <Avatar member={data} />
         </div>
         <div className="text-xl font-bold pt-2">{data.data.nickname}</div>
-        <div className="text-sm text-gray-400 ">{data.data.accountBank} {data.data.accountNumber}</div>
+        <div className="text-sm text-gray-400 ">
+          {data.data.accountBank} {data.data.accountNumber}
+        </div>
 
         <div className="border rounded-xl mt-4 shadow-md text-center text-sm">
           <div className="px-10 py-4">
@@ -41,17 +46,28 @@ const PersonalMissionRoomInfo = ({ missionProps }) => {
           </div>
           <div className="flex flex-row justify-between pt-4">
             <div className="text-gray-400 pl-5">남은 기간</div>
-            <div className="font-bold text-lg pr-5">{data.data.remainingDate}일</div>
+            <div className="font-bold text-lg pr-5">
+              {data.data.remainingDate}일
+            </div>
           </div>
           <div className="px-4 py-3">
             <div className=" bg-gray-200 rounded-full">
               <div
                 className="bg-yellow-300 h-5 rounded-full text-center text-sm flex items-center justify-center"
                 style={{
-                  width: `${(data.data.runningDate / data.data.remainingDate) * 100}%`,
+                  // 노란색 넓이 12 이하이면 12만큼 표시
+                  width: `${
+                    100 -
+                      (data.data.remainingDate / data.data.runningDate) * 100 <
+                    12
+                      ? 12
+                      : 100 -
+                        (data.data.remainingDate / data.data.runningDate) * 100
+                  }%`,
                 }}
               >
-                {data.data.runningDate}일
+                {/* {data.data.runningDate}일 */}
+                {`${Math.round(100 - (data.data.remainingDate / data.data.runningDate) * 100)}%`}
               </div>
             </div>
           </div>
@@ -60,14 +76,21 @@ const PersonalMissionRoomInfo = ({ missionProps }) => {
 
           <div className="flex flex-row justify-between pt-4">
             <div className="text-gray-400 pl-5">성공률</div>
-            <div className="font-bold text-lg pr-5">{data.data.successRate}%</div>
+            <div className="font-bold text-lg pr-5">
+              {data.data.successRate}%
+            </div>
           </div>
 
           <div className="px-4 py-3">
             <div className=" bg-gray-200 rounded-full">
               <div
                 className="bg-yellow-300 h-5 rounded-full"
-                style={{ width: `${data.data.successRate}%` }}
+                // 기본값 : 8% 만큼 찬 상태에서 시작
+                style={{
+                  width: `${
+                    data.data.successRate > 8 ? data.data.successRate : 8
+                  }%`,
+                }}
               >
                 {data.data.successRate}%
               </div>
@@ -116,16 +139,27 @@ const PersonalMissionRoomInfo = ({ missionProps }) => {
           className="bg-gray-100 mt-3 mx-10 py-3 pt-1 rounded-3xl mb-16"
         >
           {data.data.rule === "일찍 일어나기" ? (
-            <div
-              className="px-4 py-5"
-            >
-              <SettedTime data={data} onclickSettingBtn={goToSetTimePage} onclickTime={goToPhotoMissionPage}/>
-            </div>
-          ):(
-            <div
-              className="flex relative justify-around bg-gray-100 py-5 rounded-2xl w-full"
-            >
-              <SettedHomeMap data={data} onclickSettingBtn={goToPersonalMissionSettingPage} onclickMap={goToExerciseMissionPage}/>
+            data.data.rule.timeSet ? (
+              <div className="text-2xl font-bold text-center">
+                {data.data.rule.ruleTime}
+              </div>
+            ) : (
+              <div
+                onClick={(e) => {
+                  e.stopPropagation();
+                  goToSetTimePage();
+                }}
+              >
+                <p>시간설정이 완료되지 않았습니다</p>
+              </div>
+            )
+          ) : data.data.locationName ? (
+            <div className="flex justify-center px-5">
+              <SettedHomeMap
+                data={data}
+                onclickSettingBtn={goToPersonalMissionSettingPage}
+                onclickMap={goToExerciseMissionPage}
+              />
             </div>
 
           )
