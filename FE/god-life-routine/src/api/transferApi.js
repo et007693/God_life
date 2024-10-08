@@ -15,3 +15,12 @@ export const getTransferPageData = async (teamId) => {
   console.log(response.data.data);
   return response.data.data;
 };
+
+
+// 밀린 벌금 받아오기
+export const getTransferFineData = async (teamId) => {
+  // console.log("teamId", teamId);
+  const response = await axiosApi.get(`/api/v1/group/${teamId}`,);
+  // console.log("대답", response.data.data);
+  return response.data.data;
+};

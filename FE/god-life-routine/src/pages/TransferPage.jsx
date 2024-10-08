@@ -5,19 +5,24 @@ import Header from "../components/Header";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { sendFineMoney } from "../api/transferApi";
+import { getTransferFineData, sendFineMoney } from "../api/transferApi";
 import { getTransferPageData } from "../api/transferApi";
-import { getTeamMissionDetail } from "../api/teamMissionApi";
 
 const TransferPage = () => {
   const { teamId } = useParams();
   const [sendMoney, setSendMoney] = useState("");
-  const [errorMessage, setErrorMessage] = useState(""); 
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
-  const { data: teamMissinDetailData } = useQuery({
-    queryKey: ["teamMissionDetail", teamId],
-    queryFn: () => getTeamMissionDetail(teamId),
+  
+  // 밀린벌금데이터 불러오기
+  const {
+    data: transferFineData,
+    isFetching: isFineFetching,
+    isError: isFineError,
+  } = useQuery({
+    queryKey: ["getTransferFineData"],
+    queryFn: () => getTransferFineData(teamId),
     staleTime: 0,
   });
 
@@ -53,28 +58,36 @@ const TransferPage = () => {
   //   console.log(transferData);
   // }, [transferData]);
 
-  useEffect(() => {
-    console.log(teamMissinDetailData);
-  }, [teamMissinDetailData]);
+  // useEffect(() => {
+  //   if (transferFineData && transferFineData.delayedFine !== undefined) {
+  //     console.log("팀미션디테일조회", transferFineData.delayedFine);
+  //   } else {
+  //     console.log("transferFineData가 아직 로드되지 않았습니다.");
+  //   }
+  // }, [transferFineData]);
+  
 
   const handleInputChange = (e) => {
     const inputValue = e.target.value;
 
     // 벌금이 지연된 금액을 초과하는지 확인
-    if (inputValue > teamMissinDetailData.data.delayedFine) {
+    if (transferFineData && inputValue > transferFineData.delayedFine) {
       setErrorMessage("금액을 초과했습니다.");
     } else {
-      setErrorMessage(""); // 오류 메시지 초기화
+      setErrorMessage("");
     }
-
     setSendMoney(inputValue);
   };
 
   // 금액 초과하면 확인 버튼 비활성화
-  const isDisabled = sendMoney > teamMissinDetailData.data.delayedFine;
+  // const isDisabled = sendMoney > transferFineData.delayedFine;
+  const isDisabled = transferFineData
+    ? sendMoney > transferFineData.delayedFine
+    : true;
 
-  if (isFetching || isGetFetching) return <div>Loading...</div>;
-  if (isError || isGetError) return <div>Error</div>;
+  if (isFetching || isGetFetching || isFineFetching)
+    return <div>Loading...</div>;
+  if (isError || isGetError || isFineError) return <div>Error</div>;
 
   return (
     <div className="mt-16">
