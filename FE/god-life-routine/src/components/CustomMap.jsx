@@ -24,6 +24,7 @@ const CustomMap = () => {
         className='w-full h-full'
         level={3}
         onClick={onMapClick}
+        draggable={false}
       >
         <MapMarker position={position ?? center }>
           {position &&
