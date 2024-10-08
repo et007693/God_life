@@ -7,11 +7,19 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { sendFineMoney } from "../api/transferApi";
 import { getTransferPageData } from "../api/transferApi";
+import { getTeamMissionDetail } from "../api/teamMissionApi";
 
 const TransferPage = () => {
   const { teamId } = useParams();
   const [sendMoney, setSendMoney] = useState("");
+  const [errorMessage, setErrorMessage] = useState(""); 
   const navigate = useNavigate();
+
+  const { data: teamMissinDetailData } = useQuery({
+    queryKey: ["teamMissionDetail", teamId],
+    queryFn: () => getTeamMissionDetail(teamId),
+    staleTime: 0,
+  });
 
   const goToTransferSuccess = (data) => {
     navigate("/transferSuccess", {
@@ -41,9 +49,29 @@ const TransferPage = () => {
     staleTime: 0,
   });
 
+  // useEffect(() => {
+  //   console.log(transferData);
+  // }, [transferData]);
+
   useEffect(() => {
-    console.log(transferData);
-  }, [transferData]);
+    console.log(teamMissinDetailData);
+  }, [teamMissinDetailData]);
+
+  const handleInputChange = (e) => {
+    const inputValue = e.target.value;
+
+    // 벌금이 지연된 금액을 초과하는지 확인
+    if (inputValue > teamMissinDetailData.data.delayedFine) {
+      setErrorMessage("금액을 초과했습니다.");
+    } else {
+      setErrorMessage(""); // 오류 메시지 초기화
+    }
+
+    setSendMoney(inputValue);
+  };
+
+  // 금액 초과하면 확인 버튼 비활성화
+  const isDisabled = sendMoney > teamMissinDetailData.data.delayedFine;
 
   if (isFetching || isGetFetching) return <div>Loading...</div>;
   if (isError || isGetError) return <div>Error</div>;
@@ -66,7 +94,7 @@ const TransferPage = () => {
         <span className="text-2xl font-bold mr-2">
           {transferData.withdrawalAccountBankName}
         </span>
-      
+
         <span className="text-lg pl-0 text-gray-500">팀에게</span>
       </div>
 
@@ -86,21 +114,32 @@ const TransferPage = () => {
         <input
           type="number"
           value={sendMoney}
-          onChange={(e) => setSendMoney(e.target.value)}
+          // onChange={(e) => setSendMoney(e.target.value)}
+          onChange={handleInputChange}
           placeholder="벌금을 입력해주세요"
-          className="w-full p-2 pr-12 border-b border-gray-300 focus:border-orange-400 focus:outline-none transition-colors mb-16"
+          className="w-full p-2 pr-12 border-b border-gray-300 focus:border-orange-400 focus:outline-none transition-colors mb-2"
         />
         <span className="absolute right-0 top-2 text-gray-500 pt-3 pr-7">
           (원)
         </span>
+        {errorMessage && (
+          <div className="text-red-500 text-sm text-left pt-1">
+            {errorMessage}
+          </div>
+        )}
       </div>
 
       <div className="pt-60">
         <button
           onClick={() => {
-            mutate({ teamId, money: sendMoney });
+            if (!isDisabled) {
+              mutate({ teamId, money: sendMoney });
+            }
           }}
-          className="bg-orange-400 text-white px-10 py-3 rounded-lg text-xl"
+          className={`px-10 py-3 rounded-lg text-xl ${
+            isDisabled ? "bg-gray-300" : "bg-orange-400"
+          } text-white`}
+          disabled={isDisabled}
         >
           확인
         </button>
