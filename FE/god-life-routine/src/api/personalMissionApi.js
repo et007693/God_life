@@ -2,9 +2,9 @@ import galleryImgData from "../assets/galleryImgdata.json";
 import axios from "axios";
 import axiosApi from "./axiosApi";
 
-export const getGalleryImgData = async (teamId, year, month) => {
+export const getGalleryImgData = async (year, month) => {
   const response = await axiosApi.get(
-    `/api/v1/group/${teamId}/board?year=${year}&month=${month}`
+    `/api/v1/personal/board?year=${year}&month=${month}`
   );
   console.log(response.data.data.dayList);
   return response.data.data;
@@ -34,14 +34,13 @@ export const updatePersonalMission = async (rule) => {
   return response;
 };
 
-export const doPersonalExerciseMission = async (blob) => {
+export const doPersonalMission = async (blob) => {
   const token = localStorage.getItem("accessToken");
   const baseUrl =  import.meta.env.DEV
   ? "http://localhost:8080"
   : "https://j11a503.p.ssafy.io";
   const formData = new FormData();
   formData.append("picture", blob, "image.jpg");
-  formData.append("isCompleted", true);
   const response = await axios.post(`${baseUrl}/api/v1/personal/mission`,formData,{
     
     headers: {

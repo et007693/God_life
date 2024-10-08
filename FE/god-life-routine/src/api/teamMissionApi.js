@@ -24,8 +24,7 @@ export const updateTeamMissionRule = (teamId, time) => {
   return response;
 };
 
-// 
-export const doExerciseMission = async (teamId, blob) => {
+export const doTeamMission = async (teamId, blob) => {
   const token = localStorage.getItem("accessToken");
   const baseUrl =  import.meta.env.DEV
   ? "http://localhost:8080"

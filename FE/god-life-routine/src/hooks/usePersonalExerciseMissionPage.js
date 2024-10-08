@@ -3,7 +3,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import calculateDistance from "../util/calculateDistance";
 import { useMutation } from "@tanstack/react-query";
 import { createScreenShotToFormData } from "../util/screenShot";
-import { doPersonalExerciseMission } from "../api/personalMissionApi";
+import { doPersonalMission } from "../api/personalMissionApi";
 import useSearchStore from "../store/useSearchStore";
 
 export const usePersonalExerciseMissionPage = () => {
@@ -25,7 +25,7 @@ export const usePersonalExerciseMissionPage = () => {
       return () => clearInterval(updatePosition);
     }, [lat, lng, center.lat, center.lng]);
     const {mutate} = useMutation({
-      mutationFn: (data)=>(doPersonalExerciseMission(data)),
+      mutationFn: (data)=>(doPersonalMission(data)),
       onSuccess: ()=>{
         navigate(`/personalMission`);
       }

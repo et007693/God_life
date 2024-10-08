@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import calculateDistance from "../util/calculateDistance";
 import { useMutation } from "@tanstack/react-query";
-import { doExerciseMission } from "../api/teamMissionApi";
+import { doTeamMission } from "../api/teamMissionApi";
 import { createScreenShotToFormData } from "../util/screenShot";
 import useSearchStore from "../store/useSearchStore";
 
@@ -26,7 +26,7 @@ export const useTeamExerciseMissionPage = () => {
     }, [lat, lng, center.lat, center.lng]);
     const {teamId} = useParams();
     const {mutate} = useMutation({
-      mutationFn: (data)=>(doExerciseMission(teamId,data)),
+      mutationFn: (data)=>(doTeamMission(teamId,data)),
       onSuccess: ()=>{
         navigate(`/teamMission/${teamId}`);
       }
