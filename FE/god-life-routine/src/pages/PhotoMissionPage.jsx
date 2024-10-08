@@ -45,9 +45,6 @@ const PhotoMissionPage = () => {
     onSuccess: (data) => {
       console.log(data);
       setUploadResponse(data)
-      if(data.data.detect.confidence > 0.5){
-        uploadToBackendServer();
-      }
     },
     onError: (error) => {
       console.log(error);
