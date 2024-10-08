@@ -9,7 +9,10 @@ const TeamDetailEventModal = ({
   handleCloseModal,
   handleButtonClick,
   selectedButton,
-  bettingdata
+  bettingdata,
+  isSuccess,
+  setIsSuccess,
+  mutateBettingVote
 }) => {
   return (
     <Modal
@@ -20,6 +23,7 @@ const TeamDetailEventModal = ({
       buttonText="확인"
       buttonColor="orange"
       onClickButton={handleCloseModal}
+      mutateBettingVote={mutateBettingVote}
     >
       <div className="text-xl font-bold">오늘의 베팅</div>
       <div className="text-gray-400 text-sm pt-1">
@@ -27,7 +31,6 @@ const TeamDetailEventModal = ({
       </div>
 
       <div className=" pt-10 flex justify-center items-center space-x-8">
-        {/* <div> {bettingdata.targetProfileImage}</div> */}
         <BettingAvatar member={bettingdata}/>
 
         <div>
@@ -35,7 +38,6 @@ const TeamDetailEventModal = ({
           <div className="pt-4 text-lg font-semibold">{bettingdata.rule}</div>
         </div>
       </div>
-
       <div className="pt-12 text-2xl font-bold">예측성공시 1,000원</div>
 
       <div className="flex flex-row justify-center gap-14 mt-10">
@@ -43,14 +45,18 @@ const TeamDetailEventModal = ({
           label="성공"
           isSelected={selectedButton === "성공"}
           onClick={() => {
+            console.log("성공 버튼 클릭됨");
             handleButtonClick("성공");
+            setIsSuccess(true);
           }}
         />
         <BettingButton
           label="실패"
           isSelected={selectedButton === "실패"}
           onClick={() => {
+            console.log("실패 버튼 클릭됨");
             handleButtonClick("실패");
+            setIsSuccess(false);
           }}
         />
       </div>

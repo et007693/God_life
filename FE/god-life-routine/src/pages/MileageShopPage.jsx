@@ -11,10 +11,12 @@ import { useNavigate } from "react-router-dom";
 const MileageShopPage = () => {
   const navigate = useNavigate();
   const [count, setCount] = useState(1);
+  
   const { data: myPageData, isFetching } = useQuery({
     queryKey: ["myPageData"],
     queryFn: getMyPageData,
   });
+
   const {mutate:mutateBuyTicket} = useMutation({
     mutationKey:["buyTickets"],
     mutationFn:()=>buyTickets(count),

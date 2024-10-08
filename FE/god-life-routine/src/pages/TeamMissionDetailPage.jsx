@@ -16,25 +16,46 @@ import TeamDetailEventBanner from "../components/teamDetail/TeamDetailEventBanne
 import TeamDetailEventModal from "../components/teamDetail/TeamDetailEventModal";
 import TeamDetailRoomInfo from "../components/teamDetail/TeamDetailRoomInfo";
 import TeamDetailMissionInfo from "../components/teamDetail/TeamDetailMissionInfo";
-import { useQuery } from "@tanstack/react-query";
-import { getBettingData } from "../api/bettingApi";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { bettingVote, getBettingData } from "../api/bettingApi";
+import { useState } from "react";
 
 const TeamMissionDetailPage = () => {
-  const {data,isLoading,isError,showModal,selectedButton,handleShareKakaoBtn,handleOpenModal,handleCloseModal,
+  const {
+    data,
+    isLoading,
+    isError,
+    showModal,
+    selectedButton,
+    handleShareKakaoBtn,
+    handleOpenModal,
+    handleCloseModal,
     goToTeamMissionTimeSettingPage,
     goToTeamMissionLocationSettingPage,
     goToPhotoMissionPage,
     goToExerciseMissionPage,
     goToCalculateTeamPage,
-    handleButtonClick} = useTeamMissionDetailPage();
+    handleButtonClick,
+  } = useTeamMissionDetailPage();
   // 로딩 중일 때 로딩 표시
   const navigate = useNavigate();
 
-  const {teamId} = useParams();
-  const { data: bettingdata, isFetching: betingFetching, isError: bettingError } = useQuery({
+  const { teamId } = useParams();
+  const [isSuccess, setIsSuccess] = useState(true);
+
+  const {
+    data: bettingdata,
+    isFetching: betingFetching,
+    isError: bettingError,
+  } = useQuery({
     queryKey: ["bettingData"],
     queryFn: () => getBettingData(teamId),
     staleTime: 0,
+  });
+
+  const { mutate: mutateBettingVote } = useMutation({
+    mutationKey: ["bettingVote"],
+    mutationFn: () => bettingVote(isSuccess, teamId),
   });
 
   if (betingFetching) return <div>Loading...</div>;
@@ -46,10 +67,8 @@ const TeamMissionDetailPage = () => {
         <LoadingSpinner />
       </div>
     );
-  if(isError){
-    return (
-      <Navigate to="/login" />
-    );
+  if (isError) {
+    return <Navigate to="/login" />;
   }
   return (
     <div>
@@ -61,7 +80,7 @@ const TeamMissionDetailPage = () => {
       />
 
       {/* 이벤트 */}
-      <TeamDetailEventBanner handleOpenModal={handleOpenModal}/>
+      <TeamDetailEventBanner handleOpenModal={handleOpenModal} />
 
       {showModal && (
         <TeamDetailEventModal
@@ -69,13 +88,30 @@ const TeamMissionDetailPage = () => {
           handleCloseModal={handleCloseModal}
           handleButtonClick={handleButtonClick}
           selectedButton={selectedButton}
-          bettingdata ={bettingdata}
+          bettingdata={bettingdata}
+          isSuccess={isSuccess}
+          setIsSuccess={setIsSuccess}
+          mutateBettingVote={mutateBettingVote}
         />
       )}
 
       <div className="flex flex-col items-center px-10 py-5 mb-16">
-        <TeamDetailRoomInfo data={data} navigate={navigate} teamId={teamId} goToCalculateTeamPage={goToCalculateTeamPage} handleShareKakaoBtn={handleShareKakaoBtn}/>
-        <TeamDetailMissionInfo data={data} goToPhotoMissionPage={goToPhotoMissionPage} goToTeamMissionTimeSettingPage={goToTeamMissionTimeSettingPage} goToTeamMissionLocationSettingPage={goToTeamMissionLocationSettingPage} goToExerciseMissionPage={goToExerciseMissionPage}/>
+        <TeamDetailRoomInfo
+          data={data}
+          navigate={navigate}
+          teamId={teamId}
+          goToCalculateTeamPage={goToCalculateTeamPage}
+          handleShareKakaoBtn={handleShareKakaoBtn}
+        />
+        <TeamDetailMissionInfo
+          data={data}
+          goToPhotoMissionPage={goToPhotoMissionPage}
+          goToTeamMissionTimeSettingPage={goToTeamMissionTimeSettingPage}
+          goToTeamMissionLocationSettingPage={
+            goToTeamMissionLocationSettingPage
+          }
+          goToExerciseMissionPage={goToExerciseMissionPage}
+        />
       </div>
     </div>
   );

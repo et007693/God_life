@@ -9,6 +9,7 @@ const Modal = ({
   buttonText,
   buttonColor,
   onClickButton,
+  mutateBettingVote
 }) => {
   useEffect(() => {
     console.log(showModal);
@@ -18,6 +19,16 @@ const Modal = ({
     console.log("클릭되고있음");
     onClickCloseBtn();
   };
+
+  const handleButtonClick = () => {
+    if (mutateBettingVote) {
+      mutateBettingVote(); // mutateBettingVote 실행
+    }
+    if (onClickButton) {
+      onClickButton(); // onClickButton이 있으면 추가로 실행
+    }
+  };
+
 
   return (
     <div
@@ -43,7 +54,9 @@ const Modal = ({
 
         <div className="pt-1">{children}</div>
         <button
-          onClick={onClickButton || onClickClose}
+          // onClick={onClickButton || onClickClose}
+          onClick={handleButtonClick}
+
           className="mt-10 px-5 py-2 text-white rounded"
           style={{
             backgroundColor: buttonColor, 
