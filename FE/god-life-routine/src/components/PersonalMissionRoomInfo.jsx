@@ -47,10 +47,21 @@ const PersonalMissionRoomInfo = ({ missionProps }) => {
               <div
                 className="bg-yellow-300 h-5 rounded-full text-center text-sm flex items-center justify-center"
                 style={{
-                  width: `${(data.data.runningDate / data.data.remainingDate) * 100}%`,
+                  // 노란색 넓이 12 이하이면 12만큼 표시
+                  width: `${
+                    100 -
+                      (data.data.remainingDate / data.data.runningDate) * 100 <
+                    12
+                      ? 12
+                      : 100 -
+                        (data.data.remainingDate / data.data.runningDate) * 100
+                  }%`,
                 }}
+
               >
-                {data.data.runningDate}일
+                {/* {data.data.runningDate}일 */}
+                {`${Math.round(100 - (data.data.remainingDate / data.data.runningDate) * 100)}%`}
+
               </div>
             </div>
           </div>
