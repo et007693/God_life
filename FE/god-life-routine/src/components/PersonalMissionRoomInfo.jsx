@@ -152,7 +152,7 @@ const PersonalMissionRoomInfo = ({ missionProps }) => {
                 <p>시간설정이 완료되지 않았습니다</p>
               </div>
             )
-          ) : data.data.locationName ? (
+          ) : (
             <div className="flex justify-center px-5">
               <SettedHomeMap
                 data={data}
