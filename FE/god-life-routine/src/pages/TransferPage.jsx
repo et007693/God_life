@@ -62,8 +62,8 @@ const TransferPage = () => {
         <span className="pl-1 pt-1">{transferData.accountBalance}원</span>
       </div>
 
-      <div className="text-left pl-10 pt-10 flex flex-wrap">
-        <span className="text-2xl font-bold mr-1">
+      <div className="text-left pl-10 pt-10">
+        <span className="text-2xl font-bold mr-2">
           {transferData.withdrawalAccountBankName}
         </span>
       
