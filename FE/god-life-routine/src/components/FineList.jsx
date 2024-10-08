@@ -17,7 +17,7 @@ const FineList = ({ memberList }) => {
 
         return (
           <div
-            key={member.id}
+            key={member.name + "fineList"}
             className="flex flex-row items-center mb-2 w-full"
           >
             <div className="flex flex-col items-center text-center relative mt-4">

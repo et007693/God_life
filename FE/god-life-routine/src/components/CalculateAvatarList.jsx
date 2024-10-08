@@ -5,7 +5,7 @@ import CalculateAvatar from './CalculateAvatar'
 const CalculateAvatarList = ({memberList}) => {
   return (
     memberList.map((member) => (
-        <CalculateAvatar key={member.profileImage} member={member}/>
+        <CalculateAvatar key={member.memberProfileImage} member={member}/>
         ))
   )
 }

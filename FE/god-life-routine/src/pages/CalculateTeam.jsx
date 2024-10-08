@@ -31,7 +31,7 @@ const CalculateTeam = () => {
       <div className="flex flex-col items-center p-10 mt-10">
         <div className="flex flex-col items-center">
           <div className="flex -space-x-4">
-            <CalculateAvatarList memberList={data.memberList}/>
+            <CalculateAvatarList key={"calculateAvatarList"} memberList={data.memberList}/>
           </div>
           <div>
             <h1 className="text-xl mt-4 font-bold mb-2">{data.teamName}</h1>
@@ -44,7 +44,7 @@ const CalculateTeam = () => {
         </div>
         {/* 벌금 집계 */}
         <div className="flex w-full mt-5">
-          <FineList memberList={data.memberList}/>
+          <FineList key={"fineList"} memberList={data.memberList}/>
         </div>
     </div>
   </div>

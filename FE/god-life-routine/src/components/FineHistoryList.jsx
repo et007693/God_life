@@ -72,7 +72,7 @@ const FineHistoryList = ({ data }) => {
 
   return (
     <div>
-      {sortedDate.map((dateKey) => {
+      {sortedDate.length > 0 ? sortedDate.map((dateKey) => {
         const year = dateKey.substring(0, 4);
         const month = dateKey.substring(4, 6);
         const day = dateKey.substring(6, 8);
@@ -100,7 +100,7 @@ const FineHistoryList = ({ data }) => {
             ))}
           </div>
         );
-      })}
+      }):<div className="text-center text-gray-500">현재 벌금 데이터가 없습니다.</div>}
     </div>
   );
 };
