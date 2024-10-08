@@ -44,7 +44,7 @@ const Modal = ({
         <div className="pt-1">{children}</div>
         <button
           onClick={onClickButton || onClickClose}
-          className="mt-14 px-5 py-2 text-white rounded"
+          className="mt-10 px-5 py-2 text-white rounded"
           style={{
             backgroundColor: buttonColor, 
           }}

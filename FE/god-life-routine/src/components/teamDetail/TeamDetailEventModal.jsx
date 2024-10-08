@@ -1,19 +1,22 @@
 import React from "react";
 import Modal from "../Modal";
 import BettingButton from "../BettingButton";
+import BettingAvatar from "../BettingAvatar";
+
 
 const TeamDetailEventModal = ({
   showModal,
   handleCloseModal,
   handleButtonClick,
   selectedButton,
+  bettingdata
 }) => {
   return (
     <Modal
       showModal={showModal}
       onClickCloseBtn={handleCloseModal}
-      width="300px"
-      height="500px"
+      width="310px"
+      height="580px"
       buttonText="확인"
       buttonColor="orange"
       onClickButton={handleCloseModal}
@@ -23,17 +26,19 @@ const TeamDetailEventModal = ({
         투표를 통해 상금을 획득하세요!
       </div>
 
-      <div className=" pt-10 flex justify-center items-center space-x-4">
-        <div> 프로필 사진</div>
+      <div className=" pt-10 flex justify-center items-center space-x-8">
+        {/* <div> {bettingdata.targetProfileImage}</div> */}
+        <BettingAvatar member={bettingdata}/>
+
         <div>
-          <div className="font-bold text-orange-500 text-2xl">송창용</div>
-          <div className="pt-4 text-lg">일찍 일어나기</div>
+          <div className="font-bold text-orange-500 text-2xl">{bettingdata.targetName}</div>
+          <div className="pt-4 text-lg font-semibold">{bettingdata.rule}</div>
         </div>
       </div>
 
-      <div className="pt-12 text-2xl font-bold">예측성공시 : 1,000원</div>
+      <div className="pt-12 text-2xl font-bold">예측성공시 1,000원</div>
 
-      <div className="flex flex-row justify-center gap-14 mt-8">
+      <div className="flex flex-row justify-center gap-14 mt-10">
         <BettingButton
           label="성공"
           isSelected={selectedButton === "성공"}

@@ -16,6 +16,8 @@ import TeamDetailEventBanner from "../components/teamDetail/TeamDetailEventBanne
 import TeamDetailEventModal from "../components/teamDetail/TeamDetailEventModal";
 import TeamDetailRoomInfo from "../components/teamDetail/TeamDetailRoomInfo";
 import TeamDetailMissionInfo from "../components/teamDetail/TeamDetailMissionInfo";
+import { useQuery } from "@tanstack/react-query";
+import { getBettingData } from "../api/bettingApi";
 
 const TeamMissionDetailPage = () => {
   const {data,isLoading,isError,showModal,selectedButton,handleShareKakaoBtn,handleOpenModal,handleCloseModal,
@@ -27,7 +29,17 @@ const TeamMissionDetailPage = () => {
     handleButtonClick} = useTeamMissionDetailPage();
   // 로딩 중일 때 로딩 표시
   const navigate = useNavigate();
+
   const {teamId} = useParams();
+  const { data: bettingdata, isFetching: betingFetching, isError: bettingError } = useQuery({
+    queryKey: ["bettingData"],
+    queryFn: () => getBettingData(teamId),
+    staleTime: 0,
+  });
+
+  if (betingFetching) return <div>Loading...</div>;
+  if (bettingError) return <div>Error</div>;
+
   if (isLoading)
     return (
       <div className="flex justify-center items-center w-full h-screen">
@@ -57,6 +69,7 @@ const TeamMissionDetailPage = () => {
           handleCloseModal={handleCloseModal}
           handleButtonClick={handleButtonClick}
           selectedButton={selectedButton}
+          bettingdata ={bettingdata}
         />
       )}
 
