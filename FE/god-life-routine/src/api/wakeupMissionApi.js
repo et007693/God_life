@@ -2,6 +2,8 @@ import axios from "axios";
 import axiosApi from "./axiosApi";
 
 const baseUrl = "https://j11a503.p.ssafy.io";
+// const baseUrl = "http://localhost:8000/";
+console.log(baseUrl)
 
 export const getPhotoMission = async () => {  
   const response = await axios.get(`${baseUrl}/ai/v1/mission/object/`);
@@ -20,4 +22,3 @@ export const uploadMissionImg = async (file) => {
   });
   return response;
 };
-

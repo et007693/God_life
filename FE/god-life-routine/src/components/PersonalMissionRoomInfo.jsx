@@ -24,9 +24,8 @@ const PersonalMissionRoomInfo = ({ missionProps }) => {
     navigate("/personalMission/time/setting");
   }
 
-  // TODO: 기상 미션 페이지 만들고 연결
   const goToPhotoMissionPage = () => {
-    navigate(`/personalMission`);
+    navigate(`/personalMission/wakeup`);
   }
 
   return (

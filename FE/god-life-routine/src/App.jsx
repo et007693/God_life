@@ -103,7 +103,11 @@ function App() {
                 path="/personalMission/time/setting"
                 element={<TimeSettingPage />}
               />
-              {/* 미션 수행 페이지 */}
+              <Route
+                path="/personalMission/photo"
+                element={<PhotoMissionPage />}
+              />
+              {/* 운동 미션 수행 페이지 */}
               <Route
                 path="/personalMission/exercise"
                 element={<PersonalExerciseMissionPage />}
@@ -167,7 +171,15 @@ function App() {
               />
 
               {/* 임시로 만들어놓은 사진촬영 미션 수행 페이지 */}
-              <Route path="/photoMission" element={<PhotoMissionPage />} />
+              <Route 
+                path="/photoMission" 
+                element={<PhotoMissionPage />} 
+              />
+              <Route
+                path="/personalMission/wakeup"
+                element={<PhotoMissionPage />}
+              />
+
               {/* 임시로 만들어놓은 계좌선택 페이지 */}
               <Route
                 path="/personalMission/account/select"

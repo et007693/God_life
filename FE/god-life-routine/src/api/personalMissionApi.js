@@ -34,7 +34,6 @@ export const updatePersonalMission = async (rule) => {
   return response;
 };
 
-
 export const doPersonalExerciseMission = async (blob) => {
   const token = localStorage.getItem("accessToken");
   const baseUrl =  import.meta.env.DEV
