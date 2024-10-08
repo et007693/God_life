@@ -32,13 +32,7 @@ export const useTeamExerciseMissionPage = () => {
       }
     });
     const handleSubmit = async () => {
-<<<<<<< HEAD
-        const blob = await createScreenShotToFormData("screen-shot-div");
-        // const url = URL.createObjectURL(blob);
-        // window.open(url);
-=======
         const blob = await createScreenShotToFormData("screen-shot-div",0,7);
->>>>>>> d4727ca0 (feat: 기상미션 저장 api 연결 #S11P21A503-390 #in-progress)
         mutate(blob);
     }
     return {
