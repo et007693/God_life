@@ -28,6 +28,7 @@ const SettedHomeMap = ({ data, onclickSettingBtn, onclickMap }) => {
         }}
         onClick={onclickMap}
         draggable={false}
+        zoomable={false}
       >
         <MapMarker position={{lat: data.data.lat, lng: data.data.lng}} />
       </Map>
