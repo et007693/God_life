@@ -4,9 +4,9 @@ import { resizeImage } from "../util/resizeImg";
 import { getPhotoMission, uploadMissionImg } from "../api/wakeupMissionApi";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
-import { doExerciseMission } from "../api/teamMissionApi"
-import { doPersonalExerciseMission } from '../api/personalMissionApi';
 import { createScreenShotToFormData } from "../util/screenShot";
+import { doTeamMission } from "../api/teamMissionApi"
+import { doPersonalMission } from '../api/personalMissionApi';
 
 const PhotoMissionPage = () => {
   const [capturedImage, setCapturedImage] = useState(null);
@@ -21,7 +21,7 @@ const PhotoMissionPage = () => {
       queryFn:getPhotoMission
     }
   );
-  console.log(missionData)
+
   const missionObj = {
     "refrigerator": "냉장고",
     "monitor": "모니터",
@@ -32,8 +32,9 @@ const PhotoMissionPage = () => {
     "book": "책"
   }
 
+  // TODO: 개인미션 연결
   const { mutate: registPhotoMission } = useMutation({
-    mutationFn: (data) => location.pathname.includes('team') ? doExerciseMission(teamId, data) : doPersonalExerciseMission(data),
+    mutationFn: (data) => location.pathname.includes('team') ? doTeamMission(teamId, data) : doPersonalMission(data),
     onSuccess: () => {
       console.log("전송성공")
     }
