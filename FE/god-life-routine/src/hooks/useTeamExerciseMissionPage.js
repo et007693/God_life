@@ -33,6 +33,8 @@ export const useTeamExerciseMissionPage = () => {
     });
     const handleSubmit = async () => {
         const blob = await createScreenShotToFormData("screen-shot-div");
+        // const url = URL.createObjectURL(blob);
+        // window.open(url);
         mutate(blob);
     }
     return {

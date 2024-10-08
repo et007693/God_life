@@ -9,7 +9,7 @@ const PersonalExerciseMissionPage = () => {
 <div className="w-screen h-real-screen" id="screen-shot-div">
       <Header backgroundcolor={"white"} title={"운동 미션"} color={"orange"} goBack={"/"}/>
       {/* 현재 위치에서 ruleLocation까지의 거리를 표시하는 폴리라인 */}
-      <Map center={center} level={3} className="w-full h-full">
+      <Map center={center} level={3} className="w-full h-full" draggable={false}>
         <Polyline
           path={[center, { lat: lat, lng: lng }]}
           strokeWeight={5}
