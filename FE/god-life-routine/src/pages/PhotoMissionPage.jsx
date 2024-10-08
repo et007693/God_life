@@ -3,12 +3,15 @@ import Header from "../components/Header";
 import { resizeImage } from "../util/resizeImg";
 import { getPhotoMission, uploadMissionImg } from "../api/wakeupMissionApi";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
-
+import { useNavigate, useParams } from "react-router-dom";
+import { doExerciseMission } from "../api/teamMissionApi"
+import { doPersonalExerciseMission } from '../api/personalMissionApi';
+import { createScreenShotToFormData } from "../util/screenShot";
 
 const PhotoMissionPage = () => {
   const [capturedImage, setCapturedImage] = useState(null);
   const [uploadResponse, setUploadResponse] = useState(null);
+  const {teamId} = useParams();
   const fileInputRef = useRef(null);
   const navigate = useNavigate();
 
@@ -29,6 +32,13 @@ const PhotoMissionPage = () => {
     "book": "책"
   }
 
+  const { mutate: registPhotoMission } = useMutation({
+    mutationFn: (data) => location.pathname.includes('team') ? doExerciseMission(teamId, data) : doPersonalExerciseMission(data),
+    onSuccess: () => {
+      console.log("전송성공")
+    }
+  });
+
   const { mutate, isPending, data, isError, error } = useMutation({
     mutationKey: ["uploadMissionImg"],
     mutationFn: uploadMissionImg,
@@ -45,7 +55,6 @@ const PhotoMissionPage = () => {
     if (file) {
       const resizedImg = await resizeImage(file, 1024, 1024);
       setCapturedImage(URL.createObjectURL(resizedImg));
-      mutate(resizedImg);
     }
   };
 
@@ -58,10 +67,19 @@ const PhotoMissionPage = () => {
     window.location.reload();
   }
 
-  const handleConfirmClick = () => {
+  const handleConfirmClick = async() => {
     if (capturedImage) {
       const file = fileInputRef.current.files[0];
-      mutate(file)
+      const blob = new Blob([file], { type: file.type });
+      mutate(file, {
+        onSuccess: async (data) => {
+          if (data.data.detect.confidence >= 0.7) {
+            console.log("일단 AI서버업로드 성공함");
+            const blob =  await createScreenShotToFormData("capture-img",0.1)
+            registPhotoMission(blob)
+          }
+        }
+      })
     } else {
       console.log("이미지가 선택되지 않았습니다.")
     }
@@ -91,14 +109,15 @@ const PhotoMissionPage = () => {
   if (isLoading) return <div>Loading...</div>;
   return (
     <div className="w-full h-real-screen flex flex-col">
-      <Header title={"사진 촬영"} color={"orange"} goBack={"/"}/>
-      <div className="h-full flex-1 flex flex-col items-center p-5 mt-24 gap-14">
+      <Header title={"사진 촬영"} color={"orange"} />
+      <div className="h-full flex-1 flex flex-col items-center p-5 mt-24 gap-14 captureImg">
         {capturedImage ? (
           <>
             <img
+              id="capture-img"
               src={capturedImage}
               alt="찍은 사진"
-              className={`w-full max-w-md rounded-lg shadow-lg mt-4 ${
+              className={` w-full max-w-md rounded-lg shadow-lg mt-4 ${
                 isPending ? "filter blur-sm" : ""
               }`}
             />
@@ -118,7 +137,7 @@ const PhotoMissionPage = () => {
                         <div className="flex w-full justify-around">
                           {/* TODO: back에 사진 post 요청 보내기 */}
                           <button
-                            onClick={goToGallery}
+                            onClick={registPhotoMission}
                             className="mt-6 font-noto-sans-kr w-32 justify-center font-bold px-6 py-3 bg-orange-500 text-white rounded-md shadow-md hover:bg-orange-600 transition duration-300 ease-in-out flex items-center"
                           >
                           갤러리 이동
