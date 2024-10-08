@@ -29,7 +29,7 @@ const PersonalMissionRoomInfo = ({ missionProps }) => {
     <div>
       <div className="flex flex-col items-center pt-24">
         <div>
-          <Avatar member={data} />
+          <Avatar member={data.data} />
         </div>
         <div className="text-xl font-bold pt-2">{data.data.nickname}</div>
         <div className="text-sm text-gray-400 ">{data.data.accountBank} {data.data.accountNumber}</div>

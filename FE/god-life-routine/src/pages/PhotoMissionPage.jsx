@@ -41,10 +41,13 @@ const PhotoMissionPage = () => {
 
   const { mutate, isPending, data, isError, error } = useMutation({
     mutationKey: ["uploadMissionImg"],
-    mutationFn: uploadMissionImg,
+    mutationFn: (file)=>uploadMissionImg(file),
     onSuccess: (data) => {
       console.log(data);
       setUploadResponse(data)
+      if(data.data.detect.confidence > 0.5){
+        uploadToBackendServer();
+      }
     },
     onError: (error) => {
       console.log(error);
