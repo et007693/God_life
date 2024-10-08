@@ -6,7 +6,8 @@ import random
 import os
 
 app = Flask(__name__)
-CORS(app, supports_credentials=True, resources={r"/ai/v1/mission/object/*": {"origins": "http://localhost:5173"}})
+CORS(app, supports_credentials=True, resources={r"/ai/v1/mission/object/*": {"origins": ["http://localhost:5173", "https://j11a503.p.ssafy.io"]}}) # CORS 문제 해결
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 413(Request Entity Too Large) 에러 해결
 
 object = ''
 object_id = ''
