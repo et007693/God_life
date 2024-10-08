@@ -14,7 +14,6 @@ export const getPhotoMission = async () => {
 export const uploadMissionImg = async (file) => {
   const formData = new FormData();
   formData.append("file", file);
-  
   const response = await axios.post(`${baseUrl}/ai/v1/mission/object/`, formData, {
     headers: {
       "Content-Type": "multipart/form-data",
