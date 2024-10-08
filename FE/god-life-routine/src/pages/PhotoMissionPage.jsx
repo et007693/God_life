@@ -75,7 +75,6 @@ const PhotoMissionPage = () => {
       mutate(file, {
         onSuccess: async (data) => {
           if (data.data.detect.confidence >= 0.7) {
-            console.log("일단 AI서버업로드 성공함");
             const blob =  await createScreenShotToFormData("capture-img",0.1)
             registPhotoMission(blob)
           }
@@ -96,7 +95,7 @@ const PhotoMissionPage = () => {
   };
 
   const goToGallery = () => {
-    navigate("/personalMission/gallery");
+    location.pathname.includes('team') ? navigate(`/teamMission/${teamId}/gallery`) : navigate("/personalMission/gallery")
   }
 
   useEffect(() => {
@@ -136,9 +135,8 @@ const PhotoMissionPage = () => {
                         <h1>미션 성공!</h1>
                       </div>
                         <div className="flex w-full justify-around">
-                          {/* TODO: back에 사진 post 요청 보내기 */}
                           <button
-                            onClick={registPhotoMission}
+                            onClick={goToGallery}
                             className="mt-6 font-noto-sans-kr w-32 justify-center font-bold px-6 py-3 bg-orange-500 text-white rounded-md shadow-md hover:bg-orange-600 transition duration-300 ease-in-out flex items-center"
                           >
                           갤러리 이동
