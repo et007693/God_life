@@ -1,7 +1,7 @@
 import React from 'react'
+import AccountInfo from '../AccountInfo'
 import AvatarList from '../AvatarList'
 import InviteMemberBtn from '../InviteMemberBtn'
-import AccountInfo from '../AccountInfo'
 import TeamMissionDetailBody from './TeamMissionDetailBody'
 import TeamMissionDetailThreeButton from './TeamMissionDetailThreeButton'
 
@@ -16,7 +16,7 @@ const TeamDetailRoomInfo = ({data,navigate,teamId,goToCalculateTeamPage,handleSh
           <AccountInfo data={data} />
         </div>
         <TeamMissionDetailBody data={data} />
-        <TeamMissionDetailThreeButton navigate={navigate} teamId={teamId}/>
+        <TeamMissionDetailThreeButton navigate={navigate} teamId={teamId} delayedFine={data.data.delayedFine}/>
 
         <button
           className="mt-2 ml-auto pr-2 block text-left"

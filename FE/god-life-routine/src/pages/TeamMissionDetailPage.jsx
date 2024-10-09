@@ -1,16 +1,7 @@
 // URL: "/teamMission/1"
 import Header from "../components/Header";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
-import AvatarList from "../components/AvatarList";
-import InviteMemberBtn from "../components/InviteMemberBtn";
-import AccountInfo from "../components/AccountInfo";
-import TeamMissionDetailBody from "../components/teamDetail/TeamMissionDetailBody";
-import firecracker from "../assets/firecracker.png";
-import Modal from "../components/Modal";
-import BettingButton from "../components/BettingButton";
-import TeamMissionDetailThreeButton from "../components/teamDetail/TeamMissionDetailThreeButton";
 import LoadingSpinner from "../components/common/LoadingSpinner";
-import SettedHomeMap from "../components/SettedHomeMap";
 import { useTeamMissionDetailPage } from "../hooks/useTeamMissionDetailPage";
 import TeamDetailEventBanner from "../components/teamDetail/TeamDetailEventBanner";
 import TeamDetailEventModal from "../components/teamDetail/TeamDetailEventModal";

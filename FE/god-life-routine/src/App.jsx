@@ -1,52 +1,52 @@
-import { useEffect, useState } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { useEffect } from "react";
+import { CookiesProvider, useCookies } from "react-cookie";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
+import Layout from "./components/Layout";
+import PrivateRoute from "./components/PrivateRoute";
+import AccountHistoryPage from "./pages/AccountHistoryPage";
+import AccountSelectPage from "./pages/AccountSelectPage";
+import CalculateTeam from "./pages/CalculateTeam";
+import CalendarPage from "./pages/CalendarPage";
+import FineHistoryPage from "./pages/FineHistoryPage";
+import GalleryPage from "./pages/GalleryPage";
+import InviteAcceptPage from "./pages/InviteAcceptPage";
+import KakaoInvitePage from "./pages/KakaoInvitePage";
+import KakaoLoginCallbackPage from "./pages/KakaoLoginCallbackPage";
 import LocationSettingPage from "./pages/LocationSettingPage";
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
-import setScreenHeight from "./util/setScreenHeight";
+import LoginPage from "./pages/LoginPage";
 import MainPage from "./pages/MainPage";
+import MileageHistoryPage from "./pages/MileageHistoryPage";
+import MileageShopPage from "./pages/MileageShopPage";
+import MyPage from "./pages/MyPage";
+import PersonalAccountDetailPage from "./pages/PersonalAccountDetailPage";
+import PersonalExerciseMissionPage from "./pages/PersonalExerciseMissionPage";
 import PersonalMissionCreatePage from "./pages/PersonalMissionCreatePage";
 import PersonalMissionDetailPage from "./pages/PersonalMissionDetailPage";
-import AccountHistoryPage from "./pages/AccountHistoryPage";
-import CalendarPage from "./pages/CalendarPage";
+import PhotoMissionPage from "./pages/PhotoMissionPage";
+import TeamExerciseMissionPage from "./pages/TeamExerciseMissionPage";
 import TeamMissionCreatePage from "./pages/TeamMissionCreatePage";
 import TeamMissionDetailPage from "./pages/TeamMissionDetailPage";
 import TeamMissionSettingPage from "./pages/TeamMissionSettingPage";
-import FineHistoryPage from "./pages/FineHistoryPage";
-import LoginPage from "./pages/LoginPage";
+import TimeSettingPage from "./pages/TimeSettingPage";
 import TransferPage from "./pages/TransferPage";
 import TransferSuccessPage from "./pages/TransferSuccessPage";
-import PhotoMissionPage from "./pages/PhotoMissionPage";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import KakaoInvitePage from "./pages/KakaoInvitePage";
-import Layout from "./components/Layout";
-import TimeSettingPage from "./pages/TimeSettingPage";
-import AccountSelectPage from "./pages/AccountSelectPage";
-import MyPage from "./pages/MyPage";
-import MileageShopPage from "./pages/MileageShopPage";
-import MileageHistoryPage from "./pages/MileageHistoryPage";
-import PersonalAccountDetailPage from "./pages/PersonalAccountDetailPage";
-import KakaoLoginCallbackPage from "./pages/KakaoLoginCallbackPage";
-import GalleryPage from "./pages/GalleryPage";
-import CalculateTeam from "./pages/CalculateTeam";
-import PrivateRoute from "./components/PrivateRoute";
-import TeamExerciseMissionPage from "./pages/TeamExerciseMissionPage";
-import { CookiesProvider, useCookies } from "react-cookie";
-import useUserStore from "./store/useUserStore";
-import InviteAcceptPage from "./pages/InviteAcceptPage";
 import useRedirectStore from "./store/useRedirectStore";
-import PersonalExerciseMissionPage from "./pages/PersonalExerciseMissionPage";
+import useUserStore from "./store/useUserStore";
+import setScreenHeight from "./util/setScreenHeight";
 
 
-function App() {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        // 1분 동안 데이터가 유효하다.
-        staleTime: 1000 * 60 * 1,
-      },
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      // 1분 동안 데이터가 유효하다.
+      staleTime: 1000 * 60 * 1,
     },
-  });
+  },
+});
+function App() {
   const [cookies, setCookies, removeCookies] = useCookies(["accessToken"]);
   const { setAccessToken } = useUserStore();
   const { Kakao } = window;

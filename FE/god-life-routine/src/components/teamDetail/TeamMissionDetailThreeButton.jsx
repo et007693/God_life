@@ -1,13 +1,13 @@
 import React from "react";
 
-const TeamMissionDetailThreeButton = ({ navigate, teamId }) => {
+const TeamMissionDetailThreeButton = ({ navigate, teamId, delayedFine }) => {
 
   const goToAccountHistoryPage = () => {
     navigate(`/teamMission/${teamId}/accountHistory`);
   };
   
   const goToTransferPage = () => {
-    navigate(`fine/pay`);
+    navigate(`/teamMission/${teamId}/fine/pay`, { state: { delayedFine } });
   };
   const goToFineHistoryPage = () => {
     navigate(`/teamMission/${teamId}/fine/history`);
