@@ -16,6 +16,7 @@ import Modal from "../components/Modal";
 const CalculateTeam = () => {
   const { teamId } = useParams();
   const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["calculateTeam"],
@@ -30,6 +31,10 @@ const CalculateTeam = () => {
   } = useMutation({
     mutationKey: ["sendCalculateButton"],
     mutationFn: () => sendCalculateButton(teamId),
+    onSuccess: () => {
+      setShowModal(false); // 모달 닫기
+      navigate("/"); // 메인 페이지로 리다이렉트
+    },
   });
 
   if (isLoading || isSendLoding) return <div>Loading...</div>;
@@ -78,7 +83,6 @@ const CalculateTeam = () => {
             <button onClick={() => setShowModal(true)}>정산하기</button>
           )}
         </div>
-
 
         {/* 정산하기 확인 모달 */}
         {showModal && (

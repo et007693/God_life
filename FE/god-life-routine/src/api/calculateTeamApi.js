@@ -15,7 +15,6 @@ export const sendCalculateButton = async(teamId) => {
   const data = {
     teamId : teamId,
   };
-
   const response = await axiosApi.post(`/api/v1/group/adjust`, data)
   return response.data.data;
 
