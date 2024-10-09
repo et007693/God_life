@@ -51,6 +51,7 @@ const PhotoMissionPage = () => {
       console.log(error);
     },
   });
+
   const handleImageCapture = async (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -71,7 +72,7 @@ const PhotoMissionPage = () => {
   const handleConfirmClick = async() => {
     if (capturedImage) {
       const file = fileInputRef.current.files[0];
-      const blob = new Blob([file], { type: file.type });
+      // const blob = new Blob([file], { type: file.type });
       mutate(file, {
         onSuccess: async (data) => {
           if (data.data.detect.confidence >= 0.7) {
@@ -141,7 +142,6 @@ const PhotoMissionPage = () => {
                           >
                           갤러리 이동
                           </button>
-
                           <button
                           onClick={handleHomeClick}
                           className="mt-6 font-noto-sans-kr w-32 justify-center font-bold px-6 py-3 bg-orange-500 text-white rounded-md shadow-md hover:bg-orange-600 transition duration-300 ease-in-out flex items-center"
