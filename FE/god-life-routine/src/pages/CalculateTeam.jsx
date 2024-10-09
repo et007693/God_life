@@ -4,12 +4,12 @@ import React, { useEffect } from "react";
 import AvatarList from "../components/AvatarList"
 import Header from "../components/Header"
 
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom"
 import { getTeamMissionDetail } from "../api/teamMissionApi";
 import useRoomInfo from "../store/useRoomInfo";
 import FineList from "../components/FineList";
-import { getCalculateTeam } from "../api/calculateTeamApi";
+import { getCalculateTeam, sendCalculateButton } from "../api/calculateTeamApi";
 import CalculateAvatarList from "../components/CalculateAvatarList";
 
 const CalculateTeam = () => {
@@ -21,8 +21,15 @@ const CalculateTeam = () => {
     staleTime: 0,
   });
 
-  if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Error</div>;
+  const { mutate: handleSendCalculateButton, isLoading :isSendLoding,  isError: isSendError} = useMutation({
+    mutationKey: ["sendCalculateButton"],
+    mutationFn: () => sendCalculateButton(teamId),
+  });
+
+  if (isLoading || isSendLoding) return <div>Loading...</div>;
+  if (isError || isSendError) return <div>Error</div>;
+
+  const isLeader = data.memberName === data.leaderName;
 
 
   return (
@@ -43,8 +50,14 @@ const CalculateTeam = () => {
           </div>
         </div>
         {/* 벌금 집계 */}
-        <div className="flex w-full mt-5">
+        <div className="flex w-full mt-5 mb-6">
           <FineList key={"fineList"} memberList={data.memberList}/>
+        </div>
+
+        <div className="bg-orange-400 py-3 px-5 text-white rounded-lg">
+          {isLeader && <button
+          onClick={() => handleSendCalculateButton()}
+          >정산하기</button>}
         </div>
     </div>
   </div>
