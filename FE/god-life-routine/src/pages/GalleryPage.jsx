@@ -67,7 +67,7 @@ const GalleryPage = () => {
             <p className="text-[12px] text-gray-500">이달의 성공률</p>
             <div className="bg-white shadow-md rounded-lg p-2">
               <span className="text-xl font-bold text-orange-500">
-                {data.successRate}%
+                {data.successRate.toFixed(1)}%
               </span>
             </div>
           </div>

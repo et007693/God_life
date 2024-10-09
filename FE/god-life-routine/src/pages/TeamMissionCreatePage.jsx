@@ -18,18 +18,18 @@ const TeamMissionCreatePage = () => {
   ];
   
   const months = [
-    { value: "1", label: "1" },
-    { value: "2", label: "2" },
-    { value: "3", label: "3" },
-    { value: "4", label: "4" },
-    { value: "5", label: "5" },
-    { value: "6", label: "6" },
-    { value: "7", label: "7" },
-    { value: "8", label: "8" },
-    { value: "9", label: "9" },
-    { value: "10", label: "10" },
-    { value: "11", label: "11" },
-    { value: "12", label: "12" },
+    { value: "1", label: "1개월" },
+    { value: "2", label: "2개월" },
+    { value: "3", label: "3개월" },
+    { value: "4", label: "4개월" },
+    { value: "5", label: "5개월" },
+    { value: "6", label: "6개월" },
+    { value: "7", label: "7개월" },
+    { value: "8", label: "8개월" },
+    { value: "9", label: "9개월" },
+    { value: "10", label: "10개월" },
+    { value: "11", label: "11개월" },
+    { value: "12", label: "12개월" },
   ];
   
   const customStyles = {
