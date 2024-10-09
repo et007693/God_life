@@ -12,7 +12,7 @@ export const getTeamMissionDetail = async (teamId) => {
   return response.data;
 };
 
-export const getGalleryImgData = async (teamId, year, month) => {
+export const getTeamGalleryImgData = async (teamId, year, month) => {
   const response = await axiosApi.get(`/api/v1/group/${teamId}/board?year=${year}&month=${month}`)
   console.log(response.data.data.dayList);
   return response.data.data;
