@@ -17,10 +17,8 @@ const FineHistoryListItem = ({ item, data }) => {
   // const hour = item.transactionTime.substring(0, 2);
   // const minute = item.transactionTime.substring(2, 4);
 
-
-
-  return (
-    <div>
+  if (item.fine === 0) {
+    return (
       <div className="flex justify-between items-center pt-3">
         <div className="flex flex-col items-start pl-10">
           <div className="text-xl font-semibold">{item.rule}</div>
@@ -28,17 +26,30 @@ const FineHistoryListItem = ({ item, data }) => {
         </div>
 
         <div className="flex flex-col items-end pl-14">
-          <div className="font-bold text-xl">{item.fine}원</div>
+          <div className="font-bold text-xl text-red-500">{item.charged}원</div>
           <div className="text-gray-500 text-sm">{item.prefixFine}원</div>
         </div>
-
         <div className="pr-8">
-          <img
+        <img
             src={coupon}
             alt="Coupon Icon"
             className="w-8 h-8"
             onClick={openModal}
           />
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <div className="flex justify-between items-center pt-3">
+        <div className="text-xl font-semibold pl-10">
+          벌금 입금
+        </div>
+        <div className="flex flex-col items-end pr-20">
+          <div className="font-bold text-xl">{item.fine}원</div>
+          <div className="text-gray-500 text-sm">{item.prefixFine}원</div>
         </div>
       </div>
 
@@ -58,8 +69,7 @@ const FineHistoryListItem = ({ item, data }) => {
           <div>사용하시겠습니까?</div>
         </div>
       </Modal>
-    </div>
-  );
-};
+      </div>
+    )}
 
 export default FineHistoryListItem;

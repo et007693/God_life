@@ -72,12 +72,11 @@ const FineHistoryList = ({ data }) => {
 
   return (
     <div>
-      {sortedDate.length > 0 ? sortedDate.map((dateKey) => {
+      {sortedDate.length > 0 ? sortedDate.map((dateKey,index) => {
         const year = dateKey.substring(0, 4);
         const month = dateKey.substring(4, 6);
         const day = dateKey.substring(6, 8);
         const formattedDate = new Date(`${year}-${month}-${day}`);
-        // console.log(dateKey);
 
         return (
           <div key={dateKey}>
@@ -88,7 +87,7 @@ const FineHistoryList = ({ data }) => {
                   day: "numeric",
                 })}
               </div>
-              <div className="text-sm text-gray-400 pr-4">벌금면제권</div>
+              {index === 0 && <div className="text-sm text-gray-400 pr-4">벌금면제권</div>}
             </div>
             {groupedData[dateKey].map((item) => (
               <FineHistoryListItem
@@ -100,7 +99,8 @@ const FineHistoryList = ({ data }) => {
             ))}
           </div>
         );
-      }):<div className="text-center text-gray-500">현재 벌금 데이터가 없습니다.</div>}
+      }
+      ):<div className="text-center text-gray-500">현재 벌금 데이터가 없습니다.</div>}
     </div>
   );
 };
