@@ -5,7 +5,7 @@ import Header from "../components/Header";
 import { AiFillSmile, AiFillFrown } from "react-icons/ai";
 import { useParams, useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { getCalendarData } from "../api/calendarApi";
+import { getCalendarData, getPerosnalCalendarData } from "../api/calendarApi";
 
 const CalendarPage = () => {
   const { teamId } = useParams();
@@ -19,7 +19,7 @@ const CalendarPage = () => {
 
   const { data, isFetching, isError } = useQuery({
     queryKey: ["getCalendarData"],
-    queryFn: () => getCalendarData(teamId, year, month),
+    queryFn: () => location.pathname.includes('team') ? getCalendarData(teamId, year, month) : getPerosnalCalendarData(year, month),
     staleTime: 0,
   });
 

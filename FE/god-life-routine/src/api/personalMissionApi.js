@@ -1,14 +1,5 @@
-import galleryImgData from "../assets/galleryImgdata.json";
 import axios from "axios";
 import axiosApi from "./axiosApi";
-
-export const getGalleryImgData = async (year, month) => {
-  const response = await axiosApi.get(
-    `/api/v1/personal/board?year=${year}&month=${month}`
-  );
-  console.log(response.data.data.dayList);
-  return response.data.data;
-};
 
 export const createPersonalMission = async (data) => {
   console.log(data);
@@ -20,6 +11,14 @@ export const createPersonalMission = async (data) => {
 export const getPersonalMissionData = async () => {
   const response = await axiosApi.get(`/api/v1/personal`);
   return response.data;
+};
+
+export const getPersonalGalleryImgData = async (year, month) => {
+  const response = await axiosApi.get(
+    `/api/v1/personal/board?year=${year}&month=${month}`
+  );
+  console.log(response.data.data.dayList);
+  return response.data.data;
 };
 
 export const updatePersonalMission = async (rule) => {
@@ -50,4 +49,3 @@ export const doPersonalMission = async (blob) => {
   })
   return response.data;
 }
-
