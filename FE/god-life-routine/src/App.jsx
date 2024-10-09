@@ -33,8 +33,6 @@ import TeamMissionSettingPage from "./pages/TeamMissionSettingPage";
 import TimeSettingPage from "./pages/TimeSettingPage";
 import TransferPage from "./pages/TransferPage";
 import TransferSuccessPage from "./pages/TransferSuccessPage";
-import useRedirectStore from "./store/useRedirectStore";
-import useUserStore from "./store/useUserStore";
 import setScreenHeight from "./util/setScreenHeight";
 
 
@@ -48,9 +46,7 @@ const queryClient = new QueryClient({
 });
 function App() {
   const [cookies, setCookies, removeCookies] = useCookies(["accessToken"]);
-  const { setAccessToken } = useUserStore();
   const { Kakao } = window;
-  const {redirectUrl} = useRedirectStore();
   useEffect(() => {
     if (!Kakao.isInitialized()) {
       Kakao.init(import.meta.env.VITE_KAKAO_API_KEY);
