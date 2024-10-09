@@ -26,7 +26,7 @@ const FineHistoryListItem = ({ item, data }) => {
         </div>
 
         <div className="flex flex-col items-end pl-14">
-          <div className="font-bold text-xl">{item.charged}원</div>
+          <div className="font-bold text-xl text-red-500">{item.charged}원</div>
           <div className="text-gray-500 text-sm">{item.prefixFine}원</div>
         </div>
         <div className="pr-8">
