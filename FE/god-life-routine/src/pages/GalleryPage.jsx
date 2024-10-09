@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import Header from "../components/Header";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-import { getGalleryImgData } from "../api/personalMissionApi";
+import { getTeamGalleryImgData } from "../api/teamMissionApi";
 import GalleryImgList from "../components/GalleryImgList";
 
 const GalleryPage = () => {
@@ -49,9 +49,10 @@ const GalleryPage = () => {
   const year = new Date().getFullYear();
   const month = new Date().getMonth() + 1;
 
+
   const { data, isFetching, isError } = useQuery({
     queryKey: ["galleryImgData"],
-    queryFn: () => getGalleryImgData(year, month),
+    queryFn: () => getTeamGalleryImgData(teamId, year, month),
     staleTime: 0,
   });
 
