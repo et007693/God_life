@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { getBettingData } from "../api/bettingApi";
 import { getTeamMissionDetail } from "../api/teamMissionApi";
 import useRoomInfo from "../store/useRoomInfo";
 import shareKakao from "../util/shareKakao";
@@ -22,6 +23,19 @@ export const useTeamMissionDetailPage = () => {
       source: "teamMissionDetailPage",
     },
   });
+
+  const {
+    data: bettingdata,
+    isFetching: betingFetching,
+    isError: bettingError,
+    refetch: bettingRefetch,
+  } = useQuery({
+    queryKey: ["bettingData"],
+    queryFn: () => getBettingData(teamId),
+    enabled: false,
+    staleTime: 0,
+  });
+
   useEffect(() => {
     setRoomNumber(teamId);
     setRoomType("team");
@@ -29,6 +43,7 @@ export const useTeamMissionDetailPage = () => {
   }, [teamId, setRoomNumber, setRoomType, setRule, data]);
 
   const handleOpenModal = () => {
+    bettingRefetch();
     setShowModal(true);
   };
 
@@ -62,6 +77,9 @@ export const useTeamMissionDetailPage = () => {
     isError,
     showModal,
     selectedButton,
+    bettingdata,
+    betingFetching,
+    bettingError,
     handleShareKakaoBtn,
     handleOpenModal,
     handleCloseModal,
