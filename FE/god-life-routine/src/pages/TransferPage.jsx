@@ -1,7 +1,7 @@
 // URL: "/teamMission/:teamId/fine/pay"
 
 import { useMutation, useQuery } from "@tanstack/react-query";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getTransferFineData, getTransferPageData, sendFineMoney } from "../api/transferApi";
 import Header from "../components/Header";
@@ -65,15 +65,9 @@ const TransferPage = () => {
   };
 
   // 금액 초과하면 확인 버튼 비활성화
-  // const isDisabled = sendMoney > transferFineData.delayedFine;
   const isDisabled = transferFineData
     ? sendMoney > transferFineData.delayedFine
     : true;
-
-
-  useEffect(() => {
-    console.log(transferFineData.delayedFine);
-  }, [transferFineData]);
 
   if (isFetching || isGetFetching || isFineFetching)
     return <div>Loading...</div>;
