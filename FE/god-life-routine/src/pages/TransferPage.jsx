@@ -140,14 +140,14 @@ const TransferPage = () => {
         )}
       </div>
 
-      <div className="pt-60">
+      <div className="fixed bottom-12 left-24 px-8 py-4">
         <button
           onClick={() => {
             if (!isDisabled) {
               mutate({ teamId, money: sendMoney });
             }
           }}
-          className={`px-10 py-3 rounded-lg text-xl ${
+          className={`w-full px-10 py-3 rounded-lg text-xl ${
             isDisabled ? "bg-gray-300" : "bg-orange-400"
           } text-white`}
           disabled={isDisabled}
