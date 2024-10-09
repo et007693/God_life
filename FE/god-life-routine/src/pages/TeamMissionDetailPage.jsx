@@ -1,24 +1,15 @@
 // URL: "/teamMission/1"
-import Header from "../components/Header";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
-import AvatarList from "../components/AvatarList";
-import InviteMemberBtn from "../components/InviteMemberBtn";
-import AccountInfo from "../components/AccountInfo";
-import TeamMissionDetailBody from "../components/teamDetail/TeamMissionDetailBody";
-import firecracker from "../assets/firecracker.png";
-import Modal from "../components/Modal";
-import BettingButton from "../components/BettingButton";
-import TeamMissionDetailThreeButton from "../components/teamDetail/TeamMissionDetailThreeButton";
+import { bettingVote, getBettingData } from "../api/bettingApi";
 import LoadingSpinner from "../components/common/LoadingSpinner";
-import SettedHomeMap from "../components/SettedHomeMap";
-import { useTeamMissionDetailPage } from "../hooks/useTeamMissionDetailPage";
+import Header from "../components/Header";
 import TeamDetailEventBanner from "../components/teamDetail/TeamDetailEventBanner";
 import TeamDetailEventModal from "../components/teamDetail/TeamDetailEventModal";
-import TeamDetailRoomInfo from "../components/teamDetail/TeamDetailRoomInfo";
 import TeamDetailMissionInfo from "../components/teamDetail/TeamDetailMissionInfo";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { bettingVote, getBettingData } from "../api/bettingApi";
-import { useState } from "react";
+import TeamDetailRoomInfo from "../components/teamDetail/TeamDetailRoomInfo";
+import { useTeamMissionDetailPage } from "../hooks/useTeamMissionDetailPage";
 
 const TeamMissionDetailPage = () => {
   const {
@@ -27,6 +18,9 @@ const TeamMissionDetailPage = () => {
     isError,
     showModal,
     selectedButton,
+    bettingdata,
+    betingFetching,
+    bettingError,
     handleShareKakaoBtn,
     handleOpenModal,
     handleCloseModal,
@@ -43,15 +37,7 @@ const TeamMissionDetailPage = () => {
   const { teamId } = useParams();
   const [isSuccess, setIsSuccess] = useState(true);
 
-  const {
-    data: bettingdata,
-    isFetching: betingFetching,
-    isError: bettingError,
-  } = useQuery({
-    queryKey: ["bettingData"],
-    queryFn: () => getBettingData(teamId),
-    staleTime: 0,
-  });
+
 
   const { mutate: mutateBettingVote } = useMutation({
     mutationKey: ["bettingVote"],
@@ -60,7 +46,6 @@ const TeamMissionDetailPage = () => {
 
   if (betingFetching) return <div>Loading...</div>;
   if (bettingError) return <div>Error</div>;
-
   if (isLoading)
     return (
       <div className="flex justify-center items-center w-full h-screen">

@@ -1,12 +1,10 @@
 // URL: "/teamMission/:teamId/fine/pay"
 
-import React, { useEffect } from "react";
-import Header from "../components/Header";
-import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { getTransferFineData, sendFineMoney } from "../api/transferApi";
-import { getTransferPageData } from "../api/transferApi";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { getTransferFineData, getTransferPageData, sendFineMoney } from "../api/transferApi";
+import Header from "../components/Header";
 
 const TransferPage = () => {
   const { teamId } = useParams();
@@ -14,7 +12,6 @@ const TransferPage = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
-  
   // 밀린벌금데이터 불러오기
   const {
     data: transferFineData,
@@ -54,18 +51,6 @@ const TransferPage = () => {
     staleTime: 0,
   });
 
-  // useEffect(() => {
-  //   console.log(transferData);
-  // }, [transferData]);
-
-  // useEffect(() => {
-  //   if (transferFineData && transferFineData.delayedFine !== undefined) {
-  //     console.log("팀미션디테일조회", transferFineData.delayedFine);
-  //   } else {
-  //     console.log("transferFineData가 아직 로드되지 않았습니다.");
-  //   }
-  // }, [transferFineData]);
-  
 
   const handleInputChange = (e) => {
     const inputValue = e.target.value;
@@ -85,10 +70,29 @@ const TransferPage = () => {
     ? sendMoney > transferFineData.delayedFine
     : true;
 
+
+  useEffect(() => {
+    console.log(transferFineData.delayedFine);
+  }, [transferFineData]);
+
   if (isFetching || isGetFetching || isFineFetching)
     return <div>Loading...</div>;
   if (isError || isGetError || isFineError) return <div>Error</div>;
 
+  if (transferFineData && transferFineData.delayedFine === 0) 
+    return (
+  <>
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
+      <div className="bg-white p-8 rounded-lg shadow-lg text-center">
+        <h2 className="text-2xl font-bold mb-4">벌금이 없습니다</h2>
+        <p className="text-gray-600">현재 납부할 벌금이 없습니다.</p>
+        <button onClick={() => navigate(`/teamMission/${teamId}`)} className="mt-4 px-4 py-2 bg-orange-400 text-white rounded">
+          홈으로 가기
+        </button>
+      </div>
+    </div>
+  </>
+  );
   return (
     <div className="mt-16">
       <Header title={"이체하기"} color={"orange"} />
