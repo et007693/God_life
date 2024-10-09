@@ -46,7 +46,7 @@ const Modal = ({
         }}
       >
         <button
-          onClick={onClickButton} 
+          onClick={onClickClose} 
           className="absolute top-2 right-3 text-lg text-gray-500 hover:text-black"
         >
           &times; {/* X 표시 */}
