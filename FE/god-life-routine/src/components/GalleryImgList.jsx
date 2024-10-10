@@ -31,12 +31,21 @@ const GalleryImgList = ({ data, month }) => {
       <div className="grid grid-cols-3 gap-1">
         {groupedByDate[date].map((item, index) => (
           <div key={index} className="w-28 h-28 mb-6">
-            <img
-              src={`data:image/jpeg;base64,${item.picture}`}
-              alt={`Day ${item.day}`}
-              className="w-full h-full object-cover"
-            />
-            <div className="text-sm text-center">{item.memberName}</div>
+          {item.picture ? (
+            <>
+              <img
+                src={`data:image/jpeg;base64,${item.picture}`}
+                alt={`Day ${item.day}`}
+                className="w-full h-full object-cover"
+              />
+              <div className="text-sm text-center">{item.memberName}</div>
+            </>
+            ) : (
+              <div className="flex items-center justify-center h-full">
+                <p className="text-sm text-center">미션 수행내역이 <br />존재하지 않습니다.</p>
+              </div>
+            )
+          }
           </div>
         ))}
       </div>

@@ -6,6 +6,7 @@ import Header from "../components/Header";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { getTeamGalleryImgData } from "../api/teamMissionApi";
 import GalleryImgList from "../components/GalleryImgList";
+import { getPersonalGalleryImgData } from '../api/personalMissionApi';
 
 const GalleryPage = () => {
   // const { teamId } = useParams();
@@ -52,7 +53,7 @@ const GalleryPage = () => {
 
   const { data, isFetching, isError } = useQuery({
     queryKey: ["galleryImgData"],
-    queryFn: () => getTeamGalleryImgData(teamId, year, month),
+    queryFn: () => location.pathname.includes('team') ? getTeamGalleryImgData(teamId, year, month) : getPersonalGalleryImgData(year, month),
     staleTime: 0,
   });
 
