@@ -7,7 +7,6 @@ import SettedTime from "./SettedTime";
 const PersonalMissionRoomInfo = ({ missionProps }) => {
   const {
     data,
-    user,
     goToPersonalAccountDetail,
     goToPersonalMissionSettingPage,
   } = missionProps;
@@ -26,7 +25,7 @@ const PersonalMissionRoomInfo = ({ missionProps }) => {
   }
 
   return (
-    <div>
+    <>
       <div className="flex flex-col items-center pt-24">
         <div>
           <Avatar member={data.data} />
@@ -107,19 +106,16 @@ const PersonalMissionRoomInfo = ({ missionProps }) => {
         </div>
       </div>
 
-      <div className="text-left pt-8 pl-10 font-bold text-xl">
-        {data.data.rule}
-      </div>
-      <div className="text-xm text-gray-400 text-left w-full pl-10">
-        평일에만 미션이 주어집니다.
-      </div>
-        <div
-          className="bg-gray-100 mt-3 mx-10 py-3 pt-1 rounded-3xl mb-16"
-        >
+      <div className="px-7 py-4">
+        <div className="text-left font-bold text-xl mt-4">
+          {data.data.rule}
+        </div>
+        <div className="text-left text-xs text-gray-400">
+          <p>평일에만 미션이 주어집니다.</p>
+        </div>
+        <div className="bg-gray-100 mt-3 rounded-3xl mb-16">
           {data.data.rule === "일찍 일어나기" ? (
-            <div
-              className="px-4 py-5"
-            >
+            <div className="p-4">
               <SettedTime data={data} onclickSettingBtn={goToSetTimePage} onclickTime={goToPhotoMissionPage}/>
             </div>
           ):(
@@ -128,11 +124,11 @@ const PersonalMissionRoomInfo = ({ missionProps }) => {
             >
               <SettedHomeMap data={data} onclickSettingBtn={goToPersonalMissionSettingPage} onclickMap={goToExerciseMissionPage}/>
             </div>
-
           )
-         }
+          }
         </div>
-    </div>
+      </div>
+    </>
   );
 };
 
