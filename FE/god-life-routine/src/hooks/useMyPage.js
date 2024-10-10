@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useUserStore from "../store/useUserStore";
 import { getMyPageData } from "../api/myPageApi";
 import { useEffect, useState } from "react";
+import axiosApi from "../api/axiosApi";
 
 export const useMyPage = () => {
   const { setUserMyPageData } = useUserStore();
@@ -18,6 +19,14 @@ export const useMyPage = () => {
   }, [data, setUserMyPageData]);
 
   const handleButtonClick = () => {
+    axiosApi.delete("/api/v1/member")
+    .then((res) => {
+      console.log("회원탈퇴성공");
+      window.location.href = "/";
+    })
+    .catch((err) => {
+      console.log(err);
+    })
     setShowModal(false);
   };
 
