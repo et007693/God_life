@@ -38,7 +38,7 @@ const CalculateTeam = () => {
     onError: (error) => {
       console.error("Error sending calculate button:", error); // 에러 로그 출력
       alert("정산 요청에 실패했습니다. 정산 금액을 확인해주세요.");
-    }
+    },
   });
 
   if (isLoading || isSendLoding) return <div>Loading...</div>;
@@ -81,9 +81,23 @@ const CalculateTeam = () => {
         </div>
 
         {/* 방장이면 정산하기 버튼 보이도록 */}
-        <div className="bg-orange-400 py-3 px-5 text-white rounded-lg">
+        {/* <div className="bg-orange-400 py-3 px-5 text-white rounded-lg">
           {isLeader && (
             <button onClick={() => setShowModal(true)}>정산하기</button>
+          )}
+        </div> */}
+
+        <div>
+          {isLeader ? (
+            <div className="bg-orange-400 py-3 px-5 text-white rounded-lg">
+              <button onClick={() => setShowModal(true)}>정산하기</button>
+            </div>
+          ) : (
+            <>
+              <p className="text-xl text-red-300 font-bold">
+                정산은 방장만 할 수 있습니다.
+              </p>
+            </>
           )}
         </div>
 
@@ -99,7 +113,9 @@ const CalculateTeam = () => {
             onClickButton={handleSendCalculateButton}
           >
             <div className="pt-10">정산하시겠습니까?</div>
-            <p className="text-red-500 text-sm mt-1">금액이 있을때만 정산이 가능합니다.</p>
+            <p className="text-red-500 text-sm mt-1">
+              금액이 있을때만 정산이 가능합니다.
+            </p>
           </Modal>
         )}
       </div>
