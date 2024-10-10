@@ -10,7 +10,6 @@ const axiosApi = axios.create({
 axiosApi.interceptors.request.use((config) => {
   // const accessToken = "tempAccessToken";
   const accessToken = localStorage.getItem("accessToken");
-  console.log(accessToken);
 
   if (accessToken) {
     config.headers["Authorization"] = `Bearer ${accessToken}`;
@@ -50,8 +49,14 @@ axiosApi.interceptors.response.use(
           // console.log("에러발생했습니다");
       // window.location.href = "/login";
     }
+    if (error.response && error.response.data.responseCode === "U101") {
+      alert("이미 가입된 방입니다.");
+      window.location.href = "/";
+    }
+      window.location.href = "/login";
+    }
     return Promise.reject(error);
-  }
+  
 });
 
 export default axiosApi;
