@@ -23,7 +23,7 @@ const PersonalAccountDetailPage = () => {
         <div className="border-b border-gray-400 mt-3 mr-5"></div>
         <div className="flex flex-row justify-between">
           <span className="text-gray-500 ml-4 mt-3">적용이율</span>
-          <span className="text-black-500 mr-8 mt-3">연 {data.currentRate}% (고정금리)</span>
+          <span className="text-black-500 mr-8 mt-3">연 {data.currentRate}%</span>
         </div>
 
         <div className="flex flex-row justify-between">

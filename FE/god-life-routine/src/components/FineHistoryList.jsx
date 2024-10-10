@@ -4,7 +4,7 @@ import coupon from "../assets/image/coupon.png";
 import Modal from "./Modal";
 import { useMutation } from "@tanstack/react-query";
 import { sendFineExempt } from "../api/fineHistoryApi";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 // const groupByMonth = (arr) => {
 //   return arr.reduce((acc, item) => {
@@ -69,7 +69,7 @@ const groupByDate = (arr) => {
   }, {});
 };
 
-const FineHistoryList = ({ data }) => {
+const FineHistoryList = ({ data, refetch }) => {
   const groupedData = groupByDate(data.list);
 
   // 날짜 역순으로 뜨도록(최신순)
@@ -79,6 +79,7 @@ const FineHistoryList = ({ data }) => {
 
   const [showModal, setShowModal] = useState(false);
   const { teamId } = useParams();
+  const navigate = useNavigate();
 
   const openModal = () => {
     setShowModal(true);
@@ -92,7 +93,9 @@ const FineHistoryList = ({ data }) => {
     mutationKey: ["sendFineExempt"],
     mutationFn: () => sendFineExempt(teamId),
     onSuccess: () => {
+      console.log("우랄랄");
       closeModal();
+      refetch();
     },
   });
   
@@ -133,7 +136,7 @@ const FineHistoryList = ({ data }) => {
                 <Modal
                   showModal={showModal}
                   onClickCloseBtn={() => setShowModal(false)}
-                  width="250px"
+                  width="240px"
                   height="260px"
                   buttonText="확인"
                   buttonColor="orange"
@@ -158,7 +161,7 @@ const FineHistoryList = ({ data }) => {
           );
         })
       ) : (
-        <div className="text-center text-gray-500">
+        <div className="text-center text-gray-500 pt-10">
           현재 벌금 데이터가 없습니다.
         </div>
       )}

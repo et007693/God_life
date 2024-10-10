@@ -15,13 +15,12 @@ const FineHistoryPage = () => {
   const { user, setUser } = useUserStore();
   
   const { teamId } = useParams();
-  const { data, isFetching, isError } = useQuery({
+  const { data, isFetching, isError, refetch } = useQuery({
     queryKey:["fineHistory"],
     queryFn: () => getFineHistory(teamId),
     staleTime:0,
   })
 
-  console.log(data);
 
   useEffect(() => {
     setRoomNumber(null);
@@ -39,7 +38,7 @@ const FineHistoryPage = () => {
         <Avatar member={data} />
       </div>
 
-      <FineHistoryList data={data} />
+      <FineHistoryList data={data} refetch={refetch} />
       
     </div>
   );
