@@ -10,7 +10,6 @@ const axiosApi = axios.create({
 axiosApi.interceptors.request.use((config) => {
   // const accessToken = "tempAccessToken";
   const accessToken = localStorage.getItem("accessToken");
-  console.log(accessToken);
 
   if (accessToken) {
     config.headers["Authorization"] = `Bearer ${accessToken}`;
@@ -28,30 +27,34 @@ axiosApi.interceptors.response.use(
     return response;
   },
   (error) => {
-    if (error.response && error.response.status === 401) {
-      console.log(error.response.data);
-      if(error.response.data.responseCode === "JWT001"){
-      axiosApi.post("/api/v1/refresh").then(async (res) => {
-        const newAccessToken = Cookies.get("accessToken");
-        localStorage.setItem("accessToken", newAccessToken);
-        const newRes = await axiosApi.request(error.config);
-        return newRes.data;
-      })
+    if (error.response) {
+      if (error.response.data.responseCode === "U101") {
+        alert("이미 가입된 방입니다.");
+        window.location.href = "/";
+        return;
       }
-      else if(error.response.data.responseCode === "JWT002"){
-          console.log(error.response);
-          useUserStore.getState().setAccessToken(null);
-          Cookies.remove("accessToken");
-          Cookies.remove("refreshToken");
-          if (!window.location.pathname.includes("invite")) {
-            localStorage.setItem("redirectUrl", window.location.pathname);
-          }
-          window.location.href = "/login";
-          // console.log("에러발생했습니다");
-      // window.location.href = "/login";
+        if(error.response.data.responseCode === "JWT001"){
+        axiosApi.post("/api/v1/refresh").then(async (res) => {
+          const newAccessToken = Cookies.get("accessToken");
+          localStorage.setItem("accessToken", newAccessToken);
+          const newRes = await axiosApi.request(error.config);
+          return newRes.data;
+        })
+        }
+        else if(error.response.data.responseCode === "JWT002"){
+            console.log(error.response);
+            useUserStore.getState().setAccessToken(null);
+            Cookies.remove("accessToken");
+            Cookies.remove("refreshToken");
+            if (!window.location.pathname.includes("invite")) {
+              localStorage.setItem("redirectUrl", window.location.pathname);
+            }
+            window.location.href = "/login";
+      }
     }
-    return Promise.reject(error);
-  }
-});
+    
+      window.location.href = "/login";
+    }
+);
 
 export default axiosApi;
