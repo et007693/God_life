@@ -15,7 +15,7 @@ export const createScreenShotToFormData = async (elementId,resizeOffset) => {
     const check = new Image();
     check.src = checkImage;
     check.onload = () => {
-      ctx.drawImage(check, 0, (height/2)-(width/2), width, width);
+      ctx.drawImage(check, 0, (height-width)/2, width, width);
       canvas.toBlob((blob) => {
         resolve(blob);
       }, "image/jpeg",resizeOffset);

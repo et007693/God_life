@@ -1,16 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Map, MapMarker } from "react-kakao-maps-sdk";
-import { useKakaoMap } from "../hooks/useKakaoMap";
-import { useDaumCdn } from "../hooks/useDaumCdn";
 import CustomMap from "../components/CustomMap";
 import SearchAddress from "../components/SearchAddress";
 import useSearchStore from "../store/useSearchStore";
 import SearchBar from "../components/SearchBar";
 import Header from "../components/Header";
-import { useLocation, useNavigate } from "react-router-dom";
-import { updatePersonalMission } from "../api/personalMissionApi";
-import useRoomInfo from "../store/useRoomInfo";
-import { updateTeamMissionRule } from "../api/teamMissionApi";
+import {  useNavigate } from "react-router-dom";
 import { settingMyHomeLocation } from "../api/locationApi";
 import { useQueryClient } from "@tanstack/react-query";
 import { getMainPageData } from "../api/mainPageApi";
@@ -20,7 +13,6 @@ const LocationSettingPage = () => {
   // 카카오맵 API를 이용한 지도 구현
   // 전역변수를 사용해 다른 컴포넌트에서도 사용할 수 있도록함.
   const { isSearchMode,selectedAddress,center, updatePositionWithGeolocation,selectedPosition,setSelectedPosition} = useSearchStore();
-  const { roomNumber, rule } = useRoomInfo();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const onClickRegistButton = async () => {
