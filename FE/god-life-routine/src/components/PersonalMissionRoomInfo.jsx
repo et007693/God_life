@@ -88,7 +88,7 @@ const PersonalMissionRoomInfo = ({ missionProps }) => {
 
           <div className="flex flex-row justify-between items-center px-4 py-3">
             <div className="flex">
-              <div className="text-gray-400">현재 적용이율</div>
+              <div className="text-gray-400 mr-2">현재 적용이율</div>
               <div className="font-bold text-md text-red-500">
                 {data.data.interestRate}%
               </div>
