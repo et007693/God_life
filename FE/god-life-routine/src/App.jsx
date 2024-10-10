@@ -25,7 +25,6 @@ import PersonalAccountDetailPage from "./pages/PersonalAccountDetailPage";
 import PersonalExerciseMissionPage from "./pages/PersonalExerciseMissionPage";
 import PersonalMissionCreatePage from "./pages/PersonalMissionCreatePage";
 import PersonalMissionDetailPage from "./pages/PersonalMissionDetailPage";
-import PersonalMissionGalleryPage from "./pages/PersonalMissionGalleryPage";
 import PhotoMissionPage from "./pages/PhotoMissionPage";
 import TeamExerciseMissionPage from "./pages/TeamExerciseMissionPage";
 import TeamMissionCreatePage from "./pages/TeamMissionCreatePage";
@@ -94,7 +93,7 @@ function App() {
               <Route path="/personalMission" element={<Layout />}>
                 <Route path="" element={<PersonalMissionDetailPage />} />
                 <Route path="calendar" element={<CalendarPage />} />
-                <Route path="gallery" element={<PersonalMissionGalleryPage />} />
+                <Route path="gallery" element={<GalleryPage />} />
               </Route>
               <Route
                 path="/personalMission/time/setting"
