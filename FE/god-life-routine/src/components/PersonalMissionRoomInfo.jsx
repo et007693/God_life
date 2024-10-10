@@ -70,7 +70,7 @@ const PersonalMissionRoomInfo = ({ missionProps }) => {
 
           <div className="flex flex-row justify-between pt-4">
             <div className="text-gray-400 pl-5">성공률</div>
-            <div className="font-bold text-lg pr-5">{data.data.successRate}%</div>
+            <div className="font-bold text-lg pr-5">{Math.round(data.data.successRate)}%</div>
           </div>
 
           <div className="px-4 py-3">
@@ -79,7 +79,7 @@ const PersonalMissionRoomInfo = ({ missionProps }) => {
                 className="bg-yellow-300 h-5 rounded-full"
                 style={{ width: `${data.data.successRate}%` }}
               >
-                {data.data.successRate}%
+                {Math.round(data.data.successRate)}%
               </div>
             </div>
           </div>
