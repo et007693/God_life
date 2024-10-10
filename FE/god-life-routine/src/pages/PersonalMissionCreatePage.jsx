@@ -142,16 +142,6 @@ const PersonalMissionCreatePage = () => {
           </div>
         </div>
 
-        <div className="text-left p-10">
-          <div
-            className="flex justify-between items-center text-xl font-bold mb-4 mt-[-30px] cursor-pointer"
-            onClick={goToAccountSelectPage}
-          >
-            <span>계좌 선택</span>
-            <span className="text-gray-400">{">"}</span>{" "}
-          </div>
-        </div>
-
         <button
           type="submit"
           className="bg-orange-400 text-white px-10 py-3 rounded-lg text-xl"
