@@ -65,7 +65,7 @@ const TeamMissionDetailPage = () => {
       />
 
       {/* 이벤트 */}
-      {data.bettingOpen &&<TeamDetailEventBanner handleOpenModal={handleOpenModal} />}
+      {data.data.bettingOpen &&<TeamDetailEventBanner handleOpenModal={handleOpenModal} />}
 
       {showModal && (
         <TeamDetailEventModal
