@@ -109,13 +109,12 @@ const PhotoMissionPage = () => {
 
   if (isLoading) return <div>Loading...</div>;
   return (
-    <div className="w-full h-real-screen flex flex-col">
+    <div className="w-full h-real-screen flex flex-col" id="capture-img">
       <Header title={"사진 촬영"} color={"orange"} />
       <div className="h-full flex-1 flex flex-col items-center p-5 mt-24 gap-14 captureImg">
         {capturedImage ? (
           <>
             <img
-              id="capture-img"
               src={capturedImage}
               alt="찍은 사진"
               className={` w-full max-w-md rounded-lg shadow-lg mt-4 ${
