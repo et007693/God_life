@@ -13,6 +13,7 @@ import useRoomInfo from "../store/useRoomInfo";
 import { updateTeamMissionRule } from "../api/teamMissionApi";
 import { settingMyHomeLocation } from "../api/locationApi";
 import { useQueryClient } from "@tanstack/react-query";
+import { getMainPageData } from "../api/mainPageApi";
 
 
 const LocationSettingPage = () => {
@@ -29,14 +30,15 @@ const LocationSettingPage = () => {
       lat: selectedPosition.lat,
       lng: selectedPosition.lng,
     }
-    await settingMyHomeLocation(requestLocation);
     await queryClient.invalidateQueries({queryKey:["mainPageData"]});
-    navigate(`/`);
+    await settingMyHomeLocation(requestLocation).then(async (data)=>{
+      const response = await getMainPageData();
+      console.log("response",response);
+      if(response && response.locationSet){
+        navigate("/");
+      }
+    });
   }
-  useEffect(()=>{
-    updatePositionWithGeolocation();
-    setSelectedPosition(center);
-  },[updatePositionWithGeolocation])
   // 2024-09-04 작업시작
   return (
     <>

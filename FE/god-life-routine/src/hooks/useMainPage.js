@@ -18,16 +18,18 @@ export const useMainPage = () => {
       today.getMonth() + 1
     }.${today.getDate()}`;
     // console.log(formatDate);
-    const { data, isFetching, isError } = useQuery({
+    const { data, isFetching, isError,isSuccess } = useQuery({
       queryKey: ["mainPageData"],
       queryFn: getMainPageData,
       staleTime: 0,
+      
     });
-    useEffect(() => {
-      if(data && !data.locationSet){
+    useEffect(()=>{
+
+      if(!isFetching &&data && !data.locationSet){
         navigate("/location/setting");
       }
-    }, [data]);
+    },[data]);
     useEffect(()=>{
       const redirectUrl = localStorage.getItem("redirectUrl");
       if(redirectUrl){
