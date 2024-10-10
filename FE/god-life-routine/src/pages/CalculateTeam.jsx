@@ -35,10 +35,13 @@ const CalculateTeam = () => {
       setShowModal(false); // 모달 닫기
       navigate("/"); // 메인 페이지로 리다이렉트
     },
+    onError: (error) => {
+      console.error("Error sending calculate button:", error); // 에러 로그 출력
+      alert("정산 요청에 실패했습니다. 정산 금액을 확인해주세요.");
+    }
   });
 
   if (isLoading || isSendLoding) return <div>Loading...</div>;
-  if (isError || isSendError) return <div>Error</div>;
 
   const isLeader = data.memberName === data.leaderName;
 
@@ -89,13 +92,14 @@ const CalculateTeam = () => {
           <Modal
             showModal={showModal}
             onClickCloseBtn={() => setShowModal(false)}
-            width="250px"
-            height="240px"
+            width="300px"
+            height="260px"
             buttonText="확인"
             buttonColor="orange"
             onClickButton={handleSendCalculateButton}
           >
             <div className="pt-10">정산하시겠습니까?</div>
+            <p className="text-red-500 text-sm mt-1">금액이 있을때만 정산이 가능합니다.</p>
           </Modal>
         )}
       </div>
