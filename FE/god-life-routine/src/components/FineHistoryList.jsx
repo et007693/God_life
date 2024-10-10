@@ -91,7 +91,7 @@ const FineHistoryList = ({ data }) => {
             </div>
             {groupedData[dateKey].map((item) => (
               <FineHistoryListItem
-                key={item.id}
+                key={item.transactionDate}
                 item={item}
                 dateKey={dateKey}
                 data ={data}
