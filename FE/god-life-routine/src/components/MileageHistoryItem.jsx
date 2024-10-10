@@ -3,9 +3,11 @@ import React from "react";
 const MileageHistoryItem = ({ data }) => {
   let previousDate = null; // 이전 항목의 날짜를 추적할 변수
 
+  if(data.history.length === 0) return <div>마일리지 내역이 없습니다.</div>
   return (
 
     <div>
+      
       {data.history.map((item, index) => {
         const currentDate = `${item.month}월 ${item.day}일`;
 

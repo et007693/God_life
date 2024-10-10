@@ -133,7 +133,7 @@ const PersonalMissionCreatePage = () => {
                 type="number"
                 {...register("amount")}
                 onChange={(e) => setValue("amount", e.target.value)}
-                placeholder="벌금을 입력해주세요"
+                placeholder="입금액을 입력해주세요"
                 className="w-full p-2 pr-12 border-b border-gray-300 focus:border-orange-400 focus:outline-none transition-colors"
               />
               {errors.amount && <p className="text-red-500 text-sm">{errors.amount.message}</p>}
