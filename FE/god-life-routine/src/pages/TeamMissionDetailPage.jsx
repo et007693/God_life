@@ -65,7 +65,7 @@ const TeamMissionDetailPage = () => {
       />
 
       {/* 이벤트 */}
-      <TeamDetailEventBanner handleOpenModal={handleOpenModal} />
+      {data.bettingOpen &&<TeamDetailEventBanner handleOpenModal={handleOpenModal} />}
 
       {showModal && (
         <TeamDetailEventModal
@@ -80,7 +80,7 @@ const TeamMissionDetailPage = () => {
         />
       )}
 
-      <div className="flex flex-col items-center px-10 py-5 mb-16">
+      <div className={`flex flex-col items-center px-10 py-5 mb-16 ${data.data.bettingOpen ? "" : "mt-24"}`}>
         <TeamDetailRoomInfo
           data={data}
           navigate={navigate}
