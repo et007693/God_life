@@ -1,6 +1,6 @@
 import html2canvas from "html2canvas";
 import checkImage from "/images/check.png";
-export const createScreenShotToFormData = async (elementId) => {
+export const createScreenShotToFormData = async (elementId,resizeOffset) => {
   const element = document.getElementById(elementId);
   const width = window.innerWidth;
   const height = window.innerHeight;
@@ -18,7 +18,7 @@ export const createScreenShotToFormData = async (elementId) => {
       ctx.drawImage(check, 0, (height/2)-(width/2), width, width);
       canvas.toBlob((blob) => {
         resolve(blob);
-      }, "image/jpeg",0.7);
+      }, "image/jpeg",resizeOffset);
     };
   });
   
