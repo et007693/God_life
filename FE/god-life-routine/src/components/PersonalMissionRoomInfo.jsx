@@ -98,7 +98,7 @@ const PersonalMissionRoomInfo = ({ missionProps }) => {
               <div className="flex flex-row">
                 <div className="text-gray-400 pl-5">현재 적용이율</div>
                 <div className="font-bold text-md pl-5 text-red-500">
-                  {data.data.interestRate + data.data.primeRate} %
+                  {data.data.interestRate + data.data.primeRate}%
                 </div>
               </div>
 
@@ -114,7 +114,7 @@ const PersonalMissionRoomInfo = ({ missionProps }) => {
             <div>
               <button
                 onClick={goToPersonalAccountDetail}
-                className="font-bold text-lg mb-1"
+                className="font-bold text-lg mb-1 mr-3"
               >
                 계좌 상세 →
               </button>
@@ -129,26 +129,26 @@ const PersonalMissionRoomInfo = ({ missionProps }) => {
       <div className="text-xm text-gray-400 text-left w-full pl-10">
         평일에만 미션이 주어집니다.
       </div>
-      <div className="bg-gray-100 mt-3 mx-10 py-3 pt-1 rounded-3xl mb-16">
-        {data.data.rule === "일찍 일어나기" ? (
-          <div className="px-4 py-5">
-            <SettedTime
-              data={data}
-              onclickSettingBtn={goToSetTimePage}
-              onclickTime={goToPhotoMissionPage}
-            />
-          </div>
-        ) : (
-          <div className="flex relative justify-around bg-gray-100 py-5 rounded-2xl w-full">
-            <SettedHomeMap
-              data={data}
-              onclickSettingBtn={goToPersonalMissionSettingPage}
-              onclickMap={goToExerciseMissionPage}
-            />
-          </div>
-        )}
-      </div>
-    </div>
+        <div
+          className="bg-gray-100 mt-3 mx-10 py-3 pt-1 rounded-3xl mb-16"
+        >
+          {data.data.rule === "일찍 일어나기" ? (
+            <div
+              className="px-4 py-5"
+            >
+              <SettedTime data={data} onclickSettingBtn={goToSetTimePage} onclickTime={goToPhotoMissionPage}/>
+            </div>
+          ):(
+            <div
+              className="flex relative justify-around bg-gray-100 py-5 rounded-2xl w-full"
+            >
+              <SettedHomeMap data={data} onclickSettingBtn={goToPersonalMissionSettingPage} onclickMap={goToExerciseMissionPage}/>
+            </div>
+
+          )
+         }
+        </div>
+    </>
   );
 };
 
