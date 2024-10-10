@@ -7,5 +7,13 @@ export const getFineHistory = async(teamId) => {
   return response.data.data
 }
 
+// 면제권 사용
+export const sendFineExempt = async(teamId) => {
+  console.log("sendFineExempt 함수 호출됨");
+  console.log("teamId:", teamId); 
+  const response = await axiosApi.post(`/api/v1/group/${teamId}/coupon`)
+  return response.data.data;
+}
+
 
 

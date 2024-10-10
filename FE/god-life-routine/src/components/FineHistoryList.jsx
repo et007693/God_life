@@ -1,5 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import FineHistoryListItem from "./FineHistoryListItem";
+import coupon from "../assets/image/coupon.png";
+import Modal from "./Modal";
+import { useMutation } from "@tanstack/react-query";
+import { sendFineExempt } from "../api/fineHistoryApi";
+import { useParams } from "react-router-dom";
 
 // const groupByMonth = (arr) => {
 //   return arr.reduce((acc, item) => {
@@ -68,39 +73,95 @@ const FineHistoryList = ({ data }) => {
   const groupedData = groupByDate(data.list);
 
   // 날짜 역순으로 뜨도록(최신순)
-  const sortedDate = Object.keys(groupedData).sort((a, b) => b.localeCompare(a));
+  const sortedDate = Object.keys(groupedData).sort((a, b) =>
+    b.localeCompare(a)
+  );
+
+  const [showModal, setShowModal] = useState(false);
+  const { teamId } = useParams();
+
+  const openModal = () => {
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
+  
+  const { mutate: mutateFineExempt } = useMutation({
+    mutationKey: ["sendFineExempt"],
+    mutationFn: () => sendFineExempt(teamId),
+    onSuccess: () => {
+      closeModal();
+    },
+  });
+  
+  const handleButtonClick = () => {
+    mutateFineExempt();
+  };
 
   return (
     <div>
-      {sortedDate.length > 0 ? sortedDate.map((dateKey,index) => {
-        const year = dateKey.substring(0, 4);
-        const month = dateKey.substring(4, 6);
-        const day = dateKey.substring(6, 8);
-        const formattedDate = new Date(`${year}-${month}-${day}`);
+      {sortedDate.length > 0 ? (
+        sortedDate.map((dateKey, index) => {
+          const year = dateKey.substring(0, 4);
+          const month = dateKey.substring(4, 6);
+          const day = dateKey.substring(6, 8);
+          const formattedDate = new Date(`${year}-${month}-${day}`);
 
-        return (
-          <div key={dateKey}>
-            <div className="flex justify-between pl-5 pt-8">
-              <div>
-                {formattedDate.toLocaleDateString("ko-KR", {
-                  month: "long",
-                  day: "numeric",
-                })}
+          return (
+            <div key={dateKey}>
+              <div className="flex justify-between pl-5 pt-8">
+                <div>
+                  {formattedDate.toLocaleDateString("ko-KR", {
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </div>
+                {/* {index === 0 && <div className="text-sm text-gray-400 pr-4">벌금면제권</div>} */}
+                {index === 0 && (
+                  <div className="pr-4">
+                    <img
+                      src={coupon}
+                      alt="Coupon Icon"
+                      className="w-8 h-8"
+                      onClick={openModal}
+                    />
+                  </div>
+                )}
+
+                <Modal
+                  showModal={showModal}
+                  onClickCloseBtn={() => setShowModal(false)}
+                  width="250px"
+                  height="260px"
+                  buttonText="확인"
+                  buttonColor="orange"
+                  onClickButton={handleButtonClick}
+                >
+                  <div className="text-lg font-semibold pt-10">
+                    <div>벌금 면제권을</div>
+                    <div>사용하시겠습니까?</div>
+                  </div>
+                </Modal>
+
               </div>
-              {index === 0 && <div className="text-sm text-gray-400 pr-4">벌금면제권</div>}
+              {groupedData[dateKey].map((item) => (
+                <FineHistoryListItem
+                  key={item.transactionDate}
+                  item={item}
+                  dateKey={dateKey}
+                  data={data}
+                />
+              ))}
             </div>
-            {groupedData[dateKey].map((item) => (
-              <FineHistoryListItem
-                key={item.transactionDate}
-                item={item}
-                dateKey={dateKey}
-                data ={data}
-              />
-            ))}
-          </div>
-        );
-      }
-      ):<div className="text-center text-gray-500">현재 벌금 데이터가 없습니다.</div>}
+          );
+        })
+      ) : (
+        <div className="text-center text-gray-500">
+          현재 벌금 데이터가 없습니다.
+        </div>
+      )}
     </div>
   );
 };
