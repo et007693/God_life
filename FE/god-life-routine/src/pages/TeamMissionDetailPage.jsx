@@ -56,7 +56,7 @@ const TeamMissionDetailPage = () => {
     return <Navigate to="/login" />;
   }
   return (
-    <div>
+    <>
       <Header
         title={"팀 미션"}
         color={"white"}
@@ -80,7 +80,7 @@ const TeamMissionDetailPage = () => {
         />
       )}
 
-      <div className={`flex flex-col items-center px-10 py-5 mb-16 ${data.data.bettingOpen ? "" : "mt-24"}`}>
+      <div className={`items-center px-7 py-4 ${data.data.bettingOpen ? "" : "mt-24"}`}>
         <TeamDetailRoomInfo
           data={data}
           navigate={navigate}
@@ -88,17 +88,16 @@ const TeamMissionDetailPage = () => {
           goToCalculateTeamPage={goToCalculateTeamPage}
           handleShareKakaoBtn={handleShareKakaoBtn}
         />
+        
         <TeamDetailMissionInfo
           data={data}
           goToPhotoMissionPage={goToPhotoMissionPage}
           goToTeamMissionTimeSettingPage={goToTeamMissionTimeSettingPage}
-          goToTeamMissionLocationSettingPage={
-            goToTeamMissionLocationSettingPage
-          }
+          goToTeamMissionLocationSettingPage={goToTeamMissionLocationSettingPage}
           goToExerciseMissionPage={goToExerciseMissionPage}
         />
       </div>
-    </div>
+    </>
   );
 };
 
