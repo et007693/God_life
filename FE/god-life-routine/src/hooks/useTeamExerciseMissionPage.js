@@ -32,7 +32,7 @@ export const useTeamExerciseMissionPage = () => {
       }
     });
     const handleSubmit = async () => {
-        const blob = await createScreenShotToFormData("screen-shot-div",0,7);
+        const blob = await createScreenShotToFormData("screen-shot-div",0.3);
         mutate(blob);
     }
     return {
