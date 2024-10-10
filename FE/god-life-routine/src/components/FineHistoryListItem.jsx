@@ -4,15 +4,15 @@ import Modal from "../components/Modal";
 
 const FineHistoryListItem = ({ item, data }) => {
 
-  const [showModal, setShowModal] = useState(false);
+  // const [showModal, setShowModal] = useState(false);
 
-  const openModal = () => {
-    setShowModal(true);
-  };
+  // const openModal = () => {
+  //   setShowModal(true);
+  // };
 
-  const handleButtonClick = () => {
-    setShowModal(false);
-  };
+  // const handleButtonClick = () => {
+  //   setShowModal(false);
+  // };
 
   // const hour = item.transactionTime.substring(0, 2);
   // const minute = item.transactionTime.substring(2, 4);
@@ -25,18 +25,18 @@ const FineHistoryListItem = ({ item, data }) => {
           {/* <div className="text-sm text-gray-500">{hour}:{minute}</div> */}
         </div>
 
-        <div className="flex flex-col items-end pl-14">
+        <div className="flex flex-col items-end pr-6">
           <div className="font-bold text-xl text-red-500">{item.charged}원</div>
           <div className="text-gray-500 text-sm">{item.prefixFine}원</div>
         </div>
-        <div className="pr-8">
+        {/* <div className="pr-8">
         <img
             src={coupon}
             alt="Coupon Icon"
             className="w-8 h-8"
             onClick={openModal}
           />
-        </div>
+        </div> */}
       </div>
     );
   }
@@ -55,7 +55,7 @@ const FineHistoryListItem = ({ item, data }) => {
 
       <div className="border-b border-gray-200 mt-4 mx-4 mb-2"></div>
 
-      <Modal
+      {/* <Modal
         showModal={showModal}
         onClickCloseBtn={() => setShowModal(false)}
         width="250px"
@@ -68,7 +68,7 @@ const FineHistoryListItem = ({ item, data }) => {
           <div>벌금 면제권을</div>
           <div>사용하시겠습니까?</div>
         </div>
-      </Modal>
+      </Modal> */}
       </div>
     )}
 
