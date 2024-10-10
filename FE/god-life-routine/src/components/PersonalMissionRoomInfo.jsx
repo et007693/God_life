@@ -148,7 +148,7 @@ const PersonalMissionRoomInfo = ({ missionProps }) => {
           </div>
         )}
       </div>
-    </div>
+    </>
   );
 };
 
