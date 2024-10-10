@@ -86,28 +86,19 @@ const PersonalMissionRoomInfo = ({ missionProps }) => {
 
           <div className="border-b border-gray-300 mt-3 mx-4 mb-2"></div>
 
-          <div className="flex flex-row justify-between items-center pt-4">
-            <div>
-              <div className="flex flex-row">
-                <div className="text-gray-400 pl-5">현재 적용이율</div>
-                <div className="font-bold text-md pl-5 text-red-500">
-                  {data.data.interestRate}%
-                </div>
-              </div>
-
-              <div className="flex flex-row">
-                <div className="text-gray-400 pl-5">최대 적용이율</div>
-                <div className="font-bold text-md pl-5 text-red-500 mb-4">
-                  {data.data.primeRate}%
-                </div>
+          <div className="flex flex-row justify-between items-center px-4 py-3">
+            <div className="flex">
+              <div className="text-gray-400">현재 적용이율</div>
+              <div className="font-bold text-md text-red-500">
+                {data.data.interestRate}%
               </div>
             </div>
 
             {/* TODO: 계좌상세 API 연결 */}
-            <div className="pr-5">
+            <div>
               <button
                 onClick={goToPersonalAccountDetail}
-                className="font-bold text-lg pb-3"
+                className="font-bold text-lg mb-1"
               >
                 계좌 상세 →
               </button>
