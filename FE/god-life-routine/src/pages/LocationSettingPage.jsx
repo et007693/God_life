@@ -38,9 +38,6 @@ const LocationSettingPage = () => {
     setSelectedPosition(center);
   },[updatePositionWithGeolocation])
   // 2024-09-04 작업시작
-  useEffect(()=>{
-    alert("미션 수행을 위해 집 주소를 등록해주세요");
-  },[])
   return (
     <>
       <div className="w-full h-real-screen flex flex-col">

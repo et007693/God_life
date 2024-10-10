@@ -22,7 +22,7 @@ export const useMyPage = () => {
     axiosApi.delete("/api/v1/member")
     .then((res) => {
       console.log("회원탈퇴성공");
-      window.location.href = "/";
+      window.location.href = "/login";
     })
     .catch((err) => {
       console.log(err);
