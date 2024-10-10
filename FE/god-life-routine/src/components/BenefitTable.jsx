@@ -46,13 +46,13 @@ const BenefitTable = ({ data }) => {
   ];
   return (
     <>
-      <div class="p-8 pt-2">
-        <table class=" w-full border">
+      <div className="p-8 pt-2">
+        <table className=" w-full border">
           <thead>
             <tr>
-              <th class="font-bold p-2 border-b text-center bg-gray-100">금리 상세</th>
-              <th class="font-bold p-2 border-b text-center bg-gray-100">우대 금리</th>
-              <th class="font-bold py-2 px-4 border-b text-center bg-gray-100">적용 여부</th>
+              <th className="font-bold p-2 border-b text-center bg-gray-100">금리 상세</th>
+              <th className="font-bold p-2 border-b text-center bg-gray-100">우대 금리</th>
+              <th className="font-bold py-2 px-4 border-b text-center bg-gray-100">적용 여부</th>
             </tr>
           </thead>
           <tbody>

@@ -21,6 +21,7 @@ const FineHistoryPage = () => {
     staleTime:0,
   })
 
+  console.log(data);
 
   useEffect(() => {
     setRoomNumber(null);
