@@ -1,0 +1,15 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api/v1
+
+spring:
+  profiles:
+    active: dev
+    include: oauth2
+
+apiKey: ${API_KEY}
+
+schedule:
+  cron: 0 0 0 * * 1-5
+  use: true
