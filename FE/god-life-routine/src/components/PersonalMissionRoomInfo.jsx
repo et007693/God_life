@@ -8,6 +8,7 @@ const PersonalMissionRoomInfo = ({ missionProps }) => {
   const {
     data,
     goToPersonalAccountDetail,
+    
     goToPersonalMissionSettingPage,
   } = missionProps;
 
@@ -24,6 +25,9 @@ const PersonalMissionRoomInfo = ({ missionProps }) => {
 
   const goToPhotoMissionPage = () => {
     navigate(`/personalMission/wakeup`);
+  };
+  const goToTeamMissionLocationSettingPage = () => {
+    navigate(`/location/setting`);
   };
 
   return (
@@ -132,7 +136,7 @@ const PersonalMissionRoomInfo = ({ missionProps }) => {
             <div
               className="flex relative justify-around bg-gray-100 py-5 rounded-2xl w-full"
             >
-              <SettedHomeMap data={data} onclickSettingBtn={goToPersonalMissionSettingPage} onclickMap={goToExerciseMissionPage}/>
+              <SettedHomeMap data={data} onclickSettingBtn={goToTeamMissionLocationSettingPage} onclickMap={goToExerciseMissionPage}/>
             </div>
 
           )
