@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Picker from "react-mobile-picker";
 import Header from "../components/Header";
 import { useMutation } from "@tanstack/react-query";
@@ -22,12 +22,12 @@ export default function MyPicker() {
   const now = new Date();
   const location = useLocation();
   const {teamId} = useParams();
+  const {teamName,name} = location.state;
   const [pickerValue, setPickerValue] = useState({
     meridiem: now.getHours() < 12 ? "오전": "오후",
     hour: now.getHours() % 12,
     minute: now.getMinutes(),
   });
-
   const { roomNumber, roomType, rule } = useRoomInfo();
   const onNavigateNextPage = ()=>{
     const uri = roomType === "team" ? `/teamMission/${roomNumber}` : `/personalMission`
@@ -54,7 +54,7 @@ export default function MyPicker() {
     <div>
       <Header title={"시간 등록"} color={"orange"} />
       <div className="text-left p-12 pt-14 mt-10">
-        <div className="text-base mb-1 text-gray-500">송창송창용팀</div>
+        <div className="text-base mb-1 text-gray-500">{teamName? teamName : name}</div>
         <div className="flex items-center mb-4">
           <div className="text-2xl font-bold mr-2">일찍 일어나기</div>
           <div className="text-sm pt-3 text-gray-500">미션</div>

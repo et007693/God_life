@@ -1,13 +1,24 @@
 import React from "react";
 import { IoMdSettings } from "react-icons/io";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 const SettedHomeMap = ({ data, onclickSettingBtn, onclickTime }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { teamId } = useParams();
+  const onClickSettingBtn = () =>{
+    if (location.pathname.includes("team")){
+      navigate(`/teamMission/${teamId}/time/setting`,{state: {"teamName":data.data.title+"팀"}});
+    }else{
+      navigate(`/personalMission/time/setting`,{state: {"name":data.data.nickname+"님"}});
+    }
+  }
   return (
     <>
       <div className="w-full flex justify-end">
         <button
           className="flex items-center justify-center text-xl"
-          onClick={onclickSettingBtn}
+          onClick={onClickSettingBtn}
           >
           <IoMdSettings />
         </button>
